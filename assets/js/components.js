@@ -1,0 +1,1910 @@
+const basePath = location.pathname.includes('/pages/') ? '../' : './';
+
+const icons = `
+<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4.2-4.2"></path></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M4 4.5A2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"></path></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path><circle cx="12" cy="12" r="3"></circle></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><path d="M20 21a8 8 0 1 0-16 0"></path><circle cx="12" cy="7" r="4"></circle></symbol>
+  <symbol id="i-access" viewBox="0 0 24 24"><circle cx="12" cy="4" r="2"></circle><path d="M4 8h16"></path><path d="M12 6v16"></path><path d="m8 22 4-10 4 10"></path></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-5"></path></symbol>
+  <symbol id="i-people" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2"></rect></symbol>
+  <symbol id="i-form" viewBox="0 0 24 24"><path d="M8 6h13"></path><path d="M8 12h13"></path><path d="M8 18h13"></path><path d="M3 6h.01"></path><path d="M3 12h.01"></path><path d="M3 18h.01"></path></symbol>
+  <symbol id="i-dictionary" viewBox="0 0 24 24"><path d="M5 4.5A2.5 2.5 0 0 1 7.5 2H20v19H7.5A2.5 2.5 0 0 1 5 18.5z"></path><path d="M5 18.5A2.5 2.5 0 0 1 7.5 16H20"></path><path d="M9 6h6"></path><path d="M9 10h8"></path></symbol>
+  <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"></ellipse><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"></path><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"></path></symbol>
+  <symbol id="i-journal" viewBox="0 0 24 24"><path d="M7 3h10a2 2 0 0 1 2 2v16H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path><path d="M9 7h6"></path><path d="M9 11h6"></path><path d="M9 15h4"></path></symbol>
+  <symbol id="i-ebook" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"></rect><path d="M9 7h6"></path><path d="M9 11h6"></path><path d="M9 15h3"></path><path d="M12 19h.01"></path></symbol>
+  <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="M3 11v2a2 2 0 0 0 2 2h3l7 4V5l-7 4H5a2 2 0 0 0-2 2z"></path><path d="M19 9a4 4 0 0 1 0 6"></path></symbol>
+  <symbol id="i-service" viewBox="0 0 24 24"><path d="M12 3l8 4v6c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V7z"></path><path d="M9 12l2 2 4-5"></path></symbol>
+</svg>`;
+
+function icon(id, className = 'icon') {
+  return `<svg class="${className}" aria-hidden="true"><use href="#${id}"></use></svg>`;
+}
+
+const navItems = [
+  ['home', 'หน้าหลัก', `${basePath}index.html`],
+  ['dictionary', 'พจนานุกรมและคำศัพท์', `${basePath}dictionary.html`],
+  ['knowledge', 'องค์ความรู้', `${basePath}knowledge.html`],
+  ['publications', 'สื่อและสิ่งพิมพ์', `${basePath}publications.html`],
+  ['news', 'ข่าวสารและกิจกรรม', `${basePath}news.html`],
+  ['services', 'บริการประชาชน', `${basePath}services.html`],
+  ['about', 'เกี่ยวกับเรา', '#'],
+  ['contact', 'ติดต่อเรา', `${basePath}contact.html`],
+];
+
+const megaMenuData = {
+  dictionary: {
+    title: 'พจนานุกรมและคำศัพท์',
+    eyebrow: 'Language Services',
+    description: 'ค้นคำศัพท์ ความหมาย ศัพท์บัญญัติ และหลักเกณฑ์การใช้ภาษาไทยจากแหล่งข้อมูลเดียว',
+    icon: 'i-dictionary',
+    featured: ['เปิดพจนานุกรมออนไลน์', `${basePath}dictionary.html`],
+    groups: [
+      {
+        heading: 'บริการคำศัพท์',
+        links: [
+          ['พจนานุกรมออนไลน์', `${basePath}dictionary.html`, 'ค้นความหมายและการใช้คำ'],
+          ['ศัพท์บัญญัติ', '#', 'ศัพท์เฉพาะทางและคำมาตรฐาน'],
+          ['ค้นคำศัพท์ภาษาไทย', '#', 'ค้นหาคำตามหมวดและคำใกล้เคียง'],
+        ]
+      },
+      {
+        heading: 'ฐานข้อมูลที่เกี่ยวข้อง',
+        links: [
+          ['สารานุกรมและอนุกรมวิธาน', '#', 'คลังความรู้และหมวดคำ'],
+          ['หลักเกณฑ์การใช้ภาษา', '#', 'แนวทางการเขียนและการใช้ภาษา'],
+          ['คำถามที่พบบ่อยด้านภาษา', '#', 'คำตอบสั้นสำหรับประชาชน'],
+        ]
+      }
+    ]
+  },
+  knowledge: {
+    title: 'องค์ความรู้',
+    eyebrow: 'Knowledge Archive',
+    description: 'เข้าสู่คลังปัญญาแห่งชาติ บทความ ฐานข้อมูล และองค์ความรู้สำหรับประชาชน',
+    icon: 'i-book',
+    featured: ['เข้าสู่คลังองค์ความรู้', `${basePath}knowledge.html`],
+    groups: [
+      {
+        heading: 'ค้นหาและฐานข้อมูล',
+        links: [
+          ['คลังองค์ความรู้', `${basePath}knowledge.html`, 'ค้นจากทุกฐานข้อมูล'],
+          ['บทความวิชาการ', '#', 'บทความเผยแพร่และเอกสารอ้างอิง'],
+          ['องค์ความรู้สำหรับประชาชน', '#', 'เนื้อหาเข้าใจง่ายสำหรับทุกกลุ่ม'],
+        ]
+      },
+      {
+        heading: 'หมวดความรู้',
+        links: [
+          ['ภาษาไทย', '#', 'คำศัพท์ การใช้ภาษา และหลักเกณฑ์'],
+          ['วิทยาศาสตร์', '#', 'ศัพท์วิชาการและองค์ความรู้ร่วมสมัย'],
+          ['ศิลปกรรม', '#', 'ศิลปะ วัฒนธรรม และวรรณคดี'],
+          ['สังคมศาสตร์', '#', 'ชุมชน เศรษฐกิจ สังคม และนโยบาย'],
+        ]
+      }
+    ]
+  },
+  publications: {
+    title: 'สื่อและสิ่งพิมพ์',
+    eyebrow: 'Publications & Media',
+    description: 'รวมหนังสือ วารสาร e-Book สื่อดิจิทัล และเอกสารเผยแพร่ของสำนักงาน',
+    icon: 'i-ebook',
+    featured: ['ดูสื่อและสิ่งพิมพ์', `${basePath}publications.html`],
+    groups: [
+      {
+        heading: 'สิ่งพิมพ์',
+        links: [
+          ['หนังสือและตำรา', `${basePath}publications.html`, 'หนังสือวิชาการและเอกสารอ้างอิง'],
+          ['วารสารราชบัณฑิตยสภา', '#', 'วารสารและบทความเผยแพร่'],
+          ['e-Book', '#', 'อ่านออนไลน์หรือดาวน์โหลด'],
+        ]
+      },
+      {
+        heading: 'สื่อดิจิทัล',
+        links: [
+          ['วิดีโอและสื่อมัลติมีเดีย', '#', 'องค์ความรู้แบบรับชม'],
+          ['Infographic', '#', 'สรุปความรู้เข้าใจง่าย'],
+          ['วิธีสั่งซื้อหนังสือ', '#', 'ขั้นตอนและช่องทางชำระเงิน'],
+        ]
+      }
+    ]
+  },
+  news: {
+    title: 'ข่าวสารและกิจกรรม',
+    eyebrow: 'News & Events',
+    description: 'ติดตามข่าวประชาสัมพันธ์ ประกาศ กิจกรรม และความเคลื่อนไหวล่าสุด',
+    icon: 'i-megaphone',
+    featured: ['อ่านข่าวทั้งหมด', `${basePath}news.html`],
+    groups: [
+      {
+        heading: 'ข่าวสาร',
+        links: [
+          ['ข่าวประชาสัมพันธ์', `${basePath}news.html`, 'ข่าวสารทั่วไป'],
+          ['ข่าวกิจกรรม', '#', 'กิจกรรมและงานเผยแพร่'],
+          ['บทบรรยายทางวิชาการ', '#', 'สื่อความรู้จากกิจกรรม'],
+        ]
+      },
+      {
+        heading: 'ประกาศ',
+        links: [
+          ['ประกาศจัดซื้อจัดจ้าง', '#', 'ประกาศและเอกสารที่เกี่ยวข้อง'],
+          ['ประกาศรับสมัครงาน', '#', 'ข่าวสารงานบุคคล'],
+          ['ข่าวสารทางราชการ', '#', 'ประกาศเผยแพร่ทั่วไป'],
+        ]
+      }
+    ]
+  },
+  services: {
+    title: 'บริการประชาชน',
+    eyebrow: 'Digital Services',
+    description: 'รวมบริการออนไลน์ แบบฟอร์ม การติดตามสถานะ และช่องทางติดต่อเจ้าหน้าที่',
+    icon: 'i-service',
+    featured: ['เข้าสู่บริการประชาชน', `${basePath}services.html`],
+    groups: [
+      {
+        heading: 'บริการออนไลน์',
+        links: [
+          ['สอบถามข้อมูลทางวิชาการ', `${basePath}services.html`, 'ส่งคำถามและรับเลขติดตาม'],
+          ['ขออนุญาตใช้เนื้อหา', '#', 'ยื่นคำขอและแนบเอกสาร'],
+          ['ร้องเรียน / เสนอแนะ', '#', 'ส่งเรื่องและติดตามผล'],
+        ]
+      },
+      {
+        heading: 'งานบริการ',
+        links: [
+          ['แบบฟอร์มออนไลน์', '#', 'รวมแบบฟอร์มที่ใช้บ่อย'],
+          ['คำถามที่พบบ่อย', '#', 'คำตอบเกี่ยวกับบริการ'],
+          ['คู่มือการใช้บริการ', '#', 'ขั้นตอนและเอกสารประกอบ'],
+        ]
+      }
+    ]
+  },
+  about: {
+    title: 'เกี่ยวกับเรา',
+    eyebrow: 'About ORST',
+    description: 'ข้อมูลสำนักงาน โครงสร้าง ผู้บริหาร ราชบัณฑิต ภาคีสมาชิก และข้อมูลหน่วยงาน',
+    icon: 'i-shield',
+    featured: ['ข้อมูลสำนักงาน', '#'],
+    groups: [
+      {
+        heading: 'ข้อมูลสำนักงาน',
+        links: [
+          ['ประวัติความเป็นมา', '#', 'ข้อมูลและพัฒนาการของสำนักงาน'],
+          ['โครงสร้างองค์กร', '#', 'หน่วยงานและภารกิจ'],
+          ['ผู้บริหาร', '#', 'คณะผู้บริหารปัจจุบัน'],
+        ]
+      },
+      {
+        heading: 'ราชบัณฑิตและบุคลากร',
+        links: [
+          ['ราชบัณฑิตและภาคีสมาชิก', '#', 'รายชื่อและผลงาน'],
+          ['บุคลากร', '#', 'ข้อมูลหน่วยงานและบุคลากร'],
+          ['รายงานและแผนปฏิบัติราชการ', '#', 'ข้อมูลความโปร่งใสและผลการดำเนินงาน'],
+        ]
+      }
+    ]
+  }
+};
+
+function injectComponentStyles() {
+  if (document.getElementById('orst-components-style')) return;
+
+  const style = document.createElement('style');
+  style.id = 'orst-components-style';
+  style.textContent = `
+    :root {
+      --deep: #073b34;
+      --deep-2: #124c43;
+      --gold: #b99143;
+      --gold-2: #d8bd74;
+      --gold-soft: #fff4db;
+      --ink: #102033;
+      --muted: #667085;
+      --surface: #fffdf8;
+      --surface-soft: #fbf7ef;
+      --line: rgba(185, 145, 67, .24);
+      --shadow: 0 24px 70px rgba(16, 32, 51, .16);
+    }
+
+    .icon, .icon-lg {
+      width: 1.1em;
+      height: 1.1em;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex: 0 0 auto;
+    }
+
+    .icon-lg {
+      width: 1.55em;
+      height: 1.55em;
+    }
+
+    .skip-link {
+      position: fixed;
+      left: 16px;
+      top: 16px;
+      z-index: 9999;
+      transform: translateY(-140%);
+      background: var(--deep);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 999px;
+      transition: transform .18s ease;
+    }
+
+    .skip-link:focus { transform: translateY(0); }
+
+    .topbar {
+      background: var(--deep);
+      color: rgba(255,255,255,.92);
+      font-size: .88rem;
+    }
+
+    .topbar-inner, .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .topbar-inner { min-height: 34px; }
+
+    .topbar-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .topbar a, .topbar button, .topbar span {
+      color: inherit;
+      background: transparent;
+      border: 0;
+      font: inherit;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 253, 248, .96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .header-inner {
+      min-height: 76px;
+      position: relative;
+    }
+
+    .brand.brand-image {
+      min-width: 300px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .brand-logo {
+      display: block;
+      width: 200px;
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+      transition: transform .22s ease, opacity .22s ease;
+    }
+
+    .brand-image:hover .brand-logo {
+      transform: translateY(-1px);
+      opacity: .94;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .main-nav a, .main-nav button {
+      position: relative;
+      min-height: 44px;
+      padding: 10px 12px;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: .94rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .main-nav a.active, .main-nav a:hover, .main-nav button:hover,
+    .main-nav a.is-open, .main-nav button.is-open {
+      background: #fff7e8;
+      color: var(--deep);
+    }
+
+   /* Better dropdown chevron */
+.main-nav a[data-mega] {
+  gap: 8px;
+}
+
+.nav-caret {
+  width: 16px;
+  height: 16px;
+  display: inline-grid;
+  place-items: center;
+  color: var(--gold);
+  opacity: .92;
+  transform: translateY(1px);
+  transition: transform .22s ease, color .22s ease, opacity .22s ease;
+}
+
+.nav-caret svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.main-nav a[data-mega]:hover .nav-caret,
+.main-nav a[data-mega]:focus-visible .nav-caret,
+.main-nav a[data-mega].is-open .nav-caret,
+.main-nav a[data-mega][aria-expanded="true"] .nav-caret {
+  color: #8f6a23;
+  opacity: 1;
+  transform: translateY(1px) rotate(180deg);
+}
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .round-btn {
+      min-height: 44px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      text-decoration: none;
+      font-weight: 900;
+    }
+
+    .round-btn.primary {
+      background: var(--deep);
+      border-color: var(--deep);
+      color: #fff;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 10px;
+    }
+
+    .mobile-menu-btn span:not(.sr-only) {
+      display: block;
+      height: 2px;
+      margin: 5px 0;
+      background: var(--deep);
+      border-radius: 999px;
+    }
+
+    .mega-menu {
+      position: absolute;
+      left: 50%;
+      top: calc(100% + 1px);
+      transform: translateX(-50%);
+      width: min(1120px, calc(100vw - 40px));
+      z-index: 120;
+      padding-top: 12px;
+    }
+
+    .mega-menu[hidden] { display: none !important; }
+
+    .mega-inner {
+      display: grid;
+      grid-template-columns: 310px 1fr;
+      gap: 24px;
+      padding: 22px;
+      border-radius: 28px;
+      background: #fffdf8;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      animation: megaIn .18s ease;
+    }
+
+    .mega-feature {
+      position: relative;
+      overflow: hidden;
+      padding: 24px;
+      border-radius: 24px;
+      background: radial-gradient(circle at 92% 100%, rgba(185,145,67,.2), transparent 34%), linear-gradient(135deg, var(--deep), var(--deep-2));
+      color: #fff;
+    }
+
+    .mega-feature-icon {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 20px;
+      color: var(--gold-2);
+      background: rgba(255,255,255,.12);
+      margin-bottom: 14px;
+    }
+
+    .mega-feature .section-kicker {
+      color: #f7df9d;
+      font-weight: 900;
+      font-size: .8rem;
+    }
+
+    .mega-feature h3 {
+      color: #fff;
+      margin: 8px 0 8px;
+      font-family: 'IBM Plex Sans Thai', sans-serif;
+      font-size: 1.55rem;
+      line-height: 1.25;
+    }
+
+    .mega-feature p {
+      color: rgba(255,255,255,.78);
+      line-height: 1.65;
+      margin: 0 0 16px;
+    }
+
+    .mega-feature a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: var(--gold);
+      color: #13231f;
+      text-decoration: none;
+      font-weight: 900;
+    }
+
+    .mega-groups {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .mega-group {
+      padding: 16px;
+      border-radius: 20px;
+      background: #fff;
+      border: 1px solid rgba(185,145,67,.18);
+    }
+
+    .mega-group h4 {
+      color: var(--deep);
+      margin: 0 0 10px;
+      font-size: 1.02rem;
+    }
+
+    .mega-link {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      padding: 10px 0;
+      color: var(--ink);
+      text-decoration: none;
+      border-top: 1px solid rgba(185,145,67,.13);
+    }
+
+    .mega-link:first-of-type { border-top: 0; }
+
+    .mega-link strong {
+      display: block;
+      color: var(--ink);
+      line-height: 1.35;
+    }
+
+    .mega-link small {
+      display: block;
+      color: var(--muted);
+      margin-top: 2px;
+      line-height: 1.35;
+    }
+
+    .mega-link em {
+      color: var(--gold);
+      font-style: normal;
+      font-weight: 900;
+      transition: transform .18s ease;
+    }
+
+    .mega-link:hover strong { color: var(--deep); }
+    .mega-link:hover em { transform: translateX(4px); }
+
+    @keyframes megaIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .mobile-menu {
+      display: none;
+      border-top: 1px solid var(--line);
+      background: #fffdf8;
+      padding: 10px 20px 18px;
+    }
+
+    .mobile-menu.is-open { display: block; }
+
+    .mobile-link, .mobile-accordion-btn {
+      width: 100%;
+      min-height: 50px;
+      border: 0;
+      border-bottom: 1px solid rgba(185,145,67,.16);
+      background: transparent;
+      color: var(--ink);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 900;
+      text-align: left;
+      padding: 12px 4px;
+    }
+
+    .mobile-submenu {
+      display: none;
+      padding: 6px 0 10px 14px;
+      border-bottom: 1px solid rgba(185,145,67,.16);
+    }
+
+    .mobile-submenu.is-open { display: grid; gap: 4px; }
+
+    .mobile-submenu a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 8px 0;
+      display: block;
+    }
+
+
+/* ===== Modern ORST Footer ===== */
+
+.orst-footer {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 8% 0%, rgba(216, 189, 116, .18), transparent 32%),
+    radial-gradient(circle at 88% 20%, rgba(255, 255, 255, .08), transparent 28%),
+    linear-gradient(135deg, #062f2a 0%, #073b34 48%, #102033 100%);
+  color: rgba(255, 255, 255, .84);
+  padding: 54px 0 0;
+}
+
+.orst-footer::before {
+  content: "";
+  position: absolute;
+  inset: auto -80px -120px auto;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: rgba(185, 145, 67, .13);
+  pointer-events: none;
+}
+
+.orst-footer-top {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(280px, 390px) minmax(0, 1fr);
+  gap: 42px;
+  align-items: start;
+}
+
+.orst-footer-brand {
+  max-width: 390px;
+}
+
+
+
+.orst-footer-logo {
+  width: 250px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.orst-footer-brand p {
+  margin: 0;
+  color: rgba(255, 255, 255, .76);
+  line-height: 1.75;
+}
+
+.orst-footer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.orst-footer-primary,
+.orst-footer-secondary {
+  min-height: 42px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.orst-footer-primary {
+  background: var(--gold);
+  color: #13231f;
+}
+
+.orst-footer-secondary {
+  border: 1px solid rgba(255, 255, 255, .22);
+  background: rgba(255, 255, 255, .08);
+  color: #fff;
+}
+
+.orst-footer-links {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.orst-footer-col h3 {
+  margin: 0 0 14px;
+  color: #fff;
+  font-size: 1.02rem;
+}
+
+.orst-footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 9px;
+}
+
+.orst-footer-col a {
+  color: rgba(255, 255, 255, .72);
+  text-decoration: none;
+  line-height: 1.5;
+  transition: color .18s ease, transform .18s ease;
+}
+
+.orst-footer-col a:hover {
+  color: var(--gold-2);
+}
+
+.orst-footer-contact p {
+  margin: 0 0 12px;
+  color: rgba(255, 255, 255, .72);
+  line-height: 1.75;
+}
+
+.orst-footer-newsletter {
+  position: relative;
+  margin-top: 38px;
+  padding: 18px;
+  border-radius: 24px;
+  border: 1px solid rgba(216, 189, 116, .22);
+  background: rgba(255, 255, 255, .08);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.orst-footer-newsletter strong {
+  display: block;
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+.orst-footer-newsletter span {
+  display: block;
+  margin-top: 3px;
+  color: rgba(255, 255, 255, .68);
+}
+
+.orst-newsletter-form {
+  display: flex;
+  gap: 8px;
+  min-width: min(460px, 100%);
+}
+
+.orst-newsletter-form input {
+  flex: 1;
+  min-height: 46px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .18);
+  background: rgba(255, 255, 255, .12);
+  color: #fff;
+  padding: 10px 16px;
+  outline: none;
+}
+
+.orst-newsletter-form input::placeholder {
+  color: rgba(255, 255, 255, .58);
+}
+
+.orst-newsletter-form input:focus {
+  border-color: rgba(216, 189, 116, .7);
+  box-shadow: 0 0 0 4px rgba(216, 189, 116, .14);
+}
+
+.orst-newsletter-form button {
+  min-height: 46px;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--gold);
+  color: #13231f;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.orst-footer-bottom {
+  position: relative;
+  margin-top: 28px;
+  padding: 18px 0;
+  border-top: 1px solid rgba(255, 255, 255, .12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  color: rgba(255, 255, 255, .62);
+  font-size: .9rem;
+}
+
+.orst-footer-bottom nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.orst-footer-bottom a {
+  color: rgba(255, 255, 255, .68);
+  text-decoration: none;
+}
+
+.orst-footer-bottom a:hover {
+  color: var(--gold-2);
+}
+
+@media (max-width: 1100px) {
+  .orst-footer-top {
+    grid-template-columns: 1fr;
+  }
+
+  .orst-footer-brand {
+    max-width: 720px;
+  }
+
+  .orst-footer-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .orst-footer-newsletter {
+    display: grid;
+  }
+
+  .orst-newsletter-form {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .orst-footer {
+    padding-top: 40px;
+  }
+
+  .orst-footer-logo-wrap {
+    padding: 10px 12px;
+    border-radius: 20px;
+  }
+
+  .orst-footer-logo {
+    width: 220px;
+  }
+
+  .orst-footer-links {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .orst-footer-newsletter {
+    padding: 16px;
+    border-radius: 22px;
+  }
+
+  .orst-newsletter-form {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .orst-newsletter-form button {
+    width: 100%;
+  }
+
+  .orst-footer-bottom {
+    display: grid;
+  }
+
+  .orst-footer-bottom nav {
+    gap: 10px 14px;
+  }
+}
+/* ===== Footer Responsive Refinement ===== */
+
+/* Tablet / small desktop */
+@media (max-width: 1200px) {
+  .orst-footer-top {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .orst-footer-brand {
+    max-width: 760px;
+  }
+
+  .orst-footer-links {
+    grid-template-columns: repeat(4, minmax(160px, 1fr));
+    gap: 22px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 960px) {
+  .orst-footer {
+    padding-top: 44px;
+  }
+
+  .orst-footer-top {
+    gap: 30px;
+  }
+
+  .orst-footer-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .orst-footer-newsletter {
+    align-items: stretch;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .orst-newsletter-form {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .orst-footer {
+    padding-top: 36px;
+  }
+
+  .orst-footer-top {
+    gap: 28px;
+  }
+
+  .orst-footer-logo-wrap {
+    width: 100%;
+    justify-content: center;
+    padding: 12px;
+    border-radius: 20px;
+  }
+
+  .orst-footer-logo {
+    width: min(230px, 82vw);
+  }
+
+  .orst-footer-brand p {
+    text-align: center;
+    font-size: .94rem;
+    line-height: 1.7;
+  }
+
+  .orst-footer-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .orst-footer-primary,
+  .orst-footer-secondary {
+    width: 100%;
+  }
+
+  .orst-footer-links {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .orst-footer-col {
+    padding: 16px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid rgba(255, 255, 255, .10);
+  }
+
+  .orst-footer-col h3 {
+    margin-bottom: 10px;
+  }
+
+  .orst-footer-col ul {
+    gap: 7px;
+  }
+
+  .orst-footer-contact p {
+    font-size: .92rem;
+  }
+
+  .orst-footer-newsletter {
+    margin-top: 28px;
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .orst-footer-newsletter strong {
+    font-size: 1rem;
+  }
+
+  .orst-footer-newsletter span {
+    font-size: .9rem;
+    line-height: 1.55;
+  }
+
+  .orst-newsletter-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .orst-newsletter-form input,
+  .orst-newsletter-form button {
+    width: 100%;
+  }
+
+  .orst-footer-bottom {
+    display: grid;
+    grid-template-columns: 1fr;
+    text-align: center;
+    justify-items: center;
+    gap: 12px;
+  }
+
+  .orst-footer-bottom nav {
+    justify-content: center;
+    gap: 8px 14px;
+  }
+}
+
+/* Very small mobile */
+@media (max-width: 420px) {
+  .orst-footer {
+    padding-top: 32px;
+  }
+
+  .orst-footer-logo {
+    width: min(210px, 78vw);
+  }
+
+  .orst-footer-col {
+    padding: 14px;
+  }
+
+  .orst-footer-bottom {
+    font-size: .82rem;
+  }
+
+  .orst-footer-bottom nav {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
+
+    .newsletter {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .newsletter input {
+      min-height: 44px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px;
+      padding: 10px 14px;
+      background: rgba(255,255,255,.1);
+      color: #fff;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.12);
+      margin-top: 34px;
+      padding: 16px 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: .88rem;
+    }
+
+    .access-float {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 90;
+      min-height: 48px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--deep);
+      color: #fff;
+      padding: 10px 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 900;
+      box-shadow: 0 16px 36px rgba(7,59,52,.22);
+    }
+
+    .modal[hidden] { display: none !important; }
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(8,22,31,.48);
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-card {
+      position: relative;
+      z-index: 1;
+      width: min(640px, 100%);
+      border-radius: 28px;
+      background: #fffdf8;
+      border: 1px solid var(--line);
+      box-shadow: 0 28px 90px rgba(8,22,31,.28);
+      overflow: hidden;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .modal-header h2 { margin: 0; color: var(--ink); }
+
+    .modal-close {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 1.3rem;
+    }
+
+    .modal-body { padding: 20px 22px 24px; }
+
+    .shared-search-form {
+      display: flex;
+      gap: 10px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px;
+    }
+
+    .shared-search-form input {
+      flex: 1;
+      border: 0;
+      outline: 0;
+      min-height: 44px;
+      padding: 0 14px;
+      background: transparent;
+    }
+
+    .shared-search-form button {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 0;
+      background: var(--deep);
+      color: #fff;
+    }
+
+    .search-results {
+      margin-top: 14px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .search-result-item {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .tool-grid button {
+      min-height: 54px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    body.high-contrast { filter: contrast(1.12); }
+    body.readable-mode { background: #fffaf1; }
+    body.no-motion *, body.no-motion *::before, body.no-motion *::after { animation: none !important; transition: none !important; }
+
+    @media (max-width: 1180px) {
+      .main-nav { display: none; }
+      .mobile-menu-btn { display: block; }
+      .header-actions .round-btn span { display: none; }
+      .mega-menu { display: none !important; }
+    }
+
+    @media (max-width: 900px) {
+      .topbar-right { display: none; }
+      .brand.brand-image { min-width: auto; }
+      .brand-logo { width: 240px; max-width: 64vw; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .topbar-inner { justify-content: center; }
+      .brand-logo { width: 210px; max-width: 62vw; }
+      .header-inner { min-height: 68px; gap: 10px; }
+      .header-actions .round-btn.primary { display: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .tool-grid { grid-template-columns: 1fr; }
+      .access-float { right: 12px; bottom: 12px; }
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+function renderMegaMenu(key) {
+  const data = megaMenuData[key];
+  if (!data) return '';
+
+  return `
+    <div class="mega-inner" role="region" aria-label="เมนูย่อย ${data.title}">
+      <div class="mega-feature">
+        <span class="mega-feature-icon">${icon(data.icon || 'i-book', 'icon-lg')}</span>
+        <span class="section-kicker">${data.eyebrow}</span>
+        <h3>${data.title}</h3>
+        <p>${data.description}</p>
+        <a href="${data.featured[1]}">${data.featured[0]} <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="mega-groups">
+        ${data.groups.map(group => `
+          <div class="mega-group">
+            <h4>${group.heading}</h4>
+            ${group.links.map(([text, url, desc]) => `
+              <a class="mega-link" href="${url}">
+                <span><strong>${text}</strong><small>${desc || ''}</small></span>
+                <em aria-hidden="true">→</em>
+              </a>
+            `).join('')}
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function renderDesktopNav(active) {
+  return navItems.map(([key, label, href]) => {
+    const hasMega = Boolean(megaMenuData[key]);
+    const classes = `${active === key ? 'active' : ''}`.trim();
+
+    if (hasMega) {
+      return `
+        <a class="${classes}" href="${href}" data-mega="${key}" aria-haspopup="true" aria-expanded="false">
+          ${label}<span class="nav-caret" aria-hidden="true">
+  <svg viewBox="0 0 20 20">
+    <path d="M5.5 7.5 10 12l4.5-4.5"></path>
+  </svg>
+</span>
+        </a>
+      `;
+    }
+
+    return `<a class="${classes}" href="${href}">${label}</a>`;
+  }).join('');
+}
+
+function renderMobileNav(active) {
+  return navItems.map(([key, label, href]) => {
+    const data = megaMenuData[key];
+
+    if (!data) {
+      return `<a class="mobile-link ${active === key ? 'active' : ''}" href="${href}">${label}<span>›</span></a>`;
+    }
+
+    return `
+      <div class="mobile-nav-group">
+        <button class="mobile-accordion-btn" type="button" data-mobile-submenu="${key}" aria-expanded="false">
+          <span>${label}</span><span aria-hidden="true">+</span>
+        </button>
+        <div class="mobile-submenu" id="mobile-submenu-${key}">
+          <a href="${data.featured[1]}"><strong>${data.featured[0]}</strong></a>
+          ${data.groups.map(group => `
+            <div class="mobile-submenu-group">
+              <strong>${group.heading}</strong>
+              ${group.links.map(([text, url]) => `<a href="${url}">${text}</a>`).join('')}
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderHeader() {
+  const active = document.body.dataset.page || 'home';
+
+  return `
+    ${icons}
+    <a class="skip-link" href="#main-content">ข้ามไปยังเนื้อหาหลัก</a>
+    <div class="topbar">
+      <div class="container topbar-inner">
+        <div class="topbar-group">
+          <button type="button" data-open-access>${icon('i-eye')} สำหรับผู้พิการทางสายตา</button>
+          <button type="button" data-font="minus">ก-</button>
+          <button type="button" data-font="reset">ก</button>
+          <button type="button" data-font="plus">ก+</button>
+          <button type="button" data-contrast>ความคมชัด</button>
+        </div>
+        <div class="topbar-group topbar-right">
+          <a href="${basePath}contact.html">ติดต่อเรา</a>
+          <a href="#">สำหรับเจ้าหน้าที่</a>
+          <span>ภาษา TH | EN</span>
+          <a href="#">เข้าสู่ระบบ / สมัครสมาชิก</a>
+        </div>
+      </div>
+    </div>
+    <header class="site-header" id="site-header">
+      <div class="container header-inner">
+        <a class="brand brand-image" href="${basePath}index.html" aria-label="สำนักงานราชบัณฑิตยสภา หน้าแรก">
+          <img src="${basePath}assets/images/logo.png" alt="สำนักงานราชบัณฑิตยสภา Office of the Royal Society" class="brand-logo">
+        </a>
+        <nav class="main-nav" aria-label="เมนูหลัก">
+          ${renderDesktopNav(active)}
+        </nav>
+        <div class="header-actions">
+          <button class="round-btn" type="button" data-open-search aria-label="ค้นหา">${icon('i-search')} <span>ค้นหา</span></button>
+          <a class="round-btn primary" href="${basePath}services.html">บริการออนไลน์</a>
+          <button class="mobile-menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" data-mobile-menu>
+            <span></span><span></span><span></span><span class="sr-only">เปิดเมนู</span>
+          </button>
+        </div>
+        <div class="mega-menu" id="mega-menu" hidden></div>
+      </div>
+      <nav id="mobile-menu" class="mobile-menu" aria-label="เมนูมือถือ">
+        ${renderMobileNav(active)}
+        <button class="mobile-link" type="button" data-open-search>เปิดค้นหา<span>›</span></button>
+      </nav>
+    </header>
+  `;
+}
+
+// function renderFooter() {
+//   return `
+//     <footer class="footer" id="footer">
+//       <div class="container footer-grid">
+//         <div>
+//           <h3>ติดตามข่าวสารและองค์ความรู้ใหม่</h3>
+//           <p>ไม่พลาดข่าวสาร กิจกรรม และองค์ความรู้จากราชบัณฑิตยสภา</p>
+//           <form class="newsletter" onsubmit="return false">
+//             <input type="email" placeholder="อีเมลของคุณ" aria-label="อีเมลสำหรับรับข่าวสาร">
+//             <button class="round-btn primary" type="button">สมัครรับข่าวสาร</button>
+//           </form>
+//         </div>
+//         <div>
+//           <h3>ลิงก์ด่วน</h3>
+//           <ul>
+//             <li><a href="${basePath}dictionary.html">พจนานุกรม</a></li>
+//             <li><a href="${basePath}knowledge.html">คลังความรู้</a></li>
+//             <li><a href="${basePath}publications.html">สื่อสิ่งพิมพ์</a></li>
+//             <li><a href="${basePath}news.html">ข่าวและประกาศ</a></li>
+//           </ul>
+//         </div>
+//         <div>
+//           <h3>บริการยอดนิยม</h3>
+//           <ul>
+//             <li><a href="${basePath}services.html">สอบถามข้อมูลทางวิชาการ</a></li>
+//             <li><a href="${basePath}services.html">ขออนุญาตจัดพิมพ์</a></li>
+//             <li><a href="${basePath}services.html">ร้องเรียน / เสนอแนะ</a></li>
+//             <li><a href="${basePath}services.html">คำถามที่พบบ่อย</a></li>
+//           </ul>
+//         </div>
+//         <div>
+//           <h3>ติดต่อเรา</h3>
+//           <p>สำนักงานราชบัณฑิตยสภา<br>ศูนย์ราชการเฉลิมพระเกียรติฯ อาคารซี ถนนแจ้งวัฒนะ เขตหลักสี่ กรุงเทพมหานคร 10210</p>
+//           <p>โทรศัพท์: 0 2141 1728<br>อีเมล: saraban@orst.go.th</p>
+//         </div>
+//       </div>
+//       <div class="container footer-bottom">
+//         <span>© 2569 สำนักงานราชบัณฑิตยสภา</span>
+//         <span>นโยบายความเป็นส่วนตัว · เงื่อนไขการใช้งาน · แผนผังเว็บไซต์</span>
+//       </div>
+//     </footer>
+
+//     <button class="access-float" type="button" data-open-access>${icon('i-access')} ช่วยการเข้าถึง</button>
+
+//     <div class="modal" id="search-modal" hidden role="dialog" aria-modal="true" aria-labelledby="search-title">
+//       <div class="modal-backdrop" data-close-modal></div>
+//       <div class="modal-card">
+//         <div class="modal-header">
+//           <h2 id="search-title">ค้นหาองค์ความรู้</h2>
+//           <button class="modal-close" type="button" data-close-modal aria-label="ปิด">×</button>
+//         </div>
+//         <div class="modal-body">
+//           <form class="shared-search-form" id="shared-search-form">
+//             <input id="shared-search-input" type="search" placeholder="ค้นหาคำศัพท์ บทความ หนังสือ หรือบริการ...">
+//             <button type="submit" aria-label="ค้นหา">${icon('i-search')}</button>
+//           </form>
+//           <div class="search-results" id="shared-search-results" aria-live="polite"></div>
+//         </div>
+//       </div>
+//     </div>
+
+//     <div class="modal" id="access-modal" hidden role="dialog" aria-modal="true" aria-labelledby="access-title">
+//       <div class="modal-backdrop" data-close-modal></div>
+//       <div class="modal-card">
+//         <div class="modal-header">
+//           <h2 id="access-title">เครื่องมือช่วยการเข้าถึง</h2>
+//           <button class="modal-close" type="button" data-close-modal aria-label="ปิด">×</button>
+//         </div>
+//         <div class="modal-body">
+//           <div class="tool-grid">
+//             <button type="button" data-font="plus">ก+ เพิ่มตัวอักษร</button>
+//             <button type="button" data-font="minus">ก- ลดตัวอักษร</button>
+//             <button type="button" data-font="reset">ก ขนาดปกติ</button>
+//             <button type="button" data-contrast>สีตัดกันสูง</button>
+//             <button type="button" data-readable>โหมดอ่านง่าย</button>
+//             <button type="button" data-motion>หยุดเคลื่อนไหว</button>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   `;
+// }
+
+
+function renderFooter() {
+  return `
+    <footer class="footer orst-footer" id="footer">
+      <div class="container">
+
+        <div class="orst-footer-top">
+          <div class="orst-footer-brand">
+            <a class="orst-footer-logo-wrap" href="${basePath}index.html" aria-label="สำนักงานราชบัณฑิตยสภา หน้าแรก">
+              <img
+                src="${basePath}assets/images/logo.png"
+                alt="สำนักงานราชบัณฑิตยสภา Office of the Royal Society"
+                class="orst-footer-logo"
+                loading="lazy">
+            </a>
+
+            <p>
+              แหล่งรวมองค์ความรู้ มาตรฐานภาษาไทย ศัพท์บัญญัติ สิ่งพิมพ์
+              และบริการประชาชนของสำนักงานราชบัณฑิตยสภา
+            </p>
+
+            <div class="orst-footer-actions">
+              <a class="orst-footer-primary" href="${basePath}knowledge.html">
+                เข้าคลังองค์ความรู้
+              </a>
+              <a class="orst-footer-secondary" href="${basePath}services.html">
+                บริการประชาชน
+              </a>
+            </div>
+          </div>
+
+          <div class="orst-footer-links">
+            <div class="orst-footer-col">
+              <h3>บริการหลัก</h3>
+              <ul>
+                <li><a href="${basePath}dictionary.html">พจนานุกรม</a></li>
+                <li><a href="#">ศัพท์บัญญัติ</a></li>
+                <li><a href="#">คำทับศัพท์</a></li>
+                <li><a href="#">ราชาศัพท์</a></li>
+              </ul>
+            </div>
+
+            <div class="orst-footer-col">
+              <h3>องค์ความรู้</h3>
+              <ul>
+                <li><a href="${basePath}knowledge.html">คลังองค์ความรู้</a></li>
+                <li><a href="${basePath}publications.html">E-Book และสิ่งพิมพ์</a></li>
+                <li><a href="#">วารสาร</a></li>
+                <li><a href="#">สื่อมัลติมีเดีย</a></li>
+              </ul>
+            </div>
+
+            <div class="orst-footer-col">
+              <h3>ข่าวและบริการ</h3>
+              <ul>
+                <li><a href="${basePath}news.html">ข่าวและประกาศ</a></li>
+                <li><a href="${basePath}services.html">บริการออนไลน์</a></li>
+                <li><a href="#">แบบฟอร์มออนไลน์</a></li>
+                <li><a href="#">คำถามที่พบบ่อย</a></li>
+              </ul>
+            </div>
+
+            <div class="orst-footer-col orst-footer-contact">
+              <h3>ติดต่อเรา</h3>
+              <p>
+                สำนักงานราชบัณฑิตยสภา<br>
+                ศูนย์ราชการเฉลิมพระเกียรติฯ อาคารซี<br>
+                ถนนแจ้งวัฒนะ เขตหลักสี่ กรุงเทพมหานคร 10210
+              </p>
+              <p>
+                โทรศัพท์: 0 2141 1728<br>
+                อีเมล: saraban@orst.go.th
+              </p>
+            </div>
+          </div>
+        </div>
+
+        
+
+        <div class="orst-footer-bottom">
+          <span>© 2026 สำนักงานราชบัณฑิตยสภา</span>
+
+          <nav aria-label="ลิงก์นโยบายเว็บไซต์">
+            <a href="#">นโยบายความเป็นส่วนตัว</a>
+            <a href="#">เงื่อนไขการใช้งาน</a>
+            <a href="#">แผนผังเว็บไซต์</a>
+          </nav>
+        </div>
+
+      </div>
+    </footer>
+
+    <button class="access-float" type="button" data-open-access>${icon('i-access')} ช่วยการเข้าถึง</button>
+
+    <div class="modal" id="search-modal" hidden role="dialog" aria-modal="true" aria-labelledby="search-title">
+      <div class="modal-backdrop" data-close-modal></div>
+      <div class="modal-card">
+        <div class="modal-header">
+          <h2 id="search-title">ค้นหาองค์ความรู้</h2>
+          <button class="modal-close" type="button" data-close-modal aria-label="ปิด">×</button>
+        </div>
+        <div class="modal-body">
+          <form class="shared-search-form" id="shared-search-form">
+            <input id="shared-search-input" type="search" placeholder="ค้นหาคำศัพท์ บทความ หนังสือ หรือบริการ...">
+            <button type="submit" aria-label="ค้นหา">${icon('i-search')}</button>
+          </form>
+          <div class="search-results" id="shared-search-results" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="access-modal" hidden role="dialog" aria-modal="true" aria-labelledby="access-title">
+      <div class="modal-backdrop" data-close-modal></div>
+      <div class="modal-card">
+        <div class="modal-header">
+          <h2 id="access-title">เครื่องมือช่วยการเข้าถึง</h2>
+          <button class="modal-close" type="button" data-close-modal aria-label="ปิด">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="tool-grid">
+            <button type="button" data-font="plus">ก+ เพิ่มตัวอักษร</button>
+            <button type="button" data-font="minus">ก- ลดตัวอักษร</button>
+            <button type="button" data-font="reset">ก ขนาดปกติ</button>
+            <button type="button" data-contrast>สีตัดกันสูง</button>
+            <button type="button" data-readable>โหมดอ่านง่าย</button>
+            <button type="button" data-motion>หยุดเคลื่อนไหว</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+
+
+function initMegaMenu() {
+  const mega = document.querySelector('#mega-menu');
+  const links = Array.from(document.querySelectorAll('[data-mega]'));
+  if (!mega || !links.length) return;
+
+  let closeTimer;
+  let currentKey = '';
+
+  function setOpenState(key, isOpen) {
+    links.forEach(link => {
+      const open = isOpen && link.dataset.mega === key;
+      link.classList.toggle('is-open', open);
+      link.setAttribute('aria-expanded', String(open));
+    });
+  }
+
+  function openMega(key) {
+    const html = renderMegaMenu(key);
+    if (!html) return;
+    currentKey = key;
+    mega.innerHTML = html;
+    mega.hidden = false;
+    setOpenState(key, true);
+  }
+
+  function closeMega() {
+    currentKey = '';
+    mega.hidden = true;
+    mega.innerHTML = '';
+    setOpenState('', false);
+  }
+
+  links.forEach(link => {
+    link.addEventListener('mouseenter', () => {
+      clearTimeout(closeTimer);
+      openMega(link.dataset.mega);
+    });
+
+    link.addEventListener('focus', () => {
+      clearTimeout(closeTimer);
+      openMega(link.dataset.mega);
+    });
+
+    link.addEventListener('click', event => {
+      const key = link.dataset.mega;
+      if (!megaMenuData[key]) return;
+
+      event.preventDefault();
+      clearTimeout(closeTimer);
+      if (!mega.hidden && currentKey === key) {
+        closeMega();
+      } else {
+        openMega(key);
+      }
+    });
+  });
+
+  const header = document.querySelector('#site-header');
+  header?.addEventListener('mouseleave', () => {
+    closeTimer = setTimeout(closeMega, 180);
+  });
+
+  mega.addEventListener('mouseenter', () => clearTimeout(closeTimer));
+  mega.addEventListener('mouseleave', () => {
+    closeTimer = setTimeout(closeMega, 180);
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeMega();
+  });
+
+  document.addEventListener('click', event => {
+    if (!event.target.closest('#site-header')) closeMega();
+  });
+}
+
+function initMobileMenu() {
+  const btn = document.querySelector('[data-mobile-menu]');
+  const menu = document.querySelector('#mobile-menu');
+  if (!btn || !menu) return;
+
+  btn.addEventListener('click', () => {
+    const open = menu.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', String(open));
+  });
+
+  document.querySelectorAll('[data-mobile-submenu]').forEach(toggle => {
+    toggle.addEventListener('click', () => {
+      const key = toggle.dataset.mobileSubmenu;
+      const panel = document.querySelector(`#mobile-submenu-${key}`);
+      if (!panel) return;
+
+      const open = panel.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', String(open));
+      const iconSpan = toggle.querySelector('span:last-child');
+      if (iconSpan) iconSpan.textContent = open ? '−' : '+';
+    });
+  });
+}
+
+function initSharedModals() {
+  const searchModal = document.querySelector('#search-modal');
+  const accessModal = document.querySelector('#access-modal');
+
+  document.querySelectorAll('[data-open-search]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!searchModal) return;
+      searchModal.hidden = false;
+      setTimeout(() => document.querySelector('#shared-search-input')?.focus(), 40);
+    });
+  });
+
+  document.querySelectorAll('[data-open-access]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!accessModal) return;
+      accessModal.hidden = false;
+    });
+  });
+
+  document.querySelectorAll('[data-close-modal]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const modal = btn.closest('.modal');
+      if (modal) modal.hidden = true;
+    });
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key !== 'Escape') return;
+    document.querySelectorAll('.modal:not([hidden])').forEach(modal => { modal.hidden = true; });
+  });
+}
+
+function initSharedSearch() {
+  const form = document.querySelector('#shared-search-form');
+  const input = document.querySelector('#shared-search-input');
+  const results = document.querySelector('#shared-search-results');
+  if (!form || !input || !results) return;
+
+  const sampleResults = [
+    ['พจนานุกรมออนไลน์', 'ค้นความหมายและการใช้คำภาษาไทย', `${basePath}dictionary.html`],
+    ['คลังองค์ความรู้', 'บทความ วารสาร เอกสาร และองค์ความรู้สำหรับประชาชน', `${basePath}knowledge.html`],
+    ['บริการประชาชน', 'สอบถามข้อมูลทางวิชาการและติดตามสถานะ', `${basePath}services.html`]
+  ];
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const keyword = input.value.trim();
+
+    results.innerHTML = sampleResults.map(([title, desc, url]) => `
+      <a class="search-result-item" href="${url}">
+        <strong>${title}</strong><br>
+        <small>${desc}${keyword ? ` · คำค้น: ${keyword}` : ''}</small>
+      </a>
+    `).join('');
+  });
+}
+
+let componentFontStep = 0;
+function initSharedAccessibility() {
+  document.querySelectorAll('[data-font]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const mode = btn.dataset.font;
+      if (mode === 'plus') componentFontStep = Math.min(componentFontStep + 1, 3);
+      if (mode === 'minus') componentFontStep = Math.max(componentFontStep - 1, -2);
+      if (mode === 'reset') componentFontStep = 0;
+      document.documentElement.style.fontSize = `${16 + componentFontStep}px`;
+    });
+  });
+
+  document.querySelectorAll('[data-contrast]').forEach(btn => {
+    btn.addEventListener('click', () => document.body.classList.toggle('high-contrast'));
+  });
+
+  document.querySelectorAll('[data-readable]').forEach(btn => {
+    btn.addEventListener('click', () => document.body.classList.toggle('readable-mode'));
+  });
+
+  document.querySelectorAll('[data-motion]').forEach(btn => {
+    btn.addEventListener('click', () => document.body.classList.toggle('no-motion'));
+  });
+}
+
+function initNewsEventsTabs() {
+  const tabs = document.querySelectorAll('[data-news-tab]');
+  const panels = document.querySelectorAll('[data-news-panel]');
+  const viewAllLink = document.querySelector('#news-view-all-link');
+
+  if (!tabs.length || !panels.length) return;
+
+  const links = {
+    news: 'news.html?type=news',
+    training: 'news.html?type=training',
+    event: 'news.html?type=event',
+    announcement: 'news.html?type=announcement'
+  };
+
+  const labels = {
+    news: 'ดูข่าวเพิ่มเติม →',
+    training: 'ดูอบรมเพิ่มเติม →',
+    event: 'ดูกิจกรรมเพิ่มเติม →',
+    announcement: 'ดูประกาศเพิ่มเติม →'
+  };
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.newsTab;
+
+      tabs.forEach(item => {
+        const active = item === tab;
+        item.classList.toggle('active', active);
+        item.setAttribute('aria-selected', String(active));
+        item.tabIndex = active ? 0 : -1;
+      });
+
+      panels.forEach(panel => {
+        const active = panel.dataset.newsPanel === target;
+        panel.classList.toggle('active', active);
+        panel.hidden = !active;
+      });
+
+      if (viewAllLink) {
+        viewAllLink.href = links[target] || 'news.html?type=news';
+        viewAllLink.textContent = labels[target] || 'ดูข่าวเพิ่มเติม →';
+      }
+    });
+  });
+}
+
+
+
+
+function initMediaTabs() {
+  const mediaTabs = document.querySelectorAll('[data-media-tab]');
+  const mediaPanels = document.querySelectorAll('[data-media-panel]');
+  const mediaViewAllLink = document.querySelector('#media-view-all-link');
+
+  if (!mediaTabs.length || !mediaPanels.length) return;
+
+  const mediaLinks = {
+    ebook: 'ebooks.html',
+    journals: 'journals.html',
+    encyclopedia: 'encyclopedia.html',
+    research: 'research.html',
+    multimedia: 'multimedia.html'
+  };
+
+  const mediaLabels = {
+    ebook: 'ดู E-Book ทั้งหมด →',
+    journals: 'ดู Journals ทั้งหมด →',
+    encyclopedia: 'ดู Encyclopedia ทั้งหมด →',
+    research: 'ดู Research ทั้งหมด →',
+    multimedia: 'ดู Multimedia ทั้งหมด →'
+  };
+
+  mediaTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.mediaTab;
+
+      mediaTabs.forEach(item => {
+        const isActive = item === tab;
+
+        item.classList.toggle('active', isActive);
+        item.setAttribute('aria-selected', String(isActive));
+        item.tabIndex = isActive ? 0 : -1;
+      });
+
+      mediaPanels.forEach(panel => {
+        const isActive = panel.dataset.mediaPanel === target;
+
+        panel.classList.toggle('active', isActive);
+        panel.hidden = !isActive;
+      });
+
+      if (mediaViewAllLink) {
+        mediaViewAllLink.href = mediaLinks[target] || 'ebooks.html';
+        mediaViewAllLink.textContent = mediaLabels[target] || 'ดูทั้งหมด →';
+      }
+
+      const activePanel = document.querySelector(`[data-media-panel="${target}"]`);
+      const scrollRow = activePanel?.querySelector('.publication-row, .media-row');
+
+      if (scrollRow) {
+        scrollRow.scrollLeft = 0;
+      }
+    });
+  });
+}
+
+
+function initCompactFAQ() {
+  document.querySelectorAll('.faq-compact-list .faq-q').forEach(button => {
+    button.addEventListener('click', () => {
+      const item = button.closest('.faq-item');
+      const answer = item?.querySelector('.faq-a');
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+
+      button.setAttribute('aria-expanded', String(!expanded));
+      if (answer) answer.hidden = expanded;
+    });
+  });
+}
+
+function initComponents() {
+  injectComponentStyles();
+
+  const headerMount = document.getElementById('app-header');
+  const footerMount = document.getElementById('app-footer');
+
+  if (headerMount) headerMount.innerHTML = renderHeader();
+  if (footerMount) footerMount.innerHTML = renderFooter();
+
+  initMegaMenu();
+  initMobileMenu();
+  initSharedModals();
+  initSharedSearch();
+  initMediaTabs();
+  initCompactFAQ();
+  initNewsEventsTabs();
+  initSharedAccessibility();
+  
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initComponents);
+} else {
+  initComponents();
+}
+
+window.orstHeader = {
+  basePath,
+  navItems,
+  megaMenuData,
+  renderMegaMenu,
+  renderHeader,
+  renderFooter,
+};
