@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="th">
+<head><meta charset="UTF-8"><title>ORST — เก็บถาวร: section เก่าที่ถูก comment ทิ้ง</title></head>
+<body>
+<!--
+  ไฟล์นี้เก็บ "โค้ด section รุ่นเก่า" ที่เคยถูก comment ค้างไว้ในหน้าเว็บจริง
+  ย้ายออกมาเพื่อให้ไฟล์หน้าเว็บอ่านง่ายขึ้น แต่ยังเปิดดูอ้างอิงดีไซน์เดิมได้
+  (ประวัติเต็มดูได้จาก git: commit "baseline before cleanup")
+-->
+
+<!-- ===== index.html — block 1 (65 บรรทัด) ===== -->
+<!-- 
+  <div class="topbar" aria-label="แถบเครื่องมือด้านบน">
+    <div class="container topbar-inner">
+      <div class="topbar-group">
+        <button type="button" data-modal-open="accessibility-modal"><svg class="icon" aria-hidden="true">
+            <use href="#i-eye"></use>
+          </svg> สำหรับผู้พิการทางสายตา</button>
+        <span class="divider"></span>
+        <button type="button" data-font="minus">ก-</button><button type="button" data-font="reset">ก</button><button
+          type="button" data-font="plus">ก+</button>
+        <span class="divider"></span>
+        <button type="button" data-toggle-contrast>ความคมชัด</button>
+      </div>
+      <div class="topbar-group topbar-right">
+        <a href="#footer">ติดต่อเรา</a><span class="divider"></span><a href="#footer">สำหรับเจ้าหน้าที่</a><span
+          class="divider"></span><span>ภาษา ◎ TH | EN</span><span class="divider"></span><a href="#login">เข้าสู่ระบบ /
+          สมัครสมาชิก</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a class="brand brand-image" href="#main-content" aria-label="สำนักงานราชบัณฑิตยสภา หน้าแรก">
+        <img src="assets/images/logo.png" alt="สำนักงานราชบัณฑิตยสภา Office of the Royal Society" class="brand-logo">
+      </a>
+      <nav class="main-nav" aria-label="เมนูหลัก">
+        <a class="active" href="#main-content">หน้าหลัก</a>
+        <a href="#services">พจนานุกรมและคำศัพท์</a>
+        <a href="#knowledge">ค้นคว้าข้อมูล</a>
+        <a href="#archive">องค์ความรู้</a>
+        <a href="#publications">สื่อและสิ่งพิมพ์</a>
+        <a href="#news">ข่าวและประกาศ</a>
+        <a href="#service-hub">บริการทางการ</a>
+        <a href="#footer">เกี่ยวกับเรา</a>
+      </nav>
+      <div class="header-actions">
+        <button class="round-action" type="button" data-focus-search aria-label="ไปยังช่องค้นหา"><svg class="icon"
+            aria-hidden="true">
+            <use href="#i-search"></use>
+          </svg></button>
+        <button class="round-action primary" type="button" data-modal-open="advanced-modal">ค้นหาขั้นสูง</button>
+        <button class="mobile-menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu"
+          data-mobile-menu><span></span><span></span><span></span><span class="sr-only">เปิดเมนู</span></button>
+      </div>
+    </div>
+    <nav id="mobile-menu" class="mobile-menu" aria-label="เมนูมือถือ">
+      <a href="#services">พจนานุกรมและคำศัพท์ <svg class="icon">
+          <use href="#i-chevron"></use>
+        </svg></a>
+      <a href="#knowledge">ค้นคว้าข้อมูล <svg class="icon">
+          <use href="#i-chevron"></use>
+        </svg></a>
+      <a href="#archive">องค์ความรู้ <svg class="icon">
+          <use href="#i-chevron"></use>
+        </svg></a>
+      <a href="#publications">สื่อและสิ่งพิมพ์ <svg class="icon">
+          <use href="#i-chevron"></use>
+        </svg></a>
+      <a href="#news">ข่าวและประกาศ <svg class="icon">
+          <use href="#i-chevron"></use>
+        </svg></a>
+      <button type="button" data-modal-open="advanced-modal">เปิดค้นหาขั้นสูง</button>
+    </nav>
+  </header> -->
+
+<!-- ===== index.html — block 2 (3 บรรทัด) ===== -->
+<!-- <button class="orst-search-advanced" type="button" data-modal-open="advanced-modal">
+              ✦ ค้นหาแบบละเอียด
+            </button> -->
+
+<!-- ===== index.html — block 3 (21 บรรทัด) ===== -->
+<!-- <details class="orst-more-searches">
+              <summary>
+                <span>ดูคำค้นเพิ่มเติม</span>
+                <svg class="orst-summary-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+                  <path d="M5.5 7.5 10 12l4.5-4.5"></path>
+                </svg>
+              </summary>
+
+              <div class="orst-more-search-grid">
+                <button type="button" class="chip" data-query="ซอฟต์แวร์">ซอฟต์แวร์</button>
+                <button type="button" class="chip" data-query="แอปพลิเคชัน">แอปพลิเคชัน</button>
+                <button type="button" class="chip" data-query="อินเทอร์เน็ต">อินเทอร์เน็ต</button>
+                <button type="button" class="chip" data-query="หลักเกณฑ์การทับศัพท์">หลักเกณฑ์การทับศัพท์</button>
+                <button type="button" class="chip" data-query="ราชาศัพท์">ราชาศัพท์</button>
+                <button type="button" class="chip" data-query="ภาษาไทย">ภาษาไทย</button>
+                <button type="button" class="chip" data-query="คำย่อ">คำย่อ</button>
+                <button type="button" class="chip" data-query="สำนวนไทย">สำนวนไทย</button>
+                <button type="button" class="chip" data-query="สุภาษิต">สุภาษิต</button>
+                <button type="button" class="chip" data-query="สารานุกรมไทย">สารานุกรมไทย</button>
+              </div>
+            </details> -->
+
+<!-- ===== index.html — block 4 (49 บรรทัด) ===== -->
+<!-- <div class="orst-proof-card reveal" id="ai-proof" aria-label="ผู้ช่วยตรวจภาษาไทยอัจฉริยะ">
+          <aside class="orst-proof-info">
+            <div>
+             <div class="orst-proof-brand"> <span class="orst-proof-logo">AI</span> <h2>Proof อัจฉริยะ</h2> </div>
+              <p>ตรวจคำผิดพร้อมคำแนะนำการแก้ไข ช่วยให้ประชาชนใช้ภาษาไทยได้มั่นใจขึ้น</p>
+            </div>
+            <ul class="orst-proof-list">
+              <li>ตรวจได้ทั้งประโยค</li>
+              <li>สะกดคำ</li>
+              <li>การเว้นวรรค</li>
+              <li>แนะนำคำที่ควรใช้</li>
+            </ul>
+          </aside>
+
+          <div class="orst-proof-editor">
+            <div class="orst-proof-topbar">
+              <span>วางข้อความของคุณที่นี่ เพื่อตรวจคำผิด...</span>
+              <button class="orst-proof-action-link" type="button" id="proof-sample">ลองตัวอย่าง</button>
+            </div>
+            <label class="sr-only" for="proof-input">วางข้อความเพื่อตรวจคำผิด</label>
+            <textarea id="proof-input"
+              maxlength="5000">สำนักงาน ราชบัณฑิตยสภา เป็นแหล่งรวมองค์ความรู้ และมาตรฐานภาษาไทย เพื่อส่งเสริมการเรียนรู้ของคนไทย ให้ ก้าวหน้าอย่างยั่งยืน เรามุ่งมั่น ในการ พัฒนา ภาษาไทย ให้ถูกต้อง และ ทันสมัย</textarea>
+            <div class="orst-proof-bottom">
+              <button class="orst-proof-check" type="button" id="proof-check">ตรวจสอบคำผิด ✦</button>
+              <span class="orst-proof-ai">● ตรวจสอบโดย AI ภาษาไทย</span>
+              <span class="orst-proof-count" id="proof-count">0 / 5,000 ตัวอักษร</span>
+            </div>
+          </div>
+
+          <aside class="orst-proof-result" aria-live="polite">
+            <div class="orst-proof-result-head">
+              <span id="proof-status">ผลการตรวจสอบ</span>
+              <button class="orst-proof-copy-small" type="button" id="proof-clear">ล้างข้อความ</button>
+            </div>
+            <div class="orst-proof-items" id="proof-items">
+              <div class="orst-proof-item"><span class="orst-proof-dot"></span><span>สำนักงาน → สำนักงาน</span><button
+                  class="orst-proof-apply" type="button">แก้ไข</button></div>
+              <div class="orst-proof-item"><span class="orst-proof-dot"></span><span>ให้ → ให้</span><button
+                  class="orst-proof-apply" type="button">แก้ไข</button></div>
+              <div class="orst-proof-item"><span class="orst-proof-dot ok"></span><span>ในการ → ในการ</span><button
+                  class="orst-proof-apply" type="button">แก้ไข</button></div>
+              <div class="orst-proof-item"><span class="orst-proof-dot ok"></span><span>และ → และ</span><button
+                  class="orst-proof-apply" type="button">แก้ไข</button></div>
+              <div class="orst-proof-item"><span class="orst-proof-dot ok"></span><span>ทันสมัย → ทันสมัย</span><button
+                  class="orst-proof-apply" type="button">แก้ไข</button></div>
+            </div>
+            <button class="orst-proof-copy" type="button" id="proof-copy">คัดลอกผลลัพธ์</button>
+          </aside>
+        </div> -->
+
+<!-- ===== index.html — block 5 (130 บรรทัด) ===== -->
+<!-- <section class="search-results-section orst-search-results" id="knowledge" aria-labelledby="search-results-title"
+      hidden>
+      <div class="container">
+        <div class="orst-results-panel reveal">
+          <div class="orst-results-hero">
+            <div class="orst-results-heading">
+              <span class="section-kicker">Smart Search</span>
+              <h2 id="search-results-title">ผลการค้นหาองค์ความรู้</h2>
+              <p id="search-results-desc">
+                ค้นหาคำศัพท์ พจนานุกรม ศัพท์บัญญัติ บทความ หนังสือ ข่าวสาร และบริการประชาชนได้จากจุดเดียว
+              </p>
+            </div>
+
+            <div class="orst-results-command" role="search" aria-label="ค้นหาในผลลัพธ์">
+              <span class="orst-command-icon" aria-hidden="true">
+                <svg class="icon">
+                  <use href="#i-search"></use>
+                </svg>
+              </span>
+              <label class="sr-only" for="results-inline-search">ค้นหาในฐานข้อมูลองค์ความรู้</label>
+              <input id="results-inline-search" type="search" autocomplete="off"
+                placeholder="ค้นหา เช่น พจนานุกรม, ศัพท์บัญญัติ, ภาษาไทย, สารานุกรม...">
+              <button type="button" class="orst-command-btn" id="results-inline-submit">ค้นหา</button>
+            </div>
+
+            <div class="orst-results-tools">
+              <div class="orst-result-summary" id="result-summary">
+                <strong>พร้อมค้นหา</strong>
+                <span>พิมพ์คำค้นหรือเลือกหมวดด้านล่าง</span>
+              </div>
+
+              <select id="result-sort" aria-label="เรียงลำดับผลการค้นหา">
+                <option value="relevant">เรียงตามความเกี่ยวข้อง</option>
+                <option value="newest">ล่าสุดก่อน</option>
+                <option value="popular">นิยมก่อน</option>
+                <option value="az">ก-ฮ</option>
+              </select>
+
+          
+            </div>
+          </div>
+
+          <div class="orst-quick-search" aria-label="ตัวอย่างการค้นหายอดนิยม">
+            <span>ค้นหาเร็ว:</span>
+            <button type="button" data-query="พจนานุกรม">พจนานุกรม</button>
+            <button type="button" data-query="ศัพท์บัญญัติ">ศัพท์บัญญัติ</button>
+            <button type="button" data-query="สารานุกรม">สารานุกรม</button>
+            <button type="button" data-query="คลังเอกสารเก่า">คลังเอกสารเก่า</button>
+            <button type="button" data-query="E-BOOK">E-BOOK</button>
+            <button type="button" data-query="หลักเกณฑ์ต่างๆ">หลักเกณฑ์ต่างๆ</button>
+          </div>
+
+          <div class="orst-filter-row" role="tablist" aria-label="ตัวกรองผลลัพธ์">
+            <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">
+              ทั้งหมด <span id="count-all">0</span>
+            </button>
+            <button class="filter-btn" data-filter="term" role="tab">
+              คำศัพท์ <span id="count-term">0</span>
+            </button>
+            <button class="filter-btn" data-filter="dictionary" role="tab">
+              พจนานุกรม <span id="count-dictionary">0</span>
+            </button>
+            <button class="filter-btn" data-filter="journal" role="tab">
+              วารสาร <span id="count-journal">0</span>
+            </button>
+            <button class="filter-btn" data-filter="article" role="tab">
+              บทความ <span id="count-article">0</span>
+            </button>
+            <button class="filter-btn" data-filter="document" role="tab">
+              เอกสาร <span id="count-document">0</span>
+            </button>
+            <button class="filter-btn" data-filter="ebook" role="tab">
+              E-BOOK <span id="count-ebook">0</span>
+            </button>
+            <button class="filter-btn" data-filter="service" role="tab">
+              บริการประชาชน <span id="count-service">0</span>
+            </button>
+          </div>
+
+          <div class="orst-results-body" aria-live="polite" aria-atomic="false">
+            <aside class="orst-results-insight" aria-label="คำแนะนำการค้นหา">
+              <div class="orst-insight-card primary">
+                <span class="orst-insight-icon">
+                  <svg class="icon">
+                    <use href="#i-book"></use>
+                  </svg>
+                </span>
+                <strong>ค้นได้หลายฐานข้อมูล</strong>
+                <p>รองรับพจนานุกรม ศัพท์บัญญัติ สารานุกรม วารสาร เอกสาร และหนังสือดิจิทัล</p>
+              </div>
+
+              <div class="orst-insight-card">
+                <strong>หมวดที่เกี่ยวข้อง</strong>
+                <div class="orst-related-tags" id="related-tags">
+                  <button type="button" data-query="ภาษาไทย">ภาษาไทย</button>
+                  <button type="button" data-query="ราชบัณฑิต">ราชบัณฑิต</button>
+                  <button type="button" data-query="ศัพท์บัญญัติ">ศัพท์บัญญัติ</button>
+                </div>
+              </div>
+
+              <div class="orst-insight-card">
+                <strong>แนะนำการค้นหา</strong>
+                <ul>
+                  <li>พิมพ์คำใกล้เคียงได้ เช่น “อนุญาต” หรือ “อนุญาติ”</li>
+                  <li>เลือกตัวกรองเพื่อแยกคำศัพท์ เอกสาร หรือ E-BOOK</li>
+                  <li>กด “ดูรายละเอียด” เพื่อเข้าสู่หน้าข้อมูลจริง</li>
+                </ul>
+              </div>
+            </aside>
+
+            <div class="orst-results-content">
+              <div class="orst-result-status" id="search-status">
+                <span>พิมพ์คำค้นหรือเลือกคำค้นยอดนิยมเพื่อเริ่มค้นหา</span>
+                <span>ระบบจะแสดงผลลัพธ์ที่เกี่ยวข้องที่สุดก่อน</span>
+              </div>
+
+              <div class="orst-featured-result" id="featured-result" hidden></div>
+
+              <div class="orst-results-grid" id="search-results"></div>
+
+              <div class="orst-empty-state" id="orst-empty-state" hidden>
+                <strong>ไม่พบผลลัพธ์ที่ตรงกับคำค้น</strong>
+                <p>ลองใช้คำกว้างขึ้น เช่น “ภาษาไทย”, “พจนานุกรม”, “ศัพท์บัญญัติ” หรือ “สารานุกรม”</p>
+                <button type="button" data-query="ภาษาไทย">ดูตัวอย่างผลลัพธ์</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+<!-- ===== index.html — block 6 (18 บรรทัด) ===== -->
+<!-- <div class="orst-results-tools">
+              <div class="orst-result-summary" id="result-summary">
+                <strong>พร้อมค้นหา</strong>
+                <span>พิมพ์คำค้นหรือเลือกหมวดด้านล่าง</span>
+              </div>
+
+              <select id="result-sort" aria-label="เรียงลำดับผลการค้นหา">
+                <option value="relevant">เกี่ยวข้องที่สุด</option>
+                <option value="newest">ล่าสุดก่อน</option>
+                <option value="popular">นิยมก่อน</option>
+                <option value="az">ก-ฮ</option>
+              </select>
+
+              <a class="view-all orst-view-all-results" id="view-all-results" href="knowledge.html"
+                aria-label="ดูผลลัพธ์ทั้งหมดในคลังองค์ความรู้ของชาติ">
+                ดูผลลัพธ์ทั้งหมด
+              </a>
+            </div> -->
+
+<!-- ===== index.html — block 7 (144 บรรทัด) ===== -->
+<!-- 
+<section class="section quick-access-section" id="archive">
+  <div class="container">
+
+    <div class="quick-access-head">
+      <div>
+        <span class="section-kicker">QUICK ACCESS SERVICES</span>
+        <h2>บริการสำคัญที่ใช้งานบ่อย</h2>
+        <p>
+          เข้าถึงพจนานุกรม ศัพท์บัญญัติ คำทับศัพท์ สื่อการเรียนรู้ และบริการภาษาไทยของสำนักงานราชบัณฑิตยสภาได้อย่างรวดเร็ว
+        </p>
+      </div>
+
+      <a class="view-all" href="services.html" aria-label="ดูบริการทั้งหมด">
+        ดูบริการทั้งหมด →
+      </a>
+    </div>
+
+    <div class="quick-access-layout reveal">
+
+      <article class="quick-access-feature">
+        <span class="section-kicker">Smart Gateway</span>
+        <h3>ค้นหา ตรวจสอบ และเรียนรู้ภาษาไทยจากจุดเดียว</h3>
+        <p>
+          รวมบริการที่ประชาชน นักเรียน นักวิชาการ และหน่วยงานภาครัฐใช้งานบ่อย
+          เพื่อช่วยตรวจสอบคำ ใช้ภาษาอย่างถูกต้อง และเข้าถึงองค์ความรู้ได้สะดวกขึ้น
+        </p>
+
+        <div class="quick-access-actions">
+          <button type="button" class="btn" data-focus-search>
+            <svg class="icon" aria-hidden="true">
+              <use href="#i-search"></use>
+            </svg>
+            เริ่มค้นหา
+          </button>
+
+          <a class="btn secondary" href="knowledge.html">
+            เข้าคลังองค์ความรู้
+          </a>
+        </div>
+      </article>
+
+      <div class="quick-access-grid" aria-label="บริการสำคัญที่ใช้งานบ่อย">
+
+        <a class="quick-service-card is-primary" href="dictionary.html" aria-label="เปิดพจนานุกรม">
+          <span class="quick-service-icon">
+            <svg class="icon" aria-hidden="true">
+              <use href="#i-book"></use>
+            </svg>
+          </span>
+          <span>
+            <strong>พจนานุกรม</strong>
+            <small>ค้นหาความหมาย คำอ่าน และการสะกดคำ</small>
+          </span>
+          <em>ค้นหา →</em>
+        </a>
+
+        <a class="quick-service-card" href="terms.html" aria-label="เปิดศัพท์บัญญัติ">
+          <span class="quick-service-icon">
+            <svg class="icon" aria-hidden="true">
+              <use href="#i-file"></use>
+            </svg>
+          </span>
+          <span>
+            <strong>ศัพท์บัญญัติ</strong>
+            <small>ตรวจสอบคำไทยทางวิชาการและวิชาชีพ</small>
+          </span>
+          <em>เปิดดู →</em>
+        </a>
+
+        <a class="quick-service-card" href="transliteration.html" aria-label="เปิดคำทับศัพท์">
+          <span class="quick-service-icon">
+            TH
+          </span>
+          <span>
+            <strong>คำทับศัพท์</strong>
+            <small>ตรวจหลักเกณฑ์และรูปคำทับศัพท์ที่ถูกต้อง</small>
+          </span>
+          <em>ตรวจคำ →</em>
+        </a>
+
+        <a class="quick-service-card" href="royal-words.html" aria-label="เปิดราชาศัพท์">
+          <span class="quick-service-icon">
+            รา
+          </span>
+          <span>
+            <strong>ราชาศัพท์</strong>
+            <small>ค้นหาการใช้ถ้อยคำให้ถูกต้องตามบริบท</small>
+          </span>
+          <em>ค้นหา →</em>
+        </a>
+
+        <a class="quick-service-card" href="elearning.html" aria-label="เปิด e-Learning">
+          <span class="quick-service-icon">
+            <svg class="icon" aria-hidden="true">
+              <use href="#i-access"></use>
+            </svg>
+          </span>
+          <span>
+            <strong>e-Learning</strong>
+            <small>เรียนรู้ภาษาไทยและองค์ความรู้ด้วยตนเอง</small>
+          </span>
+          <em>เริ่มเรียน →</em>
+        </a>
+
+        <a class="quick-service-card" href="thai-test.html" aria-label="เปิดระบบทดสอบภาษาไทย">
+          <span class="quick-service-icon">
+            ✓
+          </span>
+          <span>
+            <strong>ระบบทดสอบภาษาไทย</strong>
+            <small>ประเมินความรู้และการใช้ภาษาไทยเบื้องต้น</small>
+          </span>
+          <em>ทำแบบทดสอบ →</em>
+        </a>
+
+        <a class="quick-service-card" href="ebooks.html" aria-label="เปิด E-Book">
+          <span class="quick-service-icon">
+            <svg class="icon" aria-hidden="true">
+              <use href="#i-form"></use>
+            </svg>
+          </span>
+          <span>
+            <strong>E-Book</strong>
+            <small>อ่านหนังสือ วารสาร และสิ่งพิมพ์ดิจิทัล</small>
+          </span>
+          <em>อ่านเลย →</em>
+        </a>
+
+        <a class="quick-service-card" href="thai-sign-language.html" aria-label="เปิดภาษามือไทย">
+          <span class="quick-service-icon">
+            มือ
+          </span>
+          <span>
+            <strong>ภาษามือไทย</strong>
+            <small>เข้าถึงคลังความรู้และสื่อภาษามือไทย</small>
+          </span>
+          <em>เปิดดู →</em>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- ===== index.html — block 8 (31 บรรทัด) ===== -->
+<!-- <section class="section" id="archive">
+      <div class="container archive-grid">
+        <div class="reveal"><span class="section-kicker">คลังปัญญาแห่งชาติ</span>
+          <h2>ฐานความรู้ที่เชื่อมโยงและค้นพบง่าย</h2>
+          <p style="color:var(--muted)">ออกแบบให้ประชาชนเริ่มจากสิ่งที่ต้องการค้นหา แล้วเชื่อมต่อไปยังคำศัพท์ บทความ
+            เอกสาร และบริการที่เกี่ยวข้องได้ทันที</p>
+        </div>
+        <div class="archive-stats reveal">
+          <div class="stat-card"><strong>185,420</strong><span>องค์ความรู้ทั้งหมด</span></div>
+          <div class="stat-card"><strong>82,156</strong><span>คำศัพท์</span></div>
+          <div class="stat-card"><strong>12,847</strong><span>บทความวิชาการ</span></div>
+          <div class="stat-card"><strong>3,294</strong><span>วารสารและสิ่งพิมพ์</span></div>
+        </div>
+        <div class="category-grid reveal">
+          <div class="category-card"><span><strong>ภาษาไทย</strong><br><small>คำศัพท์ การใช้ภาษา
+                และหลักเกณฑ์</small></span>›</div>
+          <div class="category-card">
+            <span><strong>วิทยาศาสตร์</strong><br><small>ศัพท์วิชาการและองค์ความรู้ร่วมสมัย</small></span>›
+          </div>
+          <div class="category-card"><span><strong>ศิลปกรรม</strong><br><small>ศิลปะ วัฒนธรรม และวรรณคดี</small></span>›
+          </div>
+          <div class="category-card"><span><strong>สังคมศาสตร์</strong><br><small>ชุมชน เศรษฐกิจ สังคม
+                และนโยบาย</small></span>›</div>
+          <div class="category-card"><span><strong>ประวัติราชบัณฑิต</strong><br><small>ราชบัณฑิต ภาคีสมาชิก
+                และผลงาน</small></span>›</div>
+          <div class="category-card">
+            <span><strong>องค์ความรู้สำหรับประชาชน</strong><br><small>เนื้อหาเข้าใจง่ายสำหรับทุกกลุ่ม</small></span>›
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+<!-- ===== index.html — block 9 (42 บรรทัด) ===== -->
+<!-- <section class="section alt" id="news">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>ข่าวและประกาศ</h2>
+            <p>ข่าวสารสำคัญ กิจกรรม และประกาศที่ประชาชนควรทราบ</p>
+          </div><a href="#news" class="view-all">ดูทั้งหมด →</a>
+        </div>
+        <div class="news-grid reveal">
+          <article class="news-card">
+            <div class="news-img has-photo">
+  <img src="assets/images/New-01.png" alt="การประชุมใหญ่สามัญประจำปี 2567" loading="lazy">
+ 
+</div>
+            <div class="news-body"><span class="tag">ข่าวประชาสัมพันธ์</span>
+              <h3>การประชุมใหญ่สามัญประจำปี 2567</h3>
+              <p>สำนักงานราชบัณฑิตยสภาจัดการประชุมใหญ่สามัญประจำปี</p><a class="read-link" href="#">อ่านต่อ →</a>
+            </div>
+          </article>
+          <article class="news-card">
+            <div class="news-img has-photo">
+  <img src="assets/images/New-02.png" alt="การประชุมใหญ่สามัญประจำปี 2567" loading="lazy">
+ 
+</div>
+            <div class="news-body"><span class="tag">ประกาศ</span>
+              <h3>ประกาศสำนักงานราชบัณฑิตยสภาฉบับใหม่</h3>
+              <p>ประกาศเผยแพร่ข้อกำหนดและเอกสารที่เกี่ยวข้อง</p><a class="read-link" href="#">อ่านต่อ →</a>
+            </div>
+          </article>
+          <article class="news-card">
+             <div class="news-img has-photo">
+  <img src="assets/images/New-03.png" alt="การประชุมใหญ่สามัญประจำปี 2567" loading="lazy">
+ 
+</div>
+            <div class="news-body"><span class="tag">กิจกรรม</span>
+              <h3>เชิญร่วมงานวันภาษาไทยแห่งชาติ 2567</h3>
+              <p>กิจกรรมเสวนา นิทรรศการ และการประกวดด้านภาษาไทย</p><a class="read-link" href="#">อ่านต่อ →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section> -->
+
+<!-- ===== index.html — block 10 (129 บรรทัด) ===== -->
+<!-- <section class="section media-library-section" id="publications">
+      <div class="container">
+
+        <div class="section-head media-library-head">
+          <div>
+            <span class="section-kicker">Knowledge Media</span>
+            <h2>สื่อความรู้แนะนำ</h2>
+            <p>รวมหนังสือ วารสาร e-Book และสื่อมัลติมีเดียสำหรับการเรียนรู้อย่างต่อเนื่อง</p>
+          </div>
+
+          <a class="view-all media-view-all-link" id="media-view-all-link" href="#publications">
+            ดูทั้งหมด →
+          </a>
+        </div>
+
+        <div class="media-tabs reveal">
+          <div class="media-tablist" role="tablist" aria-label="ประเภทสื่อความรู้">
+            <button type="button" class="media-tab active" id="tab-publications" role="tab" aria-selected="true"
+              aria-controls="panel-publications" data-media-tab="publications">
+              สิ่งพิมพ์และดิจิทัล
+            </button>
+
+            <button type="button" class="media-tab" id="tab-multimedia" role="tab" aria-selected="false"
+              aria-controls="panel-multimedia" data-media-tab="multimedia">
+              สื่อมัลติมีเดีย
+            </button>
+          </div>
+
+          <div class="media-tab-panel active" id="panel-publications" role="tabpanel" aria-labelledby="tab-publications"
+            data-media-panel="publications">
+
+            <div class="publication-shell media-tab-shell">
+              <button class="scroll-btn left" data-scroll="pub" data-dir="left"
+                aria-label="เลื่อนสิ่งพิมพ์ไปทางซ้าย">‹</button>
+
+              <div class="publication-row" id="pub-row">
+                <article class="pub-card">
+                  <div class="cover cover-image">
+                    <img src="assets/images/e-Book01.png" alt="พจนานุกรมฉบับราชบัณฑิตยสถาน พ.ศ. 2554" loading="lazy">
+                  </div>
+                  <p>พจนานุกรมฉบับราชบัณฑิตยสถาน พ.ศ. 2554</p>
+                </article>
+
+                <article class="pub-card">
+                  <div class="cover cover-image">
+                    <img src="assets/images/e-Book02.png" alt="สารานุกรมไทยสำหรับเยาวชนฯ" loading="lazy">
+                  </div>
+                  <p>สารานุกรมไทยสำหรับเยาวชนฯ</p>
+                </article>
+
+                <article class="pub-card">
+                  <div class="cover cover-image">
+                    <img src="assets/images/e-Book03.png" alt="วรรณกรรมรัตนโกสินทร์ เล่ม 1" loading="lazy">
+                  </div>
+                  <p>วรรณกรรมรัตนโกสินทร์ เล่ม 1</p>
+                </article>
+
+                <article class="pub-card">
+                  <div class="cover cover-image">
+                    <img src="assets/images/e-Book04.png" alt="บทความวิชาการราชบัณฑิตยสภาฉบับล่าสุด" loading="lazy">
+                  </div>
+                  <p>บทความวิชาการราชบัณฑิตยสภาฉบับล่าสุด</p>
+                </article>
+
+                <article class="pub-card">
+                  <div class="cover cover-image">
+                    <img src="assets/images/e-Book05.png" alt="จดหมายเหตุราชบัณฑิตยสภา" loading="lazy">
+                  </div>
+                  <p>จดหมายเหตุราชบัณฑิตยสภา</p>
+                </article>
+
+                <article class="pub-card">
+                  <div class="cover cover-image">
+                    <img src="assets/images/e-Book06.png" alt="ภาษาไทยร่วมสมัย" loading="lazy">
+                  </div>
+                  <p>ภาษาไทยร่วมสมัย</p>
+                </article>
+              </div>
+
+              <button class="scroll-btn right" data-scroll="pub" data-dir="right"
+                aria-label="เลื่อนสิ่งพิมพ์ไปทางขวา">›</button>
+            </div>
+          </div>
+
+          <div class="media-tab-panel" id="panel-multimedia" role="tabpanel" aria-labelledby="tab-multimedia"
+            data-media-panel="multimedia" hidden>
+
+            <div class="publication-shell media-tab-shell">
+              <button class="scroll-btn left" data-scroll="media" data-dir="left"
+                aria-label="เลื่อนสื่อมัลติมีเดียไปทางซ้าย">‹</button>
+
+              <div class="media-row" id="media-row">
+                <article class="media-card">
+                  <div class="media-thumb has-photo">
+                    <img src="assets/images/Mult-01.png" alt="ภาษาไทย: มรดกและการถ่ายทอดจากรุ่นสู่รุ่น" loading="lazy">
+                  </div>
+                  <p>ภาษาไทย: มรดกและการถ่ายทอดจากรุ่นสู่รุ่น</p>
+                </article>
+
+                <article class="media-card">
+                  <div class="media-thumb has-photo">
+                    <img src="assets/images/Mult-02.png" alt="บทบาทของราชบัณฑิตยสภากับสังคมไทย" loading="lazy">
+                  </div>
+                  <p>บทบาทของราชบัณฑิตยสภากับสังคมไทย</p>
+                </article>
+
+                <article class="media-card">
+                  <div class="media-thumb has-photo">
+                    <img src="assets/images/Mult-03.png" alt="พาทีเที่ยว: ศิลปวัฒนธรรมไทยที่ควรรู้" loading="lazy">
+                  </div>
+                  <p>พาทีเที่ยว: ศิลปวัฒนธรรมไทยที่ควรรู้</p>
+                </article>
+
+                <article class="media-card">
+                  <div class="media-thumb has-photo">
+                    <img src="assets/images/Mult-04.png" alt="การใช้ภาษาไทยในยุคดิจิทัลอย่างถูกต้อง" loading="lazy">
+                  </div>
+                  <p>การใช้ภาษาไทยในยุคดิจิทัลอย่างถูกต้อง</p>
+                </article>
+              </div>
+
+              <button class="scroll-btn right" data-scroll="media" data-dir="right"
+                aria-label="เลื่อนสื่อมัลติมีเดียไปทางขวา">›</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section> -->
+
+<!-- ===== index.html — block 11 (98 บรรทัด) ===== -->
+<!-- 
+
+    <section class="section" id="publications">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>สื่อสิ่งพิมพ์และดิจิทัลแนะนำ</h2>
+            <p>หนังสือ วารสาร e-Book และสื่อความรู้ที่ควรอ่าน</p>
+          </div><a class="view-all" href="#publications">ดูทั้งหมด →</a>
+        </div>
+        <div class="publication-shell reveal"><button class="scroll-btn left" data-scroll="pub" data-dir="left"
+            aria-label="เลื่อนซ้าย">‹</button>
+          <div class="publication-row" id="pub-row">
+            <article class="pub-card">
+              <div class="cover cover-image">
+                <img src="assets/images/e-Book01.png" alt="พจนานุกรม ฉบับราชบัณฑิตยสถาน พ.ศ. 2554" loading="lazy">
+              </div>
+              <p>พจนานุกรมฉบับราชบัณฑิตยสถาน พ.ศ. 2554</p>
+            </article>
+            <article class="pub-card">
+              <div class="cover cover-image">
+                <img src="assets/images/e-Book02.png" alt="พจนานุกรม ฉบับราชบัณฑิตยสถาน พ.ศ. 2554" loading="lazy">
+              </div>
+              <p>สารานุกรมไทยสำหรับเยาวชนฯ</p>
+            </article>
+            <article class="pub-card">
+              <div class="cover cover-image">
+                <img src="assets/images/e-Book03.png" alt="พจนานุกรม ฉบับราชบัณฑิตยสถาน พ.ศ. 2554" loading="lazy">
+              </div>
+              <p>วรรณกรรมรัตนโกสินทร์ เล่ม 1</p>
+            </article>
+            <article class="pub-card">
+              <div class="cover cover-image">
+                <img src="assets/images/e-Book04.png" alt="พจนานุกรม ฉบับราชบัณฑิตยสถาน พ.ศ. 2554" loading="lazy">
+              </div>
+              <p>บทความวิชาการราชบัณฑิตยสภาฉบับล่าสุด</p>
+            </article>
+            <article class="pub-card">
+              <div class="cover cover-image">
+                <img src="assets/images/e-Book05.png" alt="พจนานุกรม ฉบับราชบัณฑิตยสถาน พ.ศ. 2554" loading="lazy">
+              </div>
+              <p>จดหมายเหตุราชบัณฑิตยสภา</p>
+            </article>
+            <article class="pub-card">
+              <div class="cover cover-image">
+                <img src="assets/images/e-Book06.png" alt="พจนานุกรม ฉบับราชบัณฑิตยสถาน พ.ศ. 2554" loading="lazy">
+              </div>
+              <p>ภาษาไทยร่วมสมัย</p>
+            </article>
+          </div><button class="scroll-btn right" data-scroll="pub" data-dir="right" aria-label="เลื่อนขวา">›</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>สื่อมัลติมีเดีย</h2>
+            <p>คลังวิดีโอและสื่อความรู้สำหรับการเรียนรู้อย่างต่อเนื่อง</p>
+          </div><a class="view-all" href="#">ดูทั้งหมด →</a>
+        </div>
+        <div class="publication-shell reveal"><button class="scroll-btn left" data-scroll="media" data-dir="left"
+            aria-label="เลื่อนซ้าย">‹</button>
+          <div class="media-row" id="media-row">
+            <article class="media-card">
+              <div class="media-thumb has-photo">
+                <img src="assets/images/Mult-01.png" alt="ภาษาไทย: มรดกและการถ่ายทอดจากรุ่นสู่รุ่น" loading="lazy">
+
+              </div>
+              <p>ภาษาไทย: มรดกและการถ่ายทอดจากรุ่นสู่รุ่น</p>
+            </article>
+            <article class="media-card">
+              <div class="media-thumb has-photo">
+                <img src="assets/images/Mult-02.png" alt="ภาษาไทย: มรดกและการถ่ายทอดจากรุ่นสู่รุ่น" loading="lazy">
+
+              </div>
+              <p>บทบาทของราชบัณฑิตยสภากับสังคมไทย</p>
+            </article>
+            <article class="media-card">
+              <div class="media-thumb has-photo">
+                <img src="assets/images/Mult-03.png" alt="ภาษาไทย: มรดกและการถ่ายทอดจากรุ่นสู่รุ่น" loading="lazy">
+
+              </div>
+              <p>พาทีเที่ยว: ศิลปวัฒนธรรมไทยที่ควรรู้</p>
+            </article>
+            <article class="media-card">
+              <div class="media-thumb has-photo">
+                <img src="assets/images/Mult-04.png" alt="ภาษาไทย: มรดกและการถ่ายทอดจากรุ่นสู่รุ่น" loading="lazy">
+
+              </div>
+              <p>การใช้ภาษาไทยในยุคดิจิทัลอย่างถูกต้อง</p>
+            </article>
+          </div><button class="scroll-btn right" data-scroll="media" data-dir="right" aria-label="เลื่อนขวา">›</button>
+        </div>
+      </div>
+    </section>
+ -->
+
+<!-- ===== index.html — block 12 (77 บรรทัด) ===== -->
+<!-- <section class="section alt news-editorial-section" id="news">
+      <div class="container">
+        <div class="section-head news-head">
+          <div>
+            <span class="section-kicker">ข่าวสารล่าสุด</span>
+            <h2>ข่าวและประกาศ</h2>
+            <p>ติดตามข่าวสำคัญ ประกาศ กิจกรรม และความเคลื่อนไหวของราชบัณฑิตยสภา</p>
+          </div>
+          <a href="#news" class="view-all">ดูข่าวทั้งหมด →</a>
+        </div>
+
+        <div class="news-grid news-editorial-grid reveal">
+          <article class="news-card news-feature-card">
+            <a href="#" class="news-photo-link" aria-label="อ่านข่าวการประชุมใหญ่สามัญประจำปี 2567">
+              <div class="news-img has-photo">
+                <img src="assets/images/New-01.png" alt="การประชุมใหญ่สามัญประจำปี 2567" loading="lazy">
+                <span class="news-type-badge">ข่าวประชาสัมพันธ์</span>
+              </div>
+            </a>
+            <div class="news-body">
+              <div class="news-meta">
+                <span>24 พฤษภาคม 2567</span>
+                <span>ข่าวประชาสัมพันธ์</span>
+              </div>
+              <h3>การประชุมใหญ่สามัญประจำปี 2567</h3>
+              <p>สำนักงานราชบัณฑิตยสภาจัดการประชุมใหญ่สามัญประจำปี เพื่อรายงานผลการดำเนินงานและทิศทางการพัฒนาองค์กร</p>
+              <a class="read-link news-read-link" href="#">
+                อ่านรายละเอียด
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="news-card">
+            <a href="#" class="news-photo-link" aria-label="อ่านประกาศสำนักงานราชบัณฑิตยสภาฉบับใหม่">
+              <div class="news-img has-photo">
+                <img src="assets/images/New-02.png" alt="ประกาศสำนักงานราชบัณฑิตยสภาฉบับใหม่" loading="lazy">
+                <span class="news-type-badge">ประกาศ</span>
+              </div>
+            </a>
+            <div class="news-body">
+              <div class="news-meta">
+                <span>16 พฤษภาคม 2567</span>
+                <span>ประกาศ</span>
+              </div>
+              <h3>ประกาศสำนักงานราชบัณฑิตยสภาฉบับใหม่</h3>
+              <p>ประกาศเผยแพร่พร้อมกำหนดการ เอกสารสำคัญ และรายละเอียดที่เกี่ยวข้องสำหรับประชาชน</p>
+              <a class="read-link news-read-link" href="#">
+                อ่านรายละเอียด
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="news-card">
+            <a href="#" class="news-photo-link" aria-label="อ่านข่าวเชิญร่วมงานวันภาษาไทยแห่งชาติ 2567">
+              <div class="news-img has-photo">
+                <img src="assets/images/New-03.png" alt="เชิญร่วมงานวันภาษาไทยแห่งชาติ 2567" loading="lazy">
+                <span class="news-type-badge">กิจกรรม</span>
+              </div>
+            </a>
+            <div class="news-body">
+              <div class="news-meta">
+                <span>2 เมษายน 2567</span>
+                <span>กิจกรรม</span>
+              </div>
+              <h3>เชิญร่วมงานวันภาษาไทยแห่งชาติ 2567</h3>
+              <p>กิจกรรมเสวนา นิทรรศการ และการประกวดด้านภาษาไทย เพื่อส่งเสริมการเรียนรู้อย่างสร้างสรรค์</p>
+              <a class="read-link news-read-link" href="#">
+                อ่านรายละเอียด
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section> -->
+
+<!-- ===== index.html — block 13 (361 บรรทัด) ===== -->
+<!-- <section class="section alt news-events-section" id="news">
+      <div class="container">
+
+        <div class="section-head news-events-head">
+          <div>
+            <span class="section-kicker">NEWS & EVENTS</span>
+            <h2>ข่าวสารและกิจกรรม</h2>
+            <p>ติดตามข่าวสำคัญ ประกาศ กิจกรรม อบรม และกำหนดการของสำนักงานราชบัณฑิตยสภา</p>
+          </div>
+
+          <a href="news.html" class="view-all" id="news-view-all-link">
+            ดูข่าวทั้งหมด →
+          </a>
+        </div>
+
+        <div class="news-events-tabs" role="tablist" aria-label="ประเภทข่าวและกิจกรรม">
+          <button type="button" class="news-event-tab active" role="tab" aria-selected="true"
+            aria-controls="news-panel-all" id="news-tab-all" data-news-tab="all">
+            ทั้งหมด
+          </button>
+
+          <button type="button" class="news-event-tab" role="tab" aria-selected="false" aria-controls="news-panel-news"
+            id="news-tab-news" data-news-tab="news">
+            ข่าว
+          </button>
+
+          <button type="button" class="news-event-tab" role="tab" aria-selected="false"
+            aria-controls="news-panel-training" id="news-tab-training" data-news-tab="training">
+            อบรม
+          </button>
+
+          <button type="button" class="news-event-tab" role="tab" aria-selected="false" aria-controls="news-panel-event"
+            id="news-tab-event" data-news-tab="event">
+            กิจกรรม
+          </button>
+
+          <button type="button" class="news-event-tab" role="tab" aria-selected="false"
+            aria-controls="news-panel-announcement" id="news-tab-announcement" data-news-tab="announcement">
+            ประกาศ
+          </button>
+        </div>
+
+
+
+
+        <div class="news-events-layout reveal">
+
+          <div class="news-events-main">
+
+            <div class="news-event-panel active" id="news-panel-all" role="tabpanel" aria-labelledby="news-tab-all"
+              data-news-panel="all">
+
+              <article class="news-feature-wide news-feature-modern">
+                <a href="#" class="news-feature-image" aria-label="อ่านข่าวการประชุมใหญ่สามัญประจำปี 2567">
+                  <img src="assets/images/New-01.png" alt="การประชุมใหญ่สามัญประจำปี 2567" loading="lazy">
+                  <span class="news-type-badge">ข่าวประชาสัมพันธ์</span>
+                </a>
+
+                <div class="news-feature-content">
+                  <div class="news-meta">
+                    <span>24 พฤษภาคม 2567</span>
+                    <span>ข่าวประชาสัมพันธ์</span>
+                  </div>
+
+                  <h3>การประชุมใหญ่สามัญประจำปี 2567</h3>
+
+                  <p>
+                    รายงานผลการดำเนินงาน ทิศทางการพัฒนาองค์กร และบทบาทของราชบัณฑิตยสภาในการสนับสนุนองค์ความรู้ของชาติ
+                  </p>
+
+                  <div class="news-action-row">
+                    <a class="news-primary-action" href="#">อ่านรายละเอียด →</a>
+                    <button type="button" class="news-secondary-action">แชร์ข่าว</button>
+                  </div>
+                </div>
+              </article>
+
+              <div class="news-action-grid">
+                <article class="news-action-card">
+                  <span class="news-mini-type">ประกาศ</span>
+                  <strong>ประกาศสำนักงานราชบัณฑิตยสภาฉบับใหม่</strong>
+                  <small>16 พฤษภาคม 2567 · เอกสารเผยแพร่</small>
+                  <div class="news-card-actions">
+                    <a href="#">อ่านประกาศ</a>
+                    <a href="#">ดาวน์โหลด</a>
+                  </div>
+                </article>
+
+                <article class="news-action-card">
+                  <span class="news-mini-type">อบรม</span>
+                  <strong>อบรมการใช้ภาษาไทยในงานราชการ</strong>
+                  <small>18 มิถุนายน 2567 · 09.00–12.00 น.</small>
+                  <div class="news-card-actions">
+                    <a href="#">ลงทะเบียน</a>
+                    <a href="#">เพิ่มลงปฏิทิน</a>
+                  </div>
+                </article>
+
+                <article class="news-action-card">
+                  <span class="news-mini-type">กิจกรรม</span>
+                  <strong>เชิญร่วมงานวันภาษาไทยแห่งชาติ 2567</strong>
+                  <small>29 กรกฎาคม 2567 · กิจกรรม onsite</small>
+                  <div class="news-card-actions">
+                    <a href="#">ดูกำหนดการ</a>
+                    <a href="#">รายละเอียด</a>
+                  </div>
+                </article>
+
+                <article class="news-action-card">
+                  <span class="news-mini-type">ข่าว</span>
+                  <strong>ความเคลื่อนไหวของราชบัณฑิตยสภา</strong>
+                  <small>10 พฤษภาคม 2567 · ข่าวประชาสัมพันธ์</small>
+                  <div class="news-card-actions">
+                    <a href="#">อ่านข่าว</a>
+                    <a href="#">ติดตาม</a>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+
+
+            <div class="news-event-panel" id="news-panel-news" role="tabpanel" aria-labelledby="news-tab-news"
+              data-news-panel="news" hidden>
+
+              <div class="news-section-toolbar">
+                <strong>ข่าวประชาสัมพันธ์ล่าสุด</strong>
+                <span>อัปเดตข่าวสารและความเคลื่อนไหวของสำนักงาน</span>
+              </div>
+
+              <div class="news-action-grid news-action-grid-2">
+                <article class="news-action-card is-highlight">
+                  <span class="news-mini-type">ข่าวประชาสัมพันธ์</span>
+                  <strong>การประชุมใหญ่สามัญประจำปี 2567</strong>
+                  <small>24 พฤษภาคม 2567</small>
+                  <p>สรุปสาระสำคัญจากการประชุมใหญ่สามัญประจำปี และทิศทางการดำเนินงานในระยะต่อไป</p>
+                  <div class="news-card-actions">
+                    <a href="#">อ่านรายละเอียด</a>
+                    <a href="#">แชร์ข่าว</a>
+                  </div>
+                </article>
+
+                <article class="news-action-card">
+                  <span class="news-mini-type">ข่าวประชาสัมพันธ์</span>
+                  <strong>ความเคลื่อนไหวของราชบัณฑิตยสภา</strong>
+                  <small>10 พฤษภาคม 2567</small>
+                  <p>ข่าวสารภารกิจ การประชุม และกิจกรรมด้านองค์ความรู้ของสำนักงานราชบัณฑิตยสภา</p>
+                  <div class="news-card-actions">
+                    <a href="#">อ่านข่าว</a>
+                  </div>
+                </article>
+
+                <article class="news-action-card">
+                  <span class="news-mini-type">ข่าวสารองค์กร</span>
+                  <strong>การพัฒนาระบบคลังองค์ความรู้ของชาติ</strong>
+                  <small>8 พฤษภาคม 2567</small>
+                  <p>ยกระดับการเข้าถึงพจนานุกรม ศัพท์บัญญัติ และองค์ความรู้ให้ประชาชนใช้งานง่ายขึ้น</p>
+                  <div class="news-card-actions">
+                    <a href="#">อ่านข่าว</a>
+                  </div>
+                </article>
+
+                <article class="news-action-card">
+                  <span class="news-mini-type">ข่าวประชาสัมพันธ์</span>
+                  <strong>เปิดบริการข้อมูลภาษาไทยรูปแบบดิจิทัล</strong>
+                  <small>2 พฤษภาคม 2567</small>
+                  <p>ประชาชนสามารถค้นหาข้อมูลภาษาไทยและเอกสารอ้างอิงจากระบบออนไลน์ได้สะดวกขึ้น</p>
+                  <div class="news-card-actions">
+                    <a href="#">ดูบริการ</a>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+
+            <div class="news-event-panel" id="news-panel-training" role="tabpanel" aria-labelledby="news-tab-training"
+              data-news-panel="training" hidden>
+
+              <div class="news-section-toolbar">
+                <strong>หลักสูตรอบรมและสัมมนา</strong>
+                <span>กิจกรรมพัฒนาความรู้ด้านภาษาไทย เอกสารราชการ และการใช้องค์ความรู้</span>
+              </div>
+
+              <div class="news-action-grid news-action-grid-2">
+                <article class="news-action-card is-highlight">
+                  <span class="news-mini-type">เปิดลงทะเบียน</span>
+                  <strong>อบรมการใช้ภาษาไทยในงานราชการ</strong>
+                  <small>18 มิถุนายน 2567 · 09.00–12.00 น.</small>
+                  <p>แนวทางการใช้ภาษาไทยที่ถูกต้อง ชัดเจน และเหมาะสมกับเอกสารราชการ</p>
+                  <div class="news-card-actions">
+                    <a href="#">ลงทะเบียน</a>
+                    <a href="#">เพิ่มลงปฏิทิน</a>
+                  </div>
+                </article>
+
+                <article class="news-action-card">
+                  <span class="news-mini-type">ออนไลน์</span>
+                  <strong>อบรมการเขียนเอกสารราชการ</strong>
+                  <small>25 มิถุนายน 2567 · ออนไลน์</small>
+                  <p>เรียนรู้รูปแบบการเขียนหนังสือราชการ การใช้ถ้อยคำ และการเรียบเรียงอย่างเป็นทางการ</p>
+                  <div class="news-card-actions">
+                    <a href="#">ลงทะเบียน</a>
+                    <a href="#">รายละเอียด</a>
+                  </div>
+                </article>
+
+                <article class="news-action-card">
+                  <span class="news-mini-type">สัมมนา</span>
+                  <strong>ภาษาไทยในยุคดิจิทัล</strong>
+                  <small>5 กรกฎาคม 2567</small>
+                  <p>ประเด็นการใช้คำร่วมสมัย คำทับศัพท์ และศัพท์บัญญัติในสื่อดิจิทัล</p>
+                  <div class="news-card-actions">
+                    <a href="#">ดูกำหนดการ</a>
+                  </div>
+                </article>
+
+                <article class="news-action-card">
+                  <span class="news-mini-type">อบรม</span>
+                  <strong>การค้นหาองค์ความรู้จากฐานข้อมูลราชบัณฑิตยสภา</strong>
+                  <small>12 กรกฎาคม 2567</small>
+                  <p>แนะนำการใช้พจนานุกรม ศัพท์บัญญัติ วารสาร และ e-Book ผ่านระบบออนไลน์</p>
+                  <div class="news-card-actions">
+                    <a href="#">สมัครเข้าร่วม</a>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+
+            <div class="news-event-panel" id="news-panel-event" role="tabpanel" aria-labelledby="news-tab-event"
+              data-news-panel="event" hidden>
+              <div class="news-mini-grid news-mini-grid-full">
+                <article class="news-mini-card">
+                  <span class="news-mini-type">กิจกรรม</span>
+                  <strong>เชิญร่วมงานวันภาษาไทยแห่งชาติ 2567</strong>
+                  <small>2 เมษายน 2567</small>
+                  <a href="#">ดูกิจกรรม →</a>
+                </article>
+
+                <article class="news-mini-card">
+                  <span class="news-mini-type">กิจกรรม</span>
+                  <strong>กิจกรรมส่งเสริมการเรียนรู้ภาษาไทย</strong>
+                  <small>29 กรกฎาคม 2567</small>
+                  <a href="#">ดูกิจกรรม →</a>
+                </article>
+              </div>
+            </div>
+
+            <div class="news-event-panel" id="news-panel-announcement" role="tabpanel"
+              aria-labelledby="news-tab-announcement" data-news-panel="announcement" hidden>
+              <div class="news-mini-grid news-mini-grid-full">
+                <article class="news-mini-card">
+                  <span class="news-mini-type">ประกาศ</span>
+                  <strong>ประกาศสำนักงานราชบัณฑิตยสภาฉบับใหม่</strong>
+                  <small>16 พฤษภาคม 2567</small>
+                  <a href="#">อ่านประกาศ →</a>
+                </article>
+
+                <article class="news-mini-card">
+                  <span class="news-mini-type">ประกาศ</span>
+                  <strong>ประกาศรับสมัครและเอกสารที่เกี่ยวข้อง</strong>
+                  <small>8 พฤษภาคม 2567</small>
+                  <a href="#">อ่านประกาศ →</a>
+                </article>
+              </div>
+            </div>
+
+          </div>
+
+
+          
+
+          <aside class="events-calendar-card" aria-label="ปฏิทินกิจกรรม">
+            <div class="calendar-head">
+              <div>
+                <span class="section-kicker">Calendar</span>
+                <h3>ปฏิทินกิจกรรม</h3>
+              </div>
+              <a href="calendar.html" aria-label="ดูปฏิทินทั้งหมด">ทั้งหมด</a>
+            </div>
+
+            <div class="calendar-month">
+              <button type="button" aria-label="เดือนก่อนหน้า">‹</button>
+              <strong>มิถุนายน 2567</strong>
+              <button type="button" aria-label="เดือนถัดไป">›</button>
+            </div>
+
+            <div class="calendar-grid" aria-label="ปฏิทินเดือนมิถุนายน 2567">
+              <span>อา</span><span>จ</span><span>อ</span><span>พ</span><span>พฤ</span><span>ศ</span><span>ส</span>
+
+              <button type="button" class="muted">26</button>
+              <button type="button" class="muted">27</button>
+              <button type="button" class="muted">28</button>
+              <button type="button" class="muted">29</button>
+              <button type="button" class="muted">30</button>
+              <button type="button" class="muted">31</button>
+              <button type="button">1</button>
+
+              <button type="button">2</button>
+              <button type="button">3</button>
+              <button type="button">4</button>
+              <button type="button">5</button>
+              <button type="button">6</button>
+              <button type="button">7</button>
+              <button type="button">8</button>
+
+              <button type="button">9</button>
+              <button type="button">10</button>
+              <button type="button">11</button>
+              <button type="button">12</button>
+              <button type="button">13</button>
+              <button type="button">14</button>
+              <button type="button">15</button>
+
+              <button type="button">16</button>
+              <button type="button">17</button>
+              <button type="button" class="has-event" aria-label="18 มิถุนายน 2567 มีอบรม">18</button>
+              <button type="button">19</button>
+              <button type="button">20</button>
+              <button type="button">21</button>
+              <button type="button">22</button>
+
+              <button type="button">23</button>
+              <button type="button">24</button>
+              <button type="button" class="has-event" aria-label="25 มิถุนายน 2567 มีอบรม">25</button>
+              <button type="button">26</button>
+              <button type="button">27</button>
+              <button type="button">28</button>
+              <button type="button">29</button>
+            </div>
+
+            <div class="calendar-agenda">
+              <strong>กำหนดการใกล้ถึง</strong>
+
+              <a href="#" class="agenda-item">
+                <span class="agenda-date">
+                  <b>18</b>
+                  <small>มิ.ย.</small>
+                </span>
+                <span>
+                  <b>อบรมการใช้ภาษาไทยในงานราชการ</b>
+                  <small>อบรม · 09.00–12.00 น.</small>
+                </span>
+              </a>
+
+              <a href="#" class="agenda-item">
+                <span class="agenda-date">
+                  <b>25</b>
+                  <small>มิ.ย.</small>
+                </span>
+                <span>
+                  <b>อบรมการเขียนเอกสารราชการ</b>
+                  <small>อบรม · ออนไลน์</small>
+                </span>
+              </a>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section> -->
+
+<!-- ===== index.html — block 14 (30 บรรทัด) ===== -->
+<!-- <section class="section" id="service-hub">
+      <div class="container">
+        <div class="section-head center"><span class="section-kicker">Digital Service Hub</span>
+          <h2>บริการประชาชนดิจิทัล</h2>
+          <p>รวมบริการสำคัญไว้ในหน้าเดียว พร้อมแบบฟอร์มออนไลน์และการติดตามสถานะ</p>
+        </div>
+        <div class="service-hub reveal">
+          <article class="hub-card"><span class="status">ออนไลน์</span>
+            <h3>สอบถามข้อมูลทางวิชาการ</h3>
+            <p>ส่งคำถามเกี่ยวกับภาษาและองค์ความรู้</p><button class="small-btn"
+              data-modal-open="service-modal">เริ่มใช้บริการ</button>
+          </article>
+          <article class="hub-card"><span class="status">แบบฟอร์ม</span>
+            <h3>ขออนุญาตนำหนังสือไปจัดพิมพ์</h3>
+            <p>ยื่นคำขออนุญาตและแนบเอกสารได้</p><button class="small-btn"
+              data-modal-open="service-modal">กรอกแบบฟอร์ม</button>
+          </article>
+          <article class="hub-card"><span class="status">ร้องเรียน</span>
+            <h3>ร้องเรียน / เสนอแนะ</h3>
+            <p>ส่งข้อคิดเห็นเพื่อปรับปรุงบริการ</p><button class="small-btn"
+              data-modal-open="service-modal">ส่งเรื่อง</button>
+          </article>
+          <article class="hub-card"><span class="status">สำรวจ</span>
+            <h3>แบบสำรวจความคิดเห็น</h3>
+            <p>ร่วมแสดงความคิดเห็นต่อบริการ</p><button class="small-btn"
+              data-modal-open="service-modal">ตอบแบบสำรวจ</button>
+          </article>
+        </div>
+      </div>
+    </section> -->
+
+<!-- ===== index.html — block 15 (17 บรรทัด) ===== -->
+<!-- <section class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>หน่วยงานและระบบที่เกี่ยวข้อง</h2>
+            <p>เชื่อมโยงหน่วยงานและระบบสารสนเทศที่เกี่ยวข้อง</p>
+          </div><a class="view-all" href="#">ดูทั้งหมด →</a>
+        </div>
+        <div class="agency-row reveal"><a class="agency-card" href="#"><span
+              class="agency-logo">วธ</span><span>กระทรวงวัฒนธรรม</span></a><a class="agency-card" href="#"><span
+              class="agency-logo">หส</span><span>หอสมุดแห่งชาติ</span></a><a class="agency-card" href="#"><span
+              class="agency-logo">สก</span><span>สำนักศิลปกรรม</span></a><a class="agency-card" href="#"><span
+              class="agency-logo">NSTDA</span><span>สวทช.</span></a><a class="agency-card" href="#"><span
+              class="agency-logo">TCI</span><span>ศูนย์ดัชนีอ้างอิงวารสารไทย</span></a><a class="agency-card"
+            href="#"><span class="agency-logo">+</span><span>หน่วยงานที่เกี่ยวข้อง</span></a></div>
+      </div>
+    </section> -->
+
+<!-- ===== index.html — block 16 (24 บรรทัด) ===== -->
+<!-- <section class="section" id="faq">
+      <div class="container">
+        <div class="section-head center"><span class="section-kicker">คำถามที่พบบ่อย</span>
+          <h2>ช่วยให้ประชาชนเริ่มใช้งานได้เร็วขึ้น</h2>
+        </div>
+        <div class="faq-list reveal">
+          <article class="faq-item"><button class="faq-q" aria-expanded="false">ค้นหาคำศัพท์และศัพท์บัญญัติได้จากที่ใด
+              <span>+</span></button>
+            <div class="faq-a" hidden>ใช้ช่องค้นหาหลักด้านบน หรือเลือกเมนูพจนานุกรมและคำศัพท์
+              ระบบจะแสดงผลลัพธ์จากคลังข้อมูลที่เกี่ยวข้อง</div>
+          </article>
+          <article class="faq-item"><button class="faq-q" aria-expanded="false">รองรับการใช้งานบนมือถือหรือไม่
+              <span>+</span></button>
+            <div class="faq-a" hidden>รองรับทุกอุปกรณ์ ทั้งมือถือ แท็บเล็ต โน้ตบุ๊ก และคอมพิวเตอร์ โดยไม่ต้องซูมหน้าจอ
+            </div>
+          </article>
+          <article class="faq-item"><button class="faq-q"
+              aria-expanded="false">มีเครื่องมือช่วยการเข้าถึงสำหรับผู้สูงอายุหรือไม่ <span>+</span></button>
+            <div class="faq-a" hidden>มีเครื่องมือเพิ่ม/ลดขนาดตัวอักษร โหมดสีตัดกันสูง โหมดอ่านง่าย และหยุดภาพเคลื่อนไหว
+            </div>
+          </article>
+        </div>
+      </div>
+    </section> -->
+
+<!-- ===== index.html — block 17 (184 บรรทัด) ===== -->
+<!-- <section class="section faq-modern-section" id="faq">
+      <div class="container">
+        <div class="faq-modern">
+          <div class="faq-intro reveal">
+            <span class="section-kicker">คำถามที่พบบ่อย</span>
+            <h2>ช่วยให้ประชาชนเริ่มใช้งานได้เร็วขึ้น</h2>
+            <p>
+              รวมคำตอบสำคัญเกี่ยวกับการค้นหาคำศัพท์ การใช้บริการออนไลน์
+              การเข้าถึงข้อมูล และเครื่องมือช่วยการใช้งาน
+            </p>
+
+            <div class="faq-search-box" role="search">
+              <svg class="icon" aria-hidden="true">
+                <use href="#i-search"></use>
+              </svg>
+              <label class="sr-only" for="faq-search">ค้นหาคำถามที่พบบ่อย</label>
+              <input id="faq-search" type="search" placeholder="ค้นหาคำถาม เช่น พจนานุกรม มือถือ ดาวน์โหลด การเข้าถึง">
+            </div>
+
+            <div class="faq-tabs" aria-label="หมวดคำถามที่พบบ่อย">
+              <button class="faq-tab active" type="button" data-faq-filter="all">ทั้งหมด</button>
+              <button class="faq-tab" type="button" data-faq-filter="search">การค้นหา</button>
+              <button class="faq-tab" type="button" data-faq-filter="service">บริการออนไลน์</button>
+              <button class="faq-tab" type="button" data-faq-filter="access">การเข้าถึง</button>
+              <button class="faq-tab" type="button" data-faq-filter="content">เอกสารและสิ่งพิมพ์</button>
+            </div>
+          </div>
+
+          <div class="faq-layout">
+            <aside class="faq-help-card reveal">
+              <span class="faq-help-icon">
+                <svg class="icon-lg">
+                  <use href="#i-access"></use>
+                </svg>
+              </span>
+              <h3>ยังไม่พบคำตอบ?</h3>
+              <p>เริ่มจากค้นหาองค์ความรู้ หรือส่งคำถามถึงเจ้าหน้าที่ผ่านบริการออนไลน์</p>
+
+              <div class="faq-help-actions">
+                <button class="btn" type="button" data-focus-search>
+                  <svg class="icon">
+                    <use href="#i-search"></use>
+                  </svg>
+                  ค้นหาองค์ความรู้
+                </button>
+                <button class="btn secondary" type="button" data-modal-open="service-modal">
+                  ติดต่อสอบถาม
+                </button>
+                <button class="faq-text-action" type="button" data-modal-open="accessibility-modal">
+                  เปิดเครื่องมือช่วยการเข้าถึง →
+                </button>
+              </div>
+            </aside>
+
+            <div class="faq-content reveal">
+              <div class="faq-toolbar">
+                <span id="faq-count">แสดงคำถามทั้งหมด</span>
+                <div>
+                  <button type="button" data-faq-open>เปิดทั้งหมด</button>
+                  <button type="button" data-faq-close>ปิดทั้งหมด</button>
+                </div>
+              </div>
+
+              <div class="faq-list faq-list-modern">
+                <article class="faq-item" data-faq-category="search">
+                  <button class="faq-q" aria-expanded="false">
+                    <span>ค้นหาคำศัพท์และศัพท์บัญญัติได้จากที่ใด</span>
+                    <em>+</em>
+                  </button>
+                  <div class="faq-a" hidden>
+                    ใช้ช่องค้นหาหลักด้านบน หรือเลือกเมนูพจนานุกรมและคำศัพท์ ระบบจะแสดงผลลัพธ์จากฐานข้อมูลที่เกี่ยวข้อง
+                    เช่น คำศัพท์ ความหมาย ศัพท์บัญญัติ และเอกสารอ้างอิง
+                  </div>
+                </article>
+
+                <article class="faq-item" data-faq-category="search">
+                  <button class="faq-q" aria-expanded="false">
+                    <span>ถ้าไม่รู้คำค้นที่ถูกต้อง ควรเริ่มค้นหาอย่างไร</span>
+                    <em>+</em>
+                  </button>
+                  <div class="faq-a" hidden>
+                    สามารถเริ่มจากคำใกล้เคียง หมวดความรู้ หรือคำค้นยอดนิยม ระบบควรมี suggestion
+                    เพื่อช่วยแนะนำคำที่เกี่ยวข้อง และพาผู้ใช้ไปยังผลลัพธ์ที่เหมาะสม
+                  </div>
+                </article>
+
+                <article class="faq-item" data-faq-category="content">
+                  <button class="faq-q" aria-expanded="false">
+                    <span>สามารถดาวน์โหลดเอกสารหรือสิ่งพิมพ์ได้หรือไม่</span>
+                    <em>+</em>
+                  </button>
+                  <div class="faq-a" hidden>
+                    เอกสารบางรายการสามารถดาวน์โหลดได้ทันที ส่วนรายการที่มีเงื่อนไขการใช้งาน
+                    ระบบจะแสดงรายละเอียดสิทธิการใช้ เอกสารประกอบ และช่องทางขออนุญาตอย่างชัดเจน
+                  </div>
+                </article>
+
+                <article class="faq-item" data-faq-category="service">
+                  <button class="faq-q" aria-expanded="false">
+                    <span>ต้องการสอบถามข้อมูลทางวิชาการ ต้องทำอย่างไร</span>
+                    <em>+</em>
+                  </button>
+                  <div class="faq-a" hidden>
+                    ไปที่ส่วนบริการประชาชนดิจิทัล เลือก “สอบถามข้อมูลทางวิชาการ” กรอกรายละเอียดและอีเมลสำหรับติดต่อกลับ
+                    ระบบจะแจ้งเลขรับเรื่องเพื่อใช้ติดตามสถานะ
+                  </div>
+                </article>
+
+                <article class="faq-item" data-faq-category="service">
+                  <button class="faq-q" aria-expanded="false">
+                    <span>ยื่นคำขออนุญาตนำหนังสือไปจัดพิมพ์ได้ทางออนไลน์หรือไม่</span>
+                    <em>+</em>
+                  </button>
+                  <div class="faq-a" hidden>
+                    สามารถยื่นคำขอผ่านแบบฟอร์มออนไลน์ โดยระบุวัตถุประสงค์การใช้งาน ข้อมูลผู้ขออนุญาต
+                    และแนบเอกสารประกอบเพื่อให้เจ้าหน้าที่พิจารณา
+                  </div>
+                </article>
+
+                <article class="faq-item" data-faq-category="service">
+                  <button class="faq-q" aria-expanded="false">
+                    <span>หลังส่งเรื่องแล้วติดตามสถานะได้จากที่ใด</span>
+                    <em>+</em>
+                  </button>
+                  <div class="faq-a" hidden>
+                    หลังส่งเรื่อง ระบบควรออกเลขรับเรื่องให้ผู้ใช้ทันที
+                    และสามารถติดตามสถานะผ่านหน้าบริการออนไลน์หรืออีเมลที่แจ้งไว้
+                  </div>
+                </article>
+
+                <article class="faq-item" data-faq-category="access">
+                  <button class="faq-q" aria-expanded="false">
+                    <span>รองรับการใช้งานบนมือถือหรือไม่</span>
+                    <em>+</em>
+                  </button>
+                  <div class="faq-a" hidden>
+                    รองรับทุกอุปกรณ์ ทั้งมือถือ แท็บเล็ต โน้ตบุ๊ก และคอมพิวเตอร์ โดยออกแบบให้เมนู ช่องค้นหา การ์ดข่าว
+                    และบริการต่าง ๆ ปรับตามขนาดหน้าจอโดยไม่ต้องซูม
+                  </div>
+                </article>
+
+                <article class="faq-item" data-faq-category="access">
+                  <button class="faq-q" aria-expanded="false">
+                    <span>มีเครื่องมือช่วยการเข้าถึงสำหรับผู้สูงอายุหรือไม่</span>
+                    <em>+</em>
+                  </button>
+                  <div class="faq-a" hidden>
+                    มีเครื่องมือเพิ่ม/ลดขนาดตัวอักษร สีตัดกันสูง โหมดอ่านง่าย ลดภาพเคลื่อนไหว
+                    และรองรับการใช้งานด้วยแป้นพิมพ์ เพื่อให้ผู้สูงอายุและผู้พิการใช้งานได้สะดวกขึ้น
+                  </div>
+                </article>
+
+                <article class="faq-item" data-faq-category="content">
+                  <button class="faq-q" aria-expanded="false">
+                    <span>ข้อมูลในคลังปัญญาแห่งชาติมาจากแหล่งใด</span>
+                    <em>+</em>
+                  </button>
+                  <div class="faq-a" hidden>
+                    เป็นข้อมูลจากฐานความรู้ สิ่งพิมพ์ วารสาร บทความ เอกสาร และบริการของราชบัณฑิตยสภา โดยควรแสดงที่มา
+                    วันที่เผยแพร่ และประเภทข้อมูลให้ผู้ใช้ตรวจสอบได้
+                  </div>
+                </article>
+
+                <article class="faq-item" data-faq-category="content">
+                  <button class="faq-q" aria-expanded="false">
+                    <span>ถ้าต้องการอ้างอิงข้อมูล ควรดูจากส่วนใด</span>
+                    <em>+</em>
+                  </button>
+                  <div class="faq-a" hidden>
+                    ในหน้ารายละเอียดข้อมูลควรมีส่วน “ข้อมูลอ้างอิง” เช่น ชื่อเอกสาร ปีที่เผยแพร่ หน่วยงานเจ้าของข้อมูล
+                    และรูปแบบการอ้างอิง เพื่อให้ประชาชน นักเรียน และนักวิชาการนำไปใช้ได้ถูกต้อง
+                  </div>
+                </article>
+              </div>
+
+              <div class="faq-empty" id="faq-empty" hidden>
+                <strong>ไม่พบคำถามที่ตรงกับการค้นหา</strong>
+                <p>ลองใช้คำค้นอื่น เช่น “พจนานุกรม”, “ดาวน์โหลด”, “บริการออนไลน์” หรือ “ผู้สูงอายุ”</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+<!-- ===== index.html — block 18 (71 บรรทัด) ===== -->
+<!-- <div class="modal" id="service-modal" hidden role="dialog" aria-modal="true" aria-labelledby="service-title">
+    <div class="modal-backdrop" data-modal-close></div>
+
+    <div class="modal-card public-service-modal">
+      <div class="modal-header public-service-modal-head">
+        <div class="modal-title">
+          <span class="modal-title-icon public-service-modal-icon">
+            <svg class="icon-lg">
+              <use href="#i-form"></use>
+            </svg>
+          </span>
+          <div>
+            <h2 id="service-title">เริ่มใช้บริการออนไลน์</h2>
+            <p id="service-subtitle">เลือกประเภทบริการ กรอกข้อมูล และรับเลขติดตามสถานะ</p>
+          </div>
+        </div>
+        <button class="modal-close" type="button" data-modal-close aria-label="ปิด">
+          <svg class="icon">
+            <use href="#i-x"></use>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="public-service-progress" aria-label="ขั้นตอนการใช้บริการ">
+          <div class="active"><span>1</span>เลือกบริการ</div>
+          <div><span>2</span>กรอกข้อมูล</div>
+          <div><span>3</span>รับเลขติดตาม</div>
+        </div>
+
+        <form class="public-service-form">
+          <div class="field">
+            <label for="service-type">ประเภทบริการ</label>
+            <select id="service-type">
+              <option>สอบถามข้อมูลทางวิชาการ</option>
+              <option>ขออนุญาตนำหนังสือไปจัดพิมพ์</option>
+              <option>ร้องเรียน / เสนอแนะ</option>
+              <option>แบบสำรวจความคิดเห็น</option>
+            </select>
+          </div>
+
+          <div class="public-service-form-grid">
+            <div class="field">
+              <label for="service-name">ชื่อผู้ติดต่อ</label>
+              <input id="service-name" type="text" placeholder="กรอกชื่อ-นามสกุล">
+            </div>
+
+            <div class="field">
+              <label for="service-email">อีเมลสำหรับติดต่อกลับ</label>
+              <input id="service-email" type="email" placeholder="example@email.com">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="service-detail">รายละเอียด</label>
+            <textarea id="service-detail" rows="4" placeholder="ระบุรายละเอียด คำถาม หรือข้อเสนอแนะ"></textarea>
+          </div>
+
+          <div class="public-service-note">
+            <strong>หลังส่งข้อมูล ระบบจะแสดงเลขรับเรื่อง</strong>
+            <span>ใช้เลขรับเรื่องเพื่อติดตามสถานะ และรอเจ้าหน้าที่ติดต่อกลับตามช่องทางที่ระบุ</span>
+          </div>
+
+          <div class="modal-actions public-service-actions">
+            <button class="btn secondary" type="button" data-modal-close>ยกเลิก</button>
+            <button class="btn" type="button" id="service-submit-btn" data-modal-close>ส่งคำขอ</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div> -->
+
+<!-- ===== knowledge.html — block 1 (70 บรรทัด) ===== -->
+<!-- 
+    <a class="skip-link" href="#main-content">ข้ามไปยังเนื้อหาหลัก</a>
+
+    <div class="topbar" aria-label="แถบเครื่องมือด้านบน">
+        <div class="container topbar-inner">
+            <div class="topbar-group">
+                <button type="button" data-font="plus">ก+</button>
+                <button type="button" data-font="reset">ก</button>
+                <button type="button" data-font="minus">ก-</button>
+                <span class="divider"></span>
+                <button type="button" data-motion>หยุดภาพเคลื่อนไหว</button>
+            </div>
+            <div class="topbar-group topbar-right">
+                <a href="contact.html">ติดต่อเรา</a><span class="divider"></span><a href="#">สำหรับเจ้าหน้าที่</a><span
+                    class="divider"></span><span>ภาษา ◎ TH | EN</span>
+            </div>
+        </div>
+    </div>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="index.html" aria-label="สำนักงานราชบัณฑิตยสภา หน้าแรก">
+                <img class="brand-logo" src="assets/images/logo.png"
+                    alt="สำนักงานราชบัณฑิตยสภา Office of the Royal Society"
+                    onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <span class="brand-fallback" style="display:none"><span class="brand-mark"><svg class="icon-lg">
+                            <use href="#i-book"></use>
+                        </svg></span><span><strong>สำนักงานราชบัณฑิตยสภา</strong><small>Office of the Royal
+                            Society</small></span></span>
+            </a>
+            <nav class="main-nav" aria-label="เมนูหลัก">
+                <a href="index.html">หน้าหลัก</a>
+                <a href="dictionary.html">พจนานุกรมและคำศัพท์</a>
+                <a class="active" href="knowledge.html">คลังองค์ความรู้</a>
+                <a href="publications.html">สื่อและสิ่งพิมพ์</a>
+                <a href="news.html">ข่าวและประกาศ</a>
+                <a href="services.html">บริการประชาชน</a>
+                <a href="contact.html">ติดต่อเรา</a>
+            </nav>
+            <div class="header-actions">
+                <button class="round-action" type="button" data-focus-main-search aria-label="ไปยังช่องค้นหา"><svg
+                        class="icon">
+                        <use href="#i-search"></use>
+                    </svg></button>
+                <button class="round-action primary" type="button" data-scroll-filter>ตัวกรอง</button>
+                <button class="mobile-menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu"
+                    data-mobile-menu><span></span><span></span><span></span><span
+                        class="sr-only">เปิดเมนู</span></button>
+            </div>
+        </div>
+        <nav id="mobile-menu" class="mobile-menu" aria-label="เมนูมือถือ">
+            <a href="index.html">หน้าหลัก</a>
+            <a href="dictionary.html">พจนานุกรมและคำศัพท์</a>
+            <a href="knowledge.html">คลังองค์ความรู้</a>
+            <a href="publications.html">สื่อและสิ่งพิมพ์</a>
+            <a href="news.html">ข่าวและประกาศ</a>
+            <a href="services.html">บริการประชาชน</a>
+            <a href="contact.html">ติดต่อเรา</a>
+        </nav>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="container">
+            <ol>
+                <li><a href="index.html">หน้าแรก</a></li>
+                <li>/</li>
+                <li aria-current="page">คลังองค์ความรู้</li>
+            </ol>
+        </div>
+    </nav> -->
+
+<!-- ===== contact.html — block 1 (46 บรรทัด) ===== -->
+<!-- <a class="skip-link" href="#main-content">ข้ามไปยังเนื้อหาหลัก</a>
+
+  <div class="topbar" aria-label="แถบเครื่องมือด้านบน">
+    <div class="container topbar-inner">
+      <div class="topbar-group">
+        <span>สำหรับผู้พิการทางสายตา</span>
+        <span class="divider"></span>
+        <button type="button">ก-</button><button type="button">ก</button><button type="button">ก+</button>
+        <span class="divider"></span>
+        <button type="button">ความคมชัด</button>
+      </div>
+      <div class="topbar-group topbar-right">
+        <a href="contact.html">ติดต่อเรา</a><span class="divider"></span><a href="#">สำหรับเจ้าหน้าที่</a><span class="divider"></span><span>ภาษา ◎ TH | EN</span><span class="divider"></span><a href="#">เข้าสู่ระบบ / สมัครสมาชิก</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="สำนักงานราชบัณฑิตยสภา หน้าแรก">
+        <img src="assets/images/logo.png" alt="สำนักงานราชบัณฑิตยสภา Office of the Royal Society" class="brand-logo">
+      </a>
+      <nav class="main-nav" aria-label="เมนูหลัก">
+        <a href="index.html">หน้าหลัก</a>
+        <a href="dictionary.html">พจนานุกรมและคำศัพท์</a>
+        <a href="knowledge.html">ค้นคว้าข้อมูล</a>
+        <a href="publications.html">สื่อและสิ่งพิมพ์</a>
+        <a href="news.html">ข่าวและประกาศ</a>
+        <a href="services.html">บริการทางการ</a>
+        <a class="active" href="contact.html">ติดต่อเรา</a>
+      </nav>
+      <div class="header-actions">
+        <button class="round-action" type="button" aria-label="ค้นหา"><svg class="icon"><use href="#i-search"></use></svg></button>
+        <a class="round-action primary" href="#contact-form">ส่งข้อความ</a>
+        <button class="mobile-menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" data-mobile-menu><span></span><span></span><span></span><span class="sr-only">เปิดเมนู</span></button>
+      </div>
+    </div>
+    <nav id="mobile-menu" class="mobile-menu" aria-label="เมนูมือถือ">
+      <a href="index.html">หน้าหลัก <svg class="icon"><use href="#i-chevron"></use></svg></a>
+      <a href="dictionary.html">พจนานุกรมและคำศัพท์ <svg class="icon"><use href="#i-chevron"></use></svg></a>
+      <a href="knowledge.html">ค้นคว้าข้อมูล <svg class="icon"><use href="#i-chevron"></use></svg></a>
+      <a href="publications.html">สื่อและสิ่งพิมพ์ <svg class="icon"><use href="#i-chevron"></use></svg></a>
+      <a href="news.html">ข่าวและประกาศ <svg class="icon"><use href="#i-chevron"></use></svg></a>
+      <a href="contact.html">ติดต่อเรา <svg class="icon"><use href="#i-chevron"></use></svg></a>
+    </nav>
+  </header> -->
+
+</body>
+</html>
