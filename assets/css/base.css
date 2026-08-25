@@ -1,3 +1,24 @@
+/* =============================================================================
+   base.css — สไตล์พื้นฐานที่ใช้ร่วมกันทุกหน้า
+   -----------------------------------------------------------------------------
+   ลำดับการโหลด CSS ของโปรเจกต์ (ห้ามสลับ):
+     1) assets/css/base.css                <-- ไฟล์นี้
+     2) assets/css/pages/<ชื่อหน้า>.css     (มีเฉพาะหน้าที่ต้องการ)
+     3) assets/css/components.css          (ต้องเป็นตัวสุดท้ายเสมอ)
+
+   สารบัญ
+     - Design tokens (:root)         ตัวแปรสี / เงา / มุมโค้ง / ความกว้าง container
+     - Reset + base typography
+     - โหมดการเข้าถึง               .no-motion / .high-contrast / .readable-mode
+     - Shared topbar / header
+     - Home hero
+     - Shared utility                .container .section .page-hero .content-card .grid-3
+     - Modal / search popup
+     - Mega menu / Mobile accordion menu
+     - Footer
+     - Responsive + fixed-header patch
+   ============================================================================= */
+
 :root {
   --container: 1800px;
   --paper: #fbf7ef;
