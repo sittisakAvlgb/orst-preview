@@ -5,6 +5,20 @@
    หมายเหตุ: ไฟล์นี้ยังมีสไตล์ header/footer/modal ที่ซ้ำกับ components.css อยู่
              (ยกมาจากของเดิมทั้งหมดเพื่อไม่ให้หน้าตาเปลี่ยน) — components.css
              โหลดทีหลังจึงเป็นตัวที่มีผลจริง ดูรายละเอียดใน HANDOFF.md
+
+   สารบัญ (เลขบรรทัด)
+        142  Topbar / Header
+        324  Page Hero
+        484  Main content
+        771  Departments
+        819  Footer
+       1005  Contact page fixed header spacing fix
+       1018  ให้ header กลางลอยอยู่ด้านบนเสมอ
+       1027  ยกเลิก sticky เดิมที่มาจาก style เก่า
+       1033  เงาเบา ๆ ตอนเลื่อน
+       1038  กัน anchor ถูก header บัง
+       1046  modal / floating button ให้อยู่เหนือ header
+       1065  Contact hero fit improvement
    ============================================================================= */
 
 :root {

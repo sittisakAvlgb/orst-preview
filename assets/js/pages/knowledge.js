@@ -2,14 +2,14 @@
    pages/knowledge.js — สคริปต์เฉพาะหน้า คลังองค์ความรู้ (knowledge.html)
    -----------------------------------------------------------------------------
    ต้องโหลด "หลัง" assets/js/components.js เสมอ
-   เนื้อหาด้านล่างยกมาจาก <script> ที่เคยฝังในไฟล์ HTML (2 บล็อก)
-   โดยไม่แก้ตรรกะใด ๆ เพื่อรักษาพฤติกรรมเดิม
+   สารบัญ
+     init() -> initMobileMenu, initReveal, initSearch, initFilter, initView, initTopTools
+     - ค้นหา/กรองรายการในคลังองค์ความรู้ (ข้อมูลจำลองอยู่ในหน้า HTML)
+     - สลับมุมมอง grid / list และเครื่องมือปรับขนาดตัวอักษร
    ============================================================================= */
 
-/* ---------- block 1/2 ---------- */
 /* sticky header: ย้ายไปอยู่ที่ assets/js/components.js -> initFixedHeader() */
 
-/* ---------- block 2/2 ---------- */
 const qs = (s, r = document) => r ? r.querySelector(s) : null;
 const qsa = (s, r = document) => r ? [...r.querySelectorAll(s)] : [];
 let activeCategory = 'all'; let fontStep = 0;

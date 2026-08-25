@@ -1,9 +1,35 @@
+/* =============================================================================
+   components.js — Header / Top bar / Mega menu / Mobile menu / Footer
+   -----------------------------------------------------------------------------
+   ไฟล์นี้ใช้ร่วมกันทุกหน้า แก้ที่นี่ที่เดียวมีผลทั้งเว็บ
+
+   วิธีทำงาน
+     หน้า HTML วางแค่ <div id="app-header"></div> และ <div id="app-footer"></div>
+     ไฟล์นี้จะ render HTML ใส่ให้ตอน DOMContentLoaded แล้วผูก event ทั้งหมด
+     ส่วน CSS ของ component อยู่ที่ assets/css/components.css (ต้องโหลดท้ายสุด)
+
+   สารบัญ
+     icons              คลัง SVG symbol ใช้ผ่านฟังก์ชัน icon('i-book')
+     navItems           รายการเมนูหลัก [key, ชื่อที่แสดง, ลิงก์]
+                        key ต้องตรงกับ <body data-page="..."> ของแต่ละหน้า
+     megaMenuData       เนื้อหา mega menu ของแต่ละหมวด
+     renderMegaMenu()   สร้าง HTML ของ mega menu
+     renderDesktopNav() / renderMobileNav()
+     renderHeader()     topbar + header + เมนู + modal ค้นหา/การเข้าถึง
+     renderFooter()     footer ทั้งหมด
+     init*()            ผูก event ต่าง ๆ (ดูรายการใน initComponents ท้ายไฟล์)
+     initFixedHeader()  คำนวณความสูง header ที่ position:fixed แล้วดัน body ลงมา
+     window.orstHeader  export ออกไปให้หน้าอื่นเรียกใช้ได้
+   ============================================================================= */
+
+// รองรับกรณีย้ายหน้าไปไว้ในโฟลเดอร์ย่อยชื่อ pages/ ในอนาคต
+// ตอนนี้ทุกหน้าอยู่ที่ root จึงได้ค่า './' เสมอ
 const basePath = location.pathname.includes('/pages/') ? '../' : './';
 
 const icons = `
 <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4.2-4.2"></path></symbol>
-  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M4 4.5A2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"></path></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"></path></symbol>
   <symbol id="i-eye" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path><circle cx="12" cy="12" r="3"></circle></symbol>
   <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></symbol>

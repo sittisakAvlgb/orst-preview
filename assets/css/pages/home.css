@@ -5,6 +5,70 @@
    หมายเหตุ: ไฟล์นี้ยังมีสไตล์ header/footer/modal ที่ซ้ำกับ components.css อยู่
              (ยกมาจากของเดิมทั้งหมดเพื่อไม่ให้หน้าตาเปลี่ยน) — components.css
              โหลดทีหลังจึงเป็นตัวที่มีผลจริง ดูรายละเอียดใน HANDOFF.md
+
+   คำเตือนสำหรับการแก้ไข
+     บล็อก "Icon system / top bar / header / footer / modal" ในไฟล์นี้เป็นของเดิม
+     ที่ยกมาจาก <style> ในหน้า และถูก components.css (โหลดทีหลัง) ทับเกือบทั้งหมด
+     ถ้าจะแก้ header/footer ให้ไปแก้ที่ assets/css/components.css เป็นหลัก
+
+   สารบัญ (เลขบรรทัด)
+        221  Icon system
+        244  top bar
+        289  header
+        458  hero
+        521  max-width: 650px
+        641  search panel
+        885  trust
+        930  sections
+       1209  height: 186px;
+       1474  footer
+       1560  modal / popup
+       1822  reference header/hero revision
+       2227  Responsive refinement v8: desktop / tablet / mobile
+       2851  v10: Hero full background image from assets/images/orst-bg.png
+       2998  v11: Hero typography refinement - clean Thai headline
+       3148  Header logo image only
+       3182  News Editorial Section
+       3393  Public Service Hub: institutional UX
+       3609  Service modal
+       3775  Archive Focus Section: clean knowledge discovery UX
+       4055  Premium Accessibility Panel
+       4369  optional visual states
+       4440  FAQ Help Center UX
+       4723  Connected Network Wall
+       5004  Final layer fix
+       5041  ORST replacement: Hero + Search results only
+       5120  max-width: 980px;
+       5131  max-width: 780px !important;
+       5883  หรือ absolute ตาม layout
+       5885  ให้สูงกว่าหัวเว็บ / header
+       5897  ต่ำกว่าผลลัพธ์
+       6973  FIX: modal ใหญ่ขึ้น + เลื่อนได้จริง
+       7013  จัด layout ใหม่ให้ไม่ยาวเป็นเส้นเดียว
+       7072  Scrollbar ให้รู้ว่าเลื่อนได้
+       7087  ลดความสูง card ในประเภทข้อมูลให้มองเห็นครบขึ้น
+       7097  Tablet
+       7114  Mobile: เป็น bottom sheet และเลื่อนในตัวได้
+       7159  ORST Smart Advanced Search Modal
+       7405  คำผิด
+       7415  คำแก้ไขเรียบร้อย
+       7433  ปรับขนาดตามต้องการ
+       7437  เว้นระยะกับ h2
+       7442  Smart Search Preview Refinement
+       7538  Hero Popular Search Chips Refinement
+       7635  Hero Popular Search UX Refinement
+       7878  Compact Connected Network Marquee
+       8060  Media Library Tabs
+       8180  News & Events with Calendar
+       8595  Fix popular search chips on mobile
+       8671  News tab richer content
+       8831  Quick Access Services
+       9082  Knowledge Hub 5 Tabs
+       9267  Help Center FAQ Redesign
+       9521  Improved Service Modal
+       9782  FAQ Center Only
+       9954  News Mosaic Tabs: 1 Feature + 4 Small Cards
+      10203  overlay เฟดด้านหลังให้ตัวอักษรเด่น
    ============================================================================= */
 
 :root {
@@ -6902,193 +6966,6 @@ mark.orst-highlight {
   .orst-advanced-actions .btn {
     width: 100%;
     justify-content: center;
-  }
-}
-
-
-/* ===== FIX: modal ใหญ่ขึ้น + เลื่อนได้จริง ===== */
-.modal.orst-advanced-modal:not([hidden]) {
-  display: flex !important;
-  align-items: flex-start !important;
-  justify-content: center !important;
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-  padding: clamp(18px, 3vh, 36px) clamp(16px, 3vw, 42px) !important;
-  overscroll-behavior: contain;
-}
-
-.orst-advanced-modal .orst-advanced-card {
-  width: min(1180px, calc(100vw - 64px)) !important;
-  max-height: none !important;
-  min-height: auto !important;
-  margin: 0 auto !important;
-  overflow: visible !important;
-  display: flex !important;
-  flex-direction: column !important;
-  border-radius: 34px !important;
-}
-
-.orst-advanced-modal .orst-advanced-header {
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 5 !important;
-  flex: 0 0 auto !important;
-  padding: 26px 32px !important;
-  background:
-    linear-gradient(90deg, rgba(255, 250, 241, .985), rgba(255, 255, 255, .96)),
-    radial-gradient(circle at 100% 0%, rgba(7, 59, 52, .08), transparent 34%) !important;
-}
-
-.orst-advanced-modal .orst-advanced-body {
-  flex: 1 1 auto !important;
-  min-height: 0 !important;
-  overflow: visible !important;
-  padding: 26px 32px 32px !important;
-}
-
-/* จัด layout ใหม่ให้ไม่ยาวเป็นเส้นเดียว */
-.orst-advanced-modal .orst-advanced-form {
-  display: grid !important;
-  grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr) !important;
-  gap: 18px !important;
-  align-items: start !important;
-}
-
-.orst-advanced-modal .orst-search-command,
-.orst-advanced-modal .orst-filter-block,
-.orst-advanced-modal .orst-preview-box,
-.orst-advanced-modal .orst-advanced-actions {
-  grid-column: 1 / -1 !important;
-}
-
-.orst-advanced-modal .orst-filter-block {
-  padding: 20px !important;
-}
-
-.orst-advanced-modal .orst-type-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-}
-
-.orst-advanced-modal .orst-advanced-options,
-.orst-advanced-modal .orst-smart-options {
-  grid-template-columns: 1fr !important;
-  gap: 12px !important;
-}
-
-.orst-advanced-modal .orst-advanced-options {
-  grid-column: 1 !important;
-}
-
-.orst-advanced-modal .orst-smart-options {
-  grid-column: 2 !important;
-}
-
-.orst-advanced-modal .orst-preview-box {
-  position: sticky !important;
-  bottom: 14px !important;
-  z-index: 4 !important;
-  box-shadow: 0 18px 44px rgba(7, 59, 52, .18) !important;
-}
-
-.orst-advanced-modal .orst-advanced-actions {
-  position: sticky !important;
-  bottom: 0 !important;
-  z-index: 5 !important;
-  margin: 0 -32px -32px !important;
-  padding: 18px 32px 22px !important;
-  background:
-    linear-gradient(180deg, rgba(255, 253, 248, .72), rgba(255, 253, 248, .98) 42%, #fffdf8 100%) !important;
-  border-top: 1px solid rgba(217, 203, 187, .82) !important;
-}
-
-.orst-advanced-modal .orst-advanced-actions .btn {
-  min-width: 170px !important;
-}
-
-/* Scrollbar ให้รู้ว่าเลื่อนได้ */
-.modal.orst-advanced-modal::-webkit-scrollbar {
-  width: 12px;
-}
-
-.modal.orst-advanced-modal::-webkit-scrollbar-track {
-  background: rgba(255, 250, 241, .42);
-}
-
-.modal.orst-advanced-modal::-webkit-scrollbar-thumb {
-  background: rgba(185, 145, 67, .55);
-  border-radius: 999px;
-  border: 3px solid rgba(255, 250, 241, .7);
-}
-
-/* ลดความสูง card ในประเภทข้อมูลให้มองเห็นครบขึ้น */
-.orst-advanced-modal .orst-type-card {
-  min-height: 112px !important;
-  padding: 15px !important;
-}
-
-.orst-advanced-modal .orst-type-icon {
-  margin-bottom: 10px !important;
-}
-
-/* Tablet */
-@media (max-width: 1024px) {
-  .orst-advanced-modal .orst-advanced-card {
-    width: min(940px, calc(100vw - 36px)) !important;
-  }
-
-  .orst-advanced-modal .orst-advanced-form {
-    grid-template-columns: 1fr !important;
-  }
-
-  .orst-advanced-modal .orst-advanced-options,
-  .orst-advanced-modal .orst-smart-options {
-    grid-column: 1 / -1 !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  }
-}
-
-/* Mobile: เป็น bottom sheet และเลื่อนในตัวได้ */
-@media (max-width: 760px) {
-  .modal.orst-advanced-modal:not([hidden]) {
-    align-items: flex-end !important;
-    padding: 0 !important;
-  }
-
-  .orst-advanced-modal .orst-advanced-card {
-    width: 100% !important;
-    max-height: 92dvh !important;
-    overflow: hidden !important;
-    border-radius: 28px 28px 0 0 !important;
-  }
-
-  .orst-advanced-modal .orst-advanced-header {
-    padding: 18px !important;
-  }
-
-  .orst-advanced-modal .orst-advanced-body {
-    overflow-y: auto !important;
-    padding: 18px 18px 0 !important;
-  }
-
-  .orst-advanced-modal .orst-type-grid,
-  .orst-advanced-modal .orst-advanced-options,
-  .orst-advanced-modal .orst-smart-options {
-    grid-template-columns: 1fr !important;
-  }
-
-  .orst-advanced-modal .orst-advanced-actions {
-    margin: 0 -18px !important;
-    padding: 14px 18px 18px !important;
-  }
-
-  .orst-advanced-modal .orst-advanced-actions .btn {
-    width: 100% !important;
-    justify-content: center !important;
-  }
-
-  .orst-advanced-modal .orst-preview-box {
-    position: relative !important;
-    bottom: auto !important;
   }
 }
 
