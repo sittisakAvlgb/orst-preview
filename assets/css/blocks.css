@@ -1,0 +1,728 @@
+/* =============================================================================
+   blocks.css — สไตล์ของ block ทั้งหมดที่ assets/js/blocks.js สร้างขึ้น
+   -----------------------------------------------------------------------------
+   ใช้ตัวแปรสีจาก base.css ทั้งหมด ไม่ฮาร์ดโค้ดสี เพื่อให้โหมด high-contrast /
+   readable-mode ทำงานตามไปด้วยอัตโนมัติ
+
+   ลำดับการโหลด
+     1) base.css
+     2) blocks.css        <-- ไฟล์นี้
+     3) pages/<หน้า>.css   (ถ้ามี)
+     4) components.css    (ท้ายสุดเสมอ)
+
+   สารบัญ
+     - ตัวช่วยร่วม (eyebrow, breadcrumb, tag, meta, ปุ่ม, grid)
+     - page-hero
+     - rich-text
+     - card-grid
+     - feature-list
+     - stat-row
+     - link-list
+     - media-grid
+     - table
+     - faq
+     - steps
+     - two-column
+     - cta-band
+     - notice
+     - contact-info
+     - responsive
+   ============================================================================= */
+
+/* ---------- ตัวช่วยร่วม ---------- */
+
+.block-eyebrow {
+  display: inline-block;
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.block-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: .9rem;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.block-breadcrumb a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.block-breadcrumb a:hover {
+  color: var(--deep);
+  text-decoration: underline;
+}
+
+.block-breadcrumb [aria-current="page"] {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.block-tag {
+  display: inline-block;
+  align-self: start;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--gold-soft);
+  color: var(--deep);
+  border: 1px solid var(--line);
+  font-size: .78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.block-meta {
+  color: var(--muted);
+  font-size: .85rem;
+}
+
+.block-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.block-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  background: var(--deep);
+  color: #fff;
+  border: 1px solid var(--deep);
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform .16s ease, box-shadow .16s ease;
+}
+
+.block-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(16, 32, 51, .16);
+}
+
+.block-btn.is-ghost {
+  background: transparent;
+  color: var(--deep);
+  border-color: var(--line);
+}
+
+.block-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.block-grid-1 { grid-template-columns: 1fr; }
+.block-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.block-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.block-grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* ---------- page-hero (เสริมจาก base.css) ---------- */
+
+.page-hero .block-actions {
+  margin-top: 22px;
+}
+
+/* ---------- rich-text ---------- */
+
+.block-prose {
+  color: var(--ink);
+  font-size: 1.03rem;
+}
+
+.block-prose-narrow {
+  max-width: 78ch;
+}
+
+.block-prose > :first-child { margin-top: 0; }
+.block-prose > :last-child { margin-bottom: 0; }
+
+.block-prose p {
+  margin: 0 0 14px;
+}
+
+.block-prose h3 {
+  font-family: "Noto Serif Thai", serif;
+  font-size: 1.3rem;
+  margin: 26px 0 10px;
+}
+
+.block-prose ul,
+.block-prose ol {
+  margin: 0 0 14px;
+  padding-inline-start: 22px;
+}
+
+.block-prose li {
+  margin-bottom: 6px;
+}
+
+.block-prose a {
+  color: var(--deep);
+  text-underline-offset: 3px;
+}
+
+/* ---------- card-grid ---------- */
+
+.block-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+  /* base.css ตั้ง .content-card เป็น #fff ตายตัว ทำให้โหมด high-contrast ไม่มีผล
+     ที่นี่บังคับให้ใช้ตัวแปรแทน เพื่อให้โหมดการเข้าถึงทำงานกับ block ทุกตัว */
+  background: var(--surface);
+  border-color: var(--line);
+}
+
+.block-card h3 {
+  font-family: "Noto Serif Thai", serif;
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+.block-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.block-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: var(--gold-soft);
+  color: var(--deep);
+  margin-bottom: 4px;
+}
+
+.block-card.is-link {
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+.block-card.is-link:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold);
+  box-shadow: 0 16px 36px rgba(16, 32, 51, .10);
+}
+
+/* ---------- feature-list ---------- */
+
+.block-feature-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.block-feature {
+  display: flex;
+  gap: 14px;
+  align-items: start;
+}
+
+.block-feature strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.block-feature p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.block-feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  border-radius: 12px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  color: var(--deep);
+}
+
+/* ---------- stat-row ---------- */
+
+.block-stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.block-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 22px;
+  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.block-stat strong {
+  font-family: "Noto Serif Thai", serif;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  color: var(--deep);
+  line-height: 1.2;
+}
+
+.block-stat span {
+  font-weight: 600;
+}
+
+.block-stat small {
+  color: var(--muted);
+}
+
+/* ---------- link-list ---------- */
+
+.block-link-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.block-link-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color .16s ease, transform .16s ease;
+}
+
+.block-link-row:hover {
+  border-color: var(--gold);
+  transform: translateX(3px);
+}
+
+.block-link-icon {
+  display: inline-flex;
+  color: var(--deep);
+  flex: 0 0 auto;
+}
+
+.block-link-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.block-link-text span {
+  color: var(--muted);
+  font-size: .92rem;
+}
+
+/* ---------- media-grid ---------- */
+
+.block-media-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+}
+
+.block-media-thumb {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--surface-soft);
+}
+
+.block-media-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.block-media-thumb .block-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.block-media-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 18px 18px;
+}
+
+.block-media-body span {
+  color: var(--muted);
+  font-size: .92rem;
+}
+
+.block-media-card.is-link {
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.block-media-card.is-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(16, 32, 51, .12);
+}
+
+/* ---------- table ---------- */
+
+.block-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+}
+
+.block-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 520px;
+}
+
+.block-table caption {
+  caption-side: top;
+  text-align: start;
+  padding: 16px 18px 0;
+  color: var(--muted);
+  font-size: .92rem;
+}
+
+.block-table th,
+.block-table td {
+  padding: 14px 18px;
+  text-align: start;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.block-table thead th {
+  background: var(--surface-soft);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.block-table tbody tr:last-child th,
+.block-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* ---------- faq (โครง .faq-compact-list ผูก event โดย components.js) ---------- */
+
+.block-faq-fallback,
+.faq-compact-list {
+  display: grid;
+  gap: 10px;
+}
+
+.faq-compact-list .faq-item {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.faq-compact-list .faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px 18px;
+  background: none;
+  border: 0;
+  font: inherit;
+  font-weight: 700;
+  text-align: start;
+  color: inherit;
+  cursor: pointer;
+}
+
+.faq-compact-list .faq-q svg {
+  transition: transform .18s ease;
+  flex: 0 0 auto;
+}
+
+.faq-compact-list .faq-q[aria-expanded="true"] svg {
+  transform: rotate(90deg);
+}
+
+.faq-compact-list .faq-a {
+  padding: 0 18px 16px;
+  color: var(--muted);
+}
+
+.faq-compact-list .faq-a p {
+  margin: 0;
+}
+
+/* ---------- steps ---------- */
+
+.block-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+  counter-reset: step;
+}
+
+.block-step {
+  display: flex;
+  gap: 16px;
+  align-items: start;
+  padding: 18px 20px;
+  border-radius: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.block-step-no {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: var(--deep);
+  color: #fff;
+  font-weight: 800;
+}
+
+.block-step strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.block-step p {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* ---------- two-column ---------- */
+
+.block-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 34px;
+  align-items: center;
+}
+
+.block-two-col.is-image-left .block-two-col-text { order: 2; }
+.block-two-col.is-image-left .block-two-col-media { order: 1; }
+
+.block-two-col-text h3 {
+  font-family: "Noto Serif Thai", serif;
+  font-size: 1.4rem;
+  margin: 0 0 12px;
+}
+
+.block-two-col-text p {
+  margin: 0 0 12px;
+  color: var(--muted);
+}
+
+.block-two-col-media img {
+  width: 100%;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  display: block;
+}
+
+/* ---------- cta-band ---------- */
+
+.block-cta {
+  padding: 44px 0;
+  background: linear-gradient(120deg, var(--deep), var(--deep-2));
+  color: #fff;
+}
+
+.block-cta-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+}
+
+.block-cta h2 {
+  font-family: "Noto Serif Thai", serif;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  margin: 0 0 6px;
+}
+
+.block-cta p {
+  margin: 0;
+  color: rgba(255, 255, 255, .8);
+}
+
+.block-cta .block-actions {
+  margin-top: 0;
+}
+
+.block-cta .block-btn {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--deep);
+}
+
+.block-cta .block-btn.is-ghost {
+  background: transparent;
+  border-color: rgba(255, 255, 255, .5);
+  color: #fff;
+}
+
+/* ---------- notice ---------- */
+
+.block-notice {
+  display: flex;
+  gap: 14px;
+  align-items: start;
+  padding: 18px 20px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--surface-soft);
+}
+
+.block-notice strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.block-notice p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.block-notice ul {
+  margin: 6px 0;
+  padding-inline-start: 20px;
+  color: var(--muted);
+}
+
+.block-notice-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  color: var(--deep);
+}
+
+.block-notice.is-warn {
+  border-color: #d9a441;
+  background: #fdf5e4;
+}
+
+.block-notice.is-warn .block-notice-icon { color: #a4701c; }
+
+.block-notice.is-success {
+  border-color: #6fae90;
+  background: #eef7f2;
+}
+
+.block-notice.is-success .block-notice-icon { color: #267458; }
+
+/* ---------- contact-info ---------- */
+
+.block-contact {
+  display: grid;
+  gap: 24px;
+}
+
+.block-contact.has-map {
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+}
+
+.block-contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.block-contact-row {
+  display: flex;
+  gap: 14px;
+  align-items: start;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.block-contact-row small {
+  display: block;
+  color: var(--muted);
+  font-size: .82rem;
+  margin-bottom: 2px;
+}
+
+.block-contact-row a {
+  color: var(--deep);
+  font-weight: 600;
+}
+
+.block-contact-icon {
+  display: inline-flex;
+  color: var(--deep);
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+
+.block-contact-map iframe {
+  width: 100%;
+  min-height: 320px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 1024px) {
+  .block-grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .block-grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .block-grid-2,
+  .block-grid-3,
+  .block-grid-4 { grid-template-columns: 1fr; }
+
+  .block-two-col { grid-template-columns: 1fr; }
+
+  .block-two-col.is-image-left .block-two-col-text,
+  .block-two-col.is-image-left .block-two-col-media { order: 0; }
+
+  .block-contact.has-map { grid-template-columns: 1fr; }
+
+  .block-cta-inner { flex-direction: column; align-items: start; }
+
+  .block-link-row { align-items: start; flex-wrap: wrap; }
+}

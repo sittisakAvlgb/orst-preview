@@ -14,56 +14,25 @@
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Noto+Serif+Thai:wght@500;600;700&display=swap"
     rel="stylesheet">
 
-  <!-- ลำดับ CSS สำคัญมาก ห้ามสลับ:
-       1) base.css            ตัวแปรสี/reset/สไตล์พื้นฐาน
-       2) pages/<ชื่อหน้า>.css  สไตล์เฉพาะหน้า (ลบบรรทัดนี้ได้ถ้าไม่ต้องใช้)
-       3) components.css      สไตล์ header/footer ต้องอยู่ท้ายสุดเสมอ -->
+  <!-- ลำดับ CSS ห้ามสลับ: base -> blocks -> (pages/xxx) -> components -->
   <link rel="stylesheet" href="assets/css/base.css">
-  <!-- <link rel="stylesheet" href="assets/css/pages/ชื่อหน้า.css"> -->
+  <link rel="stylesheet" href="assets/css/blocks.css">
   <link rel="stylesheet" href="assets/css/components.css">
 </head>
 
-<!-- data-page ต้องตรงกับ key ตัวแรกใน navItems ของ assets/js/components.js
-     เพื่อให้เมนูบนหัวเว็บไฮไลต์หน้าปัจจุบันถูกต้อง -->
-<body data-page="[แก้ไข]">
+<body data-page="[แก้ไข-navKey]">
 
-  <!-- header ถูกสร้างโดย components.js — ห้ามเขียน header เองในหน้า -->
   <div id="app-header"></div>
 
   <main id="main-content">
-
-    <section class="page-hero">
-      <div class="container">
-        <h1>[แก้ไข] หัวข้อหน้า</h1>
-        <p>[แก้ไข] คำโปรยสั้น ๆ อธิบายว่าหน้านี้ช่วยผู้ใช้เรื่องอะไร</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container grid-3">
-        <article class="content-card">
-          <h2>หัวข้อย่อย</h2>
-          <p>เนื้อหา</p>
-        </article>
-        <article class="content-card">
-          <h2>หัวข้อย่อย</h2>
-          <p>เนื้อหา</p>
-        </article>
-        <article class="content-card">
-          <h2>หัวข้อย่อย</h2>
-          <p>เนื้อหา</p>
-        </article>
-      </div>
-    </section>
-
+    <!-- เนื้อหาทั้งหมดของหน้านี้อยู่ในไฟล์ JSON ด้านล่าง — แก้เนื้อหาที่ไฟล์นั้นไฟล์เดียว -->
+    <div id="app-content" data-content="content/pages/[แก้ไข-slug].json"></div>
   </main>
 
-  <!-- footer ถูกสร้างโดย components.js -->
   <div id="app-footer"></div>
 
-  <!-- components.js ต้องมาก่อนสคริปต์เฉพาะหน้าเสมอ -->
   <script src="assets/js/components.js"></script>
-  <!-- <script src="assets/js/pages/ชื่อหน้า.js"></script> -->
+  <script type="module" src="assets/js/page-runtime.js"></script>
 </body>
 
 </html>

@@ -14,8 +14,9 @@
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Noto+Serif+Thai:wght@500;600;700&display=swap"
     rel="stylesheet">
 
-  <!-- ลำดับ CSS ห้ามสลับ: base -> (pages/xxx) -> components -->
+  <!-- ลำดับ CSS ห้ามสลับ: base -> blocks -> (pages/xxx) -> components -->
   <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/blocks.css">
   <link rel="stylesheet" href="assets/css/components.css">
 </head>
 
@@ -24,36 +25,14 @@
   <div id="app-header"></div>
 
   <main id="main-content">
-
-    <section class="page-hero">
-      <div class="container">
-        <h1>พจนานุกรมและคำศัพท์</h1>
-        <p>ค้นหาความหมาย คำอ่าน การเขียนคำ และศัพท์บัญญัติจากฐานข้อมูลมาตรฐาน</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container grid-3">
-        <article class="content-card">
-          <h2>หัวข้อหลัก</h2>
-          <p>พื้นที่เนื้อหาสำหรับหน้า พจนานุกรมและคำศัพท์</p>
-        </article>
-        <article class="content-card">
-          <h2>รายการแนะนำ</h2>
-          <p>สามารถเพิ่ม card, table หรือ form ตาม flow งานจริง</p>
-        </article>
-        <article class="content-card">
-          <h2>บริการที่เกี่ยวข้อง</h2>
-          <p>เชื่อมโยงบริการและข้อมูลที่เกี่ยวข้องกับผู้ใช้</p>
-        </article>
-      </div>
-    </section>
-
+    <!-- เนื้อหาทั้งหมดของหน้านี้อยู่ในไฟล์ JSON ด้านล่าง — แก้เนื้อหาที่ไฟล์นั้นไฟล์เดียว -->
+    <div id="app-content" data-content="content/pages/dictionary.json"></div>
   </main>
 
   <div id="app-footer"></div>
 
   <script src="assets/js/components.js"></script>
+  <script type="module" src="assets/js/page-runtime.js"></script>
 </body>
 
 </html>

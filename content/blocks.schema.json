@@ -1,0 +1,335 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://orst.local/schemas/page.json",
+  "title": "ORST Page Content",
+  "description": "โครงสร้างไฟล์เนื้อหา 1 หน้า สำหรับ content/pages/<slug>.json — ใส่ \"$schema\": \"../blocks.schema.json\" ไว้บรรทัดแรกเพื่อให้ VS Code เติมคำและตรวจให้อัตโนมัติ",
+  "type": "object",
+  "required": ["title", "navKey", "blocks"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "_note": { "type": "string", "description": "บันทึกภายในสำหรับทีม ไม่ถูกนำไปแสดงผล" },
+    "title": { "type": "string", "description": "ชื่อหน้า ใช้ทำ <title> โดยต่อท้ายด้วย ' | สำนักงานราชบัณฑิตยสภา'" },
+    "seoTitle": { "type": "string", "description": "ถ้าต้องการกำหนด <title> เองทั้งหมด ให้ใส่ที่นี่แทน" },
+    "navKey": {
+      "type": "string",
+      "description": "ต้องตรงกับ data-page ในไฟล์ HTML และ key ในเมนู (navItems)",
+      "enum": ["home", "dictionary", "knowledge", "publications", "news", "services", "about", "contact"]
+    },
+    "description": { "type": "string", "description": "คำอธิบายหน้าใช้ทำ meta description ยาว 1-2 ประโยค" },
+    "blocks": {
+      "type": "array",
+      "minItems": 1,
+      "description": "ลำดับของ block บนหน้า เรียงจากบนลงล่าง",
+      "items": { "$ref": "#/definitions/block" }
+    }
+  },
+
+  "definitions": {
+    "common": {
+      "properties": {
+        "id": { "type": "string", "description": "id ของ <section> ใช้ทำ anchor link" },
+        "variant": { "enum": ["default", "alt"], "description": "alt = พื้นหลังสีขาว, default = พื้นสีกระดาษ" },
+        "heading": { "type": "string" },
+        "lead": { "type": "string" },
+        "eyebrow": { "type": "string", "description": "ข้อความตัวเล็กสีทองเหนือหัวข้อ" },
+        "action": {
+          "type": "object",
+          "description": "ปุ่มมุมขวาบนของ section",
+          "properties": { "label": { "type": "string" }, "href": { "type": "string" } },
+          "required": ["href"]
+        }
+      }
+    },
+    "actionList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["label", "href"],
+        "properties": {
+          "label": { "type": "string" },
+          "href": { "type": "string" },
+          "variant": { "enum": ["solid", "ghost"] }
+        }
+      }
+    },
+    "columns": { "enum": [1, 2, 3, 4], "description": "จำนวนคอลัมน์บนจอใหญ่ (จอเล็กยุบอัตโนมัติ)" },
+    "iconId": {
+      "type": "string",
+      "description": "id ไอคอนจาก sprite ใน assets/js/components.js",
+      "enum": [
+        "i-search", "i-book", "i-eye", "i-menu", "i-x", "i-user", "i-access",
+        "i-shield", "i-people", "i-file", "i-video", "i-form", "i-dictionary",
+        "i-database", "i-journal", "i-ebook", "i-megaphone", "i-service",
+        "i-chevron", "i-arrow", "i-plus", "i-map", "i-phone", "i-pen", "i-puzzle"
+      ]
+    },
+
+    "block": {
+      "type": "object",
+      "required": ["type"],
+      "properties": { "type": { "type": "string" } },
+      "allOf": [
+        { "$ref": "#/definitions/common" },
+        {
+          "oneOf": [
+            { "$ref": "#/definitions/pageHero" },
+            { "$ref": "#/definitions/richText" },
+            { "$ref": "#/definitions/cardGrid" },
+            { "$ref": "#/definitions/featureList" },
+            { "$ref": "#/definitions/statRow" },
+            { "$ref": "#/definitions/linkList" },
+            { "$ref": "#/definitions/mediaGrid" },
+            { "$ref": "#/definitions/tableBlock" },
+            { "$ref": "#/definitions/faq" },
+            { "$ref": "#/definitions/steps" },
+            { "$ref": "#/definitions/twoColumn" },
+            { "$ref": "#/definitions/ctaBand" },
+            { "$ref": "#/definitions/notice" },
+            { "$ref": "#/definitions/contactInfo" }
+          ]
+        }
+      ]
+    },
+
+    "pageHero": {
+      "description": "หัวหน้าเพจ — ใช้หน้าละ 1 อันและควรเป็น block แรกเสมอ",
+      "properties": {
+        "type": { "const": "page-hero" },
+        "heading": { "type": "string" },
+        "breadcrumb": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["label"],
+            "properties": { "label": { "type": "string" }, "href": { "type": "string" } }
+          }
+        },
+        "actions": { "$ref": "#/definitions/actionList" }
+      },
+      "required": ["type", "heading"]
+    },
+
+    "richText": {
+      "description": "ข้อความยาว — ใช้ paragraphs เป็นค่าเริ่มต้น ใช้ html เฉพาะเมื่อเนื้อหามาจากแหล่งที่เชื่อถือได้",
+      "properties": {
+        "type": { "const": "rich-text" },
+        "paragraphs": { "type": "array", "items": { "type": "string" } },
+        "html": { "type": "string" },
+        "width": { "enum": ["narrow", "full"] }
+      },
+      "required": ["type"]
+    },
+
+    "cardGrid": {
+      "description": "การ์ดเนื้อหาเรียงเป็นตาราง — block ที่ใช้บ่อยที่สุด",
+      "properties": {
+        "type": { "const": "card-grid" },
+        "columns": { "$ref": "#/definitions/columns" },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["title"],
+            "properties": {
+              "title": { "type": "string" },
+              "body": { "type": "string" },
+              "href": { "type": "string" },
+              "icon": { "$ref": "#/definitions/iconId" },
+              "tag": { "type": "string" },
+              "meta": { "type": "string" }
+            }
+          }
+        }
+      },
+      "required": ["type", "items"]
+    },
+
+    "featureList": {
+      "description": "ไอคอน + หัวข้อ + คำอธิบาย เรียงเป็นแถว",
+      "properties": {
+        "type": { "const": "feature-list" },
+        "columns": { "$ref": "#/definitions/columns" },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["title"],
+            "properties": {
+              "icon": { "$ref": "#/definitions/iconId" },
+              "title": { "type": "string" },
+              "body": { "type": "string" }
+            }
+          }
+        }
+      },
+      "required": ["type", "items"]
+    },
+
+    "statRow": {
+      "description": "ตัวเลขสถิติ",
+      "properties": {
+        "type": { "const": "stat-row" },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["value", "label"],
+            "properties": {
+              "value": { "type": "string" },
+              "label": { "type": "string" },
+              "note": { "type": "string" }
+            }
+          }
+        }
+      },
+      "required": ["type", "items"]
+    },
+
+    "linkList": {
+      "description": "รายการเอกสาร/ลิงก์ พร้อมชนิดไฟล์และวันที่",
+      "properties": {
+        "type": { "const": "link-list" },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["title", "href"],
+            "properties": {
+              "title": { "type": "string" },
+              "desc": { "type": "string" },
+              "meta": { "type": "string" },
+              "tag": { "type": "string" },
+              "href": { "type": "string" },
+              "icon": { "$ref": "#/definitions/iconId" }
+            }
+          }
+        }
+      },
+      "required": ["type", "items"]
+    },
+
+    "mediaGrid": {
+      "description": "การ์ดที่มีรูปภาพ อัตราส่วน 4:3",
+      "properties": {
+        "type": { "const": "media-grid" },
+        "columns": { "$ref": "#/definitions/columns" },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["image", "title"],
+            "properties": {
+              "image": { "type": "string", "description": "path รูป เช่น assets/images/e-Book01.png" },
+              "alt": { "type": "string", "description": "คำอธิบายรูปสำหรับ screen reader" },
+              "title": { "type": "string" },
+              "desc": { "type": "string" },
+              "href": { "type": "string" },
+              "tag": { "type": "string" }
+            }
+          }
+        }
+      },
+      "required": ["type", "items"]
+    },
+
+    "tableBlock": {
+      "description": "ตารางข้อมูล คอลัมน์แรกถูกทำเป็น row header อัตโนมัติ",
+      "properties": {
+        "type": { "const": "table" },
+        "caption": { "type": "string" },
+        "columns": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "rows": { "type": "array", "items": { "type": "array", "items": { "type": "string" } } }
+      },
+      "required": ["type", "columns", "rows"]
+    },
+
+    "faq": {
+      "description": "คำถามที่พบบ่อย เปิด/ปิดได้",
+      "properties": {
+        "type": { "const": "faq" },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["q", "a"],
+            "properties": { "q": { "type": "string" }, "a": { "type": "string" } }
+          }
+        }
+      },
+      "required": ["type", "items"]
+    },
+
+    "steps": {
+      "description": "ขั้นตอนการทำงาน ใส่เลขลำดับให้อัตโนมัติ",
+      "properties": {
+        "type": { "const": "steps" },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["title"],
+            "properties": { "title": { "type": "string" }, "body": { "type": "string" } }
+          }
+        }
+      },
+      "required": ["type", "items"]
+    },
+
+    "twoColumn": {
+      "description": "ข้อความคู่กับรูป",
+      "properties": {
+        "type": { "const": "two-column" },
+        "subheading": { "type": "string" },
+        "paragraphs": { "type": "array", "items": { "type": "string" } },
+        "image": { "type": "string" },
+        "imageAlt": { "type": "string" },
+        "imageSide": { "enum": ["left", "right"] },
+        "actions": { "$ref": "#/definitions/actionList" }
+      },
+      "required": ["type", "image"]
+    },
+
+    "ctaBand": {
+      "description": "แถบเรียกให้ทำอะไรบางอย่าง พื้นเขียวเข้ม มักวางท้ายหน้า",
+      "properties": {
+        "type": { "const": "cta-band" },
+        "heading": { "type": "string" },
+        "body": { "type": "string" },
+        "actions": { "$ref": "#/definitions/actionList" }
+      },
+      "required": ["type", "heading"]
+    },
+
+    "notice": {
+      "description": "กล่องแจ้งเตือน",
+      "properties": {
+        "type": { "const": "notice" },
+        "tone": { "enum": ["info", "warn", "success"] },
+        "title": { "type": "string" },
+        "body": { "type": "string" }
+      },
+      "required": ["type", "body"]
+    },
+
+    "contactInfo": {
+      "description": "ข้อมูลติดต่อ เบอร์โทรและอีเมลกลายเป็นลิงก์อัตโนมัติ",
+      "properties": {
+        "type": { "const": "contact-info" },
+        "address": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "hours": { "type": "string" },
+        "mapEmbed": { "type": "string", "description": "URL สำหรับ iframe แผนที่" }
+      },
+      "required": ["type"]
+    }
+  }
+}

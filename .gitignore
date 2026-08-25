@@ -9,3 +9,6 @@ Desktop.ini
 # Logs / temp
 *.log
 *.tmp
+
+# ผลลัพธ์จาก node tools/build.mjs
+dist/

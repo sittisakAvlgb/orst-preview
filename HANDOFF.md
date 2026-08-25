@@ -21,32 +21,55 @@
 
 ```
 ORST Website/
-├── index.html              หน้าหลัก
-├── knowledge.html          คลังองค์ความรู้
-├── contact.html            ติดต่อเรา
-├── dictionary.html         ┐
-├── news.html               │ 4 หน้านี้ยังเป็นโครงเปล่า
-├── publications.html       │ รอทีม UX/UI ทำเนื้อหาจริง
+├── index.html              ┐
+├── knowledge.html          │ 3 หน้านี้เขียน HTML เองทั้งหมด (มี CSS/JS เฉพาะหน้า)
+├── contact.html            ┘
+│
+├── about.html              ┐
+├── dictionary.html         │ หน้าที่ขับด้วย JSON — ไฟล์ HTML เป็นโครงเปล่า ~30 บรรทัด
+├── news.html               │ เนื้อหาจริงอยู่ที่ content/pages/<ชื่อ>.json
+├── publications.html       │
 ├── services.html           ┘
-├── _template.html          ★ แม่แบบสำหรับสร้างหน้าใหม่ (คัดลอกไฟล์นี้)
+├── styleguide.html         ★ คลังบล็อก — เปิดดูตัวอย่าง block ทุกชนิด
+├── _template.html          ★ แม่แบบหน้าใหม่ (แบบ JSON) คัดลอกไฟล์นี้
+├── _template-static.html   แม่แบบหน้าที่ต้องเขียน HTML เอง (ใช้เฉพาะกรณีพิเศษ)
+│
+├── content/                ★ เนื้อหาทั้งหมดอยู่ที่นี่ — จุดที่ CMS จะมาต่อ
+│   ├── blocks.schema.json  JSON Schema ของไฟล์เนื้อหา (VS Code ใช้เติมคำ/ตรวจ error)
+│   └── pages/
+│       ├── about.json          1 หน้า = 1 ไฟล์
+│       ├── dictionary.json
+│       ├── news.json
+│       ├── publications.json
+│       ├── services.json
+│       └── _styleguide.json    ตัวอย่าง block ครบทุกชนิด
 │
 ├── assets/
 │   ├── css/
 │   │   ├── base.css        ตัวแปรดีไซน์ + reset + สไตล์พื้นฐานที่ใช้ทุกหน้า
+│   │   ├── blocks.css      สไตล์ของ block ทุกชนิด
 │   │   ├── components.css  header / topbar / mega menu / footer / modal
 │   │   └── pages/
 │   │       ├── home.css        สไตล์เฉพาะ index.html
 │   │       ├── knowledge.css   สไตล์เฉพาะ knowledge.html
 │   │       └── contact.css     สไตล์เฉพาะ contact.html
 │   ├── js/
-│   │   ├── components.js   ★ header/footer/เมนู — แก้ที่เดียว มีผลทุกหน้า
+│   │   ├── components.js   ★ header/footer/เมนู/ไอคอน — แก้ที่เดียว มีผลทุกหน้า
+│   │   ├── blocks.js       ★ ตัวแปลง JSON เป็น HTML (pure function รันใน Node ได้)
+│   │   ├── page-runtime.js ตัวโหลด JSON แล้ว render (ES module)
 │   │   └── pages/
 │   │       ├── home.js
 │   │       ├── knowledge.js
 │   │       └── contact.js
 │   └── images/             รูปภาพทั้งหมด
 │
+├── tools/
+│   ├── validate.mjs        ตรวจไฟล์เนื้อหาทั้งหมด — รันก่อน commit
+│   └── build.mjs           สร้าง HTML นิ่งลง dist/ สำหรับ production
+│
 ├── _archive/               โค้ดเก่าที่ไม่ได้ใช้แล้ว เก็บไว้อ้างอิง (ไม่ถูกโหลด)
+├── CONTENT-MODEL.md        คลังบล็อก 14 ชนิด พร้อมตัวอย่าง JSON
+├── CLAUDE.md               กฎการทำงานสำหรับ AI agent
 ├── HANDOFF.md              เอกสารนี้
 └── README.md               สรุปสั้น
 ```
@@ -76,8 +99,9 @@ ORST Website/
 
 ```
 1) assets/css/base.css              ตัวแปร + พื้นฐาน
-2) assets/css/pages/<ชื่อหน้า>.css   สไตล์เฉพาะหน้า
-3) assets/css/components.css        ★ ต้องอยู่ท้ายสุดเสมอ
+2) assets/css/blocks.css            สไตล์ของ block (เฉพาะหน้าที่ขับด้วย JSON)
+3) assets/css/pages/<ชื่อหน้า>.css   สไตล์เฉพาะหน้า (เฉพาะ 3 หน้าที่เขียน HTML เอง)
+4) assets/css/components.css        ★ ต้องอยู่ท้ายสุดเสมอ
 ```
 
 เหตุผล: เดิม CSS ของ header/footer ถูก inject ผ่าน JavaScript ตอน runtime จึงชนะทุกไฟล์
@@ -86,24 +110,81 @@ ORST Website/
 ### ลำดับการโหลด JS
 
 ```
-1) assets/js/components.js          ต้องมาก่อนเสมอ
-2) assets/js/pages/<ชื่อหน้า>.js     (ถ้ามี)
+1) assets/js/components.js          classic script — ต้องมาก่อนเสมอ
+2) assets/js/page-runtime.js        module — หน้าที่ขับด้วย JSON
+   หรือ assets/js/pages/<หน้า>.js    หน้าที่เขียน HTML เอง
 ```
 
 ---
 
 ## 4. วิธีเพิ่มหน้าใหม่
 
-1. คัดลอก **`_template.html`** เป็นชื่อหน้าใหม่ เช่น `about.html`
-2. แก้ `<title>`, `<meta name="description">`, `<h1>`, เนื้อหาใน `<main>`
-3. แก้ `<body data-page="about">` ให้ตรงกับ **key** ในตาราง navItems ด้านล่าง
-   (เพื่อให้เมนูไฮไลต์หน้าปัจจุบันถูก)
-4. ถ้าต้องมีสไตล์เฉพาะหน้า สร้าง `assets/css/pages/about.css`
-   แล้วเปิดคอมเมนต์บรรทัด `<link ... pages/about.css>` ใน `<head>`
-   (ต้องอยู่ **ก่อน** `components.css`)
-5. ถ้าต้องมีสคริปต์เฉพาะหน้า สร้าง `assets/js/pages/about.js`
-   แล้วเปิดคอมเมนต์บรรทัด `<script src="assets/js/pages/about.js">`
-   (ต้องอยู่ **หลัง** `components.js`)
+หน้าทั่วไปทุกหน้าใช้ระบบ **JSON + block library** — เนื้อหาอยู่ในไฟล์ JSON ไฟล์เดียว
+ไม่ต้องเขียน HTML และไม่ต้องเขียน CSS
+
+### ขั้นตอน
+
+**1. สร้างไฟล์เนื้อหา** `content/pages/<slug>.json`
+
+```json
+{
+  "$schema": "../blocks.schema.json",
+  "title": "ชื่อหน้า",
+  "navKey": "about",
+  "description": "คำอธิบายหน้า 1-2 ประโยค",
+  "blocks": [
+    { "type": "page-hero", "heading": "ชื่อหน้า", "lead": "คำโปรย" },
+    { "type": "card-grid", "variant": "alt", "heading": "หัวข้อ", "columns": 3,
+      "items": [{ "title": "การ์ด", "body": "เนื้อหา", "href": "#" }] }
+  ]
+}
+```
+
+ใส่ `"$schema"` ไว้บรรทัดแรกแล้ว VS Code จะเติมคำและขีดเส้นแดงให้อัตโนมัติ
+
+**2. สร้างไฟล์ HTML** — คัดลอก `_template.html` เป็น `<slug>.html` แล้วแก้ 4 จุด
+
+| แก้ | เป็น |
+|---|---|
+| `<title>` | ชื่อหน้า |
+| `<meta name="description">` | คำอธิบายหน้า |
+| `<body data-page="...">` | ต้องเท่ากับ `navKey` ใน JSON |
+| `data-content="..."` | ต้องชี้ไป `content/pages/<slug>.json` |
+
+**3. เพิ่มลิงก์ในเมนู** (ถ้าเป็นหน้าหลักของหมวด) — แก้ `navItems` / `megaMenuData`
+ใน `assets/js/components.js`
+
+**4. ตรวจงาน**
+
+```bash
+node tools/validate.mjs
+```
+
+ตรวจให้ครบว่า: โครงสร้าง JSON ถูก · block ทุกตัวมีฟิลด์บังคับ · `navKey` ตรงกับ `data-page`
+· ไอคอนมีอยู่จริง · รูปมีอยู่จริง · ลิงก์ภายในไม่เสีย
+
+### บล็อกที่ใช้ได้ 14 ชนิด
+
+`page-hero` · `rich-text` · `card-grid` · `feature-list` · `stat-row` · `link-list` ·
+`media-grid` · `table` · `faq` · `steps` · `two-column` · `cta-band` · `notice` · `contact-info`
+
+ตัวอย่าง JSON ของทุกชนิดอยู่ใน **[CONTENT-MODEL.md](CONTENT-MODEL.md)**
+และเปิดดูของจริงได้ที่ **`styleguide.html`**
+
+### ถ้าหน้านั้นต้อง layout พิเศษจริง ๆ
+
+ใช้ `_template-static.html` แทน แล้วเขียน HTML/CSS/JS เฉพาะหน้าเอง
+(วิธีนี้ CMS จะจัดการเนื้อหาให้ไม่ได้ — ใช้เท่าที่จำเป็น)
+
+### สร้าง HTML นิ่งสำหรับขึ้น production
+
+```bash
+node tools/build.mjs
+```
+
+อ่าน JSON แล้วเขียนเนื้อหาลงไฟล์ HTML จริงในโฟลเดอร์ `dist/`
+ใช้ตัว render ตัวเดียวกับเบราว์เซอร์ ผลลัพธ์ตรงกันทุกตัวอักษร (ตรวจแล้ว)
+ทำให้ Google และ screen reader เห็นเนื้อหาโดยไม่ต้องรอ JavaScript
 
 ### แก้เมนูหลัก
 
@@ -199,12 +280,30 @@ header/topbar/footer/modal ของเดิมค้างอยู่ (ถู
 
 → เป็นเรื่องเนื้อหา ต้องให้ทีมตัดสินใจว่าจะแก้ชื่อปุ่มหรือแก้เนื้อหา
 
-### 6.6 ยังไม่ได้ทำ
+### 6.6 header/footer ยังไม่ได้ต่อ CMS
 
-- ยังไม่มีหน้า `about.html` ทั้งที่เมนูมี key `about` แล้ว (ตอนนี้ลิงก์เป็น `#`)
+เนื้อหาเมนูและ footer ยังเป็นข้อมูลในโค้ด (`navItems`, `megaMenuData`, `renderFooter()`
+ใน `assets/js/components.js`) ต่างจากเนื้อหาหน้าที่แยกเป็น JSON แล้ว
+
+เหตุผลที่ยังไม่ย้าย: header ถูก render แบบ synchronous ถ้าเปลี่ยนไป fetch JSON
+จะเกิดอาการเมนูกะพริบตอนโหลด ต้องออกแบบเพิ่ม
+
+วิธีย้ายเมื่อพร้อม: ให้ `components.js` อ่านจาก `window.ORST_SITE` ถ้ามี
+แล้วโหลด `content/site.js` (ไฟล์ข้อมูลที่ CMS สร้าง) ด้วย `<script>` ธรรมดาก่อน `components.js`
+วิธีนี้ไม่ต้อง fetch จึงไม่กะพริบ
+
+### 6.7 หน้าที่ยังแปลงเป็น block ไม่ได้
+
+`index.html`, `knowledge.html`, `contact.html` ยังเป็น HTML ที่เขียนเอง
+CMS จะจัดการเนื้อหา 3 หน้านี้ไม่ได้จนกว่าจะแตกเป็น block ก่อน
+เป็นงานใหญ่ ควรทำหลังเนื้อหาหน้าอื่นนิ่งแล้ว
+
+### 6.8 ยังไม่ได้ทำ
+
 - สลับภาษา TH | EN บน topbar เป็นข้อความเฉย ๆ ยังไม่ทำงาน
 - "เข้าสู่ระบบ / สมัครสมาชิก" และ "สำหรับเจ้าหน้าที่" ยังเป็น `href="#"`
 - ยังไม่มี `robots.txt` / `sitemap.xml` / Open Graph meta
+- ยังไม่มี CI ที่รัน `node tools/validate.mjs` อัตโนมัติตอน push
 
 ---
 
@@ -257,7 +356,60 @@ footer ขึ้นครบ, เนื้อหาไม่ถูก header ท
 
 ---
 
-## 8. Git
+## 8. รอบที่สอง — ระบบ block สำหรับ AI และ CMS
+
+รอบนี้เพิ่มโครงสร้างให้ AI สร้างหน้าใหม่ได้ตามแบบแผน และให้ต่อ CMS ได้ภายหลังโดยไม่ต้องรื้อ
+
+### แนวคิด
+
+```
+content/pages/about.json  ──►  assets/js/blocks.js  ──►  HTML
+   เนื้อหา (CMS แก้ที่นี่)        ตัวแปลง (pure function)      หน้าเว็บ
+```
+
+ตัวแปลงเป็นฟังก์ชันบริสุทธิ์ที่ไม่แตะ DOM จึงรันได้ทั้งในเบราว์เซอร์และใน Node
+ทำให้ได้ทั้งโหมด "แก้ JSON แล้วรีเฟรชเห็นเลย" และโหมด "build เป็น HTML นิ่งเพื่อ SEO"
+โดยใช้โค้ดชุดเดียวกัน — ยืนยันแล้วว่าผลลัพธ์ตรงกันทุกตัวอักษร
+
+### สิ่งที่เพิ่มเข้ามา
+
+| ไฟล์ | คืออะไร |
+|---|---|
+| `assets/js/blocks.js` | คลังบล็อก 14 ชนิด + ตัวตรวจความถูกต้อง |
+| `assets/js/page-runtime.js` | โหลด JSON แล้ว render (ข้ามอัตโนมัติถ้าหน้าถูก build มาแล้ว) |
+| `assets/css/blocks.css` | สไตล์ของ block — ใช้ตัวแปรสีล้วน ไม่ฮาร์ดโค้ด |
+| `content/blocks.schema.json` | JSON Schema — VS Code เติมคำและตรวจ error ให้ขณะพิมพ์ |
+| `content/pages/*.json` | เนื้อหา 5 หน้า + ไฟล์ตัวอย่างครบทุก block |
+| `tools/validate.mjs` | ตรวจเนื้อหาทั้งหมด ใช้ใน CI ได้ (exit code 1 เมื่อพบ error) |
+| `tools/build.mjs` | สร้าง HTML นิ่งลง `dist/` |
+| `styleguide.html` | คลังบล็อกแบบเปิดดูได้จริง |
+| `CONTENT-MODEL.md` | คู่มือคลังบล็อกสำหรับคนทำเนื้อหา |
+| `CLAUDE.md` / `AGENTS.md` | กฎการทำงานสำหรับ AI agent |
+
+### หน้าที่แปลงเป็นระบบ JSON แล้ว
+
+`dictionary` · `news` · `publications` · `services` และหน้าใหม่ `about`
+ทั้งหมดผ่านการตรวจ: render ครบทุก block, เมนูไฮไลต์ถูกหน้า, ไม่มี console error,
+ไม่มีไอคอนเสีย, โหมด high-contrast / readable-mode ทำงานกับทุก block
+
+### เนื้อหาเป็น placeholder
+
+ข้อความในวงเล็บเหลี่ยม `[...]` คือจุดที่ต้องเติมข้อมูลจริง — **ตั้งใจไม่ใส่ข้อมูลสมมติ**
+ของหน่วยงานราชการ (เบอร์โทร ที่อยู่ วันที่ ตัวเลขสถิติ) เพราะอาจถูกเข้าใจผิดว่าเป็นข้อมูลจริง
+`node tools/validate.mjs` จะรายงานจำนวน placeholder ที่ยังค้างอยู่ในแต่ละไฟล์ให้
+
+### บั๊กที่พบเพิ่มในรอบนี้
+
+- ไอคอน `i-chevron`, `i-map`, `i-phone`, `i-arrow`, `i-plus`, `i-pen`, `i-puzzle`
+  มีอยู่เฉพาะใน sprite ที่ฝังใน `index.html` หน้าอื่นจึงเรียกใช้ไม่ได้
+  → ย้ายเข้า sprite กลางใน `components.js` ครบแล้ว (ตอนนี้มี 25 ไอคอน)
+- `.content-card` ใน `base.css` ตั้งพื้นหลังเป็น `#fff` ตายตัว โหมด high-contrast จึงไม่มีผล
+  → `blocks.css` บังคับให้การ์ดของ block ใช้ `var(--surface)` แทน
+  (ไม่ได้แก้ `base.css` เพื่อไม่ให้ 3 หน้าเดิมเปลี่ยนหน้าตา — ถือเป็นหนี้ที่เหลืออยู่)
+
+---
+
+## 9. Git
 
 โปรเจกต์ถูกทำเป็น git repository แล้ว ประวัติมีจุดสำคัญคือ
 

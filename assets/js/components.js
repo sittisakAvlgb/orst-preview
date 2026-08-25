@@ -45,6 +45,13 @@ const icons = `
   <symbol id="i-journal" viewBox="0 0 24 24"><path d="M7 3h10a2 2 0 0 1 2 2v16H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path><path d="M9 7h6"></path><path d="M9 11h6"></path><path d="M9 15h4"></path></symbol>
   <symbol id="i-ebook" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"></rect><path d="M9 7h6"></path><path d="M9 11h6"></path><path d="M9 15h3"></path><path d="M12 19h.01"></path></symbol>
   <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="M3 11v2a2 2 0 0 0 2 2h3l7 4V5l-7 4H5a2 2 0 0 0-2 2z"></path><path d="M19 9a4 4 0 0 1 0 6"></path></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14"></path><path d="M5 12h14"></path></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 18l-6 3V6l6-3 6 3 6-3v15l-6 3-6-3z"></path><path d="M9 3v15"></path><path d="M15 6v15"></path></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"></rect><path d="M11 18h2"></path></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></symbol>
+  <symbol id="i-puzzle" viewBox="0 0 24 24"><path d="M19 13h-2v-2a2 2 0 1 0-4 0v2h-2V9h2V7a2 2 0 1 0-4 0v2H5v10h14Z"></path></symbol>
   <symbol id="i-service" viewBox="0 0 24 24"><path d="M12 3l8 4v6c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V7z"></path><path d="M9 12l2 2 4-5"></path></symbol>
 </svg>`;
 
@@ -59,7 +66,7 @@ const navItems = [
   ['publications', 'สื่อและสิ่งพิมพ์', `${basePath}publications.html`],
   ['news', 'ข่าวสารและกิจกรรม', `${basePath}news.html`],
   ['services', 'บริการประชาชน', `${basePath}services.html`],
-  ['about', 'เกี่ยวกับเรา', '#'],
+  ['about', 'เกี่ยวกับเรา', `${basePath}about.html`],
   ['contact', 'ติดต่อเรา', `${basePath}contact.html`],
 ];
 
@@ -195,7 +202,7 @@ const megaMenuData = {
     eyebrow: 'About ORST',
     description: 'ข้อมูลสำนักงาน โครงสร้าง ผู้บริหาร ราชบัณฑิต ภาคีสมาชิก และข้อมูลหน่วยงาน',
     icon: 'i-shield',
-    featured: ['ข้อมูลสำนักงาน', '#'],
+    featured: ['ข้อมูลสำนักงาน', `${basePath}about.html`],
     groups: [
       {
         heading: 'ข้อมูลสำนักงาน',
@@ -852,6 +859,9 @@ function initMediaTabs() {
 
 function initCompactFAQ() {
   document.querySelectorAll('.faq-compact-list .faq-q').forEach(button => {
+    // กันผูก event ซ้ำ กรณีถูกเรียกอีกรอบหลังเพิ่มเนื้อหาใหม่เข้า DOM
+    if (button.dataset.faqBound === '1') return;
+    button.dataset.faqBound = '1';
     button.addEventListener('click', () => {
       const item = button.closest('.faq-item');
       const answer = item?.querySelector('.faq-a');
@@ -932,4 +942,11 @@ window.orstHeader = {
   renderHeader,
   renderFooter,
   syncFixedHeaderHeight,
+  // เรียกซ้ำได้หลังจากเพิ่มเนื้อหาเข้า DOM ทีหลัง (เช่น หน้าที่ render จาก JSON)
+  bindDynamicContent() {
+    initCompactFAQ();
+    initMediaTabs();
+    initNewsEventsTabs();
+    syncFixedHeaderHeight();
+  },
 };

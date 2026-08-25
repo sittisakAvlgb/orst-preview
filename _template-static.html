@@ -1,0 +1,74 @@
+<!-- =============================================================================
+     _template-static.html — แม่แบบสำหรับหน้าที่เขียน HTML เองทั้งหมด
+     ใช้เฉพาะหน้าที่มี layout พิเศษจน block library รองรับไม่ไหว (เช่น index.html)
+     หน้าทั่วไปให้ใช้ _template.html ซึ่งดึงเนื้อหาจากไฟล์ JSON แทน
+     ============================================================================= -->
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="[แก้ไข] คำอธิบายหน้านี้ 1-2 ประโยค สำหรับ SEO">
+  <title>[แก้ไข] ชื่อหน้า | สำนักงานราชบัณฑิตยสภา</title>
+
+  <link rel="icon" href="assets/images/cropped-logo-with-bg-1.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Noto+Serif+Thai:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- ลำดับ CSS สำคัญมาก ห้ามสลับ:
+       1) base.css            ตัวแปรสี/reset/สไตล์พื้นฐาน
+       2) pages/<ชื่อหน้า>.css  สไตล์เฉพาะหน้า (ลบบรรทัดนี้ได้ถ้าไม่ต้องใช้)
+       3) components.css      สไตล์ header/footer ต้องอยู่ท้ายสุดเสมอ -->
+  <link rel="stylesheet" href="assets/css/base.css">
+  <!-- <link rel="stylesheet" href="assets/css/pages/ชื่อหน้า.css"> -->
+  <link rel="stylesheet" href="assets/css/components.css">
+</head>
+
+<!-- data-page ต้องตรงกับ key ตัวแรกใน navItems ของ assets/js/components.js
+     เพื่อให้เมนูบนหัวเว็บไฮไลต์หน้าปัจจุบันถูกต้อง -->
+<body data-page="[แก้ไข]">
+
+  <!-- header ถูกสร้างโดย components.js — ห้ามเขียน header เองในหน้า -->
+  <div id="app-header"></div>
+
+  <main id="main-content">
+
+    <section class="page-hero">
+      <div class="container">
+        <h1>[แก้ไข] หัวข้อหน้า</h1>
+        <p>[แก้ไข] คำโปรยสั้น ๆ อธิบายว่าหน้านี้ช่วยผู้ใช้เรื่องอะไร</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid-3">
+        <article class="content-card">
+          <h2>หัวข้อย่อย</h2>
+          <p>เนื้อหา</p>
+        </article>
+        <article class="content-card">
+          <h2>หัวข้อย่อย</h2>
+          <p>เนื้อหา</p>
+        </article>
+        <article class="content-card">
+          <h2>หัวข้อย่อย</h2>
+          <p>เนื้อหา</p>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- footer ถูกสร้างโดย components.js -->
+  <div id="app-footer"></div>
+
+  <!-- components.js ต้องมาก่อนสคริปต์เฉพาะหน้าเสมอ -->
+  <script src="assets/js/components.js"></script>
+  <!-- <script src="assets/js/pages/ชื่อหน้า.js"></script> -->
+</body>
+
+</html>

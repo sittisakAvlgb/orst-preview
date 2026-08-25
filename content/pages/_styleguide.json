@@ -1,0 +1,183 @@
+{
+  "$schema": "../blocks.schema.json",
+  "_note": "หน้านี้คือคลังบล็อก แสดง block ทุกชนิดที่ระบบรองรับ พร้อมค่าที่ใช้ได้จริง ใช้เป็นตัวอ้างอิงตอนเขียน JSON หน้าใหม่",
+  "title": "คลังบล็อก (Style Guide)",
+  "navKey": "home",
+  "description": "ตัวอย่าง block ทุกชนิดที่ใช้สร้างหน้าเว็บจากไฟล์ JSON",
+  "blocks": [
+    {
+      "type": "page-hero",
+      "eyebrow": "Design System",
+      "heading": "คลังบล็อก",
+      "lead": "block ทุกชนิดที่ระบบรองรับ พร้อมตัวอย่างการใช้งาน — คัดลอก JSON จาก content/pages/_styleguide.json ไปใช้ได้เลย",
+      "breadcrumb": [
+        { "label": "หน้าหลัก", "href": "index.html" },
+        { "label": "คลังบล็อก" }
+      ],
+      "actions": [
+        { "label": "อ่าน CONTENT-MODEL.md", "href": "#" },
+        { "label": "กลับหน้าหลัก", "href": "index.html", "variant": "ghost" }
+      ]
+    },
+    {
+      "type": "notice",
+      "tone": "info",
+      "id": "b-notice",
+      "heading": "notice",
+      "lead": "กล่องแจ้งเตือน — tone: info | warn | success",
+      "title": "นี่คือ block ชนิด notice",
+      "body": "ใช้เน้นข้อความสำคัญ เช่น ข้อควรระวัง เงื่อนไขการใช้บริการ หรือประกาศชั่วคราว"
+    },
+    {
+      "type": "rich-text",
+      "id": "b-rich-text",
+      "variant": "alt",
+      "heading": "rich-text",
+      "lead": "ข้อความยาว ใช้ paragraphs (ปลอดภัย) หรือ html (ต้องเชื่อถือแหล่งที่มา)",
+      "paragraphs": [
+        "ใส่ข้อความเป็น array ของย่อหน้าใน paragraphs ระบบจะ escape อักขระพิเศษให้อัตโนมัติ จึงปลอดภัยเมื่อเนื้อหามาจาก CMS หรือผู้ใช้",
+        "ถ้าต้องการ HTML เต็มรูปแบบ (ลิสต์ ตัวหนา ลิงก์) ให้ใช้ฟิลด์ html แทน แต่ต้องมั่นใจว่าเนื้อหามาจากแหล่งที่เชื่อถือได้เท่านั้น",
+        "ค่าเริ่มต้นจำกัดความกว้างที่ 78 ตัวอักษรเพื่อให้อ่านง่าย ตั้ง width เป็น full ถ้าต้องการเต็มความกว้าง"
+      ]
+    },
+    {
+      "type": "card-grid",
+      "id": "b-card-grid",
+      "heading": "card-grid",
+      "lead": "การ์ดเนื้อหาเรียงเป็นตาราง — block ที่ใช้บ่อยที่สุด (columns: 2, 3 หรือ 4)",
+      "action": { "label": "ตัวอย่างปุ่มมุมขวา", "href": "#" },
+      "columns": 3,
+      "items": [
+        { "icon": "i-book", "title": "การ์ดที่มีไอคอน", "body": "ใส่ icon เป็น id จาก sprite เช่น i-book, i-file, i-people", "meta": "ฟิลด์ meta อยู่ล่างสุด" },
+        { "tag": "มี tag", "title": "การ์ดที่คลิกได้", "body": "ถ้าใส่ href การ์ดทั้งใบจะกลายเป็นลิงก์และมี hover effect", "href": "#" },
+        { "title": "การ์ดแบบเรียบ", "body": "ไม่ใส่ icon ไม่ใส่ href ก็ได้ เหลือแค่หัวข้อกับเนื้อหา" }
+      ]
+    },
+    {
+      "type": "feature-list",
+      "id": "b-feature-list",
+      "variant": "alt",
+      "heading": "feature-list",
+      "lead": "ไอคอน + หัวข้อ + คำอธิบาย เรียงเป็นแถว เหมาะกับการสรุปจุดเด่นหรือคุณสมบัติ",
+      "columns": 2,
+      "items": [
+        { "icon": "i-shield", "title": "หัวข้อรายการที่ 1", "body": "คำอธิบายสั้น ๆ ต่อท้ายหัวข้อ" },
+        { "icon": "i-people", "title": "หัวข้อรายการที่ 2", "body": "คำอธิบายสั้น ๆ ต่อท้ายหัวข้อ" },
+        { "icon": "i-service", "title": "หัวข้อรายการที่ 3", "body": "คำอธิบายสั้น ๆ ต่อท้ายหัวข้อ" },
+        { "icon": "i-database", "title": "หัวข้อรายการที่ 4", "body": "คำอธิบายสั้น ๆ ต่อท้ายหัวข้อ" }
+      ]
+    },
+    {
+      "type": "stat-row",
+      "id": "b-stat-row",
+      "heading": "stat-row",
+      "lead": "ตัวเลขสถิติ ปรับจำนวนคอลัมน์อัตโนมัติตามความกว้างจอ",
+      "items": [
+        { "value": "14", "label": "ชนิดของ block", "note": "ขยายเพิ่มได้" },
+        { "value": "0", "label": "dependency ภายนอก", "note": "ไม่ต้อง npm install" },
+        { "value": "1", "label": "ไฟล์ JSON ต่อ 1 หน้า", "note": "แก้ที่เดียว" }
+      ]
+    },
+    {
+      "type": "link-list",
+      "id": "b-link-list",
+      "variant": "alt",
+      "heading": "link-list",
+      "lead": "รายการเอกสาร/ลิงก์ พร้อมชนิดไฟล์และวันที่ เหมาะกับหน้าดาวน์โหลดและประกาศ",
+      "items": [
+        { "title": "รายการที่มีครบทุกฟิลด์", "desc": "คำอธิบายใต้ชื่อรายการ", "tag": "PDF", "meta": "1 ม.ค. 2569", "href": "#" },
+        { "title": "รายการที่มีเฉพาะชื่อ", "href": "#" },
+        { "title": "รายการที่เปลี่ยนไอคอนได้", "desc": "ใส่ icon เพื่อเปลี่ยนจากไอคอนไฟล์เริ่มต้น", "icon": "i-journal", "tag": "วารสาร", "href": "#" }
+      ]
+    },
+    {
+      "type": "media-grid",
+      "id": "b-media-grid",
+      "heading": "media-grid",
+      "lead": "การ์ดที่มีรูปภาพ อัตราส่วนภาพถูกบังคับเป็น 4:3 เพื่อให้แถวเรียงเสมอกัน",
+      "columns": 4,
+      "items": [
+        { "image": "assets/images/e-Book01.png", "alt": "ตัวอย่างปกหนังสือ 1", "title": "การ์ดสื่อที่คลิกได้", "desc": "ใส่ href เพื่อให้คลิกได้", "tag": "e-Book", "href": "#" },
+        { "image": "assets/images/e-Book02.png", "alt": "ตัวอย่างปกหนังสือ 2", "title": "การ์ดที่ไม่มี tag", "desc": "ไม่ใส่ tag ก็ได้", "href": "#" },
+        { "image": "assets/images/e-Book03.png", "alt": "ตัวอย่างปกหนังสือ 3", "title": "การ์ดที่คลิกไม่ได้", "desc": "ไม่ใส่ href จะเป็นการ์ดเฉย ๆ" },
+        { "image": "assets/images/e-Book04.png", "alt": "ตัวอย่างปกหนังสือ 4", "title": "การ์ดที่มีเฉพาะชื่อ", "tag": "ใหม่", "href": "#" }
+      ]
+    },
+    {
+      "type": "table",
+      "id": "b-table",
+      "variant": "alt",
+      "heading": "table",
+      "lead": "ตารางข้อมูล คอลัมน์แรกจะถูกทำเป็น row header อัตโนมัติ และเลื่อนแนวนอนได้บนจอเล็ก",
+      "caption": "ตัวอย่างตาราง — columns คือหัวตาราง rows คือ array ซ้อน array",
+      "columns": ["ชื่อ block", "ใช้ทำอะไร", "ฟิลด์บังคับ"],
+      "rows": [
+        ["page-hero", "หัวหน้าเพจ", "heading"],
+        ["card-grid", "การ์ดเรียงตาราง", "items"],
+        ["faq", "คำถามที่พบบ่อย", "items"]
+      ]
+    },
+    {
+      "type": "steps",
+      "id": "b-steps",
+      "heading": "steps",
+      "lead": "ขั้นตอนการทำงาน ระบบใส่เลขลำดับให้อัตโนมัติ",
+      "items": [
+        { "title": "ขั้นตอนที่หนึ่ง", "body": "คำอธิบายของขั้นตอน" },
+        { "title": "ขั้นตอนที่สอง", "body": "คำอธิบายของขั้นตอน" },
+        { "title": "ขั้นตอนที่สาม", "body": "คำอธิบายของขั้นตอน" }
+      ]
+    },
+    {
+      "type": "two-column",
+      "id": "b-two-column",
+      "variant": "alt",
+      "heading": "two-column",
+      "lead": "ข้อความคู่กับรูป สลับข้างได้ด้วย imageSide: left",
+      "subheading": "หัวข้อย่อยของคอลัมน์ข้อความ",
+      "paragraphs": [
+        "ใส่ข้อความเป็น array ใน paragraphs เช่นเดียวกับ rich-text",
+        "บนจอมือถือจะเรียงเป็นแนวตั้งอัตโนมัติ โดยข้อความอยู่บนและรูปอยู่ล่างเสมอ"
+      ],
+      "image": "assets/images/ConnectedNetwork01.JPG",
+      "imageAlt": "ตัวอย่างภาพประกอบ",
+      "imageSide": "right",
+      "actions": [
+        { "label": "ปุ่มหลัก", "href": "#" },
+        { "label": "ปุ่มรอง", "href": "#", "variant": "ghost" }
+      ]
+    },
+    {
+      "type": "faq",
+      "id": "b-faq",
+      "heading": "faq",
+      "lead": "คำถามที่พบบ่อย กดเปิด/ปิดได้ (components.js ผูก event ให้อัตโนมัติ)",
+      "items": [
+        { "q": "ต้องใส่ id ให้ block ไหม", "a": "ไม่บังคับ แต่ถ้าใส่จะทำ anchor link มาที่ section นั้นได้ และ block faq ใช้ id ในการสร้าง id ของคำตอบด้วย" },
+        { "q": "เปลี่ยนสีพื้นหลัง section ยังไง", "a": "ใส่ variant เป็น alt จะได้พื้นสีขาว ถ้าไม่ใส่จะเป็นพื้นสีกระดาษตามธีม" },
+        { "q": "เพิ่ม block ชนิดใหม่ได้ไหม", "a": "ได้ เขียนฟังก์ชัน render ใน assets/js/blocks.js แล้วลงทะเบียนใน BLOCKS ท้ายไฟล์" }
+      ]
+    },
+    {
+      "type": "contact-info",
+      "id": "b-contact-info",
+      "variant": "alt",
+      "heading": "contact-info",
+      "lead": "ข้อมูลติดต่อ เบอร์โทรและอีเมลจะกลายเป็นลิงก์ tel: / mailto: อัตโนมัติ",
+      "address": "[ที่อยู่สำนักงาน]",
+      "phone": "[หมายเลขโทรศัพท์]",
+      "email": "[อีเมลติดต่อ]",
+      "hours": "[วันและเวลาทำการ]"
+    },
+    {
+      "type": "cta-band",
+      "id": "b-cta-band",
+      "heading": "cta-band",
+      "body": "แถบเรียกให้ทำอะไรบางอย่าง วางไว้ท้ายหน้าเพื่อชี้ทางผู้ใช้ต่อ",
+      "actions": [
+        { "label": "ปุ่มหลัก", "href": "#" },
+        { "label": "ปุ่มรอง", "href": "#", "variant": "ghost" }
+      ]
+    }
+  ]
+}
