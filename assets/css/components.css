@@ -107,19 +107,44 @@
   min-width: 300px;
   display: inline-flex;
   align-items: center;
-  gap: 0;
+  gap: 12px;
+  text-decoration: none;
 }
 
-.brand-logo {
+/* ตราสัญลักษณ์เป็นรูป ส่วนชื่อหน่วยงานเป็นข้อความ HTML */
+.brand-emblem {
   display: block;
-  width: 200px;
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
+  height: 56px;
+  width: auto;
+  flex: none;
   transition: transform .22s ease, opacity .22s ease;
 }
 
-.brand-image:hover .brand-logo {
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.12;
+  white-space: nowrap;
+}
+
+.brand-text-th {
+  font-size: 1.22rem;
+  font-weight: 800;
+  color: var(--deep);
+  letter-spacing: .01em;
+}
+
+.brand-text-en {
+  font-size: .68rem;
+  font-weight: 700;
+  color: var(--deep-2);
+  opacity: .82;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.brand-image:hover .brand-emblem {
   transform: translateY(-1px);
   opacity: .94;
 }
@@ -451,12 +476,40 @@ linear-gradient(135deg, #062f2a 0%, #073b34 48%, #102033 100%);
 
 
 
-.orst-footer-logo {
-  width: 250px;
-  max-width: 100%;
-  height: auto;
+.orst-footer-logo-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.orst-footer-emblem {
   display: block;
-  object-fit: contain;
+  height: 72px;
+  width: auto;
+  flex: none;
+}
+
+.orst-footer-wordmark {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  line-height: 1.15;
+}
+
+.orst-footer-wordmark-th {
+  font-size: 1.16rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.orst-footer-wordmark-en {
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .72);
 }
 
 .orst-footer-brand p {
@@ -656,8 +709,8 @@ padding: 10px 12px;
 border-radius: 20px;
   }
 
-  .orst-footer-logo {
-width: 220px;
+  .orst-footer-emblem {
+height: 60px;
   }
 
   .orst-footer-links {
@@ -749,8 +802,8 @@ padding: 12px;
 border-radius: 20px;
   }
 
-  .orst-footer-logo {
-width: min(230px, 82vw);
+  .orst-footer-emblem {
+height: 56px;
   }
 
   .orst-footer-brand p {
@@ -839,8 +892,8 @@ gap: 8px 14px;
 padding-top: 32px;
   }
 
-  .orst-footer-logo {
-width: min(210px, 78vw);
+  .orst-footer-emblem {
+height: 50px;
   }
 
   .orst-footer-col {
@@ -1025,13 +1078,16 @@ body.no-motion *, body.no-motion *::before, body.no-motion *::after { animation:
 @media (max-width: 900px) {
   .topbar-right { display: none; }
   .brand.brand-image { min-width: auto; }
-  .brand-logo { width: 240px; max-width: 64vw; }
+  .brand-emblem { height: 50px; }
+  .brand-text-th { font-size: 1.1rem; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 600px) {
   .topbar-inner { justify-content: center; }
-  .brand-logo { width: 210px; max-width: 62vw; }
+  .brand-emblem { height: 42px; }
+  .brand-text-th { font-size: .98rem; }
+  .brand-text-en { font-size: .6rem; letter-spacing: .04em; }
   .header-inner { min-height: 68px; gap: 10px; }
   .header-actions .round-btn.primary { display: none; }
   .footer-grid { grid-template-columns: 1fr; }
@@ -1039,3 +1095,9 @@ body.no-motion *, body.no-motion *::before, body.no-motion *::after { animation:
   .access-float { right: 12px; bottom: 12px; }
 }
   
+
+@media (max-width: 420px) {
+  .brand-emblem { height: 38px; }
+  .brand-text-th { font-size: .92rem; }
+  .brand-text-en { display: none; }
+}

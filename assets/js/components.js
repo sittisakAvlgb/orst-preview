@@ -328,7 +328,11 @@ function renderHeader() {
     <header class="site-header" id="site-header">
       <div class="container header-inner">
         <a class="brand brand-image" href="${basePath}index.html" aria-label="สำนักงานราชบัณฑิตยสภา หน้าแรก">
-          <img src="${basePath}assets/images/logo.png" alt="สำนักงานราชบัณฑิตยสภา Office of the Royal Society" class="brand-logo">
+          <img src="${basePath}assets/images/orst-emblem.png" alt="" aria-hidden="true" class="brand-emblem" width="181" height="320">
+          <span class="brand-text">
+            <span class="brand-text-th">สำนักงานราชบัณฑิตยสภา</span>
+            <span class="brand-text-en">Office of the Royal Society</span>
+          </span>
         </a>
         <nav class="main-nav" aria-label="เมนูหลัก">
           ${renderDesktopNav(active)}
@@ -443,10 +447,16 @@ function renderFooter() {
           <div class="orst-footer-brand">
             <a class="orst-footer-logo-wrap" href="${basePath}index.html" aria-label="สำนักงานราชบัณฑิตยสภา หน้าแรก">
               <img
-                src="${basePath}assets/images/logo.png"
-                alt="สำนักงานราชบัณฑิตยสภา Office of the Royal Society"
-                class="orst-footer-logo"
+                src="${basePath}assets/images/orst-emblem.png"
+                alt=""
+                aria-hidden="true"
+                class="orst-footer-emblem"
+                width="181" height="320"
                 loading="lazy">
+              <span class="orst-footer-wordmark">
+                <span class="orst-footer-wordmark-th">สำนักงานราชบัณฑิตยสภา</span>
+                <span class="orst-footer-wordmark-en">Office of the Royal Society</span>
+              </span>
             </a>
 
             <p>
