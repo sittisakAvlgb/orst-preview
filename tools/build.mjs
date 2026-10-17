@@ -33,7 +33,18 @@ const PAGES_DIR = join(ROOT, 'content', 'pages');
 /** โฟลเดอร์/ไฟล์ที่ต้องคัดลอกไป dist ตามเดิม */
 const COPY = ['assets', 'content'];
 /** ไฟล์ HTML ที่ไม่ต้องแตะ (เขียน HTML เองทั้งหมด) จะถูกคัดลอกดิบ ๆ */
-const STATIC_PAGES = ['index.html', 'knowledge.html', 'contact.html'];
+const STATIC_PAGES = ['index.html', 'knowledge.html', 'contact.html', '404.html'];
+/** ไฟล์เดี่ยวที่รากโปรเจกต์ ที่ต้องคัดลอกไป dist ด้วย */
+const COPY_FILES = ['robots.txt', '_headers'];
+/** หน้าที่ไม่ต้องอยู่ใน sitemap (คลังบล็อกของทีมพัฒนา และหน้าแจ้ง error) */
+const NO_INDEX = new Set(['styleguide.html', '404.html']);
+/** โดเมนจริงของเว็บ — ใช้สร้าง sitemap.xml และเติมบรรทัด Sitemap ใน robots.txt
+    ถ้าไม่ตั้ง จะข้าม sitemap และตัดบรรทัด Sitemap ออก (ยังสร้าง dist ได้ตามปกติ)
+
+      PowerShell   $env:SITE_URL = "https://ชื่อเว็บ.netlify.app"; node tools/build.mjs
+      bash         SITE_URL=https://ชื่อเว็บ.netlify.app node tools/build.mjs
+      Netlify      ตั้งใน netlify.toml หัวข้อ [build.environment]                      */
+const SITE_URL = (process.env.SITE_URL || '').trim().replace(/\/+$/, '');
 
 const MOUNT_RE = /(<div id="app-content"[^>]*>)([\s\S]*?)(<\/div>)/;
 
@@ -48,6 +59,7 @@ async function main() {
   const files = (await readdir(PAGES_DIR)).filter(f => f.endsWith('.json'));
   let built = 0;
   const problems = [];
+  const pages = [];   // ชื่อไฟล์ HTML ทุกหน้าที่ลง dist จริง ใช้ทำ sitemap
 
   for (const file of files) {
     const slug = file.replace(/\.json$/, '');
@@ -79,6 +91,7 @@ async function main() {
         `<title>${page.seoTitle || `${page.title} | สำนักงานราชบัณฑิตยสภา`}</title>`);
 
     await writeFile(join(DIST, htmlName), html, 'utf8');
+    pages.push(htmlName);
     built++;
     console.log(`  สร้าง dist/${htmlName}  (${page.blocks.length} block)`);
   }
@@ -86,10 +99,52 @@ async function main() {
   for (const name of STATIC_PAGES) {
     try {
       await cp(join(ROOT, name), join(DIST, name));
+      pages.push(name);
       console.log(`  คัดลอก dist/${name}  (หน้าที่เขียน HTML เอง)`);
     } catch {
       problems.push(`คัดลอก ${name} ไม่สำเร็จ`);
     }
+  }
+
+  // ---- ไฟล์สำหรับ deploy: robots.txt, _headers ----
+  for (const name of COPY_FILES) {
+    let text;
+    try {
+      text = await readFile(join(ROOT, name), 'utf8');
+    } catch {
+      console.log(`  ! ไม่พบ ${name} ที่รากโปรเจกต์ — ข้าม`);
+      continue;
+    }
+    if (text.includes('__SITE_URL__')) {
+      text = SITE_URL
+        ? text.replaceAll('__SITE_URL__', SITE_URL)
+        : text.split('\n').filter(line => !line.includes('__SITE_URL__')).join('\n');
+    }
+    await writeFile(join(DIST, name), text, 'utf8');
+    console.log(`  คัดลอก dist/${name}`);
+  }
+
+  // ---- sitemap.xml ----
+  // หน้าแรกมาก่อนเสมอ ที่เหลือเรียงตามชื่อ
+  const indexed = pages.filter(name => !NO_INDEX.has(name))
+    .sort((a, b) => (a === 'index.html' ? -1 : b === 'index.html' ? 1 : a.localeCompare(b)));
+  if (SITE_URL) {
+    const now = new Date();   // วันที่ตามเครื่อง ไม่ใช่ UTC จะได้ไม่คลาดกันหนึ่งวัน
+    const today = [now.getFullYear(),
+      String(now.getMonth() + 1).padStart(2, '0'),
+      String(now.getDate()).padStart(2, '0')].join('-');
+    const body = indexed.map(name => [
+      '  <url>',
+      `    <loc>${SITE_URL}/${name === 'index.html' ? '' : name}</loc>`,
+      `    <lastmod>${today}</lastmod>`,
+      '  </url>',
+    ].join('\n')).join('\n');
+    await writeFile(join(DIST, 'sitemap.xml'),
+      `<?xml version="1.0" encoding="UTF-8"?>\n` +
+      `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`, 'utf8');
+    console.log(`  สร้าง dist/sitemap.xml  (${indexed.length} URL)`);
+  } else {
+    console.log('  ข้าม sitemap.xml และบรรทัด Sitemap ใน robots.txt — ยังไม่ได้ตั้ง SITE_URL');
   }
 
   console.log(`\nสร้างเสร็จ ${built} หน้า -> dist/`);

@@ -302,7 +302,8 @@ CMS จะจัดการเนื้อหา 3 หน้านี้ไม�
 
 - สลับภาษา TH | EN บน topbar เป็นข้อความเฉย ๆ ยังไม่ทำงาน
 - "เข้าสู่ระบบ / สมัครสมาชิก" และ "สำหรับเจ้าหน้าที่" ยังเป็น `href="#"`
-- ยังไม่มี `robots.txt` / `sitemap.xml` / Open Graph meta
+- ยังไม่มี Open Graph meta (แชร์ลิงก์แล้วไม่มีรูปพรีวิว)
+- `robots.txt` / `sitemap.xml` / `404.html` / `netlify.toml` ทำแล้ว ดูหัวข้อ 10
 - ยังไม่มี CI ที่รัน `node tools/validate.mjs` อัตโนมัติตอน push
 
 ---
@@ -429,3 +430,60 @@ git log --oneline
 ```bash
 git show <commit>:index.html
 ```
+
+---
+
+## 10. ขึ้น production บน Netlify
+
+### อัพขึ้นเฉพาะโฟลเดอร์ `dist/`
+
+```bash
+$env:SITE_URL = "https://ชื่อเว็บ.netlify.app"; node tools/build.mjs
+```
+
+แล้วลากโฟลเดอร์ `dist` ไปวางที่ [app.netlify.com/drop](https://app.netlify.com/drop)
+หรือหน้า **Deploys → Deploy manually** ของไซต์ที่มีอยู่แล้ว
+
+`SITE_URL` คือโดเมนจริงของเว็บ ใช้สร้าง `sitemap.xml` และเติมบรรทัด `Sitemap:` ใน `robots.txt`
+ถ้าไม่ตั้ง build ยังทำงานปกติ แต่จะข้าม `sitemap.xml` และตัดบรรทัดนั้นทิ้ง (ดีกว่าปล่อย URL ผิดขึ้นเว็บ)
+
+**ห้ามอัพ** `tools/` `_archive/` `.vscode/` `.git/` `*.md` `_template.html` `_template-static.html`
+(ไม่ได้อยู่ใน `dist/` อยู่แล้ว — `build.mjs` คัดเฉพาะที่ต้องใช้)
+
+### ไฟล์ที่เกี่ยวกับการ deploy
+
+| ไฟล์ | อยู่ที่ | ทำอะไร |
+|---|---|---|
+| `404.html` | ราก + `dist/` | Netlify หยิบไปเสิร์ฟให้ทุก URL ที่ไม่มีจริงโดยอัตโนมัติ |
+| `robots.txt` | ราก + `dist/` | เปิดให้ค้นเจอทุกหน้า ยกเว้น `styleguide.html` |
+| `sitemap.xml` | `dist/` เท่านั้น | `build.mjs` สร้างให้จากหน้าที่มีจริง ไม่ต้องแก้มือ |
+| `_headers` | ราก + `dist/` | security header ใช้ตอนลากโฟลเดอร์ไปวางเอง |
+| `netlify.toml` | ราก | ใช้เฉพาะตอนต่อ Netlify เข้ากับ Git (build command + publish dir + header ชุดเดียวกับ `_headers`) |
+
+แก้ header ที่ `_headers` แล้วต้องแก้ `netlify.toml` ให้ตรงกันด้วย เพราะคนละเส้นทาง deploy อ่านคนละไฟล์
+
+### เรื่องที่ `404.html` ต่างจากหน้าอื่น
+
+Netlify เสิร์ฟ `404.html` ให้ทุก URL ที่ไม่มีจริง โดย**ไม่เปลี่ยน URL บนแถบที่อยู่**
+เช่นคนเปิด `/a/b/c` หน้าที่ได้คือ 404 แต่เบราว์เซอร์ยังคิดว่าตัวเองอยู่ที่ `/a/b/`
+ลิงก์และไฟล์แบบ relative ทั้งหน้าจึงชี้ผิดหมด รวมถึงลิงก์ที่ `components.js` สร้าง
+
+แก้ด้วย `<base href="/">` ใน `<head>` ของ `404.html` — **ห้ามลบบรรทัดนี้**
+ผลข้างเคียงที่ยอมรับได้คือลิงก์ที่เป็น `#...` บนหน้านี้ (เช่นปุ่มข้ามไปเนื้อหา) จะพากลับหน้าแรกแทน
+
+### ยังไม่ได้ทำ
+
+- **ลิงก์ตาย 4 จุด** จะขึ้น 404 บนเว็บจริง — `contact.html` ชี้ `/privacy`,
+  `index.html` ชี้ `calendar.html` `ebooks.html` `faq.html` (ยังไม่มี 3 หน้านี้)
+- **รูปรวม 45 MB จาก `dist` 46 MB** — `orst-bg2.png` 3 MB, `Mult-03.png` 2.6 MB และอีกหลายไฟล์
+  ระดับ 2 MB ควรย่อ/แปลงเป็น WebP ก่อนเปิดให้คนทั่วไปใช้
+- ฟอร์มใน `contact.html` ยังไม่ส่งไปไหน — บน Netlify เติม `data-netlify="true"` ที่ `<form>`
+  แล้วใช้ Netlify Forms รับข้อมูลได้เลยโดยไม่ต้องมี backend
+- ยังไม่มี Open Graph meta
+
+### เช็กก่อนกด deploy
+
+`tools/validate.mjs` ไม่ได้ตรวจตัวพิมพ์ใหญ่-เล็กของชื่อไฟล์ เพราะ Windows ไม่แยก
+แต่ Netlify รันบน Linux ที่แยก — ไฟล์อย่าง `NLT_LOGO.jpg` `ConnectedNetwork01.JPG` `e-Book01.png`
+ถ้าเขียนผิดตัวพิมพ์จะขึ้นบนเครื่องตัวเองได้แต่พังบนเว็บจริง
+ตรวจรอบล่าสุดแล้วผ่านทั้ง 121 ลิงก์ ถ้าเพิ่มรูปใหม่ให้ระวังจุดนี้

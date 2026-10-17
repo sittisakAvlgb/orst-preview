@@ -110,6 +110,15 @@ node tools/build.mjs
 
 `validate` ตรวจไฟล์เนื้อหาทั้งหมด (โครงสร้าง, ไอคอนมีจริงไหม, รูปมีจริงไหม, ลิงก์เสียไหม)
 `build` สร้าง HTML นิ่งลง `dist/` สำหรับขึ้น production (ใช้ตัว render ตัวเดียวกับเบราว์เซอร์)
+พร้อมคัดลอก `robots.txt` / `_headers` และสร้าง `sitemap.xml` ให้ด้วย
+
+ตอนขึ้นจริงต้องบอกโดเมนให้ build ด้วย ไม่งั้นจะข้าม `sitemap.xml` และตัดบรรทัด `Sitemap:` ทิ้ง
+
+```bash
+$env:SITE_URL = "https://ชื่อเว็บ.netlify.app"; node tools/build.mjs
+```
+
+**อัพขึ้น Netlify เฉพาะโฟลเดอร์ `dist/`** ไม่ต้องอัพ `tools/` `_archive/` `*.md` `_template*.html`
 
 ---
 
@@ -122,6 +131,9 @@ publications.html services.html          shell บาง ๆ ดึงเนื�
 styleguide.html                          คลังบล็อก ดูตัวอย่างทุก block
 _template.html                           แม่แบบหน้าใหม่ (JSON-driven)
 _template-static.html                    แม่แบบหน้าที่เขียน HTML เอง
+404.html                                 หน้าที่ขึ้นเมื่อเปิด URL ที่ไม่มีจริง (มี <base href="/">)
+
+netlify.toml  robots.txt  _headers       ไฟล์สำหรับ deploy ขึ้น Netlify
 
 content/
   blocks.schema.json                     JSON Schema ของไฟล์เนื้อหา

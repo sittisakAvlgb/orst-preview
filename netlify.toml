@@ -1,0 +1,22 @@
+# netlify.toml — ใช้เมื่อต่อ Netlify เข้ากับ Git repository
+# ถ้าลากโฟลเดอร์ dist ไปวางเองไม่ต้องใช้ไฟล์นี้ (Netlify จะอ่าน dist/_headers แทน)
+
+[build]
+  # สร้าง HTML นิ่งลง dist/ ด้วย Node มาตรฐาน ไม่ต้อง npm install
+  command = "node tools/build.mjs"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+  # ตั้งโดเมนจริงที่นี่ เพื่อให้ build สร้าง sitemap.xml และเติมบรรทัด Sitemap ใน robots.txt
+  # ตัวอย่าง: SITE_URL = "https://orst.netlify.app"
+  # SITE_URL = "[ใส่โดเมนจริงของเว็บไซต์]"
+
+# header ชุดเดียวกับไฟล์ _headers — แก้ที่หนึ่งแล้วแก้อีกที่ให้ตรงกัน
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"

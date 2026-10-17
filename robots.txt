@@ -1,0 +1,11 @@
+# robots.txt — บอกเครื่องมือค้นหาว่าส่วนไหนเก็บเข้าดัชนีได้
+# บรรทัด Sitemap จะถูกเติมโดเมนจริงให้ตอนรัน node tools/build.mjs
+# (ถ้าไม่ได้ตั้งตัวแปร SITE_URL บรรทัดนั้นจะถูกตัดออกจาก dist/robots.txt)
+
+User-agent: *
+Allow: /
+
+# หน้าคลังบล็อกสำหรับทีมพัฒนา ไม่ควรให้ค้นเจอ
+Disallow: /styleguide.html
+
+Sitemap: __SITE_URL__/sitemap.xml

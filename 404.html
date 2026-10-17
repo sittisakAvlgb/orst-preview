@@ -1,0 +1,100 @@
+<!-- =============================================================================
+     404.html — หน้าที่แสดงเมื่อเปิด URL ที่ไม่มีอยู่จริง
+     Netlify หยิบไฟล์ชื่อนี้ที่รากของโฟลเดอร์ที่ deploy ไปเสิร์ฟให้อัตโนมัติ
+     ไม่ต้องตั้งค่าอะไรเพิ่ม (ถ้าย้ายไปโฮสต์อื่นต้องตั้ง error page เอง)
+     ============================================================================= -->
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ไม่พบหน้าที่ต้องการบนเว็บไซต์สำนักงานราชบัณฑิตยสภา">
+  <meta name="robots" content="noindex">
+  <title>ไม่พบหน้าที่ต้องการ | สำนักงานราชบัณฑิตยสภา</title>
+
+  <!-- สำคัญ ห้ามลบ: Netlify เสิร์ฟไฟล์นี้ให้ทุก URL ที่ไม่มีอยู่จริง
+       โดย URL บนแถบที่อยู่ยังเป็นของเดิม เช่น /a/b/c
+       ลิงก์แบบ relative ทั้งหน้า (รวมที่ components.js สร้าง) จึงจะชี้ผิด
+       บรรทัดนี้บังคับให้ทุกลิงก์นับจากรากเว็บเสมอ -->
+  <base href="/">
+
+  <link rel="icon" href="/assets/images/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Noto+Serif+Thai:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- ลำดับ CSS ห้ามสลับ: base -> blocks -> components (components ท้ายสุดเสมอ) -->
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/blocks.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+</head>
+
+<!-- data-page ไม่ตรงกับ key ใดใน navItems เมนูจึงไม่ไฮไลต์ข้อไหน ซึ่งถูกต้องแล้ว -->
+<body data-page="none">
+
+  <div id="app-header"></div>
+
+  <main id="main-content">
+
+    <section class="page-hero">
+      <div class="container">
+        <span class="block-eyebrow">404</span>
+        <h1>ไม่พบหน้าที่ต้องการ</h1>
+        <p>หน้าที่เปิดอาจถูกย้าย เปลี่ยนชื่อ หรือยังไม่ได้เผยแพร่ ลองเริ่มจากหน้าที่ใช้บ่อยด้านล่าง</p>
+        <div class="block-actions">
+          <a class="block-btn" href="index.html">กลับหน้าหลัก</a>
+          <a class="block-btn is-ghost" href="contact.html">แจ้งปัญหาการใช้งาน</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>ไปยังหมวดที่ต้องการ</h2>
+        <div class="block-grid block-grid-3">
+
+          <a class="content-card block-card is-link" href="dictionary.html">
+            <h3>พจนานุกรมและคำศัพท์</h3>
+            <p>ค้นคำในพจนานุกรม ศัพท์บัญญัติ และคำทับศัพท์</p>
+          </a>
+
+          <a class="content-card block-card is-link" href="knowledge.html">
+            <h3>องค์ความรู้</h3>
+            <p>คลังความรู้ บทความ และมาตรฐานภาษาไทย</p>
+          </a>
+
+          <a class="content-card block-card is-link" href="publications.html">
+            <h3>สื่อและสิ่งพิมพ์</h3>
+            <p>หนังสือ วารสาร และสื่อเผยแพร่ของสำนักงาน</p>
+          </a>
+
+          <a class="content-card block-card is-link" href="news.html">
+            <h3>ข่าวสารและกิจกรรม</h3>
+            <p>ข่าวประชาสัมพันธ์และกิจกรรมล่าสุด</p>
+          </a>
+
+          <a class="content-card block-card is-link" href="services.html">
+            <h3>บริการประชาชน</h3>
+            <p>บริการออนไลน์และแบบฟอร์มต่าง ๆ</p>
+          </a>
+
+          <a class="content-card block-card is-link" href="about.html">
+            <h3>เกี่ยวกับเรา</h3>
+            <p>ประวัติ ภารกิจ และโครงสร้างองค์กร</p>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="app-footer"></div>
+
+  <script src="/assets/js/components.js"></script>
+</body>
+
+</html>

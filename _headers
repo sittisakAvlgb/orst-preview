@@ -1,0 +1,9 @@
+# _headers — HTTP header ที่ Netlify ใส่ให้ทุก response
+# ใช้ได้กับการลากโฟลเดอร์ dist ไปวางเอง (netlify.toml ใช้ตอนต่อ Git เท่านั้น)
+# แก้ที่นี่แล้วอย่าลืมแก้ใน netlify.toml ให้ตรงกันด้วย
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
