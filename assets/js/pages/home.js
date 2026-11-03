@@ -329,7 +329,6 @@ document.addEventListener('DOMContentLoaded', () => {
     journal: 'วารสาร',
     article: 'บทความ',
     document: 'เอกสาร',
-    ebook: 'E-BOOK',
     service: 'บริการประชาชน',
     news: 'ข่าวสาร'
   };
@@ -354,16 +353,6 @@ document.addEventListener('DOMContentLoaded', () => {
       year: 2567,
       popularity: 92,
       keywords: ['ศัพท์บัญญัติ', 'คำศัพท์', 'วิชาการ', 'ภาษาไทย', 'เทคโนโลยี']
-    },
-    {
-      id: 3,
-      type: 'ebook',
-      title: 'สารานุกรมไทยสำหรับเยาวชนฯ',
-      desc: 'คลังหนังสือและองค์ความรู้สำหรับเยาวชน ครอบคลุมวิทยาศาสตร์ สังคม วัฒนธรรม และภาษา',
-      source: 'E-BOOK',
-      year: 2566,
-      popularity: 88,
-      keywords: ['สารานุกรม', 'เยาวชน', 'หนังสือ', 'E-BOOK', 'องค์ความรู้']
     },
     {
       id: 4,
@@ -424,16 +413,6 @@ document.addEventListener('DOMContentLoaded', () => {
       year: 2567,
       popularity: 74,
       keywords: ['บริการประชาชน', 'สอบถาม', 'ข้อมูลวิชาการ', 'คำศัพท์']
-    },
-    {
-      id: 10,
-      type: 'ebook',
-      title: 'สิ่งพิมพ์และหนังสือดิจิทัล',
-      desc: 'รวมหนังสือ ตำรา เอกสารเผยแพร่ และสื่อสิ่งพิมพ์ในรูปแบบดิจิทัล',
-      source: 'สื่อสิ่งพิมพ์',
-      year: 2566,
-      popularity: 80,
-      keywords: ['สิ่งพิมพ์', 'E-BOOK', 'หนังสือ', 'ตำรา', 'ดิจิทัล']
     },
     {
       id: 11,
@@ -555,7 +534,6 @@ document.addEventListener('DOMContentLoaded', () => {
       journal: base.filter(i => i.type === 'journal').length,
       article: base.filter(i => i.type === 'article').length,
       document: base.filter(i => i.type === 'document').length,
-      ebook: base.filter(i => i.type === 'ebook').length,
       service: base.filter(i => i.type === 'service').length
     };
 

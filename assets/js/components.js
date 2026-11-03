@@ -125,7 +125,7 @@ const megaMenuData = {
   publications: {
     title: 'สื่อและสิ่งพิมพ์',
     eyebrow: 'Publications & Media',
-    description: 'รวมหนังสือ วารสาร e-Book สื่อดิจิทัล และเอกสารเผยแพร่ของสำนักงาน',
+    description: 'รวมหนังสือ วารสาร สื่อดิจิทัล และเอกสารเผยแพร่ของสำนักงาน',
     icon: 'i-ebook',
     featured: ['ดูสื่อและสิ่งพิมพ์', `${basePath}publications.html`],
     groups: [
@@ -134,7 +134,6 @@ const megaMenuData = {
         links: [
           ['หนังสือและตำรา', `${basePath}publications.html`, 'หนังสือวิชาการและเอกสารอ้างอิง'],
           ['วารสารราชบัณฑิตยสภา', '#', 'วารสารและบทความเผยแพร่'],
-          ['e-Book', '#', 'อ่านออนไลน์หรือดาวน์โหลด'],
         ]
       },
       {
@@ -489,7 +488,7 @@ function renderFooter() {
               <h3>องค์ความรู้</h3>
               <ul>
                 <li><a href="${basePath}knowledge.html">คลังองค์ความรู้</a></li>
-                <li><a href="${basePath}publications.html">E-Book และสิ่งพิมพ์</a></li>
+                <li><a href="${basePath}publications.html">สื่อและสิ่งพิมพ์</a></li>
                 <li><a href="#">วารสาร</a></li>
                 <li><a href="#">สื่อมัลติมีเดีย</a></li>
               </ul>
@@ -832,16 +831,12 @@ function initMediaTabs() {
   if (!mediaTabs.length || !mediaPanels.length) return;
 
   const mediaLinks = {
-    ebook: 'ebooks.html',
-    journals: 'journals.html',
     encyclopedia: 'encyclopedia.html',
     research: 'research.html',
     multimedia: 'multimedia.html'
   };
 
   const mediaLabels = {
-    ebook: 'ดู E-Book ทั้งหมด →',
-    journals: 'ดู Journals ทั้งหมด →',
     encyclopedia: 'ดู Encyclopedia ทั้งหมด →',
     research: 'ดู Research ทั้งหมด →',
     multimedia: 'ดู Multimedia ทั้งหมด →'
@@ -867,7 +862,7 @@ function initMediaTabs() {
       });
 
       if (mediaViewAllLink) {
-        mediaViewAllLink.href = mediaLinks[target] || 'ebooks.html';
+        mediaViewAllLink.href = mediaLinks[target] || mediaViewAllLink.getAttribute('href');
         mediaViewAllLink.textContent = mediaLabels[target] || 'ดูทั้งหมด →';
       }
 

@@ -1493,3 +1493,9 @@
 @media (max-width: 1180px) {
   .knowledge-hero .hero-inner { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* การ์ดทางลัดเหลือ 3 ใบ (นำ e-Book ออกแล้ว) — จัด 3 คอลัมน์ ไม่ให้มีช่องว่าง/ใบเดี่ยวค้าง */
+.quick-paths { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 760px) {
+  .quick-paths { grid-template-columns: 1fr; }
+}
