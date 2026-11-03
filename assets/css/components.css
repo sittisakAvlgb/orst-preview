@@ -100,8 +100,6 @@
 .topbar a.topbar-ext:hover,
 .topbar a.topbar-ext:focus-visible { color: var(--gold-2); }
 
-.mobile-link-ext .icon { width: 1.05em; height: 1.05em; color: var(--gold); }
-
 .site-header {
   position: sticky;
   top: 0;
@@ -413,44 +411,282 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-.mobile-menu {
-  display: none;
-  border-top: 1px solid var(--line);
-  background: #fffdf8;
-  padding: 10px 20px 18px;
+/* ===== แผงเมนูมือถือ/แท็บเล็ต (drawer) — แสดงเมื่อจอ <= 1365px =====
+   สร้างโดย renderDrawer() ใน components.js และถูกวางไว้ท้าย <body> */
+html.drawer-lock { overflow: hidden; }
+/* ปุ่มลอย "ช่วยการเข้าถึง" จะทับท้ายแผง — ซ่อนไว้ขณะเปิดเมนู */
+html.drawer-lock .access-float { visibility: hidden; }
+
+.drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;          /* เหนือ #app-header (9990) — ปุ่มค้นหาในแผงจะปิดแผงก่อนเปิดโมดัล */
+}
+.drawer[hidden] { display: none; }
+
+.drawer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 22, 31, .48);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity .26s ease;
 }
 
-.mobile-menu.is-open { display: block; }
+.drawer-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(440px, calc(100vw - 32px));
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  box-shadow: -24px 0 60px rgba(8, 22, 31, .22);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  transform: translateX(100%);
+  transition: transform .28s cubic-bezier(.2, .8, .2, 1);
+}
 
-.mobile-link, .mobile-accordion-btn {
-  width: 100%;
-  min-height: 50px;
-  border: 0;
-  border-bottom: 1px solid rgba(185,145,67,.16);
-  background: transparent;
-  color: var(--ink);
-  text-decoration: none;
+.drawer.is-open .drawer-backdrop { opacity: 1; }
+.drawer.is-open .drawer-panel { transform: none; }
+
+/* หัวแผง */
+.drawer-head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px 14px 22px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(216, 189, 116, .28), transparent 55%),
+    linear-gradient(135deg, var(--deep), var(--deep-2));
+  color: #fff;
+}
+.drawer-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+.drawer-close {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .28);
+  background: rgba(255, 255, 255, .1);
+  color: #fff;
+  cursor: pointer;
+}
+.drawer-close .icon { width: 20px; height: 20px; }
+.drawer-close:hover,
+.drawer-close:focus-visible { background: rgba(255, 255, 255, .2); }
+
+/* ช่องค้นหา (เปิดโมดัลค้นหา) */
+.drawer-search {
+  margin: 16px 18px 6px;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--muted);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(16, 32, 51, .05);
+}
+.drawer-search .icon { color: var(--deep); }
+.drawer-search:hover,
+.drawer-search:focus-visible { border-color: var(--gold); }
+
+/* รายการเมนู */
+.drawer-list {
+  list-style: none;
+  margin: 0;
+  padding: 8px 10px 14px;
+  display: grid;
+  gap: 2px;
+}
+.drawer-item {
+  width: 100%;
+  min-height: 62px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 9px 12px 9px 10px;
+  border: 0;
+  border-radius: 16px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 1.08rem;
   font-weight: 700;
   text-align: left;
-  padding: 12px 4px;
-}
-
-.mobile-submenu {
-  display: none;
-  padding: 6px 0 10px 14px;
-  border-bottom: 1px solid rgba(185,145,67,.16);
-}
-
-.mobile-submenu.is-open { display: grid; gap: 4px; }
-
-.mobile-submenu a {
-  color: var(--muted);
   text-decoration: none;
-  padding: 8px 0;
-  display: block;
+  cursor: pointer;
+  transition: background .18s ease;
+}
+.drawer-item:hover,
+.drawer-item:focus-visible { background: var(--gold-soft); }
+.drawer-item.is-active { background: var(--gold-soft); color: var(--deep); }
+
+.drawer-ico {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  color: var(--deep);
+  transition: background .18s ease, color .18s ease;
+}
+.drawer-ico .icon { width: 22px; height: 22px; }
+.drawer-item.is-active .drawer-ico,
+.drawer-item[aria-expanded="true"] .drawer-ico {
+  background: var(--deep);
+  border-color: var(--deep);
+  color: var(--gold-2);
+}
+
+.drawer-label {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+.drawer-label small {
+  margin-top: 1px;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  color: var(--gold);
+}
+
+.drawer-chev {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  color: var(--gold);
+  transition: transform .22s ease;
+}
+/* ปุ่มที่มีเมนูย่อย: ลูกศรชี้ลง / กางแล้วชี้ขึ้น */
+.drawer-item[aria-expanded] .drawer-chev { transform: rotate(90deg); }
+.drawer-item[aria-expanded="true"] .drawer-chev { transform: rotate(-90deg); }
+
+/* เมนูย่อย — กาง/หุบแบบลื่นด้วย grid-template-rows */
+.drawer-sub {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows .26s ease, visibility 0s linear .26s;
+}
+.drawer-sub.is-open {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition: grid-template-rows .26s ease, visibility 0s;
+}
+.drawer-sub-inner { min-height: 0; overflow: hidden; }
+.drawer-sub-body {
+  display: grid;
+  gap: 14px;
+  padding: 6px 12px 16px 68px;
+}
+
+.drawer-featured {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: #13231f;
+  font-weight: 700;
+  text-decoration: none;
+}
+.drawer-featured:hover,
+.drawer-featured:focus-visible { background: var(--gold-2); }
+
+.drawer-sub-group { display: grid; gap: 1px; }
+.drawer-sub-title {
+  padding: 2px 0 4px;
+  font-size: .86rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+.drawer-sub-group a {
+  margin-left: -12px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.drawer-sub-group a:hover,
+.drawer-sub-group a:focus-visible { background: var(--gold-soft); color: var(--deep); }
+
+/* ท้ายแผง */
+.drawer-foot {
+  margin-top: auto;
+  display: grid;
+  gap: 14px;
+  padding: 18px 20px 26px;
+  border-top: 1px solid var(--line);
+  background: var(--surface-soft);
+}
+.drawer-cta {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 999px;
+  background: var(--deep);
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.drawer-cta:hover,
+.drawer-cta:focus-visible { background: var(--deep-2); }
+.drawer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 18px;
+}
+.drawer-links a {
+  color: var(--deep-2);
+  text-decoration: none;
+}
+.drawer-links a:hover,
+.drawer-links a:focus-visible { text-decoration: underline; }
+.drawer-links .drawer-ext {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer-backdrop,
+  .drawer-panel,
+  .drawer-sub,
+  .drawer-chev { transition: none; }
 }
 
 
@@ -1080,7 +1316,9 @@ gap: 6px;
   font-weight: 700;
 }
 
-body.high-contrast { filter: contrast(1.12); }
+/* ใส่ filter ที่ <html> แทน <body>: filter บน body ทำให้ position:fixed ข้างใน (แผงเมนู, โมดัล)
+   อิงกับทั้งหน้าแทนหน้าจอ ส่วน root element ได้รับยกเว้นตามสเปก */
+html:has(> body.high-contrast) { filter: contrast(1.12); }
 body.readable-mode { background: #fffaf1; }
 body.no-motion *, body.no-motion *::before, body.no-motion *::after { animation: none !important; transition: none !important; }
 

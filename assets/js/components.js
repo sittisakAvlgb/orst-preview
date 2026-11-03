@@ -14,7 +14,7 @@
                         key ต้องตรงกับ <body data-page="..."> ของแต่ละหน้า
      megaMenuData       เนื้อหา mega menu ของแต่ละหมวด
      renderMegaMenu()   สร้าง HTML ของ mega menu
-     renderDesktopNav() / renderMobileNav()
+     renderDesktopNav() / renderDrawer()   (renderDrawer = แผงเมนูมือถือ/แท็บเล็ต)
      renderHeader()     topbar + header + เมนู + modal ค้นหา/การเข้าถึง
      renderFooter()     footer ทั้งหมด
      init*()            ผูก event ต่าง ๆ (ดูรายการใน initComponents ท้ายไฟล์)
@@ -56,6 +56,7 @@ const icons = `
   <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"></rect><path d="M11 18h2"></path></symbol>
   <symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></symbol>
   <symbol id="i-puzzle" viewBox="0 0 24 24"><path d="M19 13h-2v-2a2 2 0 1 0-4 0v2h-2V9h2V7a2 2 0 1 0-4 0v2H5v10h14Z"></path></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7"></path><path d="M5 10v10h14V10"></path><path d="M10 20v-6h4v6"></path></symbol>
   <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6"></path><path d="M10 14 20 4"></path><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"></path></symbol>
   <symbol id="i-service" viewBox="0 0 24 24"><path d="M12 3l8 4v6c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V7z"></path><path d="M9 12l2 2 4-5"></path></symbol>
 </svg>`;
@@ -279,31 +280,82 @@ function renderDesktopNav(active) {
   }).join('');
 }
 
-function renderMobileNav(active) {
-  return navItems.map(([key, label, href]) => {
+// ไอคอนของแต่ละเมนู ใช้ในแผงเมนูมือถือ/แท็บเล็ต
+const navIcons = {
+  home: 'i-home',
+  dictionary: 'i-dictionary',
+  knowledge: 'i-book',
+  publications: 'i-ebook',
+  news: 'i-megaphone',
+  services: 'i-service',
+  about: 'i-shield',
+  contact: 'i-phone',
+};
+
+/* แผงเมนูสำหรับจอ <= 1365px (เลื่อนเข้าจากขวา) — ถูกวางไว้ท้าย <body>
+   ไม่ใส่ไว้ใน .site-header เพราะ backdrop-filter ของ header ทำให้ position:fixed
+   ข้างในไม่อิงกับหน้าจอ */
+function renderDrawer(active) {
+  const items = navItems.map(([key, label, href]) => {
     const data = megaMenuData[key];
+    const isActive = active === key;
+    const ico = `<span class="drawer-ico">${icon(navIcons[key] || 'i-book')}</span>`;
 
     if (!data) {
-      return `<a class="mobile-link ${active === key ? 'active' : ''}" href="${href}">${label}<span>›</span></a>`;
+      return `
+        <li>
+          <a class="drawer-item${isActive ? ' is-active' : ''}" href="${href}"${isActive ? ' aria-current="page"' : ''}>
+            ${ico}<span class="drawer-label">${label}</span>${icon('i-chevron', 'icon drawer-chev')}
+          </a>
+        </li>`;
     }
 
+    // หมวดของหน้าที่เปิดอยู่ กางเมนูย่อยไว้ตั้งแต่แรก
     return `
-      <div class="mobile-nav-group">
-        <button class="mobile-accordion-btn" type="button" data-mobile-submenu="${key}" aria-expanded="false">
-          <span>${label}</span><span aria-hidden="true">+</span>
+      <li>
+        <button class="drawer-item${isActive ? ' is-active' : ''}" type="button" data-drawer-sub
+          aria-expanded="${isActive}" aria-controls="drawer-sub-${key}">
+          ${ico}<span class="drawer-label">${label}<small>${data.eyebrow}</small></span>${icon('i-chevron', 'icon drawer-chev')}
         </button>
-        <div class="mobile-submenu" id="mobile-submenu-${key}">
-          <a href="${data.featured[1]}"><strong>${data.featured[0]}</strong></a>
-          ${data.groups.map(group => `
-            <div class="mobile-submenu-group">
-              <strong>${group.heading}</strong>
-              ${group.links.map(([text, url]) => `<a href="${url}">${text}</a>`).join('')}
+        <div class="drawer-sub${isActive ? ' is-open' : ''}" id="drawer-sub-${key}">
+          <div class="drawer-sub-inner">
+            <div class="drawer-sub-body">
+              <a class="drawer-featured" href="${data.featured[1]}">${data.featured[0]} ${icon('i-arrow')}</a>
+              ${data.groups.map(group => `
+                <div class="drawer-sub-group">
+                  <span class="drawer-sub-title">${group.heading}</span>
+                  ${group.links.map(([text, url]) => `<a href="${url}">${text}</a>`).join('')}
+                </div>`).join('')}
             </div>
-          `).join('')}
+          </div>
+        </div>
+      </li>`;
+  }).join('');
+
+  return `
+    <div class="drawer" id="site-drawer" hidden>
+      <div class="drawer-backdrop" data-drawer-close></div>
+      <div class="drawer-panel" role="dialog" aria-modal="true" aria-label="เมนูหลัก">
+        <div class="drawer-head">
+          <span class="drawer-title">เมนู</span>
+          <button class="drawer-close" type="button" data-drawer-close aria-label="ปิดเมนู">${icon('i-x')}</button>
+        </div>
+        <button class="drawer-search" type="button" data-open-search>
+          ${icon('i-search')}<span>ค้นหาคำศัพท์ บทความ หรือบริการ…</span>
+        </button>
+        <nav aria-label="เมนูนำทาง">
+          <ul class="drawer-list">${items}</ul>
+        </nav>
+        <div class="drawer-foot">
+          <a class="drawer-cta" href="${basePath}services.html">บริการออนไลน์ ${icon('i-arrow')}</a>
+          <div class="drawer-links">
+            <a href="#">สำหรับเจ้าหน้าที่</a>
+            <a href="#">เข้าสู่ระบบ / สมัครสมาชิก</a>
+            <a class="drawer-ext" href="${ROYAL_SOCIETY_URL}" target="_blank" rel="noopener noreferrer">ราชบัณฑิตยสภา ${icon('i-external')}<span class="sr-only">(เปิดในแท็บใหม่)</span></a>
+          </div>
         </div>
       </div>
-    `;
-  }).join('');
+    </div>`;
 }
 
 function renderHeader() {
@@ -345,17 +397,12 @@ function renderHeader() {
         <div class="header-actions">
           <button class="round-btn" type="button" data-open-search aria-label="ค้นหา">${icon('i-search')} <span>ค้นหา</span></button>
           <a class="round-btn primary" href="${basePath}services.html">บริการออนไลน์</a>
-          <button class="mobile-menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" data-mobile-menu>
+          <button class="mobile-menu-btn" type="button" aria-expanded="false" aria-controls="site-drawer" aria-haspopup="dialog" data-drawer-open>
             <span></span><span></span><span></span><span class="sr-only">เปิดเมนู</span>
           </button>
         </div>
         <div class="mega-menu" id="mega-menu" hidden></div>
       </div>
-      <nav id="mobile-menu" class="mobile-menu" aria-label="เมนูมือถือ">
-        ${renderMobileNav(active)}
-        <button class="mobile-link" type="button" data-open-search>เปิดค้นหา<span>›</span></button>
-        <a class="mobile-link mobile-link-ext" href="${ROYAL_SOCIETY_URL}" target="_blank" rel="noopener noreferrer">ราชบัณฑิตยสภา<span class="sr-only">(เปิดในแท็บใหม่)</span>${icon('i-external')}</a>
-      </nav>
     </header>
   `;
 }
@@ -660,40 +707,66 @@ function initMegaMenu() {
   });
 }
 
-function initMobileMenu() {
-  const btn = document.querySelector('[data-mobile-menu]');
-  const menu = document.querySelector('#mobile-menu');
-  if (!btn || !menu) return;
+function initDrawer() {
+  const btn = document.querySelector('[data-drawer-open]');
+  const drawer = document.getElementById('site-drawer');
+  if (!btn || !drawer) return;
 
-  btn.addEventListener('click', () => {
-    const open = menu.classList.toggle('is-open');
-    btn.setAttribute('aria-expanded', String(open));
+  const panel = drawer.querySelector('.drawer-panel');
+  const noMotion = () => document.body.classList.contains('no-motion')
+    || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let hideTimer;
+
+  function open() {
+    clearTimeout(hideTimer);
+    drawer.hidden = false;
+    document.documentElement.classList.add('drawer-lock');
+    void drawer.offsetWidth;            // บังคับ reflow ให้ transition เริ่มจากสถานะปิด
+    drawer.classList.add('is-open');
+    btn.setAttribute('aria-expanded', 'true');
+    drawer.querySelector('.drawer-close').focus({ preventScroll: true });
+  }
+
+  function close(restoreFocus = true) {
+    if (drawer.hidden) return;
+    drawer.classList.remove('is-open');
+    btn.setAttribute('aria-expanded', 'false');
+    document.documentElement.classList.remove('drawer-lock');
+    hideTimer = setTimeout(() => { drawer.hidden = true; }, noMotion() ? 0 : 280);
+    if (restoreFocus) btn.focus({ preventScroll: true });   // คืนโฟกัสให้ปุ่มเมนู
+  }
+
+  btn.addEventListener('click', open);
+  drawer.querySelectorAll('[data-drawer-close]').forEach(el => el.addEventListener('click', () => close()));
+  // ปุ่มค้นหาในแผง: ปิดแผงก่อน แล้วโมดัลค้นหา (initSharedModals) จะเปิดต่อ
+  drawer.querySelector('[data-open-search]')?.addEventListener('click', () => close(false));
+
+  drawer.addEventListener('keydown', event => {
+    if (event.key === 'Escape') { close(); return; }
+    if (event.key !== 'Tab') return;
+    // วนโฟกัสอยู่ในแผงขณะเปิด
+    const items = [...panel.querySelectorAll('a[href], button:not([disabled])')]
+      .filter(el => el.offsetParent !== null && getComputedStyle(el).visibility !== 'hidden');
+    if (!items.length) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
   });
 
-  // ปิดเมนูมือถืออัตโนมัติเมื่อขยายจอขึ้นเป็นเดสก์ท็อป (ตรงกับ breakpoint ใน CSS)
-  // กันอาการเมนู drawer ค้างทับ nav แนวนอนตอนผู้ใช้ย่อ/ขยายหน้าต่าง
-  const desktopMq = window.matchMedia('(min-width: 1366px)');
-  const closeOnDesktop = () => {
-    if (desktopMq.matches && menu.classList.contains('is-open')) {
-      menu.classList.remove('is-open');
-      btn.setAttribute('aria-expanded', 'false');
-    }
-  };
-  desktopMq.addEventListener('change', closeOnDesktop);
-  window.addEventListener('resize', closeOnDesktop);
-
-  document.querySelectorAll('[data-mobile-submenu]').forEach(toggle => {
+  drawer.querySelectorAll('[data-drawer-sub]').forEach(toggle => {
     toggle.addEventListener('click', () => {
-      const key = toggle.dataset.mobileSubmenu;
-      const panel = document.querySelector(`#mobile-submenu-${key}`);
-      if (!panel) return;
-
-      const open = panel.classList.toggle('is-open');
-      toggle.setAttribute('aria-expanded', String(open));
-      const iconSpan = toggle.querySelector('span:last-child');
-      if (iconSpan) iconSpan.textContent = open ? '−' : '+';
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      document.getElementById(toggle.getAttribute('aria-controls'))?.classList.toggle('is-open', !expanded);
     });
   });
+
+  // ขยายจอเป็นเดสก์ท็อป (ตรงกับ breakpoint ใน CSS) -> ปิดแผงอัตโนมัติ
+  const desktopMq = window.matchMedia('(min-width: 1366px)');
+  const closeOnDesktop = () => { if (desktopMq.matches) close(false); };
+  desktopMq.addEventListener('change', closeOnDesktop);
+  window.addEventListener('resize', closeOnDesktop);
 }
 
 function initSharedModals() {
@@ -941,7 +1014,10 @@ function initComponents() {
   const headerMount = document.getElementById('app-header');
   const footerMount = document.getElementById('app-footer');
 
-  if (headerMount) headerMount.innerHTML = renderHeader();
+  if (headerMount) {
+    headerMount.innerHTML = renderHeader();
+    document.body.insertAdjacentHTML('beforeend', renderDrawer(document.body.dataset.page || 'home'));
+  }
   if (footerMount) {
     footerMount.innerHTML = renderFooter();
     // หน้าที่มีปุ่มลอย "ช่วยการเข้าถึง" ของตัวเอง (index.html) ไม่ต้องมีปุ่มกลางซ้อนซ้ำ
@@ -950,7 +1026,7 @@ function initComponents() {
   }
 
   initMegaMenu();
-  initMobileMenu();
+  initDrawer();
   initSharedModals();
   initSharedSearch();
   initMediaTabs();
