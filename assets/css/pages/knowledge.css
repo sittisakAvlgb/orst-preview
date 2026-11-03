@@ -1487,3 +1487,9 @@
 .hero-note,
 .filter-cta { font-size: .96rem; }
 
+
+/* มือถือ/แท็บเล็ต: "1fr" มีค่าต่ำสุดเท่าเนื้อหาที่กว้างที่สุด (ช่องค้นหา) ทำให้ส่วนหัว
+   กว้างเกินจอแล้วโดนตัดด้านขวา — ใช้ minmax(0, 1fr) ให้คอลัมน์หดตามจอได้ */
+@media (max-width: 1180px) {
+  .knowledge-hero .hero-inner { grid-template-columns: minmax(0, 1fr); }
+}

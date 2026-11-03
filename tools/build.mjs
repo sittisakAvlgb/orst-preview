@@ -71,10 +71,11 @@ function assetVersion(rel) {
 }
 
 function bustAssets(html) {
+  // รองรับทั้ง "assets/..." และ "/assets/..." (404.html ใช้แบบหลังคู่กับ <base href="/">)
   return html.replace(
-    /(\b(?:href|src)=")(assets\/[^"?#]+\.(?:css|js))(")/g,
+    /(\b(?:href|src)=")(\/?assets\/[^"?#]+\.(?:css|js))(")/g,
     (match, pre, path, post) => {
-      const v = assetVersion(path);
+      const v = assetVersion(path.replace(/^\//, ''));
       return v ? `${pre}${path}?v=${v}${post}` : match;
     }
   );
