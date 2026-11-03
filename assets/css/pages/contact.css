@@ -55,7 +55,7 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: "IBM Plex Sans Thai", "Noto Sans Thai", sans-serif;
+  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
   line-height: 1.65;
   overflow-x: hidden;
 }
@@ -374,7 +374,7 @@ svg {
 h1,
 h2,
 h3 {
-  font-family: "Noto Serif Thai", "IBM Plex Sans Thai", serif;
+  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
   line-height: 1.18;
   margin: 0;
   color: var(--ink);
@@ -435,7 +435,7 @@ h3 {
 }
 
 .hero-info-card h2 {
-  font-family: "IBM Plex Sans Thai", sans-serif;
+  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
   font-size: 1.18rem;
   margin-bottom: 14px;
 }
@@ -563,7 +563,7 @@ h3 {
 }
 
 .contact-item h3 {
-  font-family: "IBM Plex Sans Thai", sans-serif;
+  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
   font-size: 1.02rem;
   margin-bottom: 2px;
 }
@@ -622,7 +622,7 @@ h3 {
 
 .map-visual h3 {
   color: #fff;
-  font-family: "IBM Plex Sans Thai", sans-serif;
+  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
   margin-bottom: 6px;
 }
 
@@ -800,7 +800,7 @@ textarea:focus {
 }
 
 .department-card h3 {
-  font-family: "IBM Plex Sans Thai", sans-serif;
+  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
   font-size: 1.04rem;
   margin-bottom: 8px;
 }
@@ -830,7 +830,7 @@ textarea:focus {
 }
 
 .footer h3 {
-  font-family: "IBM Plex Sans Thai", sans-serif;
+  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
   color: #fff;
   font-size: 1.05rem;
   margin: 0 0 12px;

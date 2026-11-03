@@ -59,7 +59,7 @@
         margin: 0;
         background: var(--paper);
         color: var(--ink);
-        font-family: "IBM Plex Sans Thai", "Noto Sans Thai", sans-serif;
+        font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
         line-height: 1.65;
         overflow-x: hidden
     }
@@ -153,7 +153,7 @@
     h1,
     h2,
     h3 {
-        font-family: "Noto Serif Thai", "IBM Plex Sans Thai", serif;
+        font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
         line-height: 1.18;
         margin: 0;
         color: var(--ink)
@@ -550,7 +550,7 @@
     }
 
     .hero-panel h2 {
-        font-family: "IBM Plex Sans Thai", sans-serif;
+        font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
         font-size: 1.1rem;
         margin-bottom: 12px;
         color: var(--deep)
@@ -710,7 +710,7 @@
     }
 
     .path-card h3 {
-        font-family: "IBM Plex Sans Thai";
+        font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
         font-size: 1.04rem;
         position: relative;
         z-index: 1
@@ -749,7 +749,7 @@
     }
 
     .filter-title h2 {
-        font-family: "IBM Plex Sans Thai";
+        font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
         font-size: 1.1rem
     }
 
@@ -773,7 +773,7 @@
     }
 
     .filter-group h3 {
-        font-family: "IBM Plex Sans Thai";
+        font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
         font-size: .98rem;
         margin-bottom: 9px;
         color: var(--deep)
@@ -1014,7 +1014,7 @@
     }
 
     .knowledge-card h3 {
-        font-family: "IBM Plex Sans Thai";
+        font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
         font-size: 1.15rem;
         line-height: 1.4;
         color: var(--deep);
@@ -1106,7 +1106,7 @@
     }
 
     .footer h3 {
-        font-family: "IBM Plex Sans Thai";
+        font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
         color: #fff;
         font-size: 1.05rem;
         margin-bottom: 10px

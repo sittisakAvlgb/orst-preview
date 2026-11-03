@@ -19,6 +19,40 @@
      - Responsive + fixed-header patch
    ============================================================================= */
 
+/* -----------------------------------------------------------------------------
+   TH Sarabun New — ฟอนต์ราชการ (ฟอนต์แห่งชาติ) ใช้กับภาษาไทยทุกหน้า
+   เก็บไฟล์ไว้ในเว็บเอง (self-host) ที่ assets/fonts/ ไม่พึ่ง Google Fonts
+   มี 4 สไตล์: Regular/Bold/Italic/BoldItalic (น้ำหนัก 400 กับ 700)
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: "TH Sarabun New";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/THSarabunNew-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "TH Sarabun New";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/THSarabunNew-Bold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "TH Sarabun New";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/THSarabunNew-Italic.woff2") format("woff2");
+}
+@font-face {
+  font-family: "TH Sarabun New";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/THSarabunNew-BoldItalic.woff2") format("woff2");
+}
+
 :root {
   --container: 1800px;
   --paper: #fbf7ef;
@@ -45,7 +79,7 @@ html {
 
 body {
   margin: 0;
-  font-family: "IBM Plex Sans Thai", "Noto Sans Thai", sans-serif;
+  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
   color: var(--ink);
   background: var(--paper);
   line-height: 1.65;
@@ -337,7 +371,7 @@ svg {
 }
 
 .hero-copy h1 {
-  font-family: "Noto Serif Thai", serif;
+  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
   font-size: clamp(2.6rem, 5vw, 4.6rem);
   line-height: 1.18;
   letter-spacing: -.04em;
@@ -484,7 +518,7 @@ svg {
 }
 
 .section-head h2 {
-  font-family: "Noto Serif Thai", serif;
+  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
   font-size: clamp(1.7rem, 3vw, 2.4rem);
   margin: 0;
 }
@@ -667,7 +701,7 @@ svg {
 }
 
 .page-hero h1 {
-  font-family: "Noto Serif Thai", serif;
+  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
   font-size: clamp(2.2rem, 4vw, 3.4rem);
   margin: 0 0 10px;
 }
@@ -734,7 +768,7 @@ svg {
 
 .modal-header h2 {
   margin: 0;
-  font-family: "Noto Serif Thai", serif;
+  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
 }
 
 .modal-close {
@@ -1093,7 +1127,7 @@ svg {
   z-index: 1;
   margin: 8px 0 10px;
   color: #fff;
-  font-family: "Noto Serif Thai", "IBM Plex Sans Thai", serif;
+  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
   font-size: 1.45rem;
   line-height: 1.28;
 }

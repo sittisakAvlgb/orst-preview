@@ -151,7 +151,7 @@
 }
 
 .block-prose h3 {
-  font-family: "Noto Serif Thai", serif;
+  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
   font-size: 1.3rem;
   margin: 26px 0 10px;
 }
@@ -186,7 +186,7 @@
 }
 
 .block-card h3 {
-  font-family: "Noto Serif Thai", serif;
+  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
   font-size: 1.15rem;
   margin: 0;
 }
@@ -274,7 +274,7 @@
 }
 
 .block-stat strong {
-  font-family: "Noto Serif Thai", serif;
+  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
   font-size: clamp(1.8rem, 3vw, 2.4rem);
   color: var(--deep);
   line-height: 1.2;
@@ -539,7 +539,7 @@
 .block-two-col.is-image-left .block-two-col-media { order: 1; }
 
 .block-two-col-text h3 {
-  font-family: "Noto Serif Thai", serif;
+  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
   font-size: 1.4rem;
   margin: 0 0 12px;
 }
@@ -573,7 +573,7 @@
 }
 
 .block-cta h2 {
-  font-family: "Noto Serif Thai", serif;
+  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
   font-size: clamp(1.5rem, 2.6vw, 2.1rem);
   margin: 0 0 6px;
 }
