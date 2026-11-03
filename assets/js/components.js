@@ -26,6 +26,10 @@
 // ตอนนี้ทุกหน้าอยู่ที่ root จึงได้ค่า './' เสมอ
 const basePath = location.pathname.includes('/pages/') ? '../' : './';
 
+// ลิงก์ไปเว็บไซต์/ระบบของราชบัณฑิตยสภา — ใช้กับปุ่มบน topbar และในเมนูมือถือ (เปิดแท็บใหม่)
+// TODO: ใส่ URL จริงที่ได้รับจากหน่วยงาน (ตอนนี้ยังเป็น "#" ตามกฎห้ามเดาข้อมูลจริง)
+const ROYAL_SOCIETY_URL = '#';
+
 const icons = `
 <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4.2-4.2"></path></symbol>
@@ -52,6 +56,7 @@ const icons = `
   <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"></rect><path d="M11 18h2"></path></symbol>
   <symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></symbol>
   <symbol id="i-puzzle" viewBox="0 0 24 24"><path d="M19 13h-2v-2a2 2 0 1 0-4 0v2h-2V9h2V7a2 2 0 1 0-4 0v2H5v10h14Z"></path></symbol>
+  <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6"></path><path d="M10 14 20 4"></path><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"></path></symbol>
   <symbol id="i-service" viewBox="0 0 24 24"><path d="M12 3l8 4v6c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V7z"></path><path d="M9 12l2 2 4-5"></path></symbol>
 </svg>`;
 
@@ -317,6 +322,7 @@ function renderHeader() {
           <button type="button" data-contrast>ความคมชัด</button>
         </div>
         <div class="topbar-group topbar-right">
+          <a class="topbar-ext" href="${ROYAL_SOCIETY_URL}" target="_blank" rel="noopener noreferrer">ราชบัณฑิตยสภา ${icon('i-external')}<span class="sr-only">(เปิดในแท็บใหม่)</span></a>
           <a href="${basePath}contact.html">ติดต่อเรา</a>
           <a href="#">สำหรับเจ้าหน้าที่</a>
           <span>ภาษา TH | EN</span>
@@ -348,6 +354,7 @@ function renderHeader() {
       <nav id="mobile-menu" class="mobile-menu" aria-label="เมนูมือถือ">
         ${renderMobileNav(active)}
         <button class="mobile-link" type="button" data-open-search>เปิดค้นหา<span>›</span></button>
+        <a class="mobile-link mobile-link-ext" href="${ROYAL_SOCIETY_URL}" target="_blank" rel="noopener noreferrer">ราชบัณฑิตยสภา<span class="sr-only">(เปิดในแท็บใหม่)</span>${icon('i-external')}</a>
       </nav>
     </header>
   `;
