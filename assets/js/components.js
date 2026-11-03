@@ -749,13 +749,16 @@ function initSharedSearch() {
 
 let componentFontStep = 0;
 function initSharedAccessibility() {
+  // ขนาดฐานอ่านจาก CSS ตอนเริ่ม (ตอนนี้ 17px) — ถ้าเปลี่ยนฐานใน CSS ปุ่ม ก-/ก/ก+ จะตามเอง
+  const baseFontPx = parseFloat(getComputedStyle(document.documentElement).fontSize) || 17;
   document.querySelectorAll('[data-font]').forEach(btn => {
     btn.addEventListener('click', () => {
       const mode = btn.dataset.font;
       if (mode === 'plus') componentFontStep = Math.min(componentFontStep + 1, 3);
       if (mode === 'minus') componentFontStep = Math.max(componentFontStep - 1, -2);
       if (mode === 'reset') componentFontStep = 0;
-      document.documentElement.style.fontSize = `${16 + componentFontStep}px`;
+      if (componentFontStep === 0) document.documentElement.style.removeProperty('font-size');
+      else document.documentElement.style.fontSize = `${baseFontPx + componentFontStep}px`;
     });
   });
 

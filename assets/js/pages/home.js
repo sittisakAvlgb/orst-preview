@@ -918,7 +918,7 @@ function highlight(t, q) { return t.replace(new RegExp(`(${escapeRegExp(q)})`, '
 function initModals() { qsa('[data-modal-open]').forEach(btn => btn.addEventListener('click', () => openModal(btn.dataset.modalOpen))); qsa('[data-modal-close]').forEach(btn => btn.addEventListener('click', () => closeModal(btn.closest('.modal')?.id))); document.addEventListener('keydown', e => { if (e.key === 'Escape') qsa('.modal:not([hidden])').forEach(m => closeModal(m.id)) }); qs('#advanced-form')?.addEventListener('submit', e => { e.preventDefault(); const q = qs('#advanced-q').value.trim() || 'ภาษาไทย'; const type = new FormData(e.target).get('adv-type'); currentFilter = type; qsa('[data-filter]').forEach(b => { const active = b.dataset.filter === type; b.classList.toggle('active', active); b.setAttribute('aria-selected', String(active)) }); qs('#global-search').value = q; closeModal('advanced-modal'); doSearch(q) }) }
 function openModal(id) { const m = qs('#' + id); if (!m) return; lastFocused = document.activeElement; m.hidden = false; document.body.style.overflow = 'hidden'; setTimeout(() => qs('button,input,select,a', m)?.focus(), 20) }
 function closeModal(id) { const m = qs('#' + id); if (!m) return; m.hidden = true; document.body.style.overflow = ''; lastFocused?.focus?.() }
-function initAccessibility() { qsa('[data-font]').forEach(btn => btn.addEventListener('click', () => { const a = btn.dataset.font; if (a === 'plus') fontStep = Math.min(3, fontStep + 1); if (a === 'minus') fontStep = Math.max(-2, fontStep - 1); if (a === 'reset') fontStep = 0; document.documentElement.style.setProperty('--base-size', `${16 + fontStep}px`) })); qsa('[data-toggle-contrast]').forEach(b => b.addEventListener('click', () => document.body.classList.toggle('high-contrast'))); qsa('[data-readable]').forEach(b => b.addEventListener('click', () => document.body.classList.toggle('readable-mode'))); qsa('[data-reduce-motion]').forEach(b => b.addEventListener('click', () => document.body.classList.toggle('no-motion'))) }
+function initAccessibility() { qsa('[data-font]').forEach(btn => btn.addEventListener('click', () => { const a = btn.dataset.font; if (a === 'plus') fontStep = Math.min(3, fontStep + 1); if (a === 'minus') fontStep = Math.max(-2, fontStep - 1); if (a === 'reset') fontStep = 0; document.documentElement.style.setProperty('--base-size', `${17 + fontStep}px`) })); qsa('[data-toggle-contrast]').forEach(b => b.addEventListener('click', () => document.body.classList.toggle('high-contrast'))); qsa('[data-readable]').forEach(b => b.addEventListener('click', () => document.body.classList.toggle('readable-mode'))); qsa('[data-reduce-motion]').forEach(b => b.addEventListener('click', () => document.body.classList.toggle('no-motion'))) }
 function initFAQ() {
   qsa('.faq-q').forEach(btn => btn.addEventListener('click', () => {
     const a = btn.nextElementSibling; const open = btn.getAttribute('aria-expanded') === 'true'; btn.setAttribute('aria-expanded', String(!open)); const icon = btn.querySelector('em') || btn.querySelector('span:last-child');
@@ -985,8 +985,8 @@ function initAccessPanelEnhance() {
         item.classList.remove('is-on');
       });
 
-      document.documentElement.style.setProperty('--base-size', '16px');
-      fontStep = 0;
+      // รีเซ็ตขนาดตัวอักษรผ่านปุ่ม "ก" ให้ตัวนับของ components.js กับไฟล์นี้กลับเป็น 0 พร้อมกัน
+      document.querySelector('[data-font="reset"]')?.click();
     });
   });
 
