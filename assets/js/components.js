@@ -664,6 +664,18 @@ function initMobileMenu() {
     btn.setAttribute('aria-expanded', String(open));
   });
 
+  // ปิดเมนูมือถืออัตโนมัติเมื่อขยายจอขึ้นเป็นเดสก์ท็อป (ตรงกับ breakpoint ใน CSS)
+  // กันอาการเมนู drawer ค้างทับ nav แนวนอนตอนผู้ใช้ย่อ/ขยายหน้าต่าง
+  const desktopMq = window.matchMedia('(min-width: 1411px)');
+  const closeOnDesktop = () => {
+    if (desktopMq.matches && menu.classList.contains('is-open')) {
+      menu.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  };
+  desktopMq.addEventListener('change', closeOnDesktop);
+  window.addEventListener('resize', closeOnDesktop);
+
   document.querySelectorAll('[data-mobile-submenu]').forEach(toggle => {
     toggle.addEventListener('click', () => {
       const key = toggle.dataset.mobileSubmenu;

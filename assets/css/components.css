@@ -1068,7 +1068,39 @@ body.high-contrast { filter: contrast(1.12); }
 body.readable-mode { background: #fffaf1; }
 body.no-motion *, body.no-motion *::before, body.no-motion *::after { animation: none !important; transition: none !important; }
 
-@media (max-width: 1180px) {
+/* =============================================================================
+   Header responsive — 3 ชั้น ให้เมนู 8 รายการไม่ทับกันทุกความกว้าง
+     > 1760px        เมนูแนวนอนเต็ม (จอกว้าง หน้าตาเหมือนเดิม)
+     1411–1760px     เมนูแนวนอนแบบบีบกระชับ (ฟอนต์เล็กลง/ระยะชิดขึ้น)
+     <= 1410px       hamburger drawer
+   เหตุที่ตัดที่ 1410px: 8 เมนูภาษาไทยยาว ต้องการความกว้างแถวเดียว ~1333px
+   ต่ำกว่านี้เมนูจะเบียด/ทับ จึงสลับเป็น drawer ที่อ่านง่ายและเข้าถึงได้ดีกว่า
+   ============================================================================= */
+
+/* ให้แถบ header ใช้ความกว้างที่มีจริง ไม่ถูก --container ของหน้า home หนีบที่ 1280px
+   (สูตรเท่ากับ base.css เดิม จอกว้าง ≥1848px จึงได้ 1800px หน้าตาเหมือนเดิม) */
+@media (min-width: 1411px) {
+  .site-header > .container,
+  .topbar > .container {
+    width: min(1800px, calc(100% - 48px));
+  }
+}
+
+/* เมนูแนวนอนแบบบีบ — คง 8 รายการไว้แถวเดียวบนจอ laptop */
+@media (min-width: 1411px) and (max-width: 1760px) {
+  .header-inner { gap: 14px; }
+  .brand.brand-image { min-width: auto; }
+  .brand-text-th { font-size: 1.02rem; }
+  .brand-text-en { display: none; }
+  .main-nav { gap: 2px; min-width: 0; }
+  .main-nav a, .main-nav button { font-size: .80rem; padding: 10px 7px; }
+  .main-nav a[data-mega] { gap: 4px; }
+  .nav-caret, .nav-caret svg { width: 13px; height: 13px; }
+  .header-actions { gap: 6px; }
+  .header-actions .round-btn:not(.primary) span { display: none; }
+}
+
+@media (max-width: 1410px) {
   .main-nav { display: none; }
   .mobile-menu-btn { display: block; }
   .header-actions .round-btn span { display: none; }
