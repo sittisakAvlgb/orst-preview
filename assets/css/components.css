@@ -1153,25 +1153,3 @@ body.no-motion *, body.no-motion *::before, body.no-motion *::after { animation:
   font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
   font-weight: 600;
 }
-
-
-/* =============================================================================
-   Nav — เส้นใต้ทองเลื่อนเข้าเมื่อ hover/active (ทุกหน้า ให้ดูมีลูกเล่น สม่ำเสมอ)
-   ============================================================================= */
-.main-nav a { position: relative; }
-.main-nav a::after {
-  content: "";
-  position: absolute;
-  left: 13px;
-  right: 13px;
-  bottom: 6px;
-  height: 2px;
-  border-radius: 999px;
-  background: var(--gold);
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform .22s ease;
-}
-.main-nav a:hover::after,
-.main-nav a.active::after,
-.main-nav a.is-open::after { transform: scaleX(1); }

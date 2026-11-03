@@ -10216,33 +10216,3 @@ background:
 linear-gradient(180deg, rgba(255,250,241,0.3) 0%, rgba(255,250,241,0.8) 50%, rgba(255,250,241,0.95) 100%),
 radial-gradient(circle at 50% 52%, rgba(255,255,255,0.5), transparent 44%);
 }
-
-/* =============================================================================
-   Hero — ปรับดีไซน์ให้น่าสนใจ: เน้นคำสำคัญด้วยสีทอง + kicker เป็น badge
-   ============================================================================= */
-.orst-hero-title .orst-hl {
-  color: #b5801f;                 /* ทองเข้ม ตัดกับเขียวเข้มของหัวข้อ */
-  -webkit-text-fill-color: #b5801f;
-}
-
-/* kicker: จากเส้นขีด → badge pill กระจกทอง */
-.orst-hero-kicker {
-  gap: 9px;
-  padding: 7px 18px 7px 13px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, .72);
-  border: 1px solid rgba(185, 145, 67, .42);
-  color: #8a6520;
-  box-shadow: 0 8px 22px rgba(16, 32, 51, .10);
-  backdrop-filter: blur(6px);
-}
-.orst-hero-kicker::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #c79a3e;
-  box-shadow: 0 0 0 4px rgba(199, 154, 62, .18);
-  opacity: 1;
-}
-.orst-hero-kicker::after { display: none; }
