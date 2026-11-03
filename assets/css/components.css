@@ -69,7 +69,7 @@
   gap: 20px;
 }
 
-.topbar-inner { min-height: 34px; }
+.topbar-inner { min-height: 34px; justify-content: flex-end; }
 
 .topbar-group {
   display: flex;
@@ -1254,7 +1254,8 @@ body.no-motion *, body.no-motion *::before, body.no-motion *::after { animation:
 }
 
 @media (max-width: 900px) {
-  .topbar-right { display: none; }
+  /* topbar เหลือแต่ลิงก์ด้านขวา ซึ่งมีในเมนูมือถืออยู่แล้ว — ซ่อนทั้งแถบ */
+  .topbar { display: none; }
   .brand.brand-image { min-width: auto; }
   .brand-emblem { height: 50px; }
   .brand-text-th { font-size: 1.1rem; }
@@ -1262,7 +1263,6 @@ body.no-motion *, body.no-motion *::before, body.no-motion *::after { animation:
 }
 
 @media (max-width: 600px) {
-  .topbar-inner { justify-content: center; }
   .brand-emblem { height: 42px; }
   .brand-text-th { font-size: .98rem; }
   .brand-text-en { font-size: .6rem; letter-spacing: .04em; }

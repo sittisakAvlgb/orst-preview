@@ -372,13 +372,7 @@ function renderHeader() {
     <a class="skip-link" href="#main-content">ข้ามไปยังเนื้อหาหลัก</a>
     <div class="topbar">
       <div class="container topbar-inner">
-        <div class="topbar-group">
-          <button type="button" data-open-access>${icon('i-eye')} สำหรับผู้พิการทางสายตา</button>
-          <button type="button" data-font="minus">ก-</button>
-          <button type="button" data-font="reset">ก</button>
-          <button type="button" data-font="plus">ก+</button>
-          <button type="button" data-contrast>ความคมชัด</button>
-        </div>
+        <!-- ปุ่มช่วยการเข้าถึง (ขนาดตัวอักษร/ความคมชัด) อยู่ที่ปุ่มลอย "ช่วยการเข้าถึง" มุมขวาล่าง -->
         <div class="topbar-group topbar-right">
           <a class="topbar-ext" href="${ROYAL_SOCIETY_URL}" target="_blank" rel="noopener noreferrer">ราชบัณฑิตยสภา ${icon('i-external')}<span class="sr-only">(เปิดในแท็บใหม่)</span></a>
           <a href="${basePath}contact.html">ติดต่อเรา</a>
