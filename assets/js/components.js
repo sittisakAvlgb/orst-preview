@@ -315,7 +315,7 @@ function renderDrawer(active) {
       <li>
         <button class="drawer-item${isActive ? ' is-active' : ''}" type="button" data-drawer-sub
           aria-expanded="${isActive}" aria-controls="drawer-sub-${key}">
-          ${ico}<span class="drawer-label">${label}<small>${data.eyebrow}</small></span>${icon('i-chevron', 'icon drawer-chev')}
+          ${ico}<span class="drawer-label">${label}</span>${icon('i-chevron', 'icon drawer-chev')}
         </button>
         <div class="drawer-sub${isActive ? ' is-open' : ''}" id="drawer-sub-${key}">
           <div class="drawer-sub-inner">
@@ -337,7 +337,10 @@ function renderDrawer(active) {
       <div class="drawer-backdrop" data-drawer-close></div>
       <div class="drawer-panel" role="dialog" aria-modal="true" aria-label="เมนูหลัก">
         <div class="drawer-head">
-          <span class="drawer-title">เมนู</span>
+          <a class="drawer-brand" href="${basePath}index.html" aria-label="สำนักงานราชบัณฑิตยสภา หน้าแรก">
+            <img src="${basePath}assets/images/orst-emblem.png" alt="" aria-hidden="true" width="181" height="320">
+            <span><span class="drawer-brand-th">สำนักงานราชบัณฑิตยสภา</span><span class="drawer-brand-en">Office of the Royal Society</span></span>
+          </a>
           <button class="drawer-close" type="button" data-drawer-close aria-label="ปิดเมนู">${icon('i-x')}</button>
         </div>
         <button class="drawer-search" type="button" data-open-search>
