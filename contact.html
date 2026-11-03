@@ -45,37 +45,55 @@
   <main id="main-content">
     <section class="contact-hero" aria-labelledby="page-title">
       <div class="container contact-hero-inner">
-        <div class="reveal">
-          <!-- <div class="breadcrumb"><a href="index.html">หน้าหลัก</a><span>/</span><span>ติดต่อเรา</span></div> -->
-          <span class="eyebrow">ช่องทางติดต่อสำนักงาน</span>
+        <nav class="contact-crumb" aria-label="เส้นทางนำทาง">
+          <a href="index.html">หน้าหลัก</a><span aria-hidden="true">/</span><span aria-current="page">ติดต่อเรา</span>
+        </nav>
+        <div class="contact-hero-text">
           <h1 id="page-title">ติดต่อราชบัณฑิตยสภา</h1>
-          <p>เลือกช่องทางที่สะดวก สอบถามข้อมูล ส่งข้อความถึงเจ้าหน้าที่ หรือดูแผนที่เพื่อเดินทางมายังสำนักงาน</p>
-          <div class="hero-actions">
-            <a class="btn" href="#contact-form"><svg class="icon">
-                <use href="#i-send"></use>
-              </svg> ส่งข้อความถึงเรา</a>
-            <a class="btn secondary" href="#map"><svg class="icon">
-                <use href="#i-map"></use>
-              </svg> ดูแผนที่และการเดินทาง</a>
-          </div>
+          <p>สอบถามข้อมูล คำศัพท์ หรือหนังสือของสำนักงาน เลือกช่องทางที่สะดวกด้านล่าง หรือส่งข้อความถึงเจ้าหน้าที่ได้โดยตรง</p>
         </div>
+        <p class="contact-hours"><svg class="icon" aria-hidden="true">
+            <use href="#i-clock"></use>
+          </svg><span>เวลาทำการ</span> [วันและเวลาทำการ]</p>
+      </div>
+    </section>
 
-        <aside class="hero-info-card reveal" aria-label="ข้อมูลติดต่อโดยสรุป">
-          <h2>ข้อมูลติดต่อสำคัญ</h2>
-          <div class="office-status"><span></span> [วันและเวลาทำการ]</div>
-          <div class="hero-info-list">
-            <a href="tel:021411717"><svg class="icon">
-                <use href="#i-phone-call"></use>
-              </svg><span>0 2141 1717<small>สอบถามข้อมูล</small></span></a>
-            <a href="mailto:saraban@orst.go.th"><svg class="icon">
-                <use href="#i-mail"></use>
-              </svg><span>saraban@orst.go.th<small>สอบถามข้อมูลและคำศัพท์</small></span></a>
-            <div><svg class="icon">
-                <use href="#i-map"></use>
-              </svg><span>เลขที่ 120 หมู่ 3 ศูนย์ราชการเฉลิมพระเกียรติ 80 พรรษา 5 ธันวาคม 2550 (อาคารซี) กรุงเทพมหานคร 10210<small>ที่ตั้งสำนักงาน</small></span>
-            </div>
-          </div>
-        </aside>
+    <section class="contact-channels-wrap" aria-label="ช่องทางติดต่อ">
+      <div class="container">
+        <ul class="contact-channels">
+          <li>
+            <a class="channel" href="tel:021411717">
+              <span class="channel-label"><svg class="icon" aria-hidden="true"><use href="#i-phone-call"></use></svg>โทรศัพท์</span>
+              <strong class="channel-value">0 2141 1717</strong>
+              <span class="channel-note">สอบถามข้อมูล · โทรสาร -</span>
+              <span class="channel-go">โทรเลย <svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></span>
+            </a>
+          </li>
+          <li>
+            <a class="channel" href="mailto:saraban@orst.go.th">
+              <span class="channel-label"><svg class="icon" aria-hidden="true"><use href="#i-mail"></use></svg>อีเมล</span>
+              <strong class="channel-value">saraban@orst.go.th</strong>
+              <span class="channel-note">สอบถามข้อมูลและคำศัพท์</span>
+              <span class="channel-go">ส่งอีเมล <svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></span>
+            </a>
+          </li>
+          <li>
+            <a class="channel" href="#map">
+              <span class="channel-label"><svg class="icon" aria-hidden="true"><use href="#i-map"></use></svg>ที่ตั้งสำนักงาน</span>
+              <strong class="channel-value">ศูนย์ราชการฯ อาคารซี</strong>
+              <span class="channel-note">เลขที่ 120 หมู่ 3 ศูนย์ราชการเฉลิมพระเกียรติ 80 พรรษา 5 ธันวาคม 2550 กรุงเทพมหานคร 10210</span>
+              <span class="channel-go">ดูแผนที่ <svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></span>
+            </a>
+          </li>
+          <li>
+            <a class="channel channel--primary" href="#contact-form">
+              <span class="channel-label"><svg class="icon" aria-hidden="true"><use href="#i-send"></use></svg>ข้อความออนไลน์</span>
+              <strong class="channel-value">ส่งข้อความถึงเรา</strong>
+              <span class="channel-note">กรอกแบบฟอร์ม เจ้าหน้าที่จะติดต่อกลับตามช่องทางที่ท่านระบุ</span>
+              <span class="channel-go">เขียนข้อความ <svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></span>
+            </a>
+          </li>
+        </ul>
       </div>
     </section>
 

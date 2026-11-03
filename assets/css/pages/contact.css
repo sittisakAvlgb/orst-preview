@@ -394,12 +394,6 @@ h3 {
   margin: 0 0 22px;
 }
 
-.hero-actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
 .btn {
   border: 1px solid transparent;
   border-radius: 999px;
@@ -423,62 +417,6 @@ h3 {
   background: #fff;
   color: var(--ink);
   border-color: var(--line);
-}
-
-.hero-info-card {
-  background: rgba(255, 255, 255, .9);
-  border: 1px solid var(--line);
-  border-radius: 26px;
-  padding: 22px;
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(6px);
-}
-
-.hero-info-card h2 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
-  font-size: 1.18rem;
-  margin-bottom: 14px;
-}
-
-.office-status {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  padding: 13px;
-  border-radius: 16px;
-  background: #eef8f2;
-  border: 1px solid rgba(38, 116, 88, .24);
-  color: #17644a;
-  font-weight: 700;
-  margin-bottom: 12px;
-}
-
-.office-status span {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--success);
-  box-shadow: 0 0 0 4px rgba(38, 116, 88, .12);
-}
-
-.hero-info-list {
-  display: grid;
-  gap: 10px;
-}
-
-.hero-info-list a,
-.hero-info-list div {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  color: var(--ink-2);
-  font-weight: 700;
-}
-
-.hero-info-list small {
-  display: block;
-  color: var(--muted);
-  font-weight: 500;
 }
 
 /* Main content */
@@ -1039,10 +977,6 @@ textarea:focus {
     grid-template-columns: 1fr;
   }
 
-  .hero-info-card {
-    max-width: 520px;
-  }
-
   .contact-grid {
     grid-template-columns: 1fr;
   }
@@ -1137,7 +1071,6 @@ textarea:focus {
   }
 }
 
-
 /* ===== Contact page fixed header spacing fix ===== */
 :root {
 --fixed-header-height: 124px;
@@ -1196,8 +1129,6 @@ z-index: 10020 !important;
 z-index: 10010 !important;
 }
 
-
-
 /* ===== Contact hero fit improvement ===== */
 .contact-hero {
 min-height: auto;
@@ -1210,12 +1141,6 @@ align-items: center;
 padding: clamp(34px, 5vw, 58px) 0 clamp(34px, 4vw, 48px);
 }
 
-.hero-info-card {
-align-self: center;
-max-width: 430px;
-width: 100%;
-}
-
 .contact-hero h1 {
 font-size: clamp(2.9rem, 4.6vw, 4.8rem);
 }
@@ -1225,10 +1150,6 @@ font-size: clamp(2.9rem, 4.6vw, 4.8rem);
 grid-template-columns: 1fr;
 min-height: auto;
 padding: 34px 0 36px;
-}
-
-.hero-info-card {
-max-width: 100%;
 }
 }
 
@@ -1243,14 +1164,6 @@ padding: 26px 0 30px;
 
 .contact-hero h1 {
 font-size: clamp(2.25rem, 11vw, 3.25rem);
-}
-
-.hero-actions {
-display: grid;
-}
-
-.hero-actions .btn {
-width: 100%;
 }
 }
 
@@ -1272,6 +1185,185 @@ width: 100%;
 .department-topics li,
 .department-mail small { font-size: .92rem; }
 .contact-item h3 { font-size: 1.08rem; }
-.hero-info-list small,
 .contact-item small { font-size: .88rem; }
 .mini-action { font-size: .92rem; }
+
+/* =============================================================================
+   Hero หน้าติดต่อ (ออกแบบใหม่) — แถบเขียวเข้ม + แผง "ช่องทางติดต่อ" 4 ช่อง
+   ที่ซ้อนขอบล่างของแถบ ทุกช่องกดได้ทั้งก้อน (โทร / อีเมล / แผนที่ / ฟอร์ม)
+   วางท้ายไฟล์เพื่อชนะกฎ hero เดิมที่ทับกันหลายชั้นข้างบน
+   ============================================================================= */
+.contact-hero {
+  border-bottom: 0;
+  background:
+    radial-gradient(circle at 90% -20%, rgba(216, 189, 116, .24), transparent 45%),
+    linear-gradient(135deg, var(--deep), var(--deep-2));
+  color: #fff;
+}
+.contact-hero-inner {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "crumb crumb"
+    "text  hours";
+  align-items: end;
+  gap: 18px 40px;
+  padding: 40px 0 124px;
+}
+
+.contact-crumb {
+  grid-area: crumb;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: rgba(255, 255, 255, .62);
+  font-size: .95rem;
+}
+.contact-crumb a { color: rgba(255, 255, 255, .86); }
+.contact-crumb a:hover,
+.contact-crumb a:focus-visible { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+
+.contact-hero-text { grid-area: text; max-width: 720px; }
+.contact-hero h1 {
+  margin: 0 0 12px;
+  color: #fff;
+  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-size: clamp(2.1rem, 3.6vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -.01em;
+  line-height: 1.2;
+}
+.contact-hero .contact-hero-text p {
+  max-width: 620px;
+  margin: 0;
+  color: rgba(255, 255, 255, .8);
+  font-size: 1.15rem;
+  line-height: 1.6;
+}
+
+.contact-hero .contact-hours {
+  grid-area: hours;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 9px 16px;
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 999px;
+  color: #fff;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+.contact-hours span { color: var(--gold-2); font-weight: 700; }
+.contact-hours .icon { width: 18px; height: 18px; color: var(--gold-2); }
+
+/* แผงช่องทางติดต่อ */
+.contact-channels-wrap {
+  position: relative;
+  z-index: 1;
+  margin-top: -88px;
+}
+.contact-channels {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--surface);
+  box-shadow: 0 24px 50px rgba(16, 32, 51, .10);
+  overflow: hidden;
+}
+.contact-channels li + li { border-left: 1px solid var(--line); }
+
+.channel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 24px 24px 22px;
+  color: var(--ink);
+  transition: background .2s ease;
+}
+.channel:hover,
+.channel:focus-visible { background: var(--surface-soft); }
+
+.channel-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: .95rem;
+  font-weight: 700;
+}
+.channel-label .icon { width: 20px; height: 20px; color: var(--gold); }
+
+.channel-value {
+  margin-top: 8px;
+  color: var(--deep);
+  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-size: clamp(1.15rem, 1.5vw, 1.4rem);
+  font-weight: 700;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+.channel-note {
+  color: var(--muted);
+  font-size: .95rem;
+  line-height: 1.5;
+}
+.channel-go {
+  margin-top: auto;
+  padding-top: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--deep);
+  font-weight: 700;
+}
+.channel-go .icon { width: 16px; height: 16px; transition: transform .2s ease; }
+.channel:hover .channel-go .icon,
+.channel:focus-visible .channel-go .icon { transform: translateX(4px); }
+
+/* ช่อง "ส่งข้อความ" เป็นทางหลัก — พื้นทองอ่อน */
+.channel--primary { background: var(--gold-soft); }
+.channel--primary:hover,
+.channel--primary:focus-visible { background: var(--gold-soft); }
+.channel--primary:hover .channel-go,
+.channel--primary:focus-visible .channel-go { text-decoration: underline; text-underline-offset: 3px; }
+
+/* โหมดคอนทราสต์สูง: --deep เป็นสีดำ */
+body.high-contrast .channel-value,
+body.high-contrast .channel-go { color: var(--ink); }
+
+@media (max-width: 1180px) {
+  .contact-hero-inner {
+    grid-template-columns: 1fr;
+    grid-template-areas: "crumb" "text" "hours";
+    justify-items: start;
+    gap: 16px;
+    padding: 32px 0 116px;
+  }
+  .contact-channels { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .contact-channels li + li { border-left: 0; }
+  .contact-channels li:nth-child(even) { border-left: 1px solid var(--line); }
+  .contact-channels li:nth-child(n + 3) { border-top: 1px solid var(--line); }
+}
+
+@media (max-width: 760px) {
+  .contact-hero-inner { padding: 24px 0 104px; }
+  .contact-hero .contact-hours { white-space: normal; }
+  .contact-channels-wrap { margin-top: -80px; }
+  .contact-channels { grid-template-columns: 1fr; border-radius: 20px; }
+  .contact-channels li:nth-child(even) { border-left: 0; }
+  .contact-channels li + li { border-top: 1px solid var(--line); }
+  .channel { padding: 18px 18px 16px; }
+  .channel-go { padding-top: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .channel,
+  .channel-go .icon { transition: none; }
+}
