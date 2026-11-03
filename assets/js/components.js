@@ -940,7 +940,12 @@ function initComponents() {
   const footerMount = document.getElementById('app-footer');
 
   if (headerMount) headerMount.innerHTML = renderHeader();
-  if (footerMount) footerMount.innerHTML = renderFooter();
+  if (footerMount) {
+    footerMount.innerHTML = renderFooter();
+    // หน้าที่มีปุ่มลอย "ช่วยการเข้าถึง" ของตัวเอง (index.html) ไม่ต้องมีปุ่มกลางซ้อนซ้ำ
+    const ownFloat = [...document.querySelectorAll('.access-float')].some(b => !footerMount.contains(b));
+    if (ownFloat) footerMount.querySelector('.access-float')?.remove();
+  }
 
   initMegaMenu();
   initMobileMenu();
