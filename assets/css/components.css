@@ -1299,3 +1299,20 @@ body.no-motion *, body.no-motion *::before, body.no-motion *::after { animation:
   font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
   font-weight: 600;
 }
+
+/* ===== Type scale header/footer (ใช้ตัวแปร --fs-* จาก base.css) =====
+   ป้ายอังกฤษตัวพิมพ์ใหญ่ใช้ Sarabun — TH Sarabun New ตัวอังกฤษเล็กมากจนอ่านยาก */
+.brand-text-en {
+  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-weight: 600;
+  letter-spacing: .08em;
+}
+.orst-footer-wordmark-en,
+.orst-footer-head small { font-size: var(--fs-label-en); }
+.orst-footer-bottom,
+.orst-footer-totop { font-size: var(--fs-meta); }
+.orst-footer-reach li,
+.orst-footer-primary,
+.orst-footer-secondary,
+.orst-footer-col a,
+.orst-footer-col button { font-size: var(--fs-body); }

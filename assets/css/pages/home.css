@@ -10227,7 +10227,8 @@ radial-gradient(circle at 50% 52%, rgba(255,255,255,0.5), transparent 44%);
      หัวข้อการ์ด             19.6–20px (1.15–1.18rem)
      คำอธิบายในการ์ด          16.7px   (.98rem)
      แท็บ / ปุ่ม              17px     (1rem)
-     ป้าย / วันที่ / เวลา      14.6–15.3px (.86–.9rem)
+     ป้าย / วันที่ / เวลา      16px     (--fs-meta)
+     ใช้ตัวแปร --fs-* จาก base.css
    ============================================================================= */
 
 /* หัวข้อ section — ทุก section ขนาดเท่ากัน */
@@ -10250,30 +10251,51 @@ radial-gradient(circle at 50% 52%, rgba(255,255,255,0.5), transparent 44%);
 .section-kicker { font-size: .9rem; }
 
 /* การ์ดบริการและแหล่งความรู้ */
-.service-card h3 { font-size: 1.18rem; }
-.service-card p { font-size: .98rem; }
+.service-card h3 { font-size: var(--fs-title); }
+.service-card p { font-size: var(--fs-body); }
 
 /* แถบจุดเด่นใต้ hero */
-.trust-item h3 { font-size: 1.18rem; }
-.trust-item p { font-size: .98rem; }
+.trust-item h3 { font-size: var(--fs-title); }
+.trust-item p { font-size: var(--fs-body); }
 
 /* คลังสื่อ — แท็บเท่ากับแท็บข่าว */
 .media-tab { font-size: 1rem; }
 
 /* ข่าวสารและกิจกรรม */
-.news-mosaic-card-body h4 { font-size: 1.15rem; }
-.news-mosaic-card-body p { font-size: .98rem; }
-.news-meta { font-size: .9rem; }
-.news-type-badge { font-size: .88rem; }
-.news-mini-type { font-size: .86rem; }
-.calendar-head a { font-size: .9rem; }
-.calendar-grid span { font-size: .86rem; }
-.agenda-item small { font-size: .9rem; }
+.news-mosaic-card-body h4 { font-size: var(--fs-title); }
+.news-mosaic-card-body p { font-size: var(--fs-body); }
+.news-mosaic-feature-body h3 { font-size: var(--fs-panel); }
+.news-meta,
+.news-meta span,
+.news-type-badge,
+.news-mini-type,
+.calendar-head a,
+.calendar-grid span,
+.agenda-item small,
+.agenda-date small { font-size: var(--fs-meta); }
+.calendar-head h3,
+.faq-center-top h3 { font-size: var(--fs-subhead); }
 
 /* บริการประชาชนดิจิทัล */
-.intro-label { font-size: .9rem; }
+.intro-label,
 .service-badge,
-.service-time { font-size: .86rem; }
+.service-time { font-size: var(--fs-meta); }
+.service-directory-intro h3 { font-size: var(--fs-panel); }
+.public-service-content h3 { font-size: var(--fs-title); }
 
 /* หน่วยงานที่เกี่ยวข้อง */
 .network-logo-item strong { font-size: 1rem; }
+
+/* คลังสื่อ: ป้ายบนปกหนังสือแบบตัวอักษร */
+.knowledge-text-cover span { font-size: var(--fs-meta); }
+/* ปุ่มคำค้นยอดนิยมใต้ช่องค้นหา */
+.hero-popular .chip { font-size: var(--fs-body); }
+
+/* มือถือ: แท็บ/ป้าย/วันที่ในปฏิทิน เดิมถูกย่อเหลือ 14.6–15.3px — ไม่ให้ต่ำกว่า --fs-meta */
+@media (max-width: 760px) {
+  .knowledge-tablist .media-tab,
+  .news-event-tab,
+  .orst-popular-title,
+  .pub-card p,
+  .calendar-grid button { font-size: var(--fs-meta); }
+}

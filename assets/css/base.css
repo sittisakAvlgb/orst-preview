@@ -108,6 +108,17 @@
   --line: #e7ddcf;
   --shadow: 0 14px 35px rgba(16, 32, 51, .10);
   --radius: 18px;
+
+  /* สเกลตัวอักษร (ฐาน 17px, TH Sarabun New) — ทุกหน้าใช้ชุดเดียวกัน
+     ป้าย/วันที่/แท็ก/breadcrumb ต่ำสุด 16px เพราะ TH Sarabun New ตัวเล็กกว่าฟอนต์ทั่วไป */
+  --fs-meta: .94rem;      /* 16px   ป้าย วันที่ แท็ก หมายเหตุ breadcrumb */
+  --fs-body: 1rem;        /* 17px   เนื้อหา คำอธิบายการ์ด ปุ่ม ลิงก์ */
+  --fs-title: 1.15rem;    /* 19.6px หัวข้อการ์ด */
+  --fs-subhead: 1.3rem;   /* 22px   หัวข้อกล่อง/แผงย่อย */
+  --fs-panel: 1.85rem;    /* 31.5px หัวข้อแผงเด่น/แบนเนอร์ */
+  --fs-h2: clamp(1.75rem, 3vw, 2.5rem);   /* หัวข้อ section ≤ 42.5px */
+  --fs-h1: clamp(2.3rem, 4vw, 3.3rem);    /* หัวข้อหน้า ≤ 56px */
+  --fs-label-en: .72rem;  /* ป้ายภาษาอังกฤษตัวพิมพ์ใหญ่ (Sarabun) 12px */
 }
 
 * {

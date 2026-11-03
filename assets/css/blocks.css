@@ -735,3 +735,13 @@
 
   .block-link-row { align-items: start; flex-wrap: wrap; }
 }
+
+/* ===== Type scale ของ block (ใช้ตัวแปร --fs-* จาก base.css) ===== */
+.block-eyebrow,
+.block-breadcrumb,
+.block-tag,
+.block-meta,
+.block-stat small,
+.block-link-text span,
+.block-table caption { font-size: var(--fs-meta); }
+.block-cta h2 { font-size: var(--fs-panel); }

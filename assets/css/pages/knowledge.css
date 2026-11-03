@@ -1473,19 +1473,23 @@
 .section-kicker { font-size: .9rem; }
 
 /* การ์ด */
-.path-card h3 { font-size: 1.15rem; }
+.path-card h3 { font-size: var(--fs-title); }
 .path-card p,
-.knowledge-card p { font-size: .98rem; }
-.type-tag { font-size: .86rem; }
+.knowledge-card p { font-size: var(--fs-body); }
+.type-tag,
 .card-top small,
-.card-foot span { font-size: .88rem; }
+.card-foot span,
+.knowledge-card .meta span,
+.featured-body .meta span { font-size: var(--fs-meta); }
+.featured-body h2 { font-size: var(--fs-panel); }
+.hero-panel h2 { font-size: var(--fs-title); }
 
 /* ตัวกรอง / ปุ่มลัด */
 .filter-group h3 { font-size: 1.08rem; }   /* หัวข้อกลุ่มต้องไม่เล็กกว่ารายการข้างใต้ */
-.category-btn small { font-size: .88rem; }
-.chip { font-size: .96rem; }
+.category-btn small { font-size: var(--fs-meta); }
+.chip,
 .hero-note,
-.filter-cta { font-size: .96rem; }
+.filter-cta { font-size: var(--fs-body); }
 
 
 /* มือถือ/แท็บเล็ต: "1fr" มีค่าต่ำสุดเท่าเนื้อหาที่กว้างที่สุด (ช่องค้นหา) ทำให้ส่วนหัว

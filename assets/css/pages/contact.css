@@ -897,7 +897,7 @@ font-size: clamp(2.25rem, 11vw, 3.25rem);
 .contact-form-panel h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); }
 .section-kicker { font-size: .9rem; }
 
-.mini-action { font-size: .92rem; }
+.mini-action { font-size: var(--fs-meta); }
 
 /* =============================================================================
    Hero หน้าติดต่อ (ออกแบบใหม่) — แถบเขียวเข้ม + แผง "ช่องทางติดต่อ" 4 ช่อง
@@ -1380,3 +1380,20 @@ body.high-contrast .dir-mails a { color: var(--ink); }
   .dir-phones,
   .dir-mails { gap: 8px; }
 }
+
+/* ===== Type scale (ท้ายไฟล์ ชนะบล็อก hero/ฟอร์ม/สมุดรายชื่อข้างบน) ===== */
+.contact-hero h1 { font-size: var(--fs-h1); }
+.contact-form-panel h2,
+.directory-intro h2 { font-size: var(--fs-panel); }
+.map-body h2,
+.dir-unit h3 { font-size: var(--fs-subhead); }
+.contact-crumb,
+.channel-label,
+.channel-note,
+.map-label,
+.dir-head,
+.dir-label,
+.dir-none,
+.form-note,
+.mini-action { font-size: var(--fs-meta); }
+.dir-unit p { font-size: var(--fs-body); }
