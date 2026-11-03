@@ -765,9 +765,14 @@ body.high-contrast .drawer-cta { border: 1px solid var(--line); }
 
 .orst-footer-main {
   display: grid;
-  grid-template-columns: minmax(300px, 1.3fr) minmax(0, 1.25fr) minmax(0, .9fr) minmax(0, 1.2fr);
+  /* คอลัมน์กว้างตามเนื้อหา (มีเพดาน) แล้วกระจายช่องว่างเท่า ๆ กัน — จอกว้างจะไม่ยืดจนโหรงเหรง */
+  grid-template-columns: minmax(280px, 400px) minmax(0, 380px) minmax(0, 230px) minmax(0, 330px);
+  justify-content: space-between;
+  column-gap: 32px;
+  max-width: 1560px;   /* จอกว้างมาก: ไม่ให้ช่องว่างระหว่างคอลัมน์ถ่างเกิน */
   align-items: start;
 }
+.orst-footer li { margin: 0; }
 .orst-footer-main > * { padding: 0 32px; }
 .orst-footer-main > :first-child { padding-left: 0; }
 .orst-footer-main > :last-child { padding-right: 0; }
@@ -914,7 +919,7 @@ body.high-contrast .drawer-cta { border: 1px solid var(--line); }
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 .orst-footer-col--menu ul {
   grid-template-columns: repeat(2, minmax(0, 1fr));
