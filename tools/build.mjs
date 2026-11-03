@@ -22,6 +22,8 @@
    ============================================================================= */
 
 import { readFile, writeFile, readdir, mkdir, cp, rm } from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { renderBlocks, validatePage } from '../assets/js/blocks.js';
@@ -47,6 +49,36 @@ const NO_INDEX = new Set(['styleguide.html', '404.html']);
 const SITE_URL = (process.env.SITE_URL || '').trim().replace(/\/+$/, '');
 
 const MOUNT_RE = /(<div id="app-content"[^>]*>)([\s\S]*?)(<\/div>)/;
+
+/* -----------------------------------------------------------------------------
+   Cache-busting — เติม ?v=<hash เนื้อไฟล์> ต่อท้ายลิงก์ CSS/JS ในหน้า dist
+   ป้องกันเบราว์เซอร์/ผู้เข้าชมเห็นสไตล์เก่าค้างหลัง deploy
+   hash คิดจากเนื้อไฟล์จริง → ไฟล์ไหนไม่เปลี่ยน เลข version คงเดิม cache ยังใช้ได้
+   (หมายเหตุ: ไม่แตะ url(...) ฟอนต์ที่อยู่ภายใน CSS เพราะฟอนต์แทบไม่เปลี่ยน
+    และเมื่อ CSS เปลี่ยน เลข version ของ CSS จะเปลี่ยนให้เองอยู่แล้ว)
+   -------------------------------------------------------------------------- */
+const _verCache = new Map();
+function assetVersion(rel) {
+  if (_verCache.has(rel)) return _verCache.get(rel);
+  let v = '';
+  try {
+    v = createHash('sha1').update(readFileSync(join(ROOT, rel))).digest('hex').slice(0, 8);
+  } catch {
+    v = '';   // ไม่พบไฟล์ — ปล่อยลิงก์เดิมไว้
+  }
+  _verCache.set(rel, v);
+  return v;
+}
+
+function bustAssets(html) {
+  return html.replace(
+    /(\b(?:href|src)=")(assets\/[^"?#]+\.(?:css|js))(")/g,
+    (match, pre, path, post) => {
+      const v = assetVersion(path);
+      return v ? `${pre}${path}?v=${v}${post}` : match;
+    }
+  );
+}
 
 async function main() {
   await rm(DIST, { recursive: true, force: true });
@@ -85,10 +117,10 @@ async function main() {
       continue;
     }
 
-    const html = shell
+    const html = bustAssets(shell
       .replace(MOUNT_RE, (_, open, __, close) => `${open}\n${renderBlocks(page.blocks)}\n    ${close}`)
       .replace(/<title>[\s\S]*?<\/title>/,
-        `<title>${page.seoTitle || `${page.title} | สำนักงานราชบัณฑิตยสภา`}</title>`);
+        `<title>${page.seoTitle || `${page.title} | สำนักงานราชบัณฑิตยสภา`}</title>`));
 
     await writeFile(join(DIST, htmlName), html, 'utf8');
     pages.push(htmlName);
@@ -98,7 +130,8 @@ async function main() {
 
   for (const name of STATIC_PAGES) {
     try {
-      await cp(join(ROOT, name), join(DIST, name));
+      const raw = await readFile(join(ROOT, name), 'utf8');
+      await writeFile(join(DIST, name), bustAssets(raw), 'utf8');
       pages.push(name);
       console.log(`  คัดลอก dist/${name}  (หน้าที่เขียน HTML เอง)`);
     } catch {
