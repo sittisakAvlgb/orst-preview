@@ -72,7 +72,7 @@
    ============================================================================= */
 
 :root {
-  --base-size: 16px;
+  --base-size: 17px;
   --paper: #fbf7ef;
   --paper-2: #f4eee2;
   --surface: #ffffff;
@@ -509,14 +509,14 @@ h1,
 h2,
 h3 {
   font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
-  line-height: 1.18;
+  line-height: 1.26;
   margin: 0;
   color: var(--ink)
 }
 
 .hero h1 {
   font-size: clamp(2.8rem, 6vw, 5.55rem);
-  letter-spacing: -.065em;
+  letter-spacing: -.005em;
   margin-bottom: 18px;
   /* max-width: 650px */
 }
@@ -1839,8 +1839,8 @@ section {
 .hero-reference .hero h1,
 .hero-reference h1 {
   font-size: clamp(2.65rem, 4.6vw, 4.9rem);
-  line-height: 1.08;
-  letter-spacing: -.055em;
+  line-height: 1.2;
+  letter-spacing: -.005em;
   margin-bottom: 18px;
 }
 
@@ -2423,7 +2423,7 @@ section {
 
   .hero-reference h1 {
     font-size: clamp(2.35rem, 8vw, 3.85rem);
-    letter-spacing: -.045em
+    letter-spacing: -.01em
   }
 
   .hero p {
@@ -2595,8 +2595,8 @@ section {
 
   .hero-reference h1 {
     font-size: clamp(2rem, 12vw, 2.85rem);
-    line-height: 1.12;
-    letter-spacing: -.035em;
+    line-height: 1.2;
+    letter-spacing: -.01em;
     margin-bottom: 12px
   }
 
@@ -2902,7 +2902,7 @@ section {
 .hero-reference h1 {
   font-size: clamp(2.85rem, 4.35vw, 4.85rem);
   line-height: 1.40;
-  letter-spacing: -.055em;
+  letter-spacing: -.005em;
   color: #17352f;
   margin-bottom: 14px;
 }
@@ -3019,7 +3019,7 @@ section {
   margin: 0 0 18px;
   font-size: clamp(3.05rem, 4.25vw, 5.15rem);
   line-height: 1.05;
-  letter-spacing: -.035em;
+  letter-spacing: -.01em;
   color: #123e35;
   text-wrap: balance;
 }
@@ -3119,7 +3119,7 @@ section {
 
   .hero-reference .hero-title {
     font-size: clamp(2rem, 11vw, 2.75rem);
-    line-height: 1.12;
+    line-height: 1.2;
     letter-spacing: -.025em;
   }
 
@@ -3819,7 +3819,7 @@ section {
   z-index: 1;
   color: #fff;
   font-size: clamp(2.25rem, 3.4vw, 3.5rem);
-  line-height: 1.18;
+  line-height: 1.26;
   max-width: 680px;
   margin: 8px 0 14px;
 }
@@ -3866,7 +3866,7 @@ section {
   color: var(--deep);
   font-size: clamp(2.8rem, 5vw, 4.4rem);
   line-height: 1;
-  letter-spacing: -.045em;
+  letter-spacing: -.01em;
 }
 
 .archive-total small {
@@ -5121,8 +5121,8 @@ linear-gradient(90deg,
   margin: 0 auto 10px;
   color: #123e35;
   font-size: clamp(2.55rem, 4.65vw, 5.15rem);
-  line-height: 1.08;
-  letter-spacing: -.045em;
+  line-height: 1.2;
+  letter-spacing: -.01em;
   text-wrap: balance;
   text-shadow: 0 2px 0 rgba(255, 255, 255, .55);
 }

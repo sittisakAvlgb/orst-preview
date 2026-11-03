@@ -382,7 +382,7 @@ h3 {
 
 .contact-hero h1 {
   font-size: clamp(2.5rem, 4.5vw, 4.6rem);
-  letter-spacing: -.045em;
+  letter-spacing: -.01em;
   color: #17352f;
   margin-bottom: 14px;
 }
