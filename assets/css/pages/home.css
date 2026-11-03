@@ -1886,7 +1886,7 @@ section {
 }
 
 .hero-popular .chip {
-  font-size: .82rem;
+  font-size: .92rem;
   padding: 6px 11px;
   min-height: 32px;
   background: #fff;
@@ -5105,7 +5105,7 @@ linear-gradient(90deg,
   color: #a57a2f;
   font-family: "Sarabun", "TH Sarabun New", sans-serif;
   font-weight: 600;
-  font-size: .93rem;
+  font-size: 1.08rem;
 }
 
 .orst-hero-kicker::before,
@@ -5135,7 +5135,7 @@ linear-gradient(90deg,
   margin: 0 auto 20px !important;
   color: #28463f !important;
   font-family: "Sarabun", "TH Sarabun New", sans-serif !important;
-  font-size: clamp(1.02rem, 1.25vw, 1.22rem) !important;
+  font-size: clamp(1.18rem, 1.55vw, 1.5rem) !important;
   line-height: 1.72 !important;
   font-weight: 400 !important;
 }
@@ -7566,7 +7566,7 @@ mark.orst-highlight {
   background: rgba(255, 255, 255, .88);
   color: var(--deep);
   font-weight: 700;
-  font-size: .88rem;
+  font-size: .96rem;
   white-space: nowrap;
   box-shadow: 0 7px 18px rgba(16, 32, 51, .05);
   backdrop-filter: blur(6px);
@@ -7650,7 +7650,7 @@ mark.orst-highlight {
   justify-content: center;
   margin-bottom: 8px;
   color: #000;
-  font-size: .9rem;
+  font-size: 1rem;
   font-weight: 700;
   text-shadow: 0 1px 0 rgba(255, 255, 255, .55);
 }
@@ -7674,7 +7674,7 @@ mark.orst-highlight {
   background: rgba(255, 255, 255, .9);
   color: var(--deep);
   font-weight: 700;
-  font-size: .88rem;
+  font-size: .96rem;
   white-space: nowrap;
   box-shadow: 0 7px 18px rgba(16, 32, 51, .055);
   backdrop-filter: blur(6px);
