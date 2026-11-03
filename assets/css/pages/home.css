@@ -10301,123 +10301,77 @@ radial-gradient(circle at 50% 52%, rgba(255,255,255,0.5), transparent 44%);
 }
 
 /* =============================================================================
-   อินโฟกราฟิก (แท็บแรกของ "คลังสื่อและองค์ความรู้") — ปกแนวตั้ง 3:4 วาดด้วย HTML/CSS
-   ทุกใบขนาดเท่ากัน มี 3 โทนสลับกัน: เขียวเข้ม / ทองอ่อน / กระดาษ
+   อินโฟกราฟิก (แท็บแรกของ "คลังสื่อและองค์ความรู้") — ปกแบบ "หนึ่งโพสต์ หนึ่งคำ"
+   สีพื้นเรียบ (ไม่ไล่สี) คำหลักตัวใหญ่กลางปก บรรทัดเล็กบน/ล่าง ใต้ปกเป็นชื่อเรื่อง + หมวด
    ============================================================================= */
-.info-cover {
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 3 / 4;
+.ig-cover {
+  aspect-ratio: 4 / 5;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 18px 18px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: 22px 18px;
+  text-align: center;
   background: var(--surface-soft);
-  color: var(--ink);
-}
-.info-cover--deep {
-  background:
-    radial-gradient(circle at 100% 0%, rgba(216, 189, 116, .22), transparent 45%),
-    linear-gradient(160deg, var(--deep), var(--deep-2));
-  color: #fff;
-}
-.info-cover--gold {
-  background:
-    radial-gradient(circle at 0% 100%, rgba(185, 145, 67, .22), transparent 50%),
-    var(--gold-soft);
   color: var(--deep);
 }
-.info-cover--paper {
-  background: var(--surface-soft);
-  box-shadow: inset 0 0 0 1px var(--line);
-  color: var(--ink);
-}
+.ig-cream { background: #f6efe1; color: var(--deep); }
+.ig-deep  { background: var(--deep); color: #fff; }
+.ig-gold  { background: var(--gold); color: #13231f; }
+.ig-white { background: #fff; color: var(--ink); box-shadow: inset 0 -1px 0 var(--line); }
+.ig-ink   { background: #1d2f3a; color: #fff; }
 
-.info-badge {
-  align-self: flex-start;
-  padding: 3px 10px;
-  border-radius: 999px;
-  background: var(--gold);
-  color: #13231f;
+.ig-kicker {
+  font-size: 1.05rem;
+  opacity: .72;
+}
+.ig-latin {
   font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
-  font-size: var(--fs-label-en);
-  font-weight: 700;
+  font-size: .9rem;
   letter-spacing: .04em;
 }
-.info-title {
-  position: relative;
-  z-index: 1;
+.ig-word {
   font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
-  font-size: 1.12rem;
+  font-size: 2.6rem;
   font-weight: 800;
-  line-height: 1.3;
+  line-height: 1.15;
+  letter-spacing: -.01em;
 }
-
-.info-list {
-  position: relative;
-  z-index: 1;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 6px;
+.ig-word--long { font-size: 1.75rem; }
+.ig-word--digit { font-size: 5rem; line-height: 1; }
+.ig-deep .ig-word { color: var(--gold-2); }
+.ig-gap {
+  display: inline-block;
+  margin: 0 .12em;
+  font-size: .5em;
+  font-weight: 400;
+  vertical-align: .2em;
+  color: var(--gold-2);
 }
-.info-list li {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 6px 10px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, .55);
-  color: var(--ink);
-  font-size: var(--fs-body);
-  line-height: 1.35;
-}
-.info-cover--deep .info-list li { background: rgba(255, 255, 255, .1); color: #fff; }
-.info-list span { opacity: .75; }
-.info-list i { font-style: normal; opacity: .6; }
-.info-list b { font-weight: 700; }
-.info-list b.ok::before { content: "✓ "; color: #2f8a5f; }
-.info-cover--deep .info-list b.ok::before { color: var(--gold-2); }
-.info-list s {
-  opacity: .6;
-  text-decoration-thickness: 1px;
-}
-
-.info-digits {
-  position: relative;
-  z-index: 1;
-  font-size: 1.9rem;
-  font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: .02em;
-  white-space: nowrap;
-  color: var(--deep);
-}
-.info-note {
-  position: relative;
-  z-index: 1;
+.ig-sub {
+  max-width: 18ch;
   font-size: var(--fs-meta);
   line-height: 1.45;
-  opacity: .8;
+  opacity: .78;
+}
+.ig-sub s { text-decoration-thickness: 1px; }
+
+.ig-caption {
+  padding: 12px 14px 14px;
+}
+.ig-caption h3 {
+  margin: 0;
+  font-size: var(--fs-body);
+  line-height: 1.35;
+  color: var(--ink);
+}
+.ig-caption span {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: var(--fs-meta);
 }
 
-/* ตัวอักษรใหญ่จาง ๆ มุมขวาล่าง (ตกแต่ง) */
-.info-glyph {
-  position: absolute;
-  right: 10px;
-  bottom: -26px;
-  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
-  font-size: 7.5rem;
-  font-weight: 800;
-  line-height: 1;
-  opacity: .08;
-  pointer-events: none;
-}
-
-.info-card:hover .info-cover { filter: saturate(1.08); }
-
-body.high-contrast .info-list li { background: transparent; box-shadow: inset 0 0 0 1px var(--line); color: var(--ink); }
-body.high-contrast .info-cover--gold,
-body.high-contrast .info-digits { color: var(--ink); }
+body.high-contrast .ig-cover { background: var(--surface); color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
+body.high-contrast .ig-word { color: var(--ink); }

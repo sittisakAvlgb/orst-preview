@@ -353,91 +353,78 @@
                 aria-label="เลื่อนอินโฟกราฟิกไปทางซ้าย">‹</button>
 
               <div class="publication-row knowledge-scroll-row" id="encyclopedia-row">
-                <!-- อินโฟกราฟิก: ปกวาดด้วย HTML/CSS (ยังไม่มีไฟล์ภาพจริง) — เมื่อได้ภาพจากหน่วยงาน
-                     ให้แทน .info-cover ด้วย <div class="cover cover-image"><img ...></div> -->
-                <article class="pub-card knowledge-card info-card">
-                  <div class="info-cover info-cover--deep">
-                    <span class="info-badge">อินโฟกราฟิก</span>
-                    <strong class="info-title">คำที่มักเขียนผิด</strong>
-                    <ul class="info-list">
-                      <li><b class="ok">อนุญาต</b><s>อนุญาติ</s></li>
-                      <li><b class="ok">โอกาส</b><s>โอกาศ</s></li>
-                      <li><b class="ok">สังเกต</b><s>สังเกตุ</s></li>
-                      <li><b class="ok">ลายเซ็น</b><s>ลายเซ็นต์</s></li>
-                    </ul>
-                    <span class="info-glyph" aria-hidden="true">ก</span>
+                <!-- อินโฟกราฟิก: ปกแบบ "หนึ่งโพสต์ หนึ่งคำ" วาดด้วย HTML/CSS (ยังไม่มีไฟล์ภาพจริง)
+                     เมื่อได้ภาพจากหน่วยงาน ให้แทน .ig-cover ด้วย <img> ขนาด 4:5 -->
+                <article class="pub-card knowledge-card ig-card">
+                  <div class="ig-cover ig-cream">
+                    <span class="ig-kicker">เขียนอย่างไร</span>
+                    <strong class="ig-word">อนุญาต</strong>
+                    <span class="ig-sub">ไม่ใช่ <s>อนุญาติ</s></span>
                   </div>
-                  <p>คำที่มักเขียนผิด ชวนตรวจการสะกดที่พบบ่อย</p>
+                  <div class="ig-caption">
+                    <h3>คำที่มักเขียนผิด</h3>
+                    <span>อินโฟกราฟิก · การสะกดคำ</span>
+                  </div>
                 </article>
 
-                <article class="pub-card knowledge-card info-card">
-                  <div class="info-cover info-cover--gold">
-                    <span class="info-badge">อินโฟกราฟิก</span>
-                    <strong class="info-title">ราชาศัพท์ที่ควรรู้</strong>
-                    <ul class="info-list">
-                      <li><span>กิน</span><i aria-hidden="true">→</i><b>เสวย</b></li>
-                      <li><span>นอน</span><i aria-hidden="true">→</i><b>บรรทม</b></li>
-                      <li><span>ป่วย</span><i aria-hidden="true">→</i><b>ประชวร</b></li>
-                      <li><span>อาบน้ำ</span><i aria-hidden="true">→</i><b>สรงน้ำ</b></li>
-                    </ul>
-                    <span class="info-glyph" aria-hidden="true">ร</span>
+                <article class="pub-card knowledge-card ig-card">
+                  <div class="ig-cover ig-deep">
+                    <span class="ig-kicker">กิน</span>
+                    <strong class="ig-word">เสวย</strong>
+                    <span class="ig-sub">ใช้กับพระมหากษัตริย์และพระราชวงศ์</span>
                   </div>
-                  <p>ราชาศัพท์ที่ควรรู้ คำสามัญเทียบคำราชาศัพท์</p>
+                  <div class="ig-caption">
+                    <h3>ราชาศัพท์ที่ควรรู้</h3>
+                    <span>อินโฟกราฟิก · ราชาศัพท์</span>
+                  </div>
                 </article>
 
-                <article class="pub-card knowledge-card info-card">
-                  <div class="info-cover info-cover--paper">
-                    <span class="info-badge">อินโฟกราฟิก</span>
-                    <strong class="info-title">ลักษณนามน่ารู้</strong>
-                    <ul class="info-list">
-                      <li><span>ช้าง</span><i aria-hidden="true">·</i><b>เชือก</b></li>
-                      <li><span>ร่ม</span><i aria-hidden="true">·</i><b>คัน</b></li>
-                      <li><span>จดหมาย</span><i aria-hidden="true">·</i><b>ฉบับ</b></li>
-                      <li><span>พระสงฆ์</span><i aria-hidden="true">·</i><b>รูป</b></li>
-                    </ul>
-                    <span class="info-glyph" aria-hidden="true">ล</span>
+                <article class="pub-card knowledge-card ig-card">
+                  <div class="ig-cover ig-gold">
+                    <span class="ig-kicker">ช้าง ๑</span>
+                    <strong class="ig-word">เชือก</strong>
+                    <span class="ig-sub">ลักษณนามของช้างบ้าน</span>
                   </div>
-                  <p>ลักษณนามน่ารู้ ใช้คำนับให้ถูกกับสิ่งของ</p>
+                  <div class="ig-caption">
+                    <h3>ลักษณนามน่ารู้</h3>
+                    <span>อินโฟกราฟิก · ไวยากรณ์</span>
+                  </div>
                 </article>
 
-                <article class="pub-card knowledge-card info-card">
-                  <div class="info-cover info-cover--deep">
-                    <span class="info-badge">อินโฟกราฟิก</span>
-                    <strong class="info-title">คำทับศัพท์ยุคดิจิทัล</strong>
-                    <ul class="info-list">
-                      <li><span>application</span><i aria-hidden="true">→</i><b>แอปพลิเคชัน</b></li>
-                      <li><span>e-mail</span><i aria-hidden="true">→</i><b>อีเมล</b></li>
-                      <li><span>website</span><i aria-hidden="true">→</i><b>เว็บไซต์</b></li>
-                      <li><span>computer</span><i aria-hidden="true">→</i><b>คอมพิวเตอร์</b></li>
-                    </ul>
-                    <span class="info-glyph" aria-hidden="true">@</span>
+                <article class="pub-card knowledge-card ig-card">
+                  <div class="ig-cover ig-white">
+                    <span class="ig-kicker ig-latin">application</span>
+                    <strong class="ig-word ig-word--long">แอปพลิเคชัน</strong>
+                    <span class="ig-sub">ไม่ใช่ <s>แอพพลิเคชั่น</s></span>
                   </div>
-                  <p>คำทับศัพท์ยุคดิจิทัล เขียนอย่างไรให้ถูกหลัก</p>
+                  <div class="ig-caption">
+                    <h3>คำทับศัพท์ยุคดิจิทัล</h3>
+                    <span>อินโฟกราฟิก · คำทับศัพท์</span>
+                  </div>
                 </article>
 
-                <article class="pub-card knowledge-card info-card">
-                  <div class="info-cover info-cover--gold">
-                    <span class="info-badge">อินโฟกราฟิก</span>
-                    <strong class="info-title">การใช้ไม้ยมก ( ๆ )</strong>
-                    <ul class="info-list info-list--plain">
-                      <li><b class="ok">เด็ก ๆ</b><s>เด็กๆ</s></li>
-                      <li><b class="ok">ช้า ๆ</b><s>ช้าๆ</s></li>
-                    </ul>
-                    <span class="info-note">เว้นวรรคทั้งหน้าและหลังไม้ยมก</span>
-                    <span class="info-glyph" aria-hidden="true">ๆ</span>
+                <article class="pub-card knowledge-card ig-card">
+                  <div class="ig-cover ig-ink">
+                    <span class="ig-kicker">ไม้ยมก</span>
+                    <strong class="ig-word">เด็ก<span class="ig-gap" aria-hidden="true">␣</span>ๆ</strong>
+                    <span class="ig-sub">เว้นวรรคทั้งหน้าและหลัง&nbsp;ๆ</span>
                   </div>
-                  <p>การใช้ไม้ยมก เว้นวรรคอย่างไรให้ถูกต้อง</p>
+                  <div class="ig-caption">
+                    <h3>การใช้ไม้ยมก</h3>
+                    <span>อินโฟกราฟิก · เครื่องหมาย</span>
+                  </div>
                 </article>
 
-                <article class="pub-card knowledge-card info-card">
-                  <div class="info-cover info-cover--paper">
-                    <span class="info-badge">อินโฟกราฟิก</span>
-                    <strong class="info-title">ตัวเลขไทย</strong>
-                    <span class="info-digits">๐ ๑ ๒ ๓ ๔<br>๕ ๖ ๗ ๘ ๙</span>
-                    <span class="info-note">ศูนย์ หนึ่ง สอง สาม สี่ ห้า หก เจ็ด แปด เก้า</span>
-                    <span class="info-glyph" aria-hidden="true">๙</span>
+                <article class="pub-card knowledge-card ig-card">
+                  <div class="ig-cover ig-cream">
+                    <span class="ig-kicker">เก้า</span>
+                    <strong class="ig-word ig-word--digit">๙</strong>
+                    <span class="ig-sub">๐ ๑ ๒ ๓ ๔ ๕ ๖ ๗ ๘ ๙</span>
                   </div>
-                  <p>ตัวเลขไทย ๐–๙ อ่านและเขียนให้คล่อง</p>
+                  <div class="ig-caption">
+                    <h3>ตัวเลขไทย</h3>
+                    <span>อินโฟกราฟิก · ตัวเลข</span>
+                  </div>
                 </article>
               </div>
 
