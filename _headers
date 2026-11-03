@@ -7,3 +7,8 @@
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=()
+
+# ฟอนต์ไม่เปลี่ยนชื่อไฟล์บ่อย — ให้เบราว์เซอร์เก็บไว้นาน ไม่ต้องโหลดใหม่ทุกหน้า
+# (ถ้าเปลี่ยนไฟล์ฟอนต์ ให้เปลี่ยนชื่อไฟล์ด้วย)
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
