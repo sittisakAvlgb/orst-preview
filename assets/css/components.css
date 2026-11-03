@@ -736,33 +736,50 @@ body.high-contrast .drawer-cta { border: 1px solid var(--line); }
 
 
 /* ===== ORST Footer =====
-   เดสก์ท็อป: แบรนด์ | ลิงก์ 3 หมวด | การ์ดติดต่อ + แผนที่
-   แท็บเล็ต: แบรนด์ + การ์ดแผนที่ / ลิงก์เต็มแถว
-   มือถือ: เรียงทีละส่วน (แบรนด์ > การ์ดแผนที่ > ลิงก์ 2 คอลัมน์) */
+   เดสก์ท็อป: แบรนด์+ช่องทางติดต่อ | เมนูหลัก (2 คอลัมน์) | ข้อมูลเว็บไซต์ | นโยบาย
+   หัวคอลัมน์ = เส้นทองสั้น + ชื่อไทย + ชื่ออังกฤษตัวพิมพ์ใหญ่สีทอง, คั่นคอลัมน์ด้วยเส้นตั้ง
+   แท็บเล็ต: แบรนด์เต็มแถว / 3 คอลัมน์ลิงก์   มือถือ: เรียงทีละส่วน */
 
 .orst-footer {
   position: relative;
   overflow: hidden;
+  padding: 52px 0 0;
   background:
-    radial-gradient(circle at 8% 0%, rgba(216, 189, 116, .16), transparent 32%),
-    linear-gradient(135deg, #062f2a 0%, #073b34 55%, #0d2b2f 100%);
-  color: rgba(255, 255, 255, .84);
-  padding: 56px 0 0;
+    radial-gradient(circle at 0% 0%, rgba(216, 189, 116, .12), transparent 34%),
+    linear-gradient(135deg, #062f2a 0%, #073b34 55%, #0b3b33 100%);
+  color: rgba(255, 255, 255, .8);
 }
+/* ตราจาง ๆ มุมขวาล่าง */
+.orst-footer::after {
+  content: "";
+  position: absolute;
+  right: -30px;
+  bottom: -70px;
+  width: 240px;
+  height: 425px;
+  background: url("../images/orst-emblem.png") center / contain no-repeat;
+  opacity: .06;
+  pointer-events: none;
+}
+.orst-footer .container { position: relative; z-index: 1; }
 
 .orst-footer-main {
   display: grid;
-  grid-template-columns: minmax(240px, 1fr) minmax(0, 1.45fr) minmax(320px, 1.1fr);
-  grid-template-areas: "brand links visit";
-  gap: 48px;
+  grid-template-columns: minmax(300px, 1.3fr) minmax(0, 1.25fr) minmax(0, .9fr) minmax(0, 1.2fr);
   align-items: start;
+}
+.orst-footer-main > * { padding: 0 32px; }
+.orst-footer-main > :first-child { padding-left: 0; }
+.orst-footer-main > :last-child { padding-right: 0; }
+.orst-footer-main > :nth-child(n + 3) {
+  align-self: stretch;
+  border-left: 1px solid rgba(255, 255, 255, .1);
 }
 
 /* แบรนด์ */
-.orst-footer-brand { grid-area: brand; max-width: 400px; }
 .orst-footer-logo-wrap {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 14px;
   color: inherit;
   text-decoration: none;
@@ -771,73 +788,127 @@ body.high-contrast .drawer-cta { border: 1px solid var(--line); }
   display: block;
   flex: none;
   width: auto;
-  height: 68px;
+  height: 64px;
 }
 .orst-footer-wordmark {
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  line-height: 1.15;
+  gap: 4px;
+  padding-top: 4px;
 }
 .orst-footer-wordmark-th {
   color: #fff;
-  font-size: 1.16rem;
+  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-size: 1.12rem;
   font-weight: 700;
+  line-height: 1.25;
 }
 .orst-footer-wordmark-en {
-  color: rgba(255, 255, 255, .7);
-  font-size: .68rem;
-  font-weight: 700;
-  letter-spacing: .06em;
+  color: var(--gold-2);
+  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-size: .66rem;
+  font-weight: 600;
+  letter-spacing: .16em;
   text-transform: uppercase;
 }
-.orst-footer-brand p {
-  margin: 18px 0 0;
-  color: rgba(255, 255, 255, .74);
-  line-height: 1.7;
+.orst-footer-wordmark::after {
+  content: "";
+  width: 32px;
+  height: 2px;
+  margin-top: 8px;
+  background: var(--gold);
 }
+
+.orst-footer-reach {
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.orst-footer-reach li {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  font-size: .95rem;
+  line-height: 1.6;
+}
+.orst-footer-reach .icon {
+  width: 16px;
+  height: 16px;
+  margin-top: 4px;
+  color: var(--gold-2);
+}
+.orst-footer-reach a {
+  color: #fff;
+  text-decoration: none;
+}
+.orst-footer-reach a:hover,
+.orst-footer-reach a:focus-visible { color: var(--gold-2); }
+
 .orst-footer-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 20px;
+  margin-top: 22px;
 }
 .orst-footer-primary,
 .orst-footer-secondary {
   min-height: 44px;
-  padding: 9px 18px;
+  padding: 8px 18px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   border-radius: 999px;
   font-weight: 700;
   text-decoration: none;
+  transition: background .18s ease, border-color .18s ease;
 }
+.orst-footer-primary .icon,
+.orst-footer-secondary .icon { width: 16px; height: 16px; }
 .orst-footer-primary { background: var(--gold); color: #13231f; }
 .orst-footer-primary:hover,
 .orst-footer-primary:focus-visible { background: var(--gold-2); }
 .orst-footer-secondary {
-  border: 1px solid rgba(255, 255, 255, .22);
-  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .24);
   color: #fff;
 }
 .orst-footer-secondary:hover,
 .orst-footer-secondary:focus-visible { border-color: var(--gold-2); }
 
-/* ลิงก์ */
-.orst-footer-links {
-  grid-area: links;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
+/* หัวคอลัมน์ */
+.orst-footer-head {
+  margin: 0 0 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
-.orst-footer-col h3 {
-  margin: 0 0 14px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, .12);
+.orst-footer-head::before {
+  content: "";
+  width: 22px;
+  height: 2px;
+  margin-bottom: 12px;
+  background: var(--gold);
+}
+.orst-footer-head span {
   color: #fff;
-  font-size: 1.02rem;
+  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-size: 1.08rem;
+  font-weight: 700;
+  line-height: 1.3;
 }
+.orst-footer-head small {
+  color: var(--gold-2);
+  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-size: .66rem;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+/* ลิงก์ */
 .orst-footer-col ul {
   list-style: none;
   margin: 0;
@@ -845,139 +916,122 @@ body.high-contrast .drawer-cta { border: 1px solid var(--line); }
   display: grid;
   gap: 10px;
 }
-.orst-footer-col a {
+.orst-footer-col--menu ul {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(4, auto);   /* เรียงลงทีละคอลัมน์ */
+  grid-auto-flow: column;
+  column-gap: 20px;
+}
+.orst-footer-col a,
+.orst-footer-col button {
+  padding: 0;
+  border: 0;
+  background: none;
   color: rgba(255, 255, 255, .74);
+  font: inherit;
+  font-size: .98rem;
   line-height: 1.5;
+  text-align: left;
   text-decoration: none;
+  cursor: pointer;
   transition: color .18s ease;
 }
 .orst-footer-col a:hover,
-.orst-footer-col a:focus-visible { color: var(--gold-2); }
+.orst-footer-col a:focus-visible,
+.orst-footer-col button:hover,
+.orst-footer-col button:focus-visible { color: var(--gold-2); }
 
-/* การ์ดติดต่อ + แผนที่ */
-.orst-footer-visit {
-  grid-area: visit;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, .14);
-  border-radius: 20px;
-  background: rgba(255, 255, 255, .06);
-}
-.orst-footer-map {
-  aspect-ratio: 16 / 9;
-  background: rgba(255, 255, 255, .08);
-}
-.orst-footer-map iframe {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  filter: grayscale(.2);
-}
-.orst-footer-visit-body { padding: 18px 20px 20px; }
-.orst-footer-visit-body h3 {
-  margin: 0 0 6px;
-  color: #fff;
-  font-size: 1.02rem;
-}
-.orst-footer-visit address {
-  margin: 0;
-  color: rgba(255, 255, 255, .74);
-  font-style: normal;
-  line-height: 1.6;
-}
-.orst-footer-reach {
-  list-style: none;
-  margin: 12px 0 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 22px;
-}
-.orst-footer-reach li {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-.orst-footer-reach .icon { width: 17px; height: 17px; color: var(--gold-2); }
-.orst-footer-reach a {
-  color: #fff;
-  font-weight: 700;
-  text-decoration: none;
-}
-.orst-footer-reach a:hover,
-.orst-footer-reach a:focus-visible { color: var(--gold-2); }
-.orst-footer-maplink {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 14px;
-  color: var(--gold-2);
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-.orst-footer-maplink .icon { width: 15px; height: 15px; }
-.orst-footer-maplink:hover,
-.orst-footer-maplink:focus-visible { color: #fff; }
-
-/* แถบล่าง — ชิดซ้ายทั้งหมด เว้นมุมขวาให้ปุ่มลอย "ช่วยการเข้าถึง" */
+/* แถบล่าง — เว้นมุมขวาให้ปุ่มลอย "ช่วยการเข้าถึง" */
 .orst-footer-bottom {
-  margin-top: 40px;
-  padding: 18px 0 22px;
-  border-top: 1px solid rgba(255, 255, 255, .12);
+  margin-top: 44px;
+  padding: 16px 190px 18px 0;
+  border-top: 1px solid rgba(255, 255, 255, .1);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px 32px;
+  justify-content: space-between;
+  gap: 10px 24px;
   color: rgba(255, 255, 255, .6);
   font-size: .9rem;
 }
-.orst-footer-bottom nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 20px;
+.orst-footer-totop {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 999px;
+  background: none;
+  color: #fff;
+  font: inherit;
+  font-size: .9rem;
+  cursor: pointer;
 }
-.orst-footer-bottom a {
-  color: rgba(255, 255, 255, .7);
-  text-decoration: none;
-}
-.orst-footer-bottom a:hover,
-.orst-footer-bottom a:focus-visible { color: var(--gold-2); }
+.orst-footer-totop .icon { width: 15px; height: 15px; transform: rotate(-90deg); }
+.orst-footer-totop:hover,
+.orst-footer-totop:focus-visible { border-color: var(--gold-2); color: var(--gold-2); }
 
-/* แท็บเล็ต / จอเล็ก */
+/* แท็บเล็ต / จอเล็ก: แบรนด์เต็มแถว แล้ว 3 คอลัมน์ลิงก์ */
 @media (max-width: 1199.98px) {
   .orst-footer-main {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-areas:
-      "brand visit"
-      "links links";
-    gap: 36px 40px;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, .9fr) minmax(0, 1.2fr);
+    row-gap: 36px;
   }
-  .orst-footer-brand { max-width: none; }
+  .orst-footer-main > .orst-footer-brand {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 40px;
+    padding: 0 0 32px;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+  }
+  .orst-footer-brand .orst-footer-reach { grid-column: 2; grid-row: 1 / span 2; margin-top: 0; }
+  .orst-footer-main > :nth-child(2) { padding-left: 0; }
 }
 
-/* มือถือ */
+/* มือถือ: เรียงทีละส่วน */
 @media (max-width: 720px) {
   .orst-footer { padding-top: 40px; }
-  .orst-footer-main {
-    grid-template-columns: 1fr;
-    grid-template-areas: "brand" "visit" "links";
-    gap: 30px;
+  .orst-footer::after { width: 180px; height: 320px; }
+  .orst-footer-main { grid-template-columns: 1fr; row-gap: 0; }
+  .orst-footer-main > *,
+  .orst-footer-main > :nth-child(n + 3) {
+    padding: 22px 0;
+    border-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, .1);
   }
+  .orst-footer-main > .orst-footer-brand {
+    display: block;
+    padding: 0 0 26px;
+    border: 0;
+  }
+  .orst-footer-brand .orst-footer-reach { margin-top: 22px; }
   .orst-footer-emblem { height: 56px; }
-  .orst-footer-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 20px; }
-  .orst-footer-map { aspect-ratio: 4 / 3; }
+  .orst-footer-head { margin-bottom: 12px; }
+  .orst-footer-head::before { margin-bottom: 10px; }
+  /* ข้อมูลเว็บไซต์ / นโยบาย: เรียงลิงก์ต่อกันเป็นแถว ให้ footer สั้นลง */
+  .orst-footer-col:not(.orst-footer-col--menu) ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+  }
   .orst-footer-bottom {
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 32px;
-    padding-bottom: 84px;   /* เผื่อปุ่มลอยมุมขวาล่าง */
+    margin-top: 0;
+    padding: 16px 0 84px;   /* เผื่อปุ่มลอยมุมขวาล่าง */
   }
 }
 
-@media (max-width: 340px) {
+@media (max-width: 360px) {
+  .orst-footer-col--menu ul { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; }
   .orst-footer-actions { display: grid; }
-  .orst-footer-links { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orst-footer-primary,
+  .orst-footer-secondary,
+  .orst-footer-col a,
+  .orst-footer-col button { transition: none; }
 }
 
 
