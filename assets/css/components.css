@@ -308,20 +308,21 @@
 .mega-feature .section-kicker {
   color: #f7df9d;
   font-weight: 700;
-  font-size: .8rem;
+  font-size: .9rem;
 }
 
 .mega-feature h3 {
   color: #fff;
   margin: 8px 0 8px;
   font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
-  font-size: 1.55rem;
+  font-size: 1.8rem;
   line-height: 1.25;
 }
 
 .mega-feature p {
   color: rgba(255,255,255,.78);
-  line-height: 1.65;
+  line-height: 1.6;
+  font-size: 1.05rem;
   margin: 0 0 16px;
 }
 
@@ -354,7 +355,7 @@
 .mega-group h4 {
   color: var(--deep);
   margin: 0 0 10px;
-  font-size: 1.02rem;
+  font-size: 1.15rem;
 }
 
 .mega-link {
@@ -373,13 +374,15 @@
   display: block;
   color: var(--ink);
   line-height: 1.35;
+  font-size: 1.08rem;
 }
 
 .mega-link small {
   display: block;
   color: var(--muted);
   margin-top: 2px;
-  line-height: 1.35;
+  line-height: 1.4;
+  font-size: .92rem;
 }
 
 .mega-link em {
@@ -1069,38 +1072,54 @@ body.readable-mode { background: #fffaf1; }
 body.no-motion *, body.no-motion *::before, body.no-motion *::after { animation: none !important; transition: none !important; }
 
 /* =============================================================================
-   Header responsive — 3 ชั้น ให้เมนู 8 รายการไม่ทับกันทุกความกว้าง
-     > 1760px        เมนูแนวนอนเต็ม (จอกว้าง หน้าตาเหมือนเดิม)
-     1411–1760px     เมนูแนวนอนแบบบีบกระชับ (ฟอนต์เล็กลง/ระยะชิดขึ้น)
-     <= 1410px       hamburger drawer
-   เหตุที่ตัดที่ 1410px: 8 เมนูภาษาไทยยาว ต้องการความกว้างแถวเดียว ~1333px
-   ต่ำกว่านี้เมนูจะเบียด/ทับ จึงสลับเป็น drawer ที่อ่านง่ายและเข้าถึงได้ดีกว่า
+   Header responsive — ขนาดเมนูไล่ตามความกว้างจอ (จูนกับฟอนต์ TH Sarabun New)
+     >= 1560px       เมนู 19px   (1.12rem)
+     1440–1559px     เมนู ~17.7px (1.04rem)
+     1366–1439px     เมนู ~16.7px (0.98rem)
+     <= 1365px       hamburger drawer
+   ตัวเลขมาจากการวัดจริง: ความกว้างที่ต้องใช้ (โลโก้ + เมนู 8 รายการ + ปุ่ม
+   + ระยะเผื่อ 60px) ≈ 1549 / 1416 / 1361px ตามลำดับ
+   ถ้าเพิ่ม/เปลี่ยนชื่อเมนูใน components.js ต้องวัดและปรับจุดตัดใหม่
    ============================================================================= */
 
-/* ให้แถบ header ใช้ความกว้างที่มีจริง ไม่ถูก --container ของหน้า home หนีบที่ 1280px
-   (สูตรเท่ากับ base.css เดิม จอกว้าง ≥1848px จึงได้ 1800px หน้าตาเหมือนเดิม) */
-@media (min-width: 1411px) {
+/* ให้แถบ header ใช้ความกว้างที่มีจริง ไม่ถูก --container ของหน้า home หนีบที่ 1280px */
+@media (min-width: 1366px) {
   .site-header > .container,
   .topbar > .container {
     width: min(1800px, calc(100% - 48px));
   }
-}
-
-/* เมนูแนวนอนแบบบีบ — คง 8 รายการไว้แถวเดียวบนจอ laptop */
-@media (min-width: 1411px) and (max-width: 1760px) {
-  .header-inner { gap: 14px; }
+  .topbar { font-size: .94rem; }
+  .header-inner { gap: 16px; }
   .brand.brand-image { min-width: auto; }
-  .brand-text-th { font-size: 1.02rem; }
-  .brand-text-en { display: none; }
-  .main-nav { gap: 2px; min-width: 0; }
-  .main-nav a, .main-nav button { font-size: .80rem; padding: 10px 7px; }
-  .main-nav a[data-mega] { gap: 4px; }
-  .nav-caret, .nav-caret svg { width: 13px; height: 13px; }
-  .header-actions { gap: 6px; }
-  .header-actions .round-btn:not(.primary) span { display: none; }
+  .main-nav { min-width: 0; }
 }
 
-@media (max-width: 1410px) {
+/* จอกว้าง */
+@media (min-width: 1560px) {
+  .brand-text-th { font-size: 1.3rem; }
+  .brand-text-en { font-size: .72rem; }
+  .main-nav { gap: 4px; }
+  .main-nav a, .main-nav button { font-size: 1.12rem; padding: 10px 14px; }
+}
+
+/* laptop ใหญ่ */
+@media (min-width: 1440px) and (max-width: 1559.98px) {
+  .brand-text-th { font-size: 1.2rem; }
+  .main-nav { gap: 2px; }
+  .main-nav a, .main-nav button { font-size: 1.04rem; padding: 10px 10px; }
+  .main-nav a[data-mega] { gap: 6px; }
+}
+
+/* laptop 1366 */
+@media (min-width: 1366px) and (max-width: 1439.98px) {
+  .brand-text-th { font-size: 1.15rem; }
+  .main-nav { gap: 2px; }
+  .main-nav a, .main-nav button { font-size: .98rem; padding: 10px 9px; }
+  .main-nav a[data-mega] { gap: 5px; }
+  .header-actions { gap: 6px; }
+}
+
+@media (max-width: 1365.98px) {
   .main-nav { display: none; }
   .mobile-menu-btn { display: block; }
   .header-actions .round-btn span { display: none; }

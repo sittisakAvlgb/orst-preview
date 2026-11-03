@@ -666,7 +666,7 @@ function initMobileMenu() {
 
   // ปิดเมนูมือถืออัตโนมัติเมื่อขยายจอขึ้นเป็นเดสก์ท็อป (ตรงกับ breakpoint ใน CSS)
   // กันอาการเมนู drawer ค้างทับ nav แนวนอนตอนผู้ใช้ย่อ/ขยายหน้าต่าง
-  const desktopMq = window.matchMedia('(min-width: 1411px)');
+  const desktopMq = window.matchMedia('(min-width: 1366px)');
   const closeOnDesktop = () => {
     if (desktopMq.matches && menu.classList.contains('is-open')) {
       menu.classList.remove('is-open');
