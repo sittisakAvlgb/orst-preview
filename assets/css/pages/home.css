@@ -10216,3 +10216,64 @@ background:
 linear-gradient(180deg, rgba(255,250,241,0.3) 0%, rgba(255,250,241,0.8) 50%, rgba(255,250,241,0.95) 100%),
 radial-gradient(circle at 50% 52%, rgba(255,255,255,0.5), transparent 44%);
 }
+
+/* =============================================================================
+   Type scale หน้าแรก — ปรับขนาดตัวอักษรให้สมดุลตามบทบาท (ฐาน 17px)
+   เดิมหัวข้อการ์ดเล็กเท่าเนื้อหา, คำอธิบายในการ์ด/ป้ายเล็กกว่าเนื้อหาปกติ,
+   หัวข้อแต่ละ section ไม่เท่ากัน (40–47.6px) — บล็อกนี้วางไว้ท้ายไฟล์เพื่อให้ชนะ
+   กฎเดิมที่ทับกันหลายชั้นข้างบน
+     หัวข้อ section          ≤ 42.5px  (2.5rem)
+     คำอธิบายใต้หัวข้อ        18.7px   (1.1rem)
+     หัวข้อการ์ด             19.6–20px (1.15–1.18rem)
+     คำอธิบายในการ์ด          16.7px   (.98rem)
+     แท็บ / ปุ่ม              17px     (1rem)
+     ป้าย / วันที่ / เวลา      14.6–15.3px (.86–.9rem)
+   ============================================================================= */
+
+/* หัวข้อ section — ทุก section ขนาดเท่ากัน */
+.section-head h2,
+.service-directory-head h2,
+.network-head-compact h2,
+.help-center-head h2,
+.faq-center-head h2 {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+/* คำอธิบายใต้หัวข้อ section */
+.section-head > div > p,
+.service-directory-head > div > p,
+.network-head-compact > div > p,
+.help-center-head > p {
+  font-size: 1.1rem;
+}
+
+.section-kicker { font-size: .9rem; }
+
+/* การ์ดบริการและแหล่งความรู้ */
+.service-card h3 { font-size: 1.18rem; }
+.service-card p { font-size: .98rem; }
+
+/* แถบจุดเด่นใต้ hero */
+.trust-item h3 { font-size: 1.18rem; }
+.trust-item p { font-size: .98rem; }
+
+/* คลังสื่อ — แท็บเท่ากับแท็บข่าว */
+.media-tab { font-size: 1rem; }
+
+/* ข่าวสารและกิจกรรม */
+.news-mosaic-card-body h4 { font-size: 1.15rem; }
+.news-mosaic-card-body p { font-size: .98rem; }
+.news-meta { font-size: .9rem; }
+.news-type-badge { font-size: .88rem; }
+.news-mini-type { font-size: .86rem; }
+.calendar-head a { font-size: .9rem; }
+.calendar-grid span { font-size: .86rem; }
+.agenda-item small { font-size: .9rem; }
+
+/* บริการประชาชนดิจิทัล */
+.intro-label { font-size: .9rem; }
+.service-badge,
+.service-time { font-size: .86rem; }
+
+/* หน่วยงานที่เกี่ยวข้อง */
+.network-logo-item strong { font-size: 1rem; }
