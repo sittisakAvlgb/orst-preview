@@ -33,7 +33,7 @@
 
 .block-eyebrow {
   display: inline-block;
-  font-size: .82rem;
+  font-size: .9rem;
   font-weight: 700;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -74,14 +74,14 @@
   background: var(--gold-soft);
   color: var(--deep);
   border: 1px solid var(--line);
-  font-size: .78rem;
+  font-size: .86rem;
   font-weight: 700;
   white-space: nowrap;
 }
 
 .block-meta {
   color: var(--muted);
-  font-size: .85rem;
+  font-size: .88rem;
 }
 
 .block-actions {
@@ -286,6 +286,7 @@
 
 .block-stat small {
   color: var(--muted);
+  font-size: .88rem;
 }
 
 /* ---------- link-list ---------- */
@@ -332,7 +333,11 @@
 
 .block-link-text span {
   color: var(--muted);
-  font-size: .92rem;
+  font-size: .97rem;
+}
+
+.block-link-text strong {
+  font-size: 1.08rem;
 }
 
 /* ---------- media-grid ---------- */
@@ -379,7 +384,11 @@
 
 .block-media-body span {
   color: var(--muted);
-  font-size: .92rem;
+  font-size: .97rem;
+}
+
+.block-media-body strong {
+  font-size: 1.08rem;
 }
 
 .block-media-card.is-link {
@@ -680,7 +689,7 @@
 .block-contact-row small {
   display: block;
   color: var(--muted);
-  font-size: .82rem;
+  font-size: .88rem;
   margin-bottom: 2px;
 }
 
