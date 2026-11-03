@@ -10299,3 +10299,125 @@ radial-gradient(circle at 50% 52%, rgba(255,255,255,0.5), transparent 44%);
   .pub-card p,
   .calendar-grid button { font-size: var(--fs-meta); }
 }
+
+/* =============================================================================
+   อินโฟกราฟิก (แท็บแรกของ "คลังสื่อและองค์ความรู้") — ปกแนวตั้ง 3:4 วาดด้วย HTML/CSS
+   ทุกใบขนาดเท่ากัน มี 3 โทนสลับกัน: เขียวเข้ม / ทองอ่อน / กระดาษ
+   ============================================================================= */
+.info-cover {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px 18px 20px;
+  background: var(--surface-soft);
+  color: var(--ink);
+}
+.info-cover--deep {
+  background:
+    radial-gradient(circle at 100% 0%, rgba(216, 189, 116, .22), transparent 45%),
+    linear-gradient(160deg, var(--deep), var(--deep-2));
+  color: #fff;
+}
+.info-cover--gold {
+  background:
+    radial-gradient(circle at 0% 100%, rgba(185, 145, 67, .22), transparent 50%),
+    var(--gold-soft);
+  color: var(--deep);
+}
+.info-cover--paper {
+  background: var(--surface-soft);
+  box-shadow: inset 0 0 0 1px var(--line);
+  color: var(--ink);
+}
+
+.info-badge {
+  align-self: flex-start;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: #13231f;
+  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-size: var(--fs-label-en);
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+.info-title {
+  position: relative;
+  z-index: 1;
+  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-size: 1.12rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.info-list {
+  position: relative;
+  z-index: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+.info-list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .55);
+  color: var(--ink);
+  font-size: var(--fs-body);
+  line-height: 1.35;
+}
+.info-cover--deep .info-list li { background: rgba(255, 255, 255, .1); color: #fff; }
+.info-list span { opacity: .75; }
+.info-list i { font-style: normal; opacity: .6; }
+.info-list b { font-weight: 700; }
+.info-list b.ok::before { content: "✓ "; color: #2f8a5f; }
+.info-cover--deep .info-list b.ok::before { color: var(--gold-2); }
+.info-list s {
+  opacity: .6;
+  text-decoration-thickness: 1px;
+}
+
+.info-digits {
+  position: relative;
+  z-index: 1;
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  color: var(--deep);
+}
+.info-note {
+  position: relative;
+  z-index: 1;
+  font-size: var(--fs-meta);
+  line-height: 1.45;
+  opacity: .8;
+}
+
+/* ตัวอักษรใหญ่จาง ๆ มุมขวาล่าง (ตกแต่ง) */
+.info-glyph {
+  position: absolute;
+  right: 10px;
+  bottom: -26px;
+  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-size: 7.5rem;
+  font-weight: 800;
+  line-height: 1;
+  opacity: .08;
+  pointer-events: none;
+}
+
+.info-card:hover .info-cover { filter: saturate(1.08); }
+
+body.high-contrast .info-list li { background: transparent; box-shadow: inset 0 0 0 1px var(--line); color: var(--ink); }
+body.high-contrast .info-cover--gold,
+body.high-contrast .info-digits { color: var(--ink); }

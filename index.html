@@ -323,8 +323,8 @@
             <p>รวมสารานุกรม อินโฟกราฟิก และสื่อมัลติมีเดีย เพื่อการเรียนรู้อย่างต่อเนื่อง</p>
           </div>
 
-          <a class="view-all media-view-all-link" id="media-view-all-link" href="encyclopedia.html">
-            ดู Encyclopedia ทั้งหมด →
+          <a class="view-all media-view-all-link" id="media-view-all-link" href="knowledge.html">
+            ดูอินโฟกราฟิกทั้งหมด →
           </a>
         </div>
 
@@ -343,74 +343,106 @@
             </button>
           </div>
 
-          <!-- Encyclopedia -->
+          <!-- อินโฟกราฟิก (id/data ยังใช้ชื่อ encyclopedia ตาม JS เดิม) -->
           <div class="media-tab-panel active" id="panel-encyclopedia" role="tabpanel" aria-labelledby="tab-encyclopedia"
             data-media-panel="encyclopedia">
 
 
             <div class="publication-shell media-tab-shell">
               <button class="scroll-btn left" data-scroll="encyclopedia-row" data-dir="left"
-                aria-label="เลื่อนสารานุกรมไปทางซ้าย">‹</button>
+                aria-label="เลื่อนอินโฟกราฟิกไปทางซ้าย">‹</button>
 
               <div class="publication-row knowledge-scroll-row" id="encyclopedia-row">
-                <article class="pub-card knowledge-card">
-                  <div class="cover cover-image">
-                    <img src="assets/images/e-Book02.png" alt="สารานุกรมไทยสำหรับเยาวชนฯ" loading="lazy">
+                <!-- อินโฟกราฟิก: ปกวาดด้วย HTML/CSS (ยังไม่มีไฟล์ภาพจริง) — เมื่อได้ภาพจากหน่วยงาน
+                     ให้แทน .info-cover ด้วย <div class="cover cover-image"><img ...></div> -->
+                <article class="pub-card knowledge-card info-card">
+                  <div class="info-cover info-cover--deep">
+                    <span class="info-badge">อินโฟกราฟิก</span>
+                    <strong class="info-title">คำที่มักเขียนผิด</strong>
+                    <ul class="info-list">
+                      <li><b class="ok">อนุญาต</b><s>อนุญาติ</s></li>
+                      <li><b class="ok">โอกาส</b><s>โอกาศ</s></li>
+                      <li><b class="ok">สังเกต</b><s>สังเกตุ</s></li>
+                      <li><b class="ok">ลายเซ็น</b><s>ลายเซ็นต์</s></li>
+                    </ul>
+                    <span class="info-glyph" aria-hidden="true">ก</span>
                   </div>
-                  <p>สารานุกรมไทยสำหรับเยาวชนฯ</p>
+                  <p>คำที่มักเขียนผิด ชวนตรวจการสะกดที่พบบ่อย</p>
                 </article>
 
-                <article class="pub-card knowledge-card text-card">
-                  <div class="knowledge-text-cover">
-                    <span>Reference</span>
-                    <strong>คลังความรู้ไทย</strong>
+                <article class="pub-card knowledge-card info-card">
+                  <div class="info-cover info-cover--gold">
+                    <span class="info-badge">อินโฟกราฟิก</span>
+                    <strong class="info-title">ราชาศัพท์ที่ควรรู้</strong>
+                    <ul class="info-list">
+                      <li><span>กิน</span><i aria-hidden="true">→</i><b>เสวย</b></li>
+                      <li><span>นอน</span><i aria-hidden="true">→</i><b>บรรทม</b></li>
+                      <li><span>ป่วย</span><i aria-hidden="true">→</i><b>ประชวร</b></li>
+                      <li><span>อาบน้ำ</span><i aria-hidden="true">→</i><b>สรงน้ำ</b></li>
+                    </ul>
+                    <span class="info-glyph" aria-hidden="true">ร</span>
                   </div>
-                  <p>องค์ความรู้สำหรับนักเรียน ครู และประชาชนทั่วไป</p>
+                  <p>ราชาศัพท์ที่ควรรู้ คำสามัญเทียบคำราชาศัพท์</p>
                 </article>
 
-                <article class="pub-card knowledge-card text-card">
-                  <div class="knowledge-text-cover">
-                    <span>Learning</span>
-                    <strong>ความรู้รอบตัว</strong>
+                <article class="pub-card knowledge-card info-card">
+                  <div class="info-cover info-cover--paper">
+                    <span class="info-badge">อินโฟกราฟิก</span>
+                    <strong class="info-title">ลักษณนามน่ารู้</strong>
+                    <ul class="info-list">
+                      <li><span>ช้าง</span><i aria-hidden="true">·</i><b>เชือก</b></li>
+                      <li><span>ร่ม</span><i aria-hidden="true">·</i><b>คัน</b></li>
+                      <li><span>จดหมาย</span><i aria-hidden="true">·</i><b>ฉบับ</b></li>
+                      <li><span>พระสงฆ์</span><i aria-hidden="true">·</i><b>รูป</b></li>
+                    </ul>
+                    <span class="info-glyph" aria-hidden="true">ล</span>
                   </div>
-                  <p>เนื้อหาอ้างอิงเพื่อการเรียนรู้ต่อเนื่อง</p>
+                  <p>ลักษณนามน่ารู้ ใช้คำนับให้ถูกกับสิ่งของ</p>
                 </article>
 
-                <article class="pub-card knowledge-card text-card">
-                  <div class="knowledge-text-cover">
-                    <span>Reference</span>
-                    <strong>คลังความรู้ไทย</strong>
+                <article class="pub-card knowledge-card info-card">
+                  <div class="info-cover info-cover--deep">
+                    <span class="info-badge">อินโฟกราฟิก</span>
+                    <strong class="info-title">คำทับศัพท์ยุคดิจิทัล</strong>
+                    <ul class="info-list">
+                      <li><span>application</span><i aria-hidden="true">→</i><b>แอปพลิเคชัน</b></li>
+                      <li><span>e-mail</span><i aria-hidden="true">→</i><b>อีเมล</b></li>
+                      <li><span>website</span><i aria-hidden="true">→</i><b>เว็บไซต์</b></li>
+                      <li><span>computer</span><i aria-hidden="true">→</i><b>คอมพิวเตอร์</b></li>
+                    </ul>
+                    <span class="info-glyph" aria-hidden="true">@</span>
                   </div>
-                  <p>องค์ความรู้สำหรับนักเรียน ครู และประชาชนทั่วไป</p>
+                  <p>คำทับศัพท์ยุคดิจิทัล เขียนอย่างไรให้ถูกหลัก</p>
                 </article>
 
-                <article class="pub-card knowledge-card text-card">
-                  <div class="knowledge-text-cover">
-                    <span>Learning</span>
-                    <strong>ความรู้รอบตัว</strong>
+                <article class="pub-card knowledge-card info-card">
+                  <div class="info-cover info-cover--gold">
+                    <span class="info-badge">อินโฟกราฟิก</span>
+                    <strong class="info-title">การใช้ไม้ยมก ( ๆ )</strong>
+                    <ul class="info-list info-list--plain">
+                      <li><b class="ok">เด็ก ๆ</b><s>เด็กๆ</s></li>
+                      <li><b class="ok">ช้า ๆ</b><s>ช้าๆ</s></li>
+                    </ul>
+                    <span class="info-note">เว้นวรรคทั้งหน้าและหลังไม้ยมก</span>
+                    <span class="info-glyph" aria-hidden="true">ๆ</span>
                   </div>
-                  <p>เนื้อหาอ้างอิงเพื่อการเรียนรู้ต่อเนื่อง</p>
+                  <p>การใช้ไม้ยมก เว้นวรรคอย่างไรให้ถูกต้อง</p>
                 </article>
 
-                <article class="pub-card knowledge-card text-card">
-                  <div class="knowledge-text-cover">
-                    <span>Reference</span>
-                    <strong>คลังความรู้ไทย</strong>
+                <article class="pub-card knowledge-card info-card">
+                  <div class="info-cover info-cover--paper">
+                    <span class="info-badge">อินโฟกราฟิก</span>
+                    <strong class="info-title">ตัวเลขไทย</strong>
+                    <span class="info-digits">๐ ๑ ๒ ๓ ๔<br>๕ ๖ ๗ ๘ ๙</span>
+                    <span class="info-note">ศูนย์ หนึ่ง สอง สาม สี่ ห้า หก เจ็ด แปด เก้า</span>
+                    <span class="info-glyph" aria-hidden="true">๙</span>
                   </div>
-                  <p>องค์ความรู้สำหรับนักเรียน ครู และประชาชนทั่วไป</p>
-                </article>
-
-                <article class="pub-card knowledge-card text-card">
-                  <div class="knowledge-text-cover">
-                    <span>Learning</span>
-                    <strong>ความรู้รอบตัว</strong>
-                  </div>
-                  <p>เนื้อหาอ้างอิงเพื่อการเรียนรู้ต่อเนื่อง</p>
+                  <p>ตัวเลขไทย ๐–๙ อ่านและเขียนให้คล่อง</p>
                 </article>
               </div>
 
               <button class="scroll-btn right" data-scroll="encyclopedia-row" data-dir="right"
-                aria-label="เลื่อนสารานุกรมไปทางขวา">›</button>
+                aria-label="เลื่อนอินโฟกราฟิกไปทางขวา">›</button>
             </div>
           </div>
 

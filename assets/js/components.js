@@ -879,13 +879,13 @@ function initMediaTabs() {
   if (!mediaTabs.length || !mediaPanels.length) return;
 
   const mediaLinks = {
-    encyclopedia: 'encyclopedia.html',
+    encyclopedia: `${basePath}knowledge.html`,
     research: 'research.html',
     multimedia: 'multimedia.html'
   };
 
   const mediaLabels = {
-    encyclopedia: 'ดู Encyclopedia ทั้งหมด →',
+    encyclopedia: 'ดูอินโฟกราฟิกทั้งหมด →',
     research: 'ดู Research ทั้งหมด →',
     multimedia: 'ดู Multimedia ทั้งหมด →'
   };
