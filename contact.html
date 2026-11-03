@@ -99,86 +99,10 @@
 
     <section class="section">
       <div class="container contact-grid">
-        <div>
-          <div class="contact-info-panel reveal">
-            <h2>ข้อมูลติดต่อ</h2>
-            <div class="contact-list">
-              <article class="contact-item">
-                <span class="contact-icon"><svg class="icon-lg">
-                    <use href="#i-map"></use>
-                  </svg></span>
-                <div>
-                  <h3>ที่อยู่</h3>
-                  <p>สำนักงานราชบัณฑิตยสภา<br>เลขที่ 120 หมู่ 3 ศูนย์ราชการเฉลิมพระเกียรติ 80 พรรษา 5 ธันวาคม 2550 (อาคารซี) กรุงเทพมหานคร 10210</p>
-                  <div class="contact-actions">
-                    <button class="mini-action" type="button"
-                      data-copy="สำนักงานราชบัณฑิตยสภา เลขที่ 120 หมู่ 3 ศูนย์ราชการเฉลิมพระเกียรติ 80 พรรษา 5 ธันวาคม 2550 (อาคารซี) กรุงเทพมหานคร 10210">คัดลอกที่อยู่</button>
-                  </div>
-                </div>
-              </article>
-
-              <article class="contact-item">
-                <span class="contact-icon"><svg class="icon-lg">
-                    <use href="#i-phone-call"></use>
-                  </svg></span>
-                <div>
-                  <h3>โทรศัพท์</h3>
-                  <p>0 2141 1717<br><small>สอบถามข้อมูล · โทรสาร -</small></p>
-                  <div class="contact-actions">
-                    <a class="mini-action" href="tel:021411717">โทรเลย</a>
-                    <button class="mini-action" type="button" data-copy="0 2141 1717">คัดลอกเบอร์</button>
-                  </div>
-                </div>
-              </article>
-
-              <article class="contact-item">
-                <span class="contact-icon"><svg class="icon-lg">
-                    <use href="#i-mail"></use>
-                  </svg></span>
-                <div>
-                  <h3>อีเมล</h3>
-                  <p>saraban@orst.go.th<br><small>สอบถามข้อมูลและคำศัพท์ · ribook@orst.go.th สอบถามและสั่งซื้อหนังสือ</small></p>
-                  <div class="contact-actions">
-                    <a class="mini-action" href="mailto:saraban@orst.go.th">ส่งอีเมล</a>
-                    <button class="mini-action" type="button" data-copy="saraban@orst.go.th">คัดลอกอีเมล</button>
-                  </div>
-                </div>
-              </article>
-
-              <article class="contact-item">
-                <span class="contact-icon"><svg class="icon-lg">
-                    <use href="#i-clock"></use>
-                  </svg></span>
-                <div>
-                  <h3>เวลาทำการ</h3>
-                  <p>[วันและเวลาทำการ]<br><small>[วันหยุดทำการ]</small></p>
-                </div>
-              </article>
-            </div>
-          </div>
-
-          <div class="map-panel reveal" id="map">
-            <div class="map-visual">
-              <div>
-                <svg class="icon-lg">
-                  <use href="#i-map"></use>
-                </svg>
-                <h3>แผนที่และการเดินทาง</h3>
-                <p>พื้นที่สำหรับฝัง Google Maps หรือแผนที่หน่วยงาน</p>
-              </div>
-            </div>
-            <div class="map-actions">
-              <a class="btn" href="https://maps.google.com/?cid=6757793602429635294" target="_blank" rel="noopener">เปิด Google Maps</a>
-              <button class="mini-action" type="button"
-                data-copy="สำนักงานราชบัณฑิตยสภา เลขที่ 120 หมู่ 3 ศูนย์ราชการเฉลิมพระเกียรติ 80 พรรษา 5 ธันวาคม 2550 (อาคารซี) กรุงเทพมหานคร 10210">คัดลอกที่อยู่</button>
-            </div>
-          </div>
-        </div>
-
         <section class="contact-form-panel reveal" id="contact-form" aria-labelledby="form-title">
-          <span class="section-kicker">Contact Form</span>
+          <span class="section-kicker">แบบฟอร์มออนไลน์</span>
           <h2 id="form-title">ส่งข้อความถึงเรา</h2>
-          <div class="form-intro">กรอกข้อมูลให้ครบถ้วน เจ้าหน้าที่จะพิจารณาและติดต่อกลับตามช่องทางที่ท่านระบุ</div>
+          <p class="form-intro">เจ้าหน้าที่จะพิจารณาและติดต่อกลับตามช่องทางที่ท่านเลือก</p>
 
           <form id="message-form">
             <div class="form-grid">
@@ -205,14 +129,14 @@
                   <option value="other">อื่น ๆ</option>
                 </select>
               </div>
-              <div class="field full">
-                <label>ช่องทางที่สะดวกให้ติดต่อกลับ</label>
+              <fieldset class="field full contact-reply">
+                <legend>ช่องทางที่สะดวกให้ติดต่อกลับ</legend>
                 <div class="contact-choice">
                   <label><input type="radio" name="reply" value="email" checked> อีเมล</label>
                   <label><input type="radio" name="reply" value="phone"> โทรศัพท์</label>
                   <label><input type="radio" name="reply" value="both"> ทั้งสองช่องทาง</label>
                 </div>
-              </div>
+              </fieldset>
               <div class="field full">
                 <label for="message">ข้อความ <span class="required">*</span></label>
                 <textarea id="message" name="message" placeholder="กรุณากรอกข้อความที่ต้องการติดต่อ"
@@ -234,6 +158,24 @@
             </div>
           </form>
         </section>
+
+        <aside class="map-card reveal" id="map" aria-labelledby="map-title">
+          <div class="map-frame">
+            <iframe title="แผนที่สำนักงานราชบัณฑิตยสภา"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3873.302979479299!2d100.56415747941041!3d13.88082335957035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e283006010fe1d%3A0x5dc8817a2239cade!2z4Liq4Liz4LiZ4Lix4LiB4LiH4Liy4LiZ4Lij4Liy4LiK4Lia4Lix4LiT4LiR4Li04LiV4Lii4Liq4Lig4LiyIOC4qOC4ueC4meC4ouC5jOC4o-C4suC4iuC4geC4suC4o-C5geC4iOC5ieC4h-C4p-C4seC4kuC4meC4sA!5e0!3m2!1sth!2sth!4v1736823231720!5m2!1sth!2sth"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          </div>
+          <div class="map-body">
+            <span class="map-label">ที่ตั้งสำนักงาน</span>
+            <h2 id="map-title">สำนักงานราชบัณฑิตยสภา</h2>
+            <p>เลขที่ 120 หมู่ 3 ศูนย์ราชการเฉลิมพระเกียรติ 80 พรรษา 5 ธันวาคม 2550 (อาคารซี) กรุงเทพมหานคร 10210</p>
+            <div class="map-actions">
+              <a class="btn" href="https://maps.google.com/?cid=6757793602429635294" target="_blank" rel="noopener">เปิด Google Maps</a>
+              <button class="mini-action" type="button"
+                data-copy="สำนักงานราชบัณฑิตยสภา เลขที่ 120 หมู่ 3 ศูนย์ราชการเฉลิมพระเกียรติ 80 พรรษา 5 ธันวาคม 2550 (อาคารซี) กรุงเทพมหานคร 10210">คัดลอกที่อยู่</button>
+            </div>
+          </div>
+        </aside>
       </div>
     </section>
 

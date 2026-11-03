@@ -446,8 +446,7 @@ h3 {
 }
 
 .section-head h2,
-.contact-form-panel h2,
-.contact-info-panel h2 {
+.contact-form-panel h2 {
   font-size: clamp(1.65rem, 2.5vw, 2.25rem);
 }
 
@@ -456,66 +455,12 @@ h3 {
   margin: 6px 0 0;
 }
 
-.contact-info-panel,
 .contact-form-panel,
-.map-panel,
 .department-panel {
   background: #fff;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-xs);
-}
-
-.contact-info-panel {
-  padding: 24px;
-}
-
-.contact-info-panel h2 {
-  margin-bottom: 18px;
-}
-
-.contact-list {
-  display: grid;
-  gap: 14px;
-}
-
-.contact-item {
-  display: grid;
-  grid-template-columns: 52px 1fr;
-  gap: 14px;
-  padding: 14px;
-  border-radius: 18px;
-  background: var(--surface-soft);
-  border: 1px solid var(--line);
-}
-
-.contact-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
-  display: grid;
-  place-items: center;
-  background: #fff;
-  color: var(--deep);
-  border: 1px solid var(--line);
-}
-
-.contact-item h3 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
-  font-size: 1.02rem;
-  margin-bottom: 2px;
-}
-
-.contact-item p {
-  margin: 0;
-  color: var(--muted);
-}
-
-.contact-actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 10px;
 }
 
 .mini-action {
@@ -532,41 +477,6 @@ h3 {
 .mini-action:hover {
   border-color: var(--gold);
   background: #fffaf1;
-}
-
-.map-panel {
-  margin-top: 18px;
-  overflow: hidden;
-}
-
-.map-visual {
-  min-height: 280px;
-  display: grid;
-  place-items: center;
-  background:
-    linear-gradient(135deg, rgba(7, 59, 52, .92), rgba(11, 63, 55, .78)),
-    radial-gradient(circle at 20% 30%, rgba(185, 145, 67, .25), transparent 28%);
-  color: #fff;
-  padding: 26px;
-  text-align: center;
-}
-
-.map-visual svg {
-  width: 68px;
-  height: 68px;
-  color: var(--gold-2);
-  margin-bottom: 14px;
-}
-
-.map-visual h3 {
-  color: #fff;
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
-  margin-bottom: 6px;
-}
-
-.map-visual p {
-  margin: 0;
-  color: rgba(255, 255, 255, .78);
 }
 
 .map-actions {
@@ -1173,8 +1083,7 @@ font-size: clamp(2.25rem, 11vw, 3.25rem);
    ============================================================================= */
 .contact-hero h1 { font-size: clamp(2.3rem, 4vw, 3.3rem); }   /* สูงสุด ~56px */
 .section-head h2,
-.contact-form-panel h2,
-.contact-info-panel h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); }
+.contact-form-panel h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); }
 .section-kicker { font-size: .9rem; }
 
 .department-card h3 { font-size: 1.22rem; }
@@ -1184,8 +1093,6 @@ font-size: clamp(2.25rem, 11vw, 3.25rem);
 .department-topics-label { font-size: .92rem; }
 .department-topics li,
 .department-mail small { font-size: .92rem; }
-.contact-item h3 { font-size: 1.08rem; }
-.contact-item small { font-size: .88rem; }
 .mini-action { font-size: .92rem; }
 
 /* =============================================================================
@@ -1366,4 +1273,160 @@ body.high-contrast .channel-go { color: var(--ink); }
 @media (prefers-reduced-motion: reduce) {
   .channel,
   .channel-go .icon { transition: none; }
+}
+
+/* =============================================================================
+   ฟอร์ม + การ์ดแผนที่ (ออกแบบใหม่) — ข้อมูลโทร/อีเมล/ที่อยู่อยู่ใน hero แล้ว
+   ส่วนนี้จึงเหลือ ฟอร์ม (ซ้าย กว้าง) + แผนที่จริง (ขวา ติดหน้าจอขณะเลื่อน)
+   ============================================================================= */
+.contact-grid {
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 24px;
+  align-items: start;
+}
+
+/* ฟอร์ม */
+.contact-form-panel { padding: 28px 30px; }
+.contact-form-panel h2 { font-size: clamp(1.5rem, 2.2vw, 1.9rem); }
+.contact-form-panel .form-intro {
+  margin: 4px 0 20px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 1rem;
+}
+.contact-form-panel .form-grid { gap: 14px 16px; }
+.contact-form-panel .field { gap: 5px; margin: 0; }
+.contact-form-panel label,
+.contact-reply legend { font-size: .98rem; }
+.contact-form-panel input:not([type="radio"]):not([type="checkbox"]),
+.contact-form-panel select,
+.contact-form-panel textarea {
+  min-height: 44px;
+  padding: 9px 13px;
+  border-radius: 12px;
+  background: var(--surface);
+}
+.contact-form-panel textarea { min-height: 120px; }
+
+/* ช่องทางติดต่อกลับ — ปุ่มเม็ดยาเลือกได้ 1 อัน */
+.contact-reply {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.contact-reply legend {
+  margin-bottom: 5px;
+  padding: 0;
+  font-weight: 700;
+  color: var(--ink);
+}
+.contact-form-panel .contact-choice {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+}
+.contact-form-panel .contact-choice label {
+  gap: 7px;
+  min-height: 40px;
+  padding: 6px 16px 6px 12px;
+  border-radius: 999px;
+  background: var(--surface);
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease;
+}
+.contact-form-panel .contact-choice label:hover { border-color: var(--gold); }
+.contact-form-panel .contact-choice label:has(input:checked) {
+  border-color: var(--deep);
+  background: var(--gold-soft);
+  color: var(--deep);
+}
+.contact-form-panel .contact-choice input,
+.contact-form-panel .privacy-check input {
+  width: 18px;
+  height: 18px;
+  min-height: 0;
+  margin: 0;
+  flex: none;
+  accent-color: var(--deep);
+}
+.contact-form-panel .privacy-check input { margin-top: 5px; }
+
+.contact-form-panel .privacy-check {
+  margin: 18px 0 16px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: .98rem;
+}
+.contact-form-panel .form-actions {
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+/* การ์ดแผนที่ */
+.map-card {
+  position: sticky;
+  top: calc(var(--fixed-header-height, 96px) + 16px);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-xs);
+}
+.map-frame {
+  aspect-ratio: 4 / 3;
+  background: var(--surface-soft);
+}
+.map-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.map-body { padding: 20px 22px 22px; }
+.map-label {
+  display: block;
+  color: var(--gold);
+  font-size: .9rem;
+  font-weight: 700;
+}
+.map-body h2 {
+  margin: 2px 0 4px;
+  font-size: 1.3rem;
+}
+.map-body p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.map-card .map-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+.map-card .mini-action { min-height: 44px; padding: 8px 16px; }
+
+body.high-contrast .contact-form-panel .contact-choice label:has(input:checked) { color: var(--ink); }
+
+@media (max-width: 1180px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .map-card { position: static; }
+  .map-frame { aspect-ratio: 16 / 9; }
+}
+
+@media (max-width: 760px) {
+  .contact-form-panel { padding: 22px 18px; }
+  .map-frame { aspect-ratio: 4 / 3; }
+  .contact-form-panel .form-actions { display: grid; grid-template-columns: 1fr; }
+  .contact-form-panel .form-actions .btn { width: 100%; }
 }
