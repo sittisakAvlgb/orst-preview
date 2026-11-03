@@ -10195,7 +10195,7 @@ object-position: center top;
 #hero-title.orst-hero-title {
 color: #123e35;
 font-family: "Sarabun", "TH Sarabun New", sans-serif;
-font-size: clamp(2.5rem, 5vw, 4rem);
+font-size: clamp(2.3rem, 4vw, 3.3rem);   /* สูงสุด ~56px ที่ฐาน 17px */
 line-height: 1.2;
 letter-spacing: 0.5px;
 font-weight: 800;
