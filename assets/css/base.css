@@ -53,6 +53,47 @@
   src: url("../fonts/THSarabunNew-BoldItalic.woff2") format("woff2");
 }
 
+/* -----------------------------------------------------------------------------
+   Sarabun (Cadson Demak) — สารบรรณเวอร์ชันเว็บ มีหลายน้ำหนัก (300–800)
+   ใช้เฉพาะ "หัวข้อ/ดิสเพลย์" เพื่อเล่นคอนทราสต์หนา-บาง ส่วนเนื้อหายังเป็น
+   TH Sarabun New (ฟอนต์ราชการ) — self-host เหมือนกัน
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: "Sarabun";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("../fonts/Sarabun-Light.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Sarabun";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/Sarabun-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Sarabun";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/Sarabun-SemiBold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Sarabun";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/Sarabun-Bold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Sarabun";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("../fonts/Sarabun-ExtraBold.woff2") format("woff2");
+}
+
 :root {
   --container: 1800px;
   --paper: #fbf7ef;

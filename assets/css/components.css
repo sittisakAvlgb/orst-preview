@@ -1133,3 +1133,23 @@ body.no-motion *, body.no-motion *::before, body.no-motion *::after { animation:
   .brand-text-th { font-size: .92rem; }
   .brand-text-en { display: none; }
 }
+
+/* =============================================================================
+   Typography display (ไฮบริด) — เฉพาะ "hero/ดิสเพลย์" ใช้ Sarabun เพื่อเล่น
+   คอนทราสต์หนา-บาง: หัวข้อ ExtraBold 800 / คำโปรย Regular 400 / ป้าย SemiBold 600
+   ส่วนเนื้อหาและหัวข้อรอง (section/card) ยังเป็น TH Sarabun New เหมือนกันทั้งเว็บ
+   (home hero ใช้ .orst-hero-* จึงตั้งไว้ที่ home.css โดยตรง)
+   ============================================================================= */
+.hero-copy h1, .page-hero h1 {
+  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-weight: 800;
+  letter-spacing: -.01em;
+}
+.hero-copy p, .page-hero p {
+  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-weight: 400;
+}
+.eyebrow, .section-kicker {
+  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-weight: 600;
+}
