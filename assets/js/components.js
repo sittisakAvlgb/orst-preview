@@ -30,6 +30,10 @@ const basePath = location.pathname.includes('/pages/') ? '../' : './';
 // TODO: ใส่ URL จริงที่ได้รับจากหน่วยงาน (ตอนนี้ยังเป็น "#" ตามกฎห้ามเดาข้อมูลจริง)
 const ROYAL_SOCIETY_URL = '#';
 
+// แผนที่สำนักงาน (ฝังเดียวกับหน้าติดต่อของ orst.go.th) — ใช้ใน footer
+const OFFICE_MAP_URL = 'https://maps.google.com/?cid=6757793602429635294';
+const OFFICE_MAP_EMBED = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3873.302979479299!2d100.56415747941041!3d13.88082335957035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e283006010fe1d%3A0x5dc8817a2239cade!2z4Liq4Liz4LiZ4Lix4LiB4LiH4Liy4LiZ4Lij4Liy4LiK4Lia4Lix4LiT4LiR4Li04LiV4Lii4Liq4Lig4LiyIOC4qOC4ueC4meC4ouC5jOC4o-C4suC4iuC4geC4suC4o-C5geC4iOC5ieC4h-C4p-C4seC4kuC4meC4sA!5e0!3m2!1sth!2sth!4v1736823231720!5m2!1sth!2sth';
+
 const icons = `
 <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4.2-4.2"></path></symbol>
@@ -57,6 +61,8 @@ const icons = `
   <symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></symbol>
   <symbol id="i-puzzle" viewBox="0 0 24 24"><path d="M19 13h-2v-2a2 2 0 1 0-4 0v2h-2V9h2V7a2 2 0 1 0-4 0v2H5v10h14Z"></path></symbol>
   <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7"></path><path d="M5 10v10h14V10"></path><path d="M10 20v-6h4v6"></path></symbol>
+  <symbol id="i-phone-call" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.7 2.6a2 2 0 0 1-.4 2.1L8.1 9.7a16 16 0 0 0 6.2 6.2l1.3-1.3a2 2 0 0 1 2.1-.4c.8.3 1.7.6 2.6.7a2 2 0 0 1 1.7 2z"></path></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"></path><path d="m22 6-10 7L2 6"></path></symbol>
   <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6"></path><path d="M10 14 20 4"></path><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"></path></symbol>
   <symbol id="i-service" viewBox="0 0 24 24"><path d="M12 3l8 4v6c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V7z"></path><path d="M9 12l2 2 4-5"></path></symbol>
 </svg>`;
@@ -499,7 +505,7 @@ function renderFooter() {
     <footer class="footer orst-footer" id="footer">
       <div class="container">
 
-        <div class="orst-footer-top">
+        <div class="orst-footer-main">
           <div class="orst-footer-brand">
             <a class="orst-footer-logo-wrap" href="${basePath}index.html" aria-label="สำนักงานราชบัณฑิตยสภา หน้าแรก">
               <img
@@ -530,7 +536,7 @@ function renderFooter() {
             </div>
           </div>
 
-          <div class="orst-footer-links">
+          <nav class="orst-footer-links" aria-label="ลิงก์ส่วนท้าย">
             <div class="orst-footer-col">
               <h3>บริการหลัก</h3>
               <ul>
@@ -560,24 +566,30 @@ function renderFooter() {
                 <li><a href="#">คำถามที่พบบ่อย</a></li>
               </ul>
             </div>
+          </nav>
 
-            <div class="orst-footer-col orst-footer-contact">
-              <h3>ติดต่อเรา</h3>
-              <p>
-                สำนักงานราชบัณฑิตยสภา<br>
-                เลขที่ 120 หมู่ 3 ศูนย์ราชการเฉลิมพระเกียรติ<br>
-                80 พรรษา 5 ธันวาคม 2550 (อาคารซี)<br>
-                กรุงเทพมหานคร 10210
-              </p>
-              <p>
-                โทรศัพท์: 0 2141 1718<br>
-                อีเมล: saraban@orst.go.th
-              </p>
+          <!-- การ์ดติดต่อ + แผนที่ (iframe โหลดเมื่อเลื่อนมาใกล้เท่านั้น) -->
+          <section class="orst-footer-visit" aria-labelledby="footer-visit-title">
+            <div class="orst-footer-map">
+              <iframe title="แผนที่สำนักงานราชบัณฑิตยสภา" src="${OFFICE_MAP_EMBED}"
+                loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
-          </div>
+            <div class="orst-footer-visit-body">
+              <h3 id="footer-visit-title">ติดต่อเรา</h3>
+              <address>
+                เลขที่ 120 หมู่ 3 ศูนย์ราชการเฉลิมพระเกียรติ
+                80 พรรษา 5 ธันวาคม 2550 (อาคารซี) กรุงเทพมหานคร 10210
+              </address>
+              <ul class="orst-footer-reach">
+                <li>${icon('i-phone-call')}<a href="tel:021411718">0 2141 1718</a></li>
+                <li>${icon('i-mail')}<a href="mailto:saraban@orst.go.th">saraban@orst.go.th</a></li>
+              </ul>
+              <a class="orst-footer-maplink" href="${OFFICE_MAP_URL}" target="_blank" rel="noopener noreferrer">
+                เปิดใน Google Maps ${icon('i-external')}<span class="sr-only">(เปิดในแท็บใหม่)</span>
+              </a>
+            </div>
+          </section>
         </div>
-
-        
 
         <div class="orst-footer-bottom">
           <span>© 2026 สำนักงานราชบัณฑิตยสภา</span>

@@ -735,477 +735,249 @@ body.high-contrast .drawer-cta { border: 1px solid var(--line); }
 }
 
 
-/* ===== Modern ORST Footer ===== */
+/* ===== ORST Footer =====
+   เดสก์ท็อป: แบรนด์ | ลิงก์ 3 หมวด | การ์ดติดต่อ + แผนที่
+   แท็บเล็ต: แบรนด์ + การ์ดแผนที่ / ลิงก์เต็มแถว
+   มือถือ: เรียงทีละส่วน (แบรนด์ > การ์ดแผนที่ > ลิงก์ 2 คอลัมน์) */
 
 .orst-footer {
   position: relative;
   overflow: hidden;
   background:
-radial-gradient(circle at 8% 0%, rgba(216, 189, 116, .18), transparent 32%),
-radial-gradient(circle at 88% 20%, rgba(255, 255, 255, .08), transparent 28%),
-linear-gradient(135deg, #062f2a 0%, #073b34 48%, #102033 100%);
+    radial-gradient(circle at 8% 0%, rgba(216, 189, 116, .16), transparent 32%),
+    linear-gradient(135deg, #062f2a 0%, #073b34 55%, #0d2b2f 100%);
   color: rgba(255, 255, 255, .84);
-  padding: 54px 0 0;
+  padding: 56px 0 0;
 }
 
-.orst-footer::before {
-  content: "";
-  position: absolute;
-  inset: auto -80px -120px auto;
-  width: 340px;
-  height: 340px;
-  border-radius: 50%;
-  background: rgba(185, 145, 67, .13);
-  pointer-events: none;
-}
-
-.orst-footer-top {
-  position: relative;
+.orst-footer-main {
   display: grid;
-  grid-template-columns: minmax(280px, 390px) minmax(0, 1fr);
-  gap: 42px;
+  grid-template-columns: minmax(240px, 1fr) minmax(0, 1.45fr) minmax(320px, 1.1fr);
+  grid-template-areas: "brand links visit";
+  gap: 48px;
   align-items: start;
 }
 
-.orst-footer-brand {
-  max-width: 390px;
-}
-
-
-
+/* แบรนด์ */
+.orst-footer-brand { grid-area: brand; max-width: 400px; }
 .orst-footer-logo-wrap {
   display: inline-flex;
   align-items: center;
   gap: 14px;
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 }
-
 .orst-footer-emblem {
   display: block;
-  height: 72px;
-  width: auto;
   flex: none;
+  width: auto;
+  height: 68px;
 }
-
 .orst-footer-wordmark {
   display: flex;
   flex-direction: column;
   gap: 3px;
   line-height: 1.15;
 }
-
 .orst-footer-wordmark-th {
+  color: #fff;
   font-size: 1.16rem;
   font-weight: 700;
-  color: #fff;
 }
-
 .orst-footer-wordmark-en {
+  color: rgba(255, 255, 255, .7);
   font-size: .68rem;
   font-weight: 700;
   letter-spacing: .06em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, .72);
 }
-
 .orst-footer-brand p {
-  margin: 0;
-  color: rgba(255, 255, 255, .76);
-  line-height: 1.75;
+  margin: 18px 0 0;
+  color: rgba(255, 255, 255, .74);
+  line-height: 1.7;
 }
-
 .orst-footer-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 20px;
 }
-
 .orst-footer-primary,
 .orst-footer-secondary {
-  min-height: 42px;
-  padding: 9px 14px;
-  border-radius: 999px;
+  min-height: 44px;
+  padding: 9px 18px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  border-radius: 999px;
   font-weight: 700;
   text-decoration: none;
 }
-
-.orst-footer-primary {
-  background: var(--gold);
-  color: #13231f;
-}
-
+.orst-footer-primary { background: var(--gold); color: #13231f; }
+.orst-footer-primary:hover,
+.orst-footer-primary:focus-visible { background: var(--gold-2); }
 .orst-footer-secondary {
   border: 1px solid rgba(255, 255, 255, .22);
-  background: rgba(255, 255, 255, .08);
+  background: rgba(255, 255, 255, .06);
   color: #fff;
 }
+.orst-footer-secondary:hover,
+.orst-footer-secondary:focus-visible { border-color: var(--gold-2); }
 
+/* ลิงก์ */
 .orst-footer-links {
+  grid-area: links;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
 }
-
 .orst-footer-col h3 {
   margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, .12);
   color: #fff;
   font-size: 1.02rem;
 }
-
 .orst-footer-col ul {
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
   display: grid;
-  gap: 9px;
+  gap: 10px;
 }
-
 .orst-footer-col a {
-  color: rgba(255, 255, 255, .72);
-  text-decoration: none;
+  color: rgba(255, 255, 255, .74);
   line-height: 1.5;
-  transition: color .18s ease, transform .18s ease;
+  text-decoration: none;
+  transition: color .18s ease;
 }
+.orst-footer-col a:hover,
+.orst-footer-col a:focus-visible { color: var(--gold-2); }
 
-.orst-footer-col a:hover {
-  color: var(--gold-2);
+/* การ์ดติดต่อ + แผนที่ */
+.orst-footer-visit {
+  grid-area: visit;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, .06);
 }
-
-.orst-footer-contact p {
-  margin: 0 0 12px;
-  color: rgba(255, 255, 255, .72);
-  line-height: 1.75;
-}
-
-.orst-footer-newsletter {
-  position: relative;
-  margin-top: 38px;
-  padding: 18px;
-  border-radius: 24px;
-  border: 1px solid rgba(216, 189, 116, .22);
+.orst-footer-map {
+  aspect-ratio: 16 / 9;
   background: rgba(255, 255, 255, .08);
-  backdrop-filter: blur(10px);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
 }
-
-.orst-footer-newsletter strong {
+.orst-footer-map iframe {
   display: block;
-  color: #fff;
-  font-size: 1.05rem;
-}
-
-.orst-footer-newsletter span {
-  display: block;
-  margin-top: 3px;
-  color: rgba(255, 255, 255, .68);
-}
-
-.orst-newsletter-form {
-  display: flex;
-  gap: 8px;
-  min-width: min(460px, 100%);
-}
-
-.orst-newsletter-form input {
-  flex: 1;
-  min-height: 46px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, .18);
-  background: rgba(255, 255, 255, .12);
-  color: #fff;
-  padding: 10px 16px;
-  outline: none;
-}
-
-.orst-newsletter-form input::placeholder {
-  color: rgba(255, 255, 255, .58);
-}
-
-.orst-newsletter-form input:focus {
-  border-color: rgba(216, 189, 116, .7);
-  box-shadow: 0 0 0 4px rgba(216, 189, 116, .14);
-}
-
-.orst-newsletter-form button {
-  min-height: 46px;
-  padding: 10px 16px;
+  width: 100%;
+  height: 100%;
   border: 0;
-  border-radius: 999px;
-  background: var(--gold);
-  color: #13231f;
-  font-weight: 700;
-  white-space: nowrap;
+  filter: grayscale(.2);
 }
+.orst-footer-visit-body { padding: 18px 20px 20px; }
+.orst-footer-visit-body h3 {
+  margin: 0 0 6px;
+  color: #fff;
+  font-size: 1.02rem;
+}
+.orst-footer-visit address {
+  margin: 0;
+  color: rgba(255, 255, 255, .74);
+  font-style: normal;
+  line-height: 1.6;
+}
+.orst-footer-reach {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+}
+.orst-footer-reach li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.orst-footer-reach .icon { width: 17px; height: 17px; color: var(--gold-2); }
+.orst-footer-reach a {
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+.orst-footer-reach a:hover,
+.orst-footer-reach a:focus-visible { color: var(--gold-2); }
+.orst-footer-maplink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  color: var(--gold-2);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.orst-footer-maplink .icon { width: 15px; height: 15px; }
+.orst-footer-maplink:hover,
+.orst-footer-maplink:focus-visible { color: #fff; }
 
+/* แถบล่าง — ชิดซ้ายทั้งหมด เว้นมุมขวาให้ปุ่มลอย "ช่วยการเข้าถึง" */
 .orst-footer-bottom {
-  position: relative;
-  margin-top: 28px;
-  padding: 18px 0;
+  margin-top: 40px;
+  padding: 18px 0 22px;
   border-top: 1px solid rgba(255, 255, 255, .12);
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
   flex-wrap: wrap;
-  color: rgba(255, 255, 255, .62);
+  align-items: center;
+  gap: 8px 32px;
+  color: rgba(255, 255, 255, .6);
   font-size: .9rem;
 }
-
 .orst-footer-bottom nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
+  gap: 8px 20px;
 }
-
 .orst-footer-bottom a {
-  color: rgba(255, 255, 255, .68);
+  color: rgba(255, 255, 255, .7);
   text-decoration: none;
 }
+.orst-footer-bottom a:hover,
+.orst-footer-bottom a:focus-visible { color: var(--gold-2); }
 
-.orst-footer-bottom a:hover {
-  color: var(--gold-2);
+/* แท็บเล็ต / จอเล็ก */
+@media (max-width: 1199.98px) {
+  .orst-footer-main {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "brand visit"
+      "links links";
+    gap: 36px 40px;
+  }
+  .orst-footer-brand { max-width: none; }
 }
 
-@media (max-width: 1100px) {
-  .orst-footer-top {
-grid-template-columns: 1fr;
+/* มือถือ */
+@media (max-width: 720px) {
+  .orst-footer { padding-top: 40px; }
+  .orst-footer-main {
+    grid-template-columns: 1fr;
+    grid-template-areas: "brand" "visit" "links";
+    gap: 30px;
   }
-
-  .orst-footer-brand {
-max-width: 720px;
-  }
-
-  .orst-footer-links {
-grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .orst-footer-newsletter {
-display: grid;
-  }
-
-  .orst-newsletter-form {
-min-width: 0;
-  }
-}
-
-@media (max-width: 640px) {
-  .orst-footer {
-padding-top: 40px;
-  }
-
-  .orst-footer-logo-wrap {
-padding: 10px 12px;
-border-radius: 20px;
-  }
-
-  .orst-footer-emblem {
-height: 60px;
-  }
-
-  .orst-footer-links {
-grid-template-columns: 1fr;
-gap: 22px;
-  }
-
-  .orst-footer-newsletter {
-padding: 16px;
-border-radius: 22px;
-  }
-
-  .orst-newsletter-form {
-display: grid;
-grid-template-columns: 1fr;
-  }
-
-  .orst-newsletter-form button {
-width: 100%;
-  }
-
+  .orst-footer-emblem { height: 56px; }
+  .orst-footer-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 20px; }
+  .orst-footer-map { aspect-ratio: 4 / 3; }
   .orst-footer-bottom {
-display: grid;
-  }
-
-  .orst-footer-bottom nav {
-gap: 10px 14px;
-  }
-}
-/* ===== Footer Responsive Refinement ===== */
-
-/* Tablet / small desktop */
-@media (max-width: 1200px) {
-  .orst-footer-top {
-grid-template-columns: 1fr;
-gap: 34px;
-  }
-
-  .orst-footer-brand {
-max-width: 760px;
-  }
-
-  .orst-footer-links {
-grid-template-columns: repeat(4, minmax(160px, 1fr));
-gap: 22px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 32px;
+    padding-bottom: 84px;   /* เผื่อปุ่มลอยมุมขวาล่าง */
   }
 }
 
-/* Tablet */
-@media (max-width: 960px) {
-  .orst-footer {
-padding-top: 44px;
-  }
-
-  .orst-footer-top {
-gap: 30px;
-  }
-
-  .orst-footer-links {
-grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .orst-footer-newsletter {
-align-items: stretch;
-display: grid;
-grid-template-columns: 1fr;
-  }
-
-  .orst-newsletter-form {
-width: 100%;
-min-width: 0;
-  }
-}
-
-/* Mobile */
-@media (max-width: 640px) {
-  .orst-footer {
-padding-top: 36px;
-  }
-
-  .orst-footer-top {
-gap: 28px;
-  }
-
-  .orst-footer-logo-wrap {
-width: 100%;
-justify-content: center;
-padding: 12px;
-border-radius: 20px;
-  }
-
-  .orst-footer-emblem {
-height: 56px;
-  }
-
-  .orst-footer-brand p {
-text-align: center;
-font-size: .94rem;
-line-height: 1.7;
-  }
-
-  .orst-footer-actions {
-display: grid;
-grid-template-columns: 1fr;
-  }
-
-  .orst-footer-primary,
-  .orst-footer-secondary {
-width: 100%;
-  }
-
-  .orst-footer-links {
-grid-template-columns: 1fr;
-gap: 10px;
-  }
-
-  .orst-footer-col {
-padding: 16px;
-border-radius: 18px;
-background: rgba(255, 255, 255, .06);
-border: 1px solid rgba(255, 255, 255, .10);
-  }
-
-  .orst-footer-col h3 {
-margin-bottom: 10px;
-  }
-
-  .orst-footer-col ul {
-gap: 7px;
-  }
-
-  .orst-footer-contact p {
-font-size: .92rem;
-  }
-
-  .orst-footer-newsletter {
-margin-top: 28px;
-padding: 16px;
-border-radius: 20px;
-  }
-
-  .orst-footer-newsletter strong {
-font-size: 1rem;
-  }
-
-  .orst-footer-newsletter span {
-font-size: .9rem;
-line-height: 1.55;
-  }
-
-  .orst-newsletter-form {
-display: grid;
-grid-template-columns: 1fr;
-gap: 10px;
-  }
-
-  .orst-newsletter-form input,
-  .orst-newsletter-form button {
-width: 100%;
-  }
-
-  .orst-footer-bottom {
-display: grid;
-grid-template-columns: 1fr;
-text-align: center;
-justify-items: center;
-gap: 12px;
-  }
-
-  .orst-footer-bottom nav {
-justify-content: center;
-gap: 8px 14px;
-  }
-}
-
-/* Very small mobile */
-@media (max-width: 420px) {
-  .orst-footer {
-padding-top: 32px;
-  }
-
-  .orst-footer-emblem {
-height: 50px;
-  }
-
-  .orst-footer-col {
-padding: 14px;
-  }
-
-  .orst-footer-bottom {
-font-size: .82rem;
-  }
-
-  .orst-footer-bottom nav {
-display: grid;
-grid-template-columns: 1fr;
-gap: 6px;
-  }
+@media (max-width: 340px) {
+  .orst-footer-actions { display: grid; }
+  .orst-footer-links { grid-template-columns: 1fr; }
 }
 
 
