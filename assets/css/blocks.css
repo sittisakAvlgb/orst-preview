@@ -63,7 +63,7 @@
 
 .block-breadcrumb [aria-current="page"] {
   color: var(--ink);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .block-tag {
@@ -281,7 +281,7 @@
 }
 
 .block-stat span {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .block-stat small {
@@ -513,7 +513,7 @@
   border-radius: 999px;
   background: var(--deep);
   color: #fff;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .block-step strong {
@@ -686,7 +686,7 @@
 
 .block-contact-row a {
   color: var(--deep);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .block-contact-icon {

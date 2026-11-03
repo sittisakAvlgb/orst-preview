@@ -130,7 +130,7 @@
 
 .brand-text-th {
   font-size: 1.22rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--deep);
   letter-spacing: .01em;
 }
@@ -166,7 +166,7 @@
   background: transparent;
   color: var(--ink);
   text-decoration: none;
-  font-weight: 800;
+  font-weight: 700;
   font-size: .94rem;
   display: inline-flex;
   align-items: center;
@@ -234,7 +234,7 @@
   gap: 8px;
   padding: 10px 16px;
   text-decoration: none;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .round-btn.primary {
@@ -307,7 +307,7 @@
 
 .mega-feature .section-kicker {
   color: #f7df9d;
-  font-weight: 900;
+  font-weight: 700;
   font-size: .8rem;
 }
 
@@ -335,7 +335,7 @@
   background: var(--gold);
   color: #13231f;
   text-decoration: none;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .mega-groups {
@@ -385,7 +385,7 @@
 .mega-link em {
   color: var(--gold);
   font-style: normal;
-  font-weight: 900;
+  font-weight: 700;
   transition: transform .18s ease;
 }
 
@@ -417,7 +417,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-weight: 900;
+  font-weight: 700;
   text-align: left;
   padding: 12px 4px;
 }
@@ -500,7 +500,7 @@ linear-gradient(135deg, #062f2a 0%, #073b34 48%, #102033 100%);
 
 .orst-footer-wordmark-th {
   font-size: 1.16rem;
-  font-weight: 800;
+  font-weight: 700;
   color: #fff;
 }
 
@@ -533,7 +533,7 @@ linear-gradient(135deg, #062f2a 0%, #073b34 48%, #102033 100%);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-weight: 900;
+  font-weight: 700;
   text-decoration: none;
 }
 
@@ -644,7 +644,7 @@ linear-gradient(135deg, #062f2a 0%, #073b34 48%, #102033 100%);
   border-radius: 999px;
   background: var(--gold);
   color: #13231f;
-  font-weight: 900;
+  font-weight: 700;
   white-space: nowrap;
 }
 
@@ -953,7 +953,7 @@ gap: 6px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-weight: 900;
+  font-weight: 700;
   box-shadow: 0 16px 36px rgba(7,59,52,.22);
 }
 
@@ -1061,7 +1061,7 @@ gap: 6px;
   border-radius: 16px;
   background: #fff;
   color: var(--ink);
-  font-weight: 800;
+  font-weight: 700;
 }
 
 body.high-contrast { filter: contrast(1.12); }

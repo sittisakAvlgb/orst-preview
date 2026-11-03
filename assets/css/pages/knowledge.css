@@ -119,7 +119,7 @@
         color: #111827;
         padding: 10px 14px;
         border-radius: 12px;
-        font-weight: 800;
+        font-weight: 700;
         box-shadow: var(--shadow-sm)
     }
 
@@ -256,7 +256,7 @@
 
     .brand-fallback strong {
         display: block;
-        font-weight: 800;
+        font-weight: 700;
         font-size: 1.16rem;
         line-height: 1.28
     }
@@ -318,7 +318,7 @@
         justify-content: center;
         gap: 7px;
         padding: 0 14px;
-        font-weight: 800;
+        font-weight: 700;
         box-shadow: var(--shadow-xs)
     }
 
@@ -366,7 +366,7 @@
         border-radius: 14px;
         padding: 13px 14px;
         margin-top: 8px;
-        font-weight: 800;
+        font-weight: 700;
         color: var(--ink)
     }
 
@@ -392,7 +392,7 @@
 
     .breadcrumb [aria-current="page"] {
         color: var(--deep);
-        font-weight: 800
+        font-weight: 700
     }
 
     .knowledge-hero {
@@ -430,7 +430,7 @@
         align-items: center;
         gap: 10px;
         color: var(--gold);
-        font-weight: 900;
+        font-weight: 700;
         margin-bottom: 12px
     }
 
@@ -496,7 +496,7 @@
         align-items: center;
         justify-content: center;
         gap: 9px;
-        font-weight: 900;
+        font-weight: 700;
         background: var(--deep);
         color: #fff;
         box-shadow: var(--shadow-xs)
@@ -526,7 +526,7 @@
         background: rgba(255, 255, 255, .84);
         border-radius: 999px;
         padding: 8px 13px;
-        font-weight: 800;
+        font-weight: 700;
         color: var(--ink);
         font-size: .92rem;
         min-height: 38px;
@@ -612,7 +612,7 @@
 
     .section-kicker {
         font-size: .82rem;
-        font-weight: 900;
+        font-weight: 700;
         color: var(--gold);
         letter-spacing: .02em
     }
@@ -640,7 +640,7 @@
         border-radius: 999px;
         min-height: 42px;
         padding: 8px 13px;
-        font-weight: 800;
+        font-weight: 700;
         color: var(--ink)
     }
 
@@ -757,7 +757,7 @@
         border: 0;
         background: transparent;
         color: var(--gold);
-        font-weight: 900
+        font-weight: 700
     }
 
     .filter-group {
@@ -790,7 +790,7 @@
         justify-content: space-between;
         gap: 12px;
         color: var(--ink);
-        font-weight: 800;
+        font-weight: 700;
         text-align: left
     }
 
@@ -885,13 +885,13 @@
         background: #fff;
         color: var(--ink);
         padding: 0 16px;
-        font-weight: 800;
+        font-weight: 700;
         box-shadow: var(--shadow-xs)
     }
 
     .result-count {
         color: var(--muted);
-        font-weight: 800;
+        font-weight: 700;
         margin-bottom: 16px
     }
 
@@ -928,7 +928,7 @@
         color: #17212b;
         border-radius: 999px;
         padding: 7px 12px;
-        font-weight: 900;
+        font-weight: 700;
         z-index: 1
     }
 
@@ -1005,7 +1005,7 @@
         border-radius: 999px;
         padding: 5px 10px;
         font-size: .78rem;
-        font-weight: 900
+        font-weight: 700
     }
 
     .card-top small {
@@ -1041,7 +1041,7 @@
 
     .read-link {
         color: var(--gold);
-        font-weight: 900;
+        font-weight: 700;
         white-space: nowrap
     }
 
@@ -1078,7 +1078,7 @@
         background: #fff;
         border-radius: 12px;
         color: var(--ink);
-        font-weight: 800
+        font-weight: 700
     }
 
     .pagination button.active,

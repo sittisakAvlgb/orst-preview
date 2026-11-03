@@ -298,7 +298,7 @@ svg {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-weight: 800;
+  font-weight: 700;
   box-shadow: 0 5px 14px rgba(16, 32, 51, .05);
 }
 
@@ -344,7 +344,7 @@ svg {
   border-radius: 14px;
   padding: 13px 14px;
   margin-top: 8px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--ink);
 }
 
@@ -541,7 +541,7 @@ svg {
   background: #fff;
   border-radius: 999px;
   padding: 10px 16px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .service-grid {
@@ -630,7 +630,7 @@ svg {
   color: #fff;
   border-radius: 12px;
   padding: 8px 10px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .news-body {
@@ -653,7 +653,7 @@ svg {
   border-radius: 999px;
   padding: 4px 9px;
   font-size: .78rem;
-  font-weight: 800;
+  font-weight: 700;
   margin-bottom: 8px;
 }
 
@@ -817,7 +817,7 @@ svg {
   color: #fff;
   border-radius: 999px;
   padding: 13px 18px;
-  font-weight: 800;
+  font-weight: 700;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -835,7 +835,7 @@ svg {
   border-radius: 16px;
   background: var(--surface-soft);
   padding: 15px;
-  font-weight: 800;
+  font-weight: 700;
   text-align: left;
 }
 
@@ -1164,7 +1164,7 @@ svg {
   margin: 0 0 10px;
   color: var(--deep);
   font-size: 1rem;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .mega-group a,
@@ -1211,7 +1211,7 @@ svg {
   gap: 8px;
   margin-top: 10px;
   color: var(--gold);
-  font-weight: 900;
+  font-weight: 700;
 }
 
 /* Mobile accordion menu */
@@ -1239,7 +1239,7 @@ svg {
   justify-content: space-between;
   padding: 13px 14px;
   list-style: none;
-  font-weight: 900;
+  font-weight: 700;
   cursor: pointer;
 }
 

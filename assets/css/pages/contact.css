@@ -108,7 +108,7 @@ svg {
   color: #111827;
   padding: 10px 14px;
   border-radius: 12px;
-  font-weight: 800;
+  font-weight: 700;
   box-shadow: var(--shadow-sm);
 }
 
@@ -266,7 +266,7 @@ svg {
   justify-content: center;
   gap: 7px;
   padding: 0 14px;
-  font-weight: 800;
+  font-weight: 700;
   box-shadow: var(--shadow-xs);
 }
 
@@ -313,7 +313,7 @@ svg {
   border-radius: 14px;
   padding: 13px 14px;
   margin-top: 8px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--ink);
 }
 
@@ -360,7 +360,7 @@ svg {
   align-items: center;
   gap: 10px;
   color: var(--gold);
-  font-weight: 900;
+  font-weight: 700;
   margin-bottom: 10px;
 }
 
@@ -409,7 +409,7 @@ h3 {
   align-items: center;
   justify-content: center;
   gap: 9px;
-  font-weight: 900;
+  font-weight: 700;
   background: var(--deep);
   color: #fff;
   box-shadow: var(--shadow-xs);
@@ -449,7 +449,7 @@ h3 {
   background: #eef8f2;
   border: 1px solid rgba(38, 116, 88, .24);
   color: #17644a;
-  font-weight: 900;
+  font-weight: 700;
   margin-bottom: 12px;
 }
 
@@ -503,7 +503,7 @@ h3 {
 
 .section-kicker {
   font-size: .84rem;
-  font-weight: 900;
+  font-weight: 700;
   color: var(--gold);
 }
 
@@ -587,7 +587,7 @@ h3 {
   border: 1px solid var(--line);
   background: #fff;
   color: var(--deep);
-  font-weight: 900;
+  font-weight: 700;
   font-size: .86rem;
 }
 
@@ -670,7 +670,7 @@ h3 {
 }
 
 label {
-  font-weight: 900;
+  font-weight: 700;
   color: var(--ink);
 }
 
@@ -720,7 +720,7 @@ textarea:focus {
   border: 1px solid var(--line);
   border-radius: 14px;
   background: #fff;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--ink-2);
 }
 
@@ -750,7 +750,7 @@ textarea:focus {
 
 .privacy-check a {
   color: var(--deep);
-  font-weight: 900;
+  font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -813,7 +813,7 @@ textarea:focus {
 
 .department-card a {
   color: var(--deep);
-  font-weight: 900;
+  font-weight: 700;
 }
 
 /* Footer */
@@ -875,7 +875,7 @@ textarea:focus {
   padding: 12px 16px;
   border-radius: 14px;
   box-shadow: var(--shadow-sm);
-  font-weight: 900;
+  font-weight: 700;
   opacity: 0;
   transform: translateY(12px);
   pointer-events: none;
