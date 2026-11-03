@@ -779,42 +779,166 @@ textarea:focus {
 
 .department-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-top: 16px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 20px;
 }
 
+/* แถวบน: ผู้บริหาร (2 ส่วน) + สำนักงานเลขานุการกรม (4 ส่วน) / แถวล่าง: 3 กอง */
 .department-card {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: 20px;
   background: var(--surface-soft);
-  padding: 16px;
+  padding: 20px;
   transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
 }
+.department-card--wide { grid-column: span 4; }
 
 .department-card:hover {
   transform: translateY(-3px);
   border-color: rgba(185, 145, 67, .5);
   box-shadow: var(--shadow-xs);
-  background: #fff;
 }
 
+.department-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.department-no {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--gold-soft);
+  color: var(--deep);
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1;
+}
 .department-card h3 {
+  margin: 0;
   font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
-  font-size: 1.04rem;
-  margin-bottom: 8px;
+  line-height: 1.3;
 }
-
-.department-card p {
-  margin: 5px 0;
+.department-head p {
+  margin: 2px 0 0;
   color: var(--muted);
-  font-size: .94rem;
+  line-height: 1.45;
 }
 
-.department-card a {
+/* รายการเบอร์โทร: ชื่อ ซ้าย / เบอร์ ขวา */
+.department-lines {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  column-gap: 32px;
+}
+.department-card--wide .department-lines { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.department-lines li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-top: 1px solid var(--line);
+}
+.department-tel {
+  flex: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 2px 12px;
+  white-space: nowrap;
   color: var(--deep);
   font-weight: 700;
 }
+.department-tel a {
+  color: var(--deep);
+  font-weight: 700;
+}
+.department-tel a:hover,
+.department-tel a:focus-visible { color: var(--gold); }
+
+/* หมวดศัพท์ที่แต่ละกองรับสอบถาม */
+.department-topics-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-weight: 700;
+}
+.department-topics ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.department-topics li {
+  padding: 1px 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  line-height: 1.7;
+}
+
+.department-mails {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+.department-mail {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--deep);
+  font-weight: 700;
+}
+.department-mail .icon {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  color: var(--gold);
+}
+.department-mail small {
+  margin-left: 6px;
+  color: var(--muted);
+  font-weight: 400;
+}
+.department-mail:hover span,
+.department-mail:focus-visible span { text-decoration: underline; text-underline-offset: 3px; }
+
+/* การ์ดผู้บริหาร — พื้นเขียวเข้มเป็นจุดเด่นของแถว */
+.department-card--exec {
+  border-color: transparent;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(216, 189, 116, .22), transparent 55%),
+    linear-gradient(150deg, var(--deep), var(--deep-2));
+  color: #fff;
+}
+.department-card--exec .department-no {
+  background: rgba(255, 255, 255, .12);
+  color: var(--gold-2);
+}
+.department-card--exec h3 { color: #fff; }
+.department-card--exec .department-head p { color: rgba(255, 255, 255, .78); }
+.department-card--exec .department-lines { margin-top: auto; }
+.department-card--exec .department-lines li { border-color: rgba(255, 255, 255, .16); }
+.department-card--exec .department-tel,
+.department-card--exec .department-tel a { color: var(--gold-2); }
+.department-card--exec .department-tel a { font-size: 1.3rem; }
+.department-card--exec .department-tel a:hover,
+.department-card--exec .department-tel a:focus-visible { color: #fff; }
 
 /* Footer */
 .footer {
@@ -924,8 +1048,14 @@ textarea:focus {
   }
 
   .department-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  /* แท็บเล็ต: ผู้บริหาร/เลขานุการกรม เต็มแถว แล้ว 3 กองเรียง 2 คอลัมน์ */
+  .department-card { grid-column: span 1; }
+  .department-card--exec,
+  .department-card--wide,
+  .department-card:last-child { grid-column: 1 / -1; }
 
   .footer-grid {
     grid-template-columns: 1fr 1fr;
@@ -976,6 +1106,12 @@ textarea:focus {
   .footer-grid {
     grid-template-columns: 1fr;
   }
+
+  .department-card,
+  .department-card--exec,
+  .department-card--wide,
+  .department-card:last-child { grid-column: auto; }
+  .department-card--wide .department-lines { grid-template-columns: 1fr; }
 
   .contact-choice {
     grid-template-columns: 1fr;
@@ -1128,8 +1264,13 @@ width: 100%;
 .contact-info-panel h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); }
 .section-kicker { font-size: .9rem; }
 
-.department-card h3 { font-size: 1.15rem; }
-.department-card p { font-size: .98rem; }
+.department-card h3 { font-size: 1.22rem; }
+.department-head p,
+.department-lines li,
+.department-mail { font-size: 1rem; }
+.department-topics-label { font-size: .92rem; }
+.department-topics li,
+.department-mail small { font-size: .92rem; }
 .contact-item h3 { font-size: 1.08rem; }
 .hero-info-list small,
 .contact-item small { font-size: .88rem; }
