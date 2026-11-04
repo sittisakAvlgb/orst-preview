@@ -732,6 +732,7 @@ function init() {
   initAccessPanelEnhance();
   initFAQEnhance();
   initMediaPlaylist();
+  initEventCalendar();
 }
 function initHeader() {
   const h = qs('#site-header');
@@ -961,6 +962,18 @@ function initMediaPlaylist() {
     if (reduce()) { swap(); return; }
     img.classList.add('is-swapping');
     setTimeout(swap, 200);
+  }));
+}
+
+// ปฏิทินกิจกรรม: กดวันที่มีกิจกรรม -> ไฮไลต์รายการที่ตรงกันในกำหนดการ
+function initEventCalendar() {
+  const days = qsa('[data-cal-event]');
+  days.forEach(day => day.addEventListener('click', () => {
+    const target = qs(`#${day.dataset.calEvent}`);
+    days.forEach(d => d.classList.toggle('is-selected', d === day));
+    qsa('.cal-event').forEach(ev => ev.classList.toggle('is-selected', ev === target));
+    target?.focus({ preventScroll: true });
+    target?.scrollIntoView({ block: 'nearest', behavior: reduce() ? 'auto' : 'smooth' });
   }));
 }
 

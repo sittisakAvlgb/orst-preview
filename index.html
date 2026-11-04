@@ -1017,89 +1017,51 @@
 
           
 
-          <aside class="events-calendar-card" aria-label="ปฏิทินกิจกรรม">
-            <div class="calendar-head">
-              <div>
-                <span class="section-kicker">Calendar</span>
-                <h3>ปฏิทินกิจกรรม</h3>
-              </div>
-              <a href="calendar.html" aria-label="ดูปฏิทินทั้งหมด">ทั้งหมด</a>
+          <aside class="events-calendar-card cal" aria-labelledby="cal-title">
+            <div class="cal-head">
+              <h3 id="cal-title">ปฏิทินกิจกรรม</h3>
+              <a href="news.html">ดูทั้งหมด <svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
             </div>
 
-            <div class="calendar-month">
+            <div class="cal-month">
               <button type="button" aria-label="เดือนก่อนหน้า">‹</button>
               <strong>มิถุนายน 2567</strong>
               <button type="button" aria-label="เดือนถัดไป">›</button>
             </div>
 
-            <div class="calendar-grid" aria-label="ปฏิทินเดือนมิถุนายน 2567">
-              <span>อา</span><span>จ</span><span>อ</span><span>พ</span><span>พฤ</span><span>ศ</span><span>ส</span>
-
-              <button type="button" class="muted">26</button>
-              <button type="button" class="muted">27</button>
-              <button type="button" class="muted">28</button>
-              <button type="button" class="muted">29</button>
-              <button type="button" class="muted">30</button>
-              <button type="button" class="muted">31</button>
-              <button type="button">1</button>
-
-              <button type="button">2</button>
-              <button type="button">3</button>
-              <button type="button">4</button>
-              <button type="button">5</button>
-              <button type="button">6</button>
-              <button type="button">7</button>
-              <button type="button">8</button>
-
-              <button type="button">9</button>
-              <button type="button">10</button>
-              <button type="button">11</button>
-              <button type="button">12</button>
-              <button type="button">13</button>
-              <button type="button">14</button>
-              <button type="button">15</button>
-
-              <button type="button">16</button>
-              <button type="button">17</button>
-              <button type="button" class="has-event" aria-label="18 มิถุนายน 2567 มีอบรม">18</button>
-              <button type="button">19</button>
-              <button type="button">20</button>
-              <button type="button">21</button>
-              <button type="button">22</button>
-
-              <button type="button">23</button>
-              <button type="button">24</button>
-              <button type="button" class="has-event" aria-label="25 มิถุนายน 2567 มีอบรม">25</button>
-              <button type="button">26</button>
-              <button type="button">27</button>
-              <button type="button">28</button>
-              <button type="button">29</button>
+            <!-- ปฏิทินย่อ: วันที่มีกิจกรรมเป็นวงกลมเขียว กดแล้วไฮไลต์รายการด้านล่าง (initEventCalendar ใน home.js) -->
+            <div class="cal-grid" role="group" aria-label="ปฏิทินเดือนมิถุนายน 2567">
+              <span class="cal-dow">อา</span><span class="cal-dow">จ</span><span class="cal-dow">อ</span><span class="cal-dow">พ</span><span class="cal-dow">พฤ</span><span class="cal-dow">ศ</span><span class="cal-dow">ส</span>
+              <span></span><span></span><span></span><span></span><span></span><span></span><span class="cal-day is-weekend">1</span>
+              <span class="cal-day is-weekend">2</span><span class="cal-day">3</span><span class="cal-day">4</span><span class="cal-day">5</span><span class="cal-day">6</span><span class="cal-day">7</span><span class="cal-day is-weekend">8</span>
+              <span class="cal-day is-weekend">9</span><span class="cal-day">10</span><span class="cal-day">11</span><span class="cal-day">12</span><span class="cal-day">13</span><span class="cal-day">14</span><span class="cal-day is-weekend">15</span>
+              <span class="cal-day is-weekend">16</span><span class="cal-day">17</span><button type="button" class="cal-day has-event" data-cal-event="ev-18" aria-label="18 มิถุนายน 2567: อบรมการใช้ภาษาไทยในงานราชการ">18</button><span class="cal-day">19</span><span class="cal-day">20</span><span class="cal-day">21</span><span class="cal-day is-weekend">22</span>
+              <span class="cal-day is-weekend">23</span><span class="cal-day">24</span><button type="button" class="cal-day has-event" data-cal-event="ev-25" aria-label="25 มิถุนายน 2567: อบรมการเขียนเอกสารราชการ">25</button><span class="cal-day">26</span><span class="cal-day">27</span><span class="cal-day">28</span><span class="cal-day is-weekend">29</span>
+              <span class="cal-day is-weekend">30</span>
             </div>
 
-            <div class="calendar-agenda">
-              <strong>กำหนดการใกล้ถึง</strong>
-
-              <a href="#" class="agenda-item">
-                <span class="agenda-date">
-                  <b>18</b>
-                  <small>มิ.ย.</small>
-                </span>
-                <span>
-                  <b>อบรมการใช้ภาษาไทยในงานราชการ</b>
-                  <small>อบรม · 09.00–12.00 น.</small>
-                </span>
-              </a>
-
-              <a href="#" class="agenda-item">
-                <span class="agenda-date">
-                  <b>25</b>
-                  <small>มิ.ย.</small>
-                </span>
-                <span>
-                  <b>อบรมการเขียนเอกสารราชการ</b>
-                  <small>อบรม · ออนไลน์</small>
-                </span>
-              </a>
+            <div class="cal-agenda">
+              <h4>กำหนดการถัดไป</h4>
+              <ol>
+                <li>
+                  <a href="#" class="cal-event" id="ev-18">
+                    <span class="cal-event-date"><b>18</b><small>มิ.ย.</small></span>
+                    <span class="cal-event-body">
+                      <strong>อบรมการใช้ภาษาไทยในงานราชการ</strong>
+                      <small>อบรม · 09.00–12.00 น.</small>
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="cal-event" id="ev-25">
+                    <span class="cal-event-date"><b>25</b><small>มิ.ย.</small></span>
+                    <span class="cal-event-body">
+                      <strong>อบรมการเขียนเอกสารราชการ</strong>
+                      <small>อบรม · ออนไลน์</small>
+                    </span>
+                  </a>
+                </li>
+              </ol>
             </div>
           </aside>
 
