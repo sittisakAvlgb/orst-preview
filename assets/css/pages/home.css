@@ -10846,42 +10846,118 @@ body.high-contrast .cal-day.has-event { color: var(--ink); box-shadow: inset 0 0
   .cal-grid { max-width: none; }
 }
 
-/* ข่าวเด่น: ภาพข่าวเป็นภาพ 16:9 ที่มีตัวอักษรในภาพ — เดิมกล่องภาพสูงกว่าสัดส่วนจริง
-   (object-fit: cover) จึงถูกตัดซ้าย/ขวาจนตัวหนังสือขาด -> ล็อกกล่องเป็น 16:9 เห็นภาพครบ */
+/* =============================================================================
+   ข่าวสาร — แบบกระชับ: ข่าวเด่น (ซ้าย ภาพ 16:9 + หัวข้อ) | รายการข่าวย่อย (ขวา แถวภาพเล็ก)
+   ภาพข่าวเป็น 16:9 มีตัวอักษรในภาพ — ล็อกกรอบ 16:9 ไม่ให้ถูกตัด
+   ============================================================================= */
+.news-mosaic-layout {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+/* ข่าวเด่น */
+.news-mosaic-feature {
+  min-height: 0;
+  grid-template-columns: none;
+  grid-template-rows: auto auto;
+  align-items: stretch;
+  border-radius: 20px;
+  box-shadow: var(--shadow-xs);
+}
 .news-mosaic-feature-img {
   aspect-ratio: 16 / 9;
   min-height: 0;
+  align-self: auto;
 }
-/* จอกว้าง: ข่าวเด่นเป็นการ์ดแนวนอนเต็มแถว (ภาพ 16:9 ซ้าย เนื้อหาขวา) ข่าวย่อย 2x2 อยู่ข้างล่าง
-   — เดิมข่าวเด่นเป็นคอลัมน์แคบสูง ภาพถูกตัดหรือเหลือที่ว่างใต้เนื้อหา */
-@media (min-width: 901px) {
-  .news-mosaic-layout { grid-template-columns: 1fr; }
-  .news-mosaic-feature {
-    min-height: 0;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
-    grid-template-rows: none;
-    align-items: center;
-  }
+.news-mosaic-feature-img::after { display: none; }
+.news-mosaic-feature-body { padding: 18px 22px 22px; }
+.news-mosaic-feature-body h3 {
+  margin: 6px 0 8px;
+  font-size: 1.5rem;
+  line-height: 1.35;
 }
-@media (max-width: 1180px) {
-  /* แท็บเล็ต: ภาพซ้าย เนื้อหาขวา — ไม่ยืดกล่องภาพตามความสูงข้อความ */
-  .news-mosaic-feature { grid-template-rows: none; align-items: center; }
-  .news-mosaic-feature-img { min-height: 0; align-self: center; }
-}
-@media (max-width: 900px) {
-  .news-mosaic-feature-img { min-height: 0; }
+.news-mosaic-feature-body p {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-/* ข่าวย่อย: ภาพ 16:9 เห็นครบเหมือนข่าวเด่น (เดิมสูง 116px ตัดตัวอักษรในภาพครึ่งบรรทัด) */
-.news-mosaic-card { grid-template-rows: auto 1fr; }
-.news-mosaic-thumb { aspect-ratio: 16 / 9; min-height: 0; height: auto; }
+/* รายการข่าวย่อย: แถว ภาพเล็ก | ประเภท + หัวข้อ คั่นเส้นบาง ทั้งแถวกดได้ */
+.news-mosaic-side {
+  grid-template-columns: 1fr;
+  gap: 0;
+  padding: 6px 18px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+  box-shadow: var(--shadow-xs);
+}
+.news-mosaic-card {
+  position: relative;
+  grid-template-columns: 148px minmax(0, 1fr);
+  grid-template-rows: none;
+  gap: 14px;
+  align-items: center;
+  min-height: 0;
+  padding: 14px 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.news-mosaic-card:first-child { border-top: 0; }
+.news-mosaic-card:hover {
+  transform: none;
+  background: transparent;
+  box-shadow: none;
+}
+.news-mosaic-thumb {
+  aspect-ratio: 16 / 9;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  border-radius: 10px;
+}
 .news-mosaic-thumb img { object-position: center; }
+.news-mosaic-card-body {
+  padding: 0;
+  gap: 4px;
+}
+.news-mosaic-card-body h4 {
+  margin: 0;
+  font-size: var(--fs-body);
+  line-height: 1.4;
+  transition: color .18s ease;
+}
+.news-mosaic-card-body p { display: none; }
+/* ลิงก์ "อ่านต่อ" คลุมทั้งแถว (ยังอ่านได้ด้วย screen reader) */
+.news-mosaic-card-body > a {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  color: transparent;
+  font-size: 0;
+}
+.news-mosaic-card:hover h4,
+.news-mosaic-card:focus-within h4 { color: var(--deep); text-decoration: underline; text-underline-offset: 3px; }
+.news-mosaic-card:focus-within { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 8px; }
+
+.news-mosaic-side { grid-template-columns: 1fr; }
+@media (max-width: 700px) {
+  .news-mosaic-layout { grid-template-columns: 1fr; }
+}
 @media (max-width: 640px) {
-  /* มือถือ: การ์ดแนวนอน ภาพซ้าย 16:9 กว้าง 140px */
-  .news-mosaic-card { grid-template-columns: 140px 1fr; grid-template-rows: none; min-height: 0; align-items: center; }
-  .news-mosaic-thumb { min-height: 0; margin: 10px 0 10px 10px; border-radius: 12px; }
+  .news-mosaic-feature-body { padding: 16px 18px 18px; }
+  .news-mosaic-feature-body h3 { font-size: 1.3rem; }
+  .news-mosaic-side { padding: 4px 14px; }
+  .news-mosaic-card { grid-template-columns: 112px minmax(0, 1fr); gap: 12px; padding: 12px 0; }
+  .news-mosaic-thumb { margin: 0; border-radius: 8px; }
 }
 @media (max-width: 420px) {
-  .news-mosaic-card { grid-template-columns: 1fr; }
-  .news-mosaic-thumb { margin: 0; border-radius: 0; height: auto; }
+  .news-mosaic-card { grid-template-columns: 104px minmax(0, 1fr); }
+  .news-mosaic-thumb { margin: 0; border-radius: 8px; }
 }
