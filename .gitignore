@@ -12,3 +12,6 @@ Desktop.ini
 
 # ผลลัพธ์จาก node tools/build.mjs
 dist/
+
+# ไฟล์ภาพต้นฉบับขนาดใหญ่ (ไม่ deploy) — ไฟล์ที่เว็บใช้จริงคือเวอร์ชันย่อใน assets/images/
+_source-images/

@@ -508,7 +508,7 @@ svg {
   content: "";
   position: absolute;
   inset: 0;
-  background: url('../images/orst-bg.png') center/cover no-repeat, linear-gradient(135deg, #eee4d0, #153b35);
+  background: url('../images/orst-bg.jpg') center/cover no-repeat, linear-gradient(135deg, #eee4d0, #153b35);
   opacity: .95;
 }
 
