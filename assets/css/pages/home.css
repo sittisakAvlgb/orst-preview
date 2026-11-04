@@ -10554,5 +10554,57 @@ body.high-contrast .mm-item.is-active { box-shadow: inset 0 0 0 1px var(--gold);
   .mm-item { transition: none; }
 }
 
-/* ภาพพื้นหลัง hero = ภาพตึกสำนักงานจริง (orst-bg.jpg, 4:3) — เลื่อนจุดโฟกัสลงให้เห็นเสาและทางเข้า */
-.orst-hero-wow { background-position: center 55%; }
+/* =============================================================================
+   Hero หน้าแรก — ภาพตึกจริงแบบเต็มสี + ชั้นเขียวเข้มโปร่งแสง ข้อความสีขาว
+   (เดิมคลุมภาพด้วยสีครีมเกือบทึบ ทำให้ภาพจางจนดูไม่ออกว่าเป็นตึก)
+   วางท้ายไฟล์เพื่อชนะกฎ hero เดิมหลายชั้นข้างบน
+   ============================================================================= */
+.orst-hero-wow {
+  background-color: var(--deep);
+  background-image:
+    linear-gradient(180deg, rgba(4, 30, 26, .62) 0%, rgba(4, 30, 26, .38) 38%, rgba(4, 30, 26, .5) 70%, rgba(4, 30, 26, .86) 100%),
+    radial-gradient(ellipse 70% 60% at 50% 42%, rgba(4, 30, 26, .45), transparent 75%),
+    url("../../images/orst-bg.jpg");
+  background-size: cover, cover, cover;
+  background-position: center, center, center 55%;
+  background-repeat: no-repeat;
+}
+/* ปิดแสงขาวเดิมที่ซ้อนอยู่บนภาพ */
+.orst-hero-wow.hero-reference::before { background: none; }
+.orst-hero-wow::after { display: none; }
+
+.orst-hero-wow .orst-hero-kicker { color: var(--gold-2); }
+#hero-title.orst-hero-title {
+  color: #fff;
+  text-shadow: 0 2px 28px rgba(0, 0, 0, .35);
+}
+.orst-hero-wow .orst-hero-lead {
+  color: rgba(255, 255, 255, .88) !important;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, .3);
+}
+.orst-hero-wow .orst-popular-title {
+  color: rgba(255, 255, 255, .85);
+  text-shadow: none;
+}
+.orst-hero-wow .orst-popular-row .chip {
+  border-color: rgba(255, 255, 255, .28);
+  background: rgba(255, 255, 255, .12);
+  color: #fff;
+  box-shadow: none;
+}
+.orst-hero-wow .orst-popular-row .chip:hover,
+.orst-hero-wow .orst-popular-row .chip:focus-visible {
+  border-color: var(--gold-2);
+  background: var(--gold-2);
+  color: #13231f;
+}
+/* ช่องค้นหาลอยเด่นบนพื้นเข้ม */
+.orst-hero-wow .orst-smart-search { box-shadow: 0 24px 60px rgba(0, 0, 0, .28); }
+
+
+body.high-contrast .orst-hero-wow { background-image: none; background-color: #000; }
+
+/* มือถือ: ย่อหัวข้อให้แต่ละวลีอยู่บรรทัดเดียว (เดิมตัดกลางคำ "สถาบันความ / รู้ของชาติ") */
+@media (max-width: 480px) {
+  #hero-title.orst-hero-title { font-size: clamp(1.6rem, 8vw, 2.2rem); }
+}
