@@ -10845,3 +10845,43 @@ body.high-contrast .cal-day.has-event { color: var(--ink); box-shadow: inset 0 0
   .events-calendar-card.cal { padding: 18px 16px 14px; }
   .cal-grid { max-width: none; }
 }
+
+/* ข่าวเด่น: ภาพข่าวเป็นภาพ 16:9 ที่มีตัวอักษรในภาพ — เดิมกล่องภาพสูงกว่าสัดส่วนจริง
+   (object-fit: cover) จึงถูกตัดซ้าย/ขวาจนตัวหนังสือขาด -> ล็อกกล่องเป็น 16:9 เห็นภาพครบ */
+.news-mosaic-feature-img {
+  aspect-ratio: 16 / 9;
+  min-height: 0;
+}
+/* จอกว้าง: ข่าวเด่นเป็นการ์ดแนวนอนเต็มแถว (ภาพ 16:9 ซ้าย เนื้อหาขวา) ข่าวย่อย 2x2 อยู่ข้างล่าง
+   — เดิมข่าวเด่นเป็นคอลัมน์แคบสูง ภาพถูกตัดหรือเหลือที่ว่างใต้เนื้อหา */
+@media (min-width: 901px) {
+  .news-mosaic-layout { grid-template-columns: 1fr; }
+  .news-mosaic-feature {
+    min-height: 0;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+    grid-template-rows: none;
+    align-items: center;
+  }
+}
+@media (max-width: 1180px) {
+  /* แท็บเล็ต: ภาพซ้าย เนื้อหาขวา — ไม่ยืดกล่องภาพตามความสูงข้อความ */
+  .news-mosaic-feature { grid-template-rows: none; align-items: center; }
+  .news-mosaic-feature-img { min-height: 0; align-self: center; }
+}
+@media (max-width: 900px) {
+  .news-mosaic-feature-img { min-height: 0; }
+}
+
+/* ข่าวย่อย: ภาพ 16:9 เห็นครบเหมือนข่าวเด่น (เดิมสูง 116px ตัดตัวอักษรในภาพครึ่งบรรทัด) */
+.news-mosaic-card { grid-template-rows: auto 1fr; }
+.news-mosaic-thumb { aspect-ratio: 16 / 9; min-height: 0; height: auto; }
+.news-mosaic-thumb img { object-position: center; }
+@media (max-width: 640px) {
+  /* มือถือ: การ์ดแนวนอน ภาพซ้าย 16:9 กว้าง 140px */
+  .news-mosaic-card { grid-template-columns: 140px 1fr; grid-template-rows: none; min-height: 0; align-items: center; }
+  .news-mosaic-thumb { min-height: 0; margin: 10px 0 10px 10px; border-radius: 12px; }
+}
+@media (max-width: 420px) {
+  .news-mosaic-card { grid-template-columns: 1fr; }
+  .news-mosaic-thumb { margin: 0; border-radius: 0; height: auto; }
+}
