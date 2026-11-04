@@ -10375,3 +10375,181 @@ radial-gradient(circle at 50% 52%, rgba(255,255,255,0.5), transparent 44%);
 
 body.high-contrast .ig-cover { background: var(--surface); color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
 body.high-contrast .ig-word { color: var(--ink); }
+
+/* =============================================================================
+   สื่อมัลติมีเดีย — วิดีโอเด่น (ซ้าย) + เพลย์ลิสต์ (ขวา)
+   กดรายการในเพลย์ลิสต์เพื่อสลับวิดีโอเด่น / มือถือ: วิดีโอเด่นอยู่บน รายการเรียงข้างล่าง
+   ============================================================================= */
+.mm-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(300px, 1fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* วิดีโอเด่น */
+.mm-feature {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+  box-shadow: var(--shadow-xs);
+  color: var(--ink);
+  text-decoration: none;
+}
+.mm-feature-media {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--deep);
+}
+.mm-feature-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .4s ease, opacity .25s ease;
+}
+.mm-feature:hover .mm-feature-media img { transform: scale(1.03); }
+.mm-feature-media img.is-swapping { opacity: 0; }
+
+.mm-feature-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 16px;
+  padding: 16px 20px 18px;
+}
+.mm-kicker {
+  flex-basis: 100%;
+  color: var(--gold);
+  font-size: var(--fs-meta);
+  font-weight: 700;
+}
+.mm-feature-title {
+  flex: 1 1 260px;
+  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.mm-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--deep);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.mm-cta .icon { width: 16px; height: 16px; transition: transform .2s ease; }
+.mm-feature:hover .mm-cta .icon { transform: translateX(4px); }
+
+/* เพลย์ลิสต์ */
+.mm-playlist {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+  box-shadow: var(--shadow-xs);
+}
+.mm-playlist-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid var(--line);
+}
+.mm-playlist-head strong { font-size: var(--fs-title); color: var(--ink); }
+.mm-playlist-head span { color: var(--muted); font-size: var(--fs-meta); }
+
+.mm-list {
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+  display: grid;
+  gap: 4px;
+  flex: 1;
+  grid-auto-rows: 1fr;   /* รายการกระจายเต็มความสูงเท่าวิดีโอเด่น */
+}
+.mm-list li { margin: 0; }
+.mm-item {
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 128px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  padding: 8px;
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background .18s ease;
+}
+.mm-item:hover { background: var(--surface-soft); }
+.mm-item.is-active { background: var(--gold-soft); }
+.mm-item.is-active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--gold);
+}
+.mm-thumb {
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--deep);
+}
+.mm-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.mm-item-text { display: grid; gap: 2px; min-width: 0; }
+.mm-no {
+  color: var(--muted);
+  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-size: var(--fs-label-en);
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+.mm-item.is-active .mm-no { color: var(--gold); }
+.mm-item.is-active .mm-no::after { content: " · กำลังแสดง"; letter-spacing: 0; }
+.mm-item-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: var(--fs-body);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+body.high-contrast .mm-item.is-active { box-shadow: inset 0 0 0 1px var(--gold); }
+
+@media (max-width: 1100px) {
+  .mm-stage { grid-template-columns: 1fr; }
+  .mm-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .mm-list { grid-template-columns: 1fr; }
+  .mm-item { grid-template-columns: 112px minmax(0, 1fr); }
+  .mm-feature-body { padding: 14px 16px 16px; }
+  .mm-feature-title { font-size: 1.08rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mm-feature-media img,
+  .mm-cta .icon,
+  .mm-item { transition: none; }
+}

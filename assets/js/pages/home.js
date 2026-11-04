@@ -694,7 +694,7 @@ document.addEventListener('DOMContentLoaded', () => {
    - ข้อมูลจำลองชุดที่สอง: searchData (8 รายการ) + suggestions
    - init() รวมการเริ่มทำงาน: initHeader, initMobileMenu, initSearch, initFilters,
      initModals, initAccessibility, initFAQ, initScrollers, initReveal,
-     initBackTop, initAccessPanelEnhance, initFAQEnhance, initServiceHub
+     initBackTop, initAccessPanelEnhance, initFAQEnhance, initServiceHub, initMediaPlaylist
    ============================================================================= */
 const searchData = [
   { type: 'term', label: 'คำศัพท์', title: 'พจนานุกรมฉบับราชบัณฑิตยสถาน พ.ศ. 2554', desc: 'ค้นหาความหมาย การอ่าน และการเขียนคำภาษาไทยมาตรฐาน', meta: 'ฐานข้อมูลคำศัพท์' },
@@ -731,6 +731,7 @@ function init() {
   initBackTop();
   initAccessPanelEnhance();
   initFAQEnhance();
+  initMediaPlaylist();
 }
 function initHeader() {
   const h = qs('#site-header');
@@ -905,6 +906,35 @@ function initFAQ() {
 }
 function initScrollers() { qsa('[data-scroll]').forEach(btn => btn.addEventListener('click', () => { const el = qs(`#${btn.dataset.scroll}-row`); el?.scrollBy({ left: (btn.dataset.dir === 'left' ? -1 : 1) * 320, behavior: reduce() ? 'auto' : 'smooth' }) })) }
 function initReveal() { const items = qsa('.reveal'); if (!('IntersectionObserver' in window)) { items.forEach(i => i.classList.add('is-visible')); return } const ob = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); ob.unobserve(e.target) } }), { threshold: .12 }); items.forEach(i => ob.observe(i)) }
+
+// สื่อมัลติมีเดีย: กดรายการในเพลย์ลิสต์ -> เปลี่ยนภาพ/ชื่อของวิดีโอเด่น
+function initMediaPlaylist() {
+  const img = qs('[data-mm-feature-img]');
+  const title = qs('[data-mm-feature-title]');
+  const items = qsa('.mm-item');
+  if (!img || !title || !items.length) return;
+
+  items.forEach(item => item.addEventListener('click', () => {
+    if (item.classList.contains('is-active')) return;
+    items.forEach(other => {
+      const active = other === item;
+      other.classList.toggle('is-active', active);
+      other.setAttribute('aria-pressed', String(active));
+    });
+    const swap = () => {
+      img.src = item.dataset.mmSrc;
+      title.textContent = item.dataset.mmTitle;
+      img.classList.remove('is-swapping');
+    };
+    // จอแคบ: เพลย์ลิสต์อยู่ใต้วิดีโอเด่น — เลื่อนให้เห็นวิดีโอที่เพิ่งเลือก
+    if (window.matchMedia('(max-width: 1100px)').matches) {
+      qs('[data-mm-feature]')?.scrollIntoView({ block: 'nearest', behavior: reduce() ? 'auto' : 'smooth' });
+    }
+    if (reduce()) { swap(); return; }
+    img.classList.add('is-swapping');
+    setTimeout(swap, 200);
+  }));
+}
 
 function initBackTop() {
   const btn = qs('[data-back-top]');

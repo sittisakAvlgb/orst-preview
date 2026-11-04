@@ -881,13 +881,13 @@ function initMediaTabs() {
   const mediaLinks = {
     encyclopedia: `${basePath}knowledge.html`,
     research: 'research.html',
-    multimedia: 'multimedia.html'
+    multimedia: `${basePath}knowledge.html`
   };
 
   const mediaLabels = {
     encyclopedia: 'ดูอินโฟกราฟิกทั้งหมด →',
     research: 'ดู Research ทั้งหมด →',
-    multimedia: 'ดู Multimedia ทั้งหมด →'
+    multimedia: 'ดูสื่อมัลติมีเดียทั้งหมด →'
   };
 
   mediaTabs.forEach(tab => {

@@ -502,42 +502,67 @@
             data-media-panel="multimedia" hidden>
 
 
-            <div class="publication-shell media-tab-shell">
-              <button class="scroll-btn left" data-scroll="multimedia-row" data-dir="left"
-                aria-label="เลื่อนสื่อมัลติมีเดียไปทางซ้าย">‹</button>
+            <!-- วิดีโอเด่น + เพลย์ลิสต์: กดรายการด้านขวาเพื่อสลับวิดีโอเด่น (initMediaPlaylist ใน home.js) -->
+            <div class="mm-stage">
+              <a class="mm-feature" href="#" data-mm-feature>
+                <span class="mm-feature-media">
+                  <img src="assets/images/Mult-01.png" alt="" width="1672" height="941" loading="lazy" data-mm-feature-img>
+                </span>
+                <span class="mm-feature-body">
+                  <span class="mm-kicker">สื่อมัลติมีเดียแนะนำ</span>
+                  <strong class="mm-feature-title" data-mm-feature-title>ภาษาไทย: มรดกและการถ่ายทอดจากรุ่นสู่รุ่น</strong>
+                  <span class="mm-cta">รับชมวิดีโอ <svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></span>
+                </span>
+              </a>
 
-              <div class="media-row knowledge-scroll-row" id="multimedia-row">
-                <article class="media-card knowledge-card">
-                  <div class="media-thumb has-photo">
-                    <img src="assets/images/Mult-01.png" alt="ภาษาไทย: มรดกและการถ่ายทอดจากรุ่นสู่รุ่น" loading="lazy">
-                  </div>
-                  <p>ภาษาไทย: มรดกและการถ่ายทอดจากรุ่นสู่รุ่น</p>
-                </article>
-
-                <article class="media-card knowledge-card">
-                  <div class="media-thumb has-photo">
-                    <img src="assets/images/Mult-02.png" alt="บทบาทของราชบัณฑิตยสภากับสังคมไทย" loading="lazy">
-                  </div>
-                  <p>บทบาทของราชบัณฑิตยสภากับสังคมไทย</p>
-                </article>
-
-                <article class="media-card knowledge-card">
-                  <div class="media-thumb has-photo">
-                    <img src="assets/images/Mult-03.png" alt="พาทีเที่ยว: ศิลปวัฒนธรรมไทยที่ควรรู้" loading="lazy">
-                  </div>
-                  <p>พาทีเที่ยว: ศิลปวัฒนธรรมไทยที่ควรรู้</p>
-                </article>
-
-                <article class="media-card knowledge-card">
-                  <div class="media-thumb has-photo">
-                    <img src="assets/images/Mult-04.png" alt="การใช้ภาษาไทยในยุคดิจิทัลอย่างถูกต้อง" loading="lazy">
-                  </div>
-                  <p>การใช้ภาษาไทยในยุคดิจิทัลอย่างถูกต้อง</p>
-                </article>
+              <div class="mm-playlist">
+                <div class="mm-playlist-head">
+                  <strong>รายการวิดีโอ</strong>
+                  <span>4 เรื่อง</span>
+                </div>
+                <ol class="mm-list">
+                  <li>
+                    <button class="mm-item is-active" type="button" aria-pressed="true"
+                      data-mm-src="assets/images/Mult-01.png" data-mm-title="ภาษาไทย: มรดกและการถ่ายทอดจากรุ่นสู่รุ่น">
+                      <span class="mm-thumb"><img src="assets/images/Mult-01.png" alt="" width="1672" height="941" loading="lazy"></span>
+                      <span class="mm-item-text">
+                        <span class="mm-no">01</span>
+                        <span class="mm-item-title">ภาษาไทย: มรดกและการถ่ายทอดจากรุ่นสู่รุ่น</span>
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="mm-item" type="button" aria-pressed="false"
+                      data-mm-src="assets/images/Mult-02.png" data-mm-title="บทบาทของราชบัณฑิตยสภากับสังคมไทย">
+                      <span class="mm-thumb"><img src="assets/images/Mult-02.png" alt="" width="1672" height="941" loading="lazy"></span>
+                      <span class="mm-item-text">
+                        <span class="mm-no">02</span>
+                        <span class="mm-item-title">บทบาทของราชบัณฑิตยสภากับสังคมไทย</span>
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="mm-item" type="button" aria-pressed="false"
+                      data-mm-src="assets/images/Mult-03.png" data-mm-title="พาทีเที่ยว: ศิลปวัฒนธรรมไทยที่ควรรู้">
+                      <span class="mm-thumb"><img src="assets/images/Mult-03.png" alt="" width="1672" height="941" loading="lazy"></span>
+                      <span class="mm-item-text">
+                        <span class="mm-no">03</span>
+                        <span class="mm-item-title">พาทีเที่ยว: ศิลปวัฒนธรรมไทยที่ควรรู้</span>
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="mm-item" type="button" aria-pressed="false"
+                      data-mm-src="assets/images/Mult-04.png" data-mm-title="การใช้ภาษาไทยในยุคดิจิทัลอย่างถูกต้อง">
+                      <span class="mm-thumb"><img src="assets/images/Mult-04.png" alt="" width="1672" height="941" loading="lazy"></span>
+                      <span class="mm-item-text">
+                        <span class="mm-no">04</span>
+                        <span class="mm-item-title">การใช้ภาษาไทยในยุคดิจิทัลอย่างถูกต้อง</span>
+                      </span>
+                    </button>
+                  </li>
+                </ol>
               </div>
-
-              <button class="scroll-btn right" data-scroll="multimedia-row" data-dir="right"
-                aria-label="เลื่อนสื่อมัลติมีเดียไปทางขวา">›</button>
             </div>
           </div>
 
