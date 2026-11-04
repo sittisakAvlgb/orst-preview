@@ -904,7 +904,35 @@ function initFAQ() {
     if (icon) icon.textContent = open ? '+' : '−'; a.hidden = open
   }))
 }
-function initScrollers() { qsa('[data-scroll]').forEach(btn => btn.addEventListener('click', () => { const el = qs(`#${btn.dataset.scroll}-row`); el?.scrollBy({ left: (btn.dataset.dir === 'left' ? -1 : 1) * 320, behavior: reduce() ? 'auto' : 'smooth' }) })) }
+// ปุ่ม ‹ › ของแถวการ์ด: เลื่อนทีละเกือบเต็มความกว้างที่มองเห็น และปิดปุ่มเมื่อสุดแถว
+function initScrollers() {
+  // data-scroll ใส่ id ของแถวตรง ๆ (เช่น "encyclopedia-row") — รองรับแบบไม่มี -row ด้วย
+  const rowOf = id => qs(`#${id}`) || qs(`#${id}-row`);
+  qsa('[data-scroll]').forEach(btn => btn.addEventListener('click', () => {
+    const el = rowOf(btn.dataset.scroll);
+    if (!el) return;
+    const step = Math.max(320, el.clientWidth * .85);
+    el.scrollBy({ left: (btn.dataset.dir === 'left' ? -1 : 1) * step, behavior: reduce() ? 'auto' : 'smooth' });
+  }));
+
+  const rows = [...new Set(qsa('[data-scroll]').map(b => b.dataset.scroll))];
+  rows.forEach(id => {
+    const el = rowOf(id);
+    if (!el) return;
+    const left = qs(`[data-scroll="${id}"][data-dir="left"]`);
+    const right = qs(`[data-scroll="${id}"][data-dir="right"]`);
+    const update = () => {
+      const max = el.scrollWidth - el.clientWidth;
+      if (left) left.disabled = el.scrollLeft <= 4;
+      if (right) right.disabled = el.scrollLeft >= max - 4;
+    };
+    el.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    // แถวที่อยู่ในแท็บซ่อน: อัปเดตเมื่อแท็บถูกเปิด
+    qsa('[data-media-tab]').forEach(tab => tab.addEventListener('click', () => requestAnimationFrame(update)));
+    update();
+  });
+}
 function initReveal() { const items = qsa('.reveal'); if (!('IntersectionObserver' in window)) { items.forEach(i => i.classList.add('is-visible')); return } const ob = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); ob.unobserve(e.target) } }), { threshold: .12 }); items.forEach(i => ob.observe(i)) }
 
 // สื่อมัลติมีเดีย: กดรายการในเพลย์ลิสต์ -> เปลี่ยนภาพ/ชื่อของวิดีโอเด่น

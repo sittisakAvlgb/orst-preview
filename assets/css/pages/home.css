@@ -10669,3 +10669,18 @@ body.no-motion .hero-slide { animation: none !important; }
 body.no-motion .hero-slide--1 { opacity: 1; transform: none; }
 
 body.high-contrast .hero-slides { display: none; }
+
+/* อินโฟกราฟิก: เว้นระยะคำหลักกับบรรทัดล่าง (สระล่าง/ญ ไม่ทับข้อความ) */
+.ig-cover { gap: 10px; }
+.ig-word { line-height: 1.35; padding-bottom: 2px; }
+.ig-sub.ig-digits { letter-spacing: .12em; }
+
+/* ปุ่มเลื่อนแถวการ์ด: จางและกดไม่ได้เมื่อสุดแถว (initScrollers ใน home.js) */
+.scroll-btn {
+  color: var(--deep);
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: opacity .2s ease, transform .2s ease, background .2s ease;
+}
+.scroll-btn:hover:not(:disabled) { background: var(--deep); color: #fff; }
+.scroll-btn:disabled { opacity: 0; pointer-events: none; }
