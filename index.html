@@ -1399,15 +1399,15 @@
 <section class="section help-center-section faq-center-section" id="faq">
   <div class="container">
 
-    <div class="help-center-head faq-center-head qa-head reveal">
-      <span class="section-kicker">ช่วยเหลือและกำหนดการ</span>
-      <h2>คำถามที่พบบ่อย</h2>
-      <p>คำตอบสั้น ๆ สำหรับการเริ่มใช้งานเว็บไซต์และบริการสำคัญ พร้อมกำหนดการกิจกรรมที่กำลังจะมาถึง</p>
-    </div>
+    <!-- ซ้าย: หัวข้อ + ช่วยเหลือ + กำหนดการ / ขวา: รายการคำถาม
+         มือถือเรียง: หัวข้อ > คำถาม > ช่วยเหลือ > กำหนดการ (grid-template-areas) -->
+    <div class="qa-layout reveal">
+      <div class="qa-intro">
+        <span class="section-kicker">ช่วยเหลือและกำหนดการ</span>
+        <h2>คำถามที่พบบ่อย</h2>
+        <p>คำตอบสั้น ๆ สำหรับการเริ่มใช้งานเว็บไซต์และบริการสำคัญ พร้อมกำหนดการกิจกรรมที่กำลังจะมาถึง</p>
+      </div>
 
-    <!-- FAQ (ซ้าย) + ปฏิทินกิจกรรม (ขวา) — ย้ายปฏิทินมาจากส่วนข่าว -->
-    <div class="faq-cal-layout">
-    <div class="qa-block reveal">
       <div class="qa-list">
         <details class="qa-item" name="home-faq" open>
           <summary>
@@ -1469,7 +1469,6 @@
           <a class="qa-help-link" href="faq.html">ดูคำถามทั้งหมด →</a>
         </div>
       </div>
-    </div>
 
       <aside class="events-calendar-card cal" aria-labelledby="cal-title">
         <div class="cal-head">

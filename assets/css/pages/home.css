@@ -11348,3 +11348,81 @@ body.high-contrast .qa-help-primary { box-shadow: inset 0 0 0 1px var(--line); }
 @media (prefers-reduced-motion: reduce) {
   .qa-toggle::before, .qa-toggle::after, .qa-q { transition: none; }
 }
+
+/* FAQ: จัดโครงใหม่ — คอลัมน์ซ้าย (หัวข้อ / ช่วยเหลือ / กำหนดการ) | ขวา (คำถาม)
+   คำถามกว้างไม่เกิน 960px บรรทัดไม่ยาวเกินจนปุ่ม + อยู่ไกลจากคำถาม */
+.qa-layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 380px) minmax(0, 960px);
+  grid-template-areas:
+    "intro list"
+    "help  list"
+    "cal   list";
+  grid-template-rows: auto auto 1fr;
+  column-gap: clamp(48px, 6vw, 120px);
+  row-gap: 32px;
+  align-items: start;
+}
+.qa-intro { grid-area: intro; }
+.qa-intro .section-kicker { color: var(--muted); }
+.qa-intro h2 {
+  margin: 4px 0 10px;
+  color: var(--ink);
+  font-size: var(--fs-h2);
+}
+.qa-intro p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+.qa-layout > .qa-list { grid-area: list; }
+
+/* ช่วยเหลือ: เรียงลงในคอลัมน์ซ้าย */
+.qa-layout > .qa-help {
+  grid-area: help;
+  display: grid;
+  gap: 14px;
+  justify-content: stretch;
+  padding: 0;
+}
+.qa-layout > .qa-help .qa-help-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 18px;
+}
+
+/* กำหนดการ */
+.qa-layout > .events-calendar-card.cal {
+  grid-area: cal;
+  position: static;
+  display: block;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+.qa-layout .cal-head { padding-top: 16px; border-top: 2px solid var(--ink); }
+.qa-layout .cal-head h3 { color: var(--ink); font-size: var(--fs-title); }
+.qa-layout .cal-head a { color: var(--ink); }
+.qa-layout .cal-agenda { margin-top: 4px; }
+.qa-layout .cal-agenda li { border-top: 1px solid rgba(16, 32, 51, .12); }
+.qa-layout .cal-agenda li:first-child { border-top: 0; }
+.qa-layout .cal-event { grid-template-columns: 64px minmax(0, 1fr); padding: 16px 0; border-radius: 0; }
+.qa-layout .cal-event:hover,
+.qa-layout .cal-event:focus-visible { background: none; }
+.qa-layout .cal-event:hover strong { color: var(--deep); text-decoration: underline; text-underline-offset: 3px; }
+.qa-layout .cal-event-date { justify-items: start; color: var(--deep); }
+.qa-layout .cal-event-date b { font-size: 2rem; }
+.qa-layout .cal-event-body strong { color: var(--ink); }
+
+@media (max-width: 1000px) {
+  .qa-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "intro" "list" "help" "cal";
+    grid-template-rows: none;
+    row-gap: 28px;
+  }
+}
