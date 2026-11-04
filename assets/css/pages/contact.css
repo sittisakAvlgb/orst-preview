@@ -1397,3 +1397,9 @@ body.high-contrast .dir-mails a { color: var(--ink); }
 .form-note,
 .mini-action { font-size: var(--fs-meta); }
 .dir-unit p { font-size: var(--fs-body); }
+
+/* มือถือ/แท็บเล็ต: เบอร์โทรและอีเมลในสมุดรายชื่อกดง่าย (พื้นที่กดสูง 40px) */
+@media (max-width: 1100px) {
+  .dir-num a,
+  .dir-mails a { display: inline-flex; align-items: center; min-height: 40px; }
+}

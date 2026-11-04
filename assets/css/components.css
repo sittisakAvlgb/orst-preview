@@ -1316,3 +1316,14 @@ body.no-motion *, body.no-motion *::before, body.no-motion *::after { animation:
 .orst-footer-secondary,
 .orst-footer-col a,
 .orst-footer-col button { font-size: var(--fs-body); }
+
+/* footer มือถือ/แท็บเล็ต (จอสัมผัส): ลิงก์สูงพอให้กดด้วยนิ้ว (เดิม ~22px) */
+@media (max-width: 1100px) {
+  .orst-footer-col ul { gap: 0 20px; }
+  .orst-footer-col a,
+  .orst-footer-col button {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+  }
+}

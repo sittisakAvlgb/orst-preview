@@ -1503,3 +1503,8 @@
 @media (max-width: 760px) {
   .quick-paths { grid-template-columns: 1fr; }
 }
+
+/* มือถือ/แท็บเล็ต: ลิงก์ "อ่านต่อ" ในการ์ดกดง่ายขึ้น */
+@media (max-width: 1100px) {
+  .read-link { display: inline-flex; align-items: center; min-height: 40px; }
+}
