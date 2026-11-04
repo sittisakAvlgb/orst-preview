@@ -10961,3 +10961,39 @@ body.high-contrast .cal-day.has-event { color: var(--ink); box-shadow: inset 0 0
   .news-mosaic-card { grid-template-columns: 104px minmax(0, 1fr); }
   .news-mosaic-thumb { margin: 0; border-radius: 8px; }
 }
+
+/* ข่าว + ปฏิทิน: 3 คอลัมน์สูงเท่ากัน — ข่าวเด่น | รายการข่าว | ปฏิทิน
+   รายการข่าวแต่ละแถวขยายเต็มความสูงเท่า ๆ กัน ภาพเล็กกว้างตามสัดส่วนคอลัมน์ */
+.news-mosaic-layout {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: stretch;
+}
+.news-mosaic-feature { grid-template-rows: auto 1fr; }
+.news-mosaic-feature-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.news-mosaic-feature-body .news-primary-action { margin-top: auto; }
+.news-mosaic-feature-body p { margin-bottom: 18px; }
+.news-mosaic-side {
+  grid-auto-rows: 1fr;
+  align-content: stretch;
+}
+.news-mosaic-card { grid-template-columns: minmax(120px, 40%) minmax(0, 1fr); }
+
+@media (min-width: 1181px) {
+  .news-events-layout { align-items: stretch; }
+  .news-events-main { display: flex; flex-direction: column; }
+  .news-events-main > .news-event-panel:not([hidden]) { flex: 1; display: flex; flex-direction: column; }
+  .news-event-panel > .news-mosaic-layout { flex: 1; }
+  .events-calendar-card.cal { display: flex; flex-direction: column; }
+  .cal-agenda { flex: 1; }
+}
+@media (max-width: 700px) {
+  .news-mosaic-side { grid-auto-rows: auto; }
+  .news-mosaic-card { grid-template-columns: 112px minmax(0, 1fr); }
+}
+@media (max-width: 420px) {
+  .news-mosaic-card { grid-template-columns: 104px minmax(0, 1fr); }
+}
