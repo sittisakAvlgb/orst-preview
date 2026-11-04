@@ -10596,3 +10596,76 @@ body.high-contrast .orst-hero-wow { background-image: none; background-color: #0
 @media (max-width: 480px) {
   #hero-title.orst-hero-title { font-size: clamp(1.6rem, 8vw, 2.2rem); }
 }
+
+/* =============================================================================
+   Hero หน้าแรก — ภาพพื้นหลังเคลื่อนไหว: ภาพตึก 4 มุม (hero-1..4.jpg) ค่อย ๆ ซูม/เลื่อน
+   แล้วจางสลับกันวนไปเรื่อย ๆ (ใบละ ~7 วินาที รอบละ 28 วินาที) — CSS ล้วน ไม่ใช้ JS
+   ชั้นสีครีม (.hero-slides::after) อยู่เหนือภาพ ข้อความยังอ่านง่ายเหมือนเดิม
+   ผู้ใช้ที่ตั้ง "ลดการเคลื่อนไหว" / ปุ่มหยุดภาพเคลื่อนไหว -> เห็นภาพแรกนิ่ง ๆ
+   ============================================================================= */
+.hero-slides {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transform-origin: 50% 50%;
+  will-change: opacity, transform;
+  animation: heroSlide 28s linear infinite;
+}
+.hero-slide--1 { background-image: url("../../images/hero-1.jpg"); transform-origin: 30% 60%; animation-delay: -2s; }
+.hero-slide--2 { background-image: url("../../images/hero-2.jpg"); transform-origin: 70% 40%; animation-delay: 5s; }
+.hero-slide--3 { background-image: url("../../images/hero-3.jpg"); transform-origin: 40% 50%; animation-delay: 12s; }
+.hero-slide--4 { background-image: url("../../images/hero-4.jpg"); transform-origin: 60% 60%; animation-delay: 19s; }
+
+/* แต่ละใบ: จางเข้า 2 วิ -> ค้าง ~5 วิ พร้อมซูมช้า ๆ -> จางออก 2 วิ
+   ใบแรกเริ่มที่ -2s เพื่อให้เปิดหน้ามาเห็นภาพเต็มทันที */
+@keyframes heroSlide {
+  0%   { opacity: 0; transform: scale(1.02) translate3d(0, 0, 0); }
+  7%   { opacity: 1; }
+  25%  { opacity: 1; }
+  32%  { opacity: 0; transform: scale(1.12) translate3d(-1.5%, -1%, 0); }
+  100% { opacity: 0; transform: scale(1.12) translate3d(-1.5%, -1%, 0); }
+}
+
+/* ชั้นสีครีม: เข้มกลางภาพหลังข้อความ จางออกทางขอบ */
+.hero-slides::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 56% 64% at 50% 44%,
+      rgba(255, 250, 241, .93) 0%,
+      rgba(255, 250, 241, .82) 42%,
+      rgba(255, 250, 241, .38) 74%,
+      rgba(255, 250, 241, .12) 100%),
+    linear-gradient(180deg,
+      rgba(255, 250, 241, .3) 0%,
+      rgba(255, 250, 241, 0) 28%,
+      rgba(255, 250, 241, 0) 72%,
+      rgba(255, 250, 241, .6) 100%);
+}
+@media (max-width: 760px) {
+  .hero-slide { background-position: 30% center; }
+  .hero-slides::after {
+    background: linear-gradient(180deg, rgba(255, 250, 241, .82) 0%, rgba(255, 250, 241, .88) 60%, rgba(255, 250, 241, .95) 100%);
+  }
+}
+
+/* ลดการเคลื่อนไหว: ภาพแรกนิ่ง */
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide { animation: none; }
+  .hero-slide--1 { opacity: 1; transform: none; }
+}
+body.no-motion .hero-slide { animation: none !important; }
+body.no-motion .hero-slide--1 { opacity: 1; transform: none; }
+
+body.high-contrast .hero-slides { display: none; }
