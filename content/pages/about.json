@@ -82,7 +82,7 @@
       "body": "ติดต่อสำนักงานได้ตามช่องทางที่สะดวก",
       "actions": [
         { "label": "ติดต่อเรา", "href": "contact.html" },
-        { "label": "บริการประชาชน", "href": "services.html", "variant": "ghost" }
+        { "label": "บริการวิชาการ", "href": "services.html", "variant": "ghost" }
       ]
     }
   ]

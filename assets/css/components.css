@@ -286,11 +286,11 @@
 
 .mega-inner {
   display: grid;
-  grid-template-columns: 310px 1fr;
-  gap: 24px;
-  padding: 22px;
-  border-radius: 28px;
-  background: #fffdf8;
+  grid-template-columns: 300px 1fr;
+  gap: 32px;
+  padding: 26px 30px;
+  border-radius: 14px;
+  background: #fff;
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
   animation: megaIn .18s ease;
@@ -299,21 +299,21 @@
 .mega-feature {
   position: relative;
   overflow: hidden;
-  padding: 24px;
-  border-radius: 24px;
-  background: radial-gradient(circle at 92% 100%, rgba(185,145,67,.2), transparent 34%), linear-gradient(135deg, var(--deep), var(--deep-2));
+  padding: 26px 24px;
+  border-radius: 12px;
+  background: var(--deep);
   color: #fff;
 }
 
 .mega-feature-icon {
-  width: 58px;
-  height: 58px;
+  width: 48px;
+  height: 48px;
   display: grid;
   place-items: center;
-  border-radius: 20px;
+  border-radius: 10px;
   color: var(--gold-2);
   background: rgba(255,255,255,.12);
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .mega-feature .section-kicker {
@@ -342,31 +342,52 @@
   align-items: center;
   gap: 8px;
   min-height: 42px;
-  padding: 9px 14px;
-  border-radius: 999px;
+  padding: 10px 18px;
+  border-radius: 6px;
   background: var(--gold);
   color: #13231f;
   text-decoration: none;
   font-weight: 700;
 }
+.mega-feature a:hover { filter: brightness(1.05); }
 
 .mega-groups {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 0;
 }
 
+/* คอลัมน์เรียบ ไม่มีกล่องการ์ด — คั่นด้วยเส้นบางแนวตั้ง (ดูเป็นระเบียบ ทางการ) */
 .mega-group {
-  padding: 16px;
-  border-radius: 20px;
-  background: #fff;
-  border: 1px solid rgba(185,145,67,.18);
+  padding: 2px 26px;
+  background: none;
+  border: 0;
+  border-radius: 0;
 }
+.mega-group:first-child { padding-left: 0; }
+.mega-group + .mega-group { border-left: 1px solid var(--line); }
 
 .mega-group h4 {
+  display: inline-block;
   color: var(--deep);
-  margin: 0 0 10px;
-  font-size: 1.15rem;
+  margin: 0 0 12px;
+  padding-bottom: 7px;
+  border-bottom: 2px solid var(--gold);
+  font-size: 1.1rem;
+}
+
+/* กลุ่มที่มีรายการเยอะ — ขยายกว้าง 2 ช่องแล้วจัดลิงก์เป็น 2 คอลัมน์ให้สมดุล ไม่ยาวเกิน */
+.mega-group--wide { grid-column: span 2; }
+
+.mega-group--wide .mega-group-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 22px;
+}
+
+.mega-group--wide .mega-link {
+  border-top: 0;
+  padding: 8px 0;
 }
 
 .mega-link {
@@ -403,8 +424,50 @@
   transition: transform .18s ease;
 }
 
+/* hover เมนูย่อย — ปรับใหม่ให้ดูมีชีวิต (override กฎเก่าใน base.css ที่โหลดก่อน)
+   ใช้ selector .mega-group a ให้ specificity เท่ากับ base.css แล้วชนะด้วยลำดับการโหลด */
+.mega-group a::after,
+.mega-link::after { content: none; }            /* เอาลูกศร › ที่ซ้ำกับ → ออก เหลืออันเดียว */
+
+.mega-group a,
+.mega-link { position: relative; border-radius: 6px; }
+
+.mega-group a:hover,
+.mega-link:hover {
+  background: rgba(185,145,67,.09);
+  color: var(--deep);
+  transform: none;
+}
+
 .mega-link:hover strong { color: var(--deep); }
-.mega-link:hover em { transform: translateX(4px); }
+.mega-link:hover small { color: var(--ink); }
+.mega-link:hover em { transform: translateX(4px); color: var(--gold); }
+
+/* ไอคอนนำหน้าแต่ละลิงก์ — ให้เมนูดูมีมิติ สแกนง่าย */
+.mega-groups .mega-link {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+}
+.mega-link-ic {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  color: var(--deep);
+  transition: background .18s ease, color .18s ease, border-color .18s ease;
+}
+.mega-link-ic .icon { width: 19px; height: 19px; }
+.mega-link:hover .mega-link-ic {
+  background: var(--deep);
+  border-color: var(--deep);
+  color: var(--gold-2);
+}
+.mega-link-tx { min-width: 0; }
 
 @keyframes megaIn {
   from { opacity: 0; transform: translateY(-8px); }

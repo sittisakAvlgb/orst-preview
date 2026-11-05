@@ -78,7 +78,7 @@
               <button type="button" class="chip" data-query="วารสาร">วารสาร</button>
               <button type="button" class="chip" data-query="สิ่งพิมพ์">สิ่งพิมพ์</button>
               <button type="button" class="chip" data-query="หลักเกณฑ์">หลักเกณฑ์</button>
-              <button type="button" class="chip" data-query="บริการประชาชน">บริการประชาชน</button>
+              <button type="button" class="chip" data-query="บริการวิชาการ">บริการวิชาการ</button>
             </div>
 
           </div>
@@ -101,7 +101,7 @@
               <h2 id="search-results-title">ผลการค้นหาองค์ความรู้เบื้องต้น</h2>
 
               <p id="search-results-desc">
-                แสดงผลลัพธ์ที่เกี่ยวข้องมากที่สุดจากพจนานุกรม ศัพท์บัญญัติ บทความ หนังสือ วารสาร เอกสาร และบริการประชาชน
+                แสดงผลลัพธ์ที่เกี่ยวข้องมากที่สุดจากพจนานุกรม ศัพท์บัญญัติ บทความ หนังสือ วารสาร เอกสาร และบริการวิชาการ
               </p>
             </div>
 
@@ -161,7 +161,7 @@
             </button>
 
             <button class="filter-btn" data-filter="service" role="tab" aria-selected="false">
-              บริการประชาชน <span id="count-service">0</span>
+              บริการวิชาการ <span id="count-service">0</span>
             </button>
           </div>
 
@@ -244,74 +244,41 @@
       </div>
     </section>
 
-    <section class="section alt" id="services">
+    <!-- บริการวิชาการเด่น — จุดเข้าบริการช่วงบนหน้าแรก (สไตล์การ์ดเดียวกับหมวดบริการ) -->
+    <section class="section alt" id="academic-service" aria-labelledby="svc1-title">
       <div class="container">
         <div class="section-head">
           <div>
-            <h2>บริการและแหล่งความรู้</h2>
-            <p>เข้าถึงองค์ความรู้และบริการของราชบัณฑิตยสภาได้อย่างสะดวก</p>
-          </div><a class="view-all" href="#service-hub">ดูบริการทั้งหมด →</a>
+            <h2 id="svc1-title">บริการวิชาการของสำนักงาน</h2>
+            <p>ระบบและช่องทางต่าง ๆ ที่ให้บริการประชาชน</p>
+          </div>
+          <a class="view-all" href="#service-hub">ดูบริการทั้งหมด →</a>
         </div>
-        <div class="service-grid reveal">
-          <a class="service-card" href="#knowledge"><span class="service-icon"><svg class="icon-lg">
-                <use href="#i-book"></use>
-              </svg></span>
-            <h3>พจนานุกรม</h3>
-            <p>ค้นความหมายและการใช้คำตามมาตรฐานภาษาไทย</p><span class="arrow">›</span>
-          </a>
-          <a class="service-card" href="#knowledge"><span class="service-icon"><svg class="icon-lg">
-                <use href="#i-form"></use>
-              </svg></span>
-            <h3>ศัพท์บัญญัติ</h3>
-            <p>ศัพท์เฉพาะทางและคำมาตรฐาน</p><span class="arrow">›</span>
-          </a>
-          <a class="service-card" href="#archive"><span class="service-icon"><svg class="icon-lg">
+
+        <div class="svc-card-grid reveal">
+          <a class="service-card" href="#service-hub"><span class="service-icon"><svg class="icon-lg">
                 <use href="#i-search"></use>
               </svg></span>
-            <h3>ค้นคว้าข้อมูล</h3>
-            <p>ระบบค้นหาข้อมูลวิชาการ เอกสาร และงานวิจัย</p><span class="arrow">›</span>
+            <h3>สอบถามข้อมูลทางวิชาการ</h3>
+            <p>ส่งคำถามด้านภาษา คำศัพท์ และองค์ความรู้ แล้วรับคำตอบจากเจ้าหน้าที่</p><span class="arrow">›</span>
           </a>
-          <a class="service-card" href="#archive"><span class="service-icon"><svg class="icon-lg">
-                <use href="#i-shield"></use>
-              </svg></span>
-            <h3>มาตรฐานและกฎเกณฑ์</h3>
-            <p>มาตรฐานภาษาไทยและหลักเกณฑ์การใช้ภาษา</p><span class="arrow">›</span>
-          </a>
-          <a class="service-card" href="#news"><span class="service-icon"><svg class="icon-lg">
+          <a class="service-card" href="#service-hub"><span class="service-icon"><svg class="icon-lg">
                 <use href="#i-file"></use>
               </svg></span>
-            <h3>ข่าวและประกาศ</h3>
-            <p>ข่าวสารและประกาศจากสำนักงาน</p><span class="arrow">›</span>
+            <h3>ขออนุญาตใช้เนื้อหา</h3>
+            <p>ยื่นคำขอนำหนังสือหรือสิ่งพิมพ์ของสำนักงานไปจัดพิมพ์หรือเผยแพร่ต่อ</p><span class="arrow">›</span>
           </a>
-          <a class="service-card" href="#publications"><span class="service-icon"><svg class="icon-lg">
-                <use href="#i-phone"></use>
+          <a class="service-card" href="#service-hub"><span class="service-icon"><svg class="icon-lg">
+                <use href="#i-form"></use>
               </svg></span>
-            <h3>หนังสือและตำรา</h3>
-            <p>หนังสือ ตำรา และเอกสารวิชาการออนไลน์</p><span class="arrow">›</span>
-          </a>
-          <a class="service-card" href="#knowledge"><span class="service-icon"><svg class="icon-lg">
-                <use href="#i-file"></use>
-              </svg></span>
-            <h3>ฐานข้อมูล</h3>
-            <p>ฐานข้อมูลงานวิชาการและองค์ความรู้</p><span class="arrow">›</span>
-          </a>
-          <a class="service-card" href="#archive"><span class="service-icon"><svg class="icon-lg">
-                <use href="#i-puzzle"></use>
-              </svg></span>
-            <h3>คลังความรู้</h3>
-            <p>บทความ องค์ความรู้ และสื่อการเรียนรู้</p><span class="arrow">›</span>
-          </a>
-          <a class="service-card" href="#publications"><span class="service-icon"><svg class="icon-lg">
-                <use href="#i-video"></use>
-              </svg></span>
-            <h3>สื่อดิจิทัล</h3>
-            <p>สื่อวิดีโอ สื่อเสียง และสื่อมัลติมีเดีย</p><span class="arrow">›</span>
+            <h3>ร้องเรียน / เสนอแนะ</h3>
+            <p>แจ้งปัญหาการใช้บริการหรือข้อเสนอแนะ พร้อมติดตามสถานะได้</p><span class="arrow">›</span>
           </a>
           <a class="service-card" href="#service-hub"><span class="service-icon"><svg class="icon-lg">
                 <use href="#i-pen"></use>
               </svg></span>
-            <h3>บริการวิชาการ</h3>
-            <p>คำปรึกษา แบบฟอร์ม และการติดต่อราชการ</p><span class="arrow">›</span>
+            <h3>แบบสำรวจความคิดเห็น</h3>
+            <p>ร่วมประเมินเว็บไซต์และบริการ เพื่อพัฒนาการให้บริการให้ดียิ่งขึ้น</p><span class="arrow">›</span>
           </a>
         </div>
       </div>
@@ -1129,7 +1096,7 @@
             <span class="section-kicker">Digital Service Hub</span>
             <h2 style="
     color: #FFF;
-">บริการประชาชนดิจิทัล</h2>
+">บริการวิชาการดิจิทัล</h2>
             <p style="
     color: #FFF;
 ">เลือกบริการที่ต้องการ ยื่นคำขอ และติดตามสถานะได้อย่างชัดเจน</p>
@@ -1428,7 +1395,7 @@
             <span class="qa-q">ต้องการสอบถามข้อมูลทางวิชาการต้องทำอย่างไร</span>
             <span class="qa-toggle" aria-hidden="true"></span>
           </summary>
-          <p class="qa-a">เลือกเมนูบริการประชาชนหรือปุ่มติดต่อสอบถาม กรอกรายละเอียดคำถามและข้อมูลติดต่อ เพื่อให้เจ้าหน้าที่พิจารณาและตอบกลับ</p>
+          <p class="qa-a">เลือกเมนูบริการวิชาการหรือปุ่มติดต่อสอบถาม กรอกรายละเอียดคำถามและข้อมูลติดต่อ เพื่อให้เจ้าหน้าที่พิจารณาและตอบกลับ</p>
         </details>
 
         <details class="qa-item" name="home-faq">

@@ -10275,7 +10275,7 @@ radial-gradient(circle at 50% 52%, rgba(255,255,255,0.5), transparent 44%);
 .calendar-head h3,
 .faq-center-top h3 { font-size: var(--fs-subhead); }
 
-/* บริการประชาชนดิจิทัล */
+/* บริการวิชาการดิจิทัล */
 .intro-label,
 .service-badge,
 .service-time { font-size: var(--fs-meta); }
@@ -11596,4 +11596,19 @@ body.high-contrast .qa-layout > .events-calendar-card.cal { background: var(--su
 @media (max-width: 1100px) {
   .qa-help-link,
   .qa-layout .cal-head a { display: inline-flex; align-items: center; min-height: 40px; }
+}
+
+/* =============================================================================
+   บริการวิชาการเด่น — การ์ด 4 บริการ (ใช้สไตล์ .service-card เดียวกับหมวดบริการ)
+   ============================================================================= */
+.svc-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+@media (max-width: 1000px) {
+  .svc-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .svc-card-grid { grid-template-columns: 1fr; }
 }
