@@ -12100,3 +12100,43 @@ body.high-contrast .access-setting-row.is-on { background: var(--surface); box-s
 }
 .orst-hero-wow .orst-search-submit:hover { filter: brightness(1.15); }
 body.high-contrast .orst-hero-wow .orst-smart-search { background: var(--surface); }
+
+/* หัวข้อ hero: ระยะบรรทัด 1.2 แน่นเกินสำหรับภาษาไทย — สระ/วรรณยุกต์บน (ที่ เรี รู้ ยั่ง ยื)
+   ของบรรทัดล่างเกือบชนบรรทัดบน ปรับเป็น 1.38 */
+#hero-title.orst-hero-title { line-height: 1.38; }
+
+/* =============================================================================
+   แถบจุดเด่นใต้ hero — responsive ชุดเดียวจบ (เดิมกฎกระจายหลาย breakpoint
+   ช่วง 2x2 ยังใช้เส้นคั่นของแบบ 4 คอลัมน์ เส้นเหลื่อม/ไม่มีเส้นคั่นแถว)
+   - >= 1281px : 4 คอลัมน์ ไอคอนซ้าย
+   - 1024–1280 : 4 คอลัมน์ ไอคอนบน ข้อความใต้ (คอลัมน์แคบ ไม่บีบข้อความ)
+   - 761–1023  : 2x2 ไอคอนซ้าย เส้นคั่นกลาง + เส้นคั่นแถว
+   - <= 760    : 2x2 กะทัดรัด (กฎเดิมช่วงมือถือ)
+   ============================================================================= */
+@media (min-width: 1024px) and (max-width: 1280.98px) {
+  .trust-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .trust-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 22px 20px;
+    border-top: 0;
+    border-left: 1px solid rgba(255, 255, 255, .12);
+  }
+  .trust-item:first-child { border-left: 0; padding-left: 0; }
+  .trust-item .trust-icon { width: 40px; height: 40px; }
+}
+@media (min-width: 760.02px) and (max-width: 1023.98px) {
+  .trust-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .trust-item {
+    flex-direction: row;
+    align-items: center;
+    padding: 20px 24px;
+    border-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, .12);
+  }
+  .trust-item:nth-child(-n + 2) { border-top: 0; }
+  .trust-item:nth-child(odd) { padding-left: 0; }
+  .trust-item:nth-child(even) { border-left: 1px solid rgba(255, 255, 255, .12); }
+  .trust-item .trust-icon { width: 44px; height: 44px; }
+}
