@@ -11612,3 +11612,367 @@ body.high-contrast .qa-layout > .events-calendar-card.cal { background: var(--su
 @media (max-width: 560px) {
   .svc-card-grid { grid-template-columns: 1fr; }
 }
+
+/* บริการวิชาการเด่น — ปรับให้อ่านง่าย/กดง่ายขึ้น (เฉพาะส่วนนี้ ไม่กระทบ .service-card ที่อื่น)
+   - ตัดวงครีมมุมขวาล่าง (มองแทบไม่เห็น ไม่ช่วยบอกว่ากดได้)
+   - คำอธิบายเข้มขึ้น (ฟอนต์ Sarabun เส้นบาง สีเทาเดิมดูจาง) — ผสมจากตัวแปร โหมด high-contrast ยังทำงาน
+   - ลิงก์ "ใช้บริการ →" ชิดล่างทุกใบ การ์ดสูงเท่ากัน */
+#academic-service .service-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+}
+#academic-service .service-card::after { content: none; }
+#academic-service .service-card p {
+  color: color-mix(in srgb, var(--ink) 78%, var(--muted));
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+#academic-service .svc-go {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--deep);
+  font-weight: 700;
+  font-size: var(--fs-body);
+  position: relative;
+  z-index: 1;
+  transition: color .18s ease;
+}
+#academic-service .svc-go span { transition: transform .18s ease; }
+#academic-service .service-card:hover .svc-go { color: var(--gold); }
+#academic-service .service-card:hover .svc-go span { transform: translateX(3px); }
+
+/* บริการวิชาการดิจิทัล — คำอธิบายในการ์ดเข้มขึ้น (ฟอนต์เส้นบาง สีเทาเดิมจาง) */
+#service-hub .public-service-card p {
+  color: color-mix(in srgb, var(--ink) 78%, var(--muted));
+}
+
+/* FAQ + กำหนดการ — ตัดกล่อง "ยังไม่พบคำตอบ" ออก แล้วเพิ่มปฏิทินเดือนในการ์ดกำหนดการ
+   คำถาม (ซ้าย) | ปฏิทิน + รายการกิจกรรม (ขวา) สูงเท่ากัน */
+.qa-layout {
+  grid-template-areas:
+    "intro intro"
+    "list  cal";
+  grid-template-rows: auto auto;
+  align-items: stretch;
+}
+.qa-layout > .events-calendar-card.cal { padding-bottom: 12px; }
+.qa-layout .cal-month {
+  display: grid;
+  justify-content: start;
+  gap: 2px;
+  margin: 12px 0 6px;
+  padding: 0;
+  border: 0;
+}
+.qa-layout .cal-month strong { font-size: var(--fs-title); color: var(--deep); }
+.qa-layout .cal-month small { color: var(--muted); font-size: var(--fs-meta); }
+.qa-layout .cal-grid { padding-bottom: 10px; border-bottom: 1px solid rgba(16, 32, 51, .12); }
+.qa-layout .cal-day { width: 34px; height: 34px; }
+.qa-layout .cal-event.is-selected strong { color: var(--deep); }
+.qa-layout .cal-event.is-selected .cal-event-date b { color: var(--gold); }
+
+@media (max-width: 1000px) {
+  .qa-layout { grid-template-areas: "intro" "list" "cal"; }
+}
+
+/* FAQ แคบลง (ลูกค้า: คำถามกว้างเกิน) — แบ่งครึ่ง คำถาม | กำหนดการ
+   การ์ดกำหนดการกว้างขึ้น จึงวางปฏิทิน (ซ้าย) คู่รายการกิจกรรม (ขวา) ไม่ให้ปฏิทินยืดโล่ง */
+@media (min-width: 1201px) {
+  .qa-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .qa-layout > .events-calendar-card.cal {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "head  head"
+      "month agenda"
+      "grid  agenda";
+    grid-template-rows: auto auto 1fr;
+    column-gap: 28px;
+    align-content: start;
+  }
+  .qa-layout .cal-head { grid-area: head; }
+  .qa-layout .cal-month { grid-area: month; }
+  .qa-layout .cal-grid { grid-area: grid; align-self: start; padding-bottom: 0; border-bottom: 0; }
+  .qa-layout .cal-agenda {
+    grid-area: agenda;
+    margin-top: 12px;
+    padding-left: 28px;
+    border-left: 1px solid rgba(16, 32, 51, .12);
+  }
+}
+
+/* กำหนดการ — รายการแบบป้ายวันที่ (ลูกค้าเลือก)
+   ป้ายวันที่สีเขียวเข้ม (วัน / เลข / เดือน) + เวลาหรือรูปแบบ พร้อมไอคอน + ลิงก์รายละเอียด */
+.qa-layout .cal-agenda { display: flex; flex-direction: column; }
+.qa-layout .cal-agenda ol { display: grid; gap: 12px; }
+.qa-layout .cal-agenda li,
+.qa-layout .cal-agenda li:first-child { border-top: 0; }
+.qa-layout .cal-event {
+  display: grid;
+  grid-template-columns: 68px minmax(0, 1fr);
+  align-items: start;
+  gap: 16px;
+  padding: 12px;
+  border: 1px solid rgba(16, 32, 51, .1);
+  border-radius: 12px;
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color .18s ease, background .18s ease;
+}
+.qa-layout .cal-event:hover,
+.qa-layout .cal-event:focus-visible,
+.qa-layout .cal-event.is-selected {
+  background: var(--surface-soft);
+  border-color: var(--gold);
+}
+.qa-layout .cal-event:hover strong { text-decoration: none; }
+
+.qa-layout .cal-event-date {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 0;
+  min-height: 76px;
+  padding: 6px 4px;
+  border-radius: 10px;
+  background: var(--deep);
+  color: #fff;
+  line-height: 1.15;
+}
+.qa-layout .cal-event-date b { font-size: 1.9rem; color: #fff; line-height: 1.05; }
+.qa-layout .cal-event-date small { color: var(--gold-2); font-size: var(--fs-meta); font-weight: 700; }
+.qa-layout .cal-event.is-selected .cal-event-date { background: var(--gold); }
+.qa-layout .cal-event.is-selected .cal-event-date b,
+.qa-layout .cal-event.is-selected .cal-event-date small { color: #13231f; }
+
+.qa-layout .cal-event-body { display: grid; gap: 6px; padding-top: 2px; }
+.qa-layout .cal-event-body strong { color: var(--ink); font-size: var(--fs-title); line-height: 1.35; }
+.cal-event-meta { display: flex; flex-wrap: wrap; gap: 4px 16px; color: color-mix(in srgb, var(--ink) 78%, var(--muted)); font-size: var(--fs-meta); }
+.cal-event-meta > span { display: inline-flex; align-items: center; gap: 6px; }
+.cal-event-meta svg {
+  width: 16px; height: 16px; flex: none;
+  fill: none; stroke: var(--deep); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+.cal-event-more { color: var(--deep); font-size: var(--fs-meta); font-weight: 700; }
+.cal-event-more span { display: inline-block; transition: transform .18s ease; }
+.cal-event:hover .cal-event-more { color: var(--gold); }
+.cal-event:hover .cal-event-more span { transform: translateX(3px); }
+
+.cal-all {
+  align-self: flex-start;
+  margin-top: 14px;
+  color: var(--deep);
+  font-weight: 700;
+  font-size: var(--fs-body);
+  text-decoration: none;
+}
+.cal-all:hover,
+.cal-all:focus-visible { color: var(--gold); }
+
+body.high-contrast .qa-layout .cal-event-date { background: var(--surface); box-shadow: inset 0 0 0 2px var(--gold); }
+
+/* กำหนดการ 5 กิจกรรม — การ์ดกะทัดรัดขึ้น (ป้ายวันที่เล็กลง ลิงก์เป็นลูกศรท้ายแถว) ไม่ให้สูงเกินกล่องคำถาม */
+.qa-layout .cal-agenda ol { gap: 8px; }
+.qa-layout .cal-event {
+  grid-template-columns: 54px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 14px 8px 8px;
+  border-radius: 10px;
+}
+.qa-layout .cal-event-date { min-height: 0; padding: 5px 2px; border-radius: 8px; }
+.qa-layout .cal-event-date b { font-size: 1.45rem; }
+.qa-layout .cal-event-date small { font-size: .78rem; }
+.qa-layout .cal-event-body { gap: 2px; padding-top: 0; }
+.qa-layout .cal-event-body strong { font-size: var(--fs-body); }
+.cal-event-go { color: var(--deep); font-weight: 700; transition: transform .18s ease, color .18s ease; }
+.cal-event:hover .cal-event-go { color: var(--gold); transform: translateX(3px); }
+.qa-layout .cal-all { margin-top: 12px; }
+@media (min-width: 1201px) {
+  /* 5 กิจกรรม: ให้ฝั่งกำหนดการกว้างกว่าเล็กน้อย ปฏิทินกว้างคงที่ รายการได้พื้นที่ที่เหลือ */
+  .qa-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); }
+  .qa-layout > .events-calendar-card.cal { grid-template-columns: 252px minmax(0, 1fr); column-gap: 24px; }
+  .qa-layout .cal-agenda { padding-left: 24px; }
+}
+
+/* =============================================================================
+   ปฏิทินกิจกรรม v2 — ตารางเดือนเต็มคอลัมน์ (ลูกค้า: ไม่สมดุล / ปฏิทินไม่น่าสนใจ)
+   - แถบชื่อเดือนสีเขียวเข้ม + จำนวนกิจกรรม
+   - วันเป็นช่องตาราง (กว้างเต็มคอลัมน์) วันมีกิจกรรม = ช่องเขียวเข้ม + จุดทอง, วันที่เลือก = ช่องทอง
+   - รายการกิจกรรมเป็นแถวคั่นเส้น (ไม่เป็นการ์ดซ้อนการ์ด)
+   ============================================================================= */
+.qa-layout .cal-month {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 14px 0 0;
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 10px 10px 0 0;
+  background: var(--deep);
+}
+.qa-layout .cal-month strong { color: #fff; font-size: var(--fs-title); }
+.qa-layout .cal-month small { color: var(--gold-2); font-size: var(--fs-meta); font-weight: 700; }
+
+.qa-layout .cal-grid {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0;
+  row-gap: 0;
+  padding: 0;
+  border: 1px solid rgba(16, 32, 51, .12);
+  border-top: 0;
+  border-bottom: 1px solid rgba(16, 32, 51, .12);
+  border-radius: 0 0 10px 10px;
+  overflow: hidden;
+}
+.qa-layout .cal-dow {
+  padding: 8px 0;
+  background: var(--surface-soft);
+  color: var(--ink);
+  font-size: var(--fs-meta);
+  border-bottom: 1px solid rgba(16, 32, 51, .12);
+}
+.qa-layout .cal-grid > span:not(.cal-dow),
+.qa-layout .cal-grid > .cal-day {
+  position: relative;
+  justify-self: stretch;
+  width: auto;
+  height: auto;
+  min-height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 0;
+  border-right: 1px solid rgba(16, 32, 51, .07);
+  border-bottom: 1px solid rgba(16, 32, 51, .07);
+  font-size: var(--fs-body);
+}
+.qa-layout .cal-grid > :nth-child(7n) { border-right: 0; }
+.qa-layout .cal-grid > .cal-day.is-weekend { background: rgba(16, 32, 51, .025); }
+.qa-layout .cal-grid > .cal-day.has-event {
+  background: var(--deep);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: none;
+}
+.qa-layout .cal-grid > .cal-day.has-event::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 6px;
+  width: 5px;
+  height: 5px;
+  margin-left: -2.5px;
+  border-radius: 50%;
+  background: var(--gold-2);
+}
+.qa-layout .cal-grid > .cal-day.has-event:hover,
+.qa-layout .cal-grid > .cal-day.has-event:focus-visible,
+.qa-layout .cal-grid > .cal-day.has-event.is-selected {
+  background: var(--gold);
+  color: #13231f;
+  box-shadow: none;
+  outline: none;
+}
+.qa-layout .cal-grid > .cal-day.has-event:focus-visible { box-shadow: inset 0 0 0 3px var(--deep); }
+.qa-layout .cal-grid > .cal-day.has-event:hover::after,
+.qa-layout .cal-grid > .cal-day.has-event.is-selected::after { background: #13231f; }
+
+.cal-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  margin: 10px 0 0;
+  color: color-mix(in srgb, var(--ink) 78%, var(--muted));
+  font-size: var(--fs-meta);
+}
+.cal-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.cal-legend i { width: 12px; height: 12px; border-radius: 3px; background: var(--deep); }
+.cal-legend i.is-selected { background: var(--gold); }
+
+/* รายการกิจกรรม: แถวคั่นเส้น */
+.qa-layout .cal-agenda ol { gap: 0; }
+.qa-layout .cal-agenda li { border-top: 1px solid rgba(16, 32, 51, .1); }
+.qa-layout .cal-agenda li:first-child { border-top: 0; }
+.qa-layout .cal-event {
+  grid-template-columns: 50px minmax(0, 1fr) auto;
+  gap: 14px;
+  padding: 10px 10px 10px 6px;
+  border: 0;
+  border-radius: 8px;
+}
+.qa-layout .cal-event:hover,
+.qa-layout .cal-event:focus-visible,
+.qa-layout .cal-event.is-selected { background: var(--surface-soft); border-color: transparent; }
+
+body.high-contrast .qa-layout .cal-grid > .cal-day.has-event { background: var(--surface); color: var(--ink); box-shadow: inset 0 0 0 2px var(--gold); }
+
+@media (min-width: 1201px) {
+  .qa-layout > .events-calendar-card.cal {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "head  head"
+      "month agenda"
+      "grid  agenda"
+      "legend agenda";
+    grid-template-rows: auto auto auto 1fr;
+    column-gap: 26px;
+  }
+  .qa-layout .cal-legend { grid-area: legend; }
+  .qa-layout .cal-agenda { margin-top: 14px; padding-left: 0; border-left: 0; }
+}
+@media (min-width: 1201px) {
+  .qa-layout > .events-calendar-card.cal {
+    grid-template-areas:
+      "head   head"
+      "month  agenda"
+      "grid   agenda"
+      "legend agenda"
+      ".      agenda";
+    grid-template-rows: auto auto auto auto 1fr;
+  }
+  .qa-layout .cal-grid > span:not(.cal-dow),
+  .qa-layout .cal-grid > .cal-day { min-height: 54px; }
+}
+@media (min-width: 1201px) {
+  .qa-layout .cal-grid > span:not(.cal-dow),
+  .qa-layout .cal-grid > .cal-day { min-height: 60px; }
+}
+
+/* Responsive คำถาม + กำหนดการ
+   < 1366px (header เปลี่ยนเป็นเมนูมือถือช่วงเดียวกัน): เรียง คำถาม > กำหนดการ เต็มความกว้าง
+   เดิมช่วง 1001–1365 วางข้างกันแต่คอลัมน์กำหนดการแคบ ปฏิทินซ้อนบนรายการ การ์ดสูงจนกล่องคำถามโล่ง
+   การ์ดกำหนดการกว้างพอ (>= 700px) -> ปฏิทินซ้าย / รายการขวา เหมือนจอใหญ่ */
+@media (max-width: 1365px) {
+  .qa-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "intro" "list" "cal";
+    grid-template-rows: none;
+  }
+}
+@media (min-width: 700px) and (max-width: 1365px) {
+  .qa-layout > .events-calendar-card.cal {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    grid-template-areas:
+      "head   head"
+      "month  agenda"
+      "grid   agenda"
+      "legend agenda"
+      ".      agenda";
+    grid-template-rows: auto auto auto auto 1fr;
+    column-gap: 24px;
+    align-content: start;
+  }
+  .qa-layout .cal-head { grid-area: head; }
+  .qa-layout .cal-month { grid-area: month; }
+  .qa-layout .cal-grid { grid-area: grid; align-self: start; }
+  .qa-layout .cal-legend { grid-area: legend; }
+  .qa-layout .cal-agenda { grid-area: agenda; margin-top: 14px; padding-left: 0; border-left: 0; }
+  .qa-layout .cal-grid > span:not(.cal-dow),
+  .qa-layout .cal-grid > .cal-day { min-height: 54px; }
+}

@@ -185,10 +185,29 @@
   white-space: nowrap;
 }
 
-.main-nav a.active, .main-nav a:hover, .main-nav button:hover,
+.main-nav a:hover, .main-nav button:hover,
 .main-nav a.is-open, .main-nav button.is-open {
   background: #fff7e8;
   color: var(--deep);
+}
+
+/* หน้าปัจจุบัน (active) — ไม่ใช้พื้นครีมซ้ำกับ hover/เปิดเมนู
+   ใช้ตัวอักษรเขียวเข้ม + แถบทองชิดขอบล่างของ header แทน
+   (override .main-nav a.active::after ใน pages/*.css ที่วางเส้นไว้ในปุ่ม) */
+.main-nav a.active { background: transparent; color: var(--deep); }
+.main-nav a.active:hover,
+.main-nav a.active.is-open { background: #fff7e8; }
+.main-nav a.active::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  /* ลิงก์อยู่กึ่งกลางแนวตั้งของ .header-inner (สูง 76px) — % ของ bottom อิงความสูงลิงก์
+     จึงคำนวณระยะถึงขอบล่าง header ได้ทุกหน้า แม้ความสูงลิงก์ต่างกันเล็กน้อย, -1px ทับเส้นขอบ */
+  bottom: calc((100% - 76px) / 2 - 1px);
+  height: 3px;
+  background: var(--gold);
+  border-radius: 3px 3px 0 0;
 }
 
    /* Better dropdown chevron */
@@ -277,7 +296,7 @@
   left: 50%;
   top: calc(100% + 1px);
   transform: translateX(-50%);
-  width: min(1120px, calc(100vw - 40px));
+  width: min(1240px, calc(100vw - 40px));
   z-index: 120;
   padding-top: 12px;
 }
@@ -286,9 +305,9 @@
 
 .mega-inner {
   display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: 32px;
-  padding: 26px 30px;
+  grid-template-columns: 264px 1fr;
+  gap: 26px;
+  padding: 24px;
   border-radius: 14px;
   background: #fff;
   border: 1px solid var(--line);
@@ -353,13 +372,14 @@
 
 .mega-groups {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 0;
+  align-content: start;
 }
 
 /* คอลัมน์เรียบ ไม่มีกล่องการ์ด — คั่นด้วยเส้นบางแนวตั้ง (ดูเป็นระเบียบ ทางการ) */
 .mega-group {
-  padding: 2px 26px;
+  padding: 2px 14px;
   background: none;
   border: 0;
   border-radius: 0;
@@ -370,7 +390,7 @@
 .mega-group h4 {
   display: inline-block;
   color: var(--deep);
-  margin: 0 0 12px;
+  margin: 0 10px 10px;
   padding-bottom: 7px;
   border-bottom: 2px solid var(--gold);
   font-size: 1.1rem;
@@ -444,12 +464,21 @@
 .mega-link:hover em { transform: translateX(4px); color: var(--gold); }
 
 /* ไอคอนนำหน้าแต่ละลิงก์ — ให้เมนูดูมีมิติ สแกนง่าย */
-.mega-groups .mega-link {
+/* จัดใหม่: ตัดเส้นคั่นและลูกศรออก ให้ชื่อเมนูมีที่พอไม่ต้องตัดบรรทัด
+   hover ใช้พื้นหลังทั้งแถว + ไอคอนเปลี่ยนสีแทน */
+.mega-groups .mega-link,
+.mega-group--wide .mega-link {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr;
   align-items: center;
   gap: 12px;
+  padding: 9px 10px;
+  margin: 0 0 2px;
+  border-top: 0;
+  border-radius: 8px;
 }
+.mega-groups .mega-link em { display: none; }
+.mega-link strong { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .mega-link-ic {
   width: 36px;
   height: 36px;

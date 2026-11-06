@@ -114,6 +114,12 @@ async function main() {
   // ผูก event ให้ block ที่ต้องใช้ JS (เช่น faq) เพราะเนื้อหาเพิ่งถูกใส่เข้า DOM
   window.orstHeader?.bindDynamicContent?.();
 
+  // ลิงก์ที่มี #anchor (เช่น services.html#channels) — เนื้อหาเพิ่ง render หลังเบราว์เซอร์โหลดหน้า
+  // เบราว์เซอร์จึงหา id ไม่เจอเอง ต้องเลื่อนไปให้หลัง render เสร็จ
+  if (location.hash.length > 1) {
+    document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView({ behavior: 'instant' });
+  }
+
   document.dispatchEvent(new CustomEvent('orst:content-rendered', { detail: { page, path } }));
 }
 
