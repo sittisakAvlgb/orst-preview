@@ -11976,3 +11976,127 @@ body.high-contrast .qa-layout .cal-grid > .cal-day.has-event { background: var(-
   .qa-layout .cal-grid > span:not(.cal-dow),
   .qa-layout .cal-grid > .cal-day { min-height: 54px; }
 }
+
+/* =============================================================================
+   แผงช่วยการเข้าถึง — โทนทางการ เรียบ (ลูกค้า: ดูเป็น AI เกินไป)
+   ตัดดาวประดับ / พื้นไล่สี / มุมมนมาก / เงาฟุ้ง, ไอคอนลายเส้นชุดเดียว, ปุ่มเป็นสี่เหลี่ยมมุมมนน้อย
+   ============================================================================= */
+.access-panel { border-radius: 14px; background: var(--surface, #fff); box-shadow: 0 20px 60px rgba(8, 22, 31, .22); }
+.access-panel-header { padding: 18px 20px; background: var(--surface, #fff); align-items: center; }
+.access-brand { gap: 12px; }
+.access-brand-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  box-shadow: none;
+}
+.access-brand-icon::before,
+.access-brand-icon::after { content: none; }
+.access-brand-icon .icon-lg { width: 24px; height: 24px; }
+.access-brand h2 { font-size: var(--fs-title); }
+.access-close { width: 38px; height: 38px; border-radius: 8px; }
+.access-close:hover { background: var(--surface-soft); }
+
+.access-panel-body { height: calc(100% - 82px); padding: 18px 20px 20px; }
+.access-section { margin-bottom: 18px; }
+.access-section-title {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: var(--fs-meta);
+  font-weight: 700;
+}
+
+.font-segment { padding: 3px; border-radius: 8px; }
+.font-segment button { min-height: 36px; border-radius: 6px; }
+.font-segment button.active { box-shadow: none; }
+
+.access-setting-list { border-radius: 10px; }
+.access-setting-row { min-height: 48px; padding: 8px 12px; grid-template-columns: 24px 1fr 40px; gap: 12px; }
+.access-setting-row:hover { background: var(--surface-soft); }
+.setting-icon { width: 24px; height: 24px; }
+.setting-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.setting-text { font-size: var(--fs-body); font-weight: 600; }
+.setting-switch::after { box-shadow: 0 1px 2px rgba(0, 0, 0, .2); }
+
+.access-actions { grid-template-columns: 1fr 1.4fr; margin-top: 20px; }
+.access-reset,
+.access-save { min-height: 44px; border-radius: 8px; }
+.access-reset:hover { background: var(--surface-soft); }
+.access-save:hover { filter: brightness(1.15); }
+.access-footer-note { margin-top: 12px; }
+
+@media (max-width: 760px) {
+  .access-panel { border-radius: 14px 14px 0 0; }
+  .access-panel-body { max-height: calc(90vh - 82px); }
+}
+
+/* แผงช่วยการเข้าถึง — ไม่เบลอพื้นหลัง และมืดลงเพียงเล็กน้อย
+   ผู้ใช้เห็นผลของการตั้งค่า (ตัวอักษรใหญ่ / คอนทราสต์ / เน้นลิงก์) บนหน้าเว็บได้ทันทีขณะกด */
+.access-panel-modal .access-panel-backdrop {
+  background: rgba(8, 22, 31, .18);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+/* ความสูงพอดีเนื้อหา (เดิมสูงเต็มจอ เหลือพื้นที่ว่างด้านล่าง) */
+.access-panel-modal { align-items: flex-start; }
+.access-panel {
+  height: auto;
+  max-height: calc(100vh - 32px);
+  display: flex;
+  flex-direction: column;
+}
+.access-panel-header { flex: none; }
+.access-panel-body { height: auto; flex: 1 1 auto; min-height: 0; overflow: auto; }
+/* สวิตช์ที่เปิดอยู่ — ทั้งแถวมีพื้นอ่อน + ตัวอักษรเขียว เห็นชัดว่าเปิดอะไรไว้บ้าง */
+.access-setting-row.is-on { background: rgba(7, 59, 52, .06); }
+.access-setting-row.is-on .setting-text { color: var(--deep); font-weight: 700; }
+body.high-contrast .access-setting-row.is-on { background: var(--surface); box-shadow: inset 3px 0 0 var(--gold); }
+
+@media (max-width: 760px) {
+  .access-panel-modal { align-items: flex-end; }
+  .access-panel { max-height: 90vh; }
+  .access-panel-body { max-height: none; }
+}
+/* มือถือ: แผงเป็น bottom sheet ชิดขอบล่างจอ (กฎ .modal ทั่วไปจัดกึ่งกลาง + padding 20px ชนะ .access-panel-modal อยู่) */
+@media (max-width: 760px) {
+  #accessibility-modal.access-panel-modal { padding: 0; align-items: end; justify-items: stretch; }
+  #accessibility-modal .access-panel { width: 100%; }
+}
+
+/* ช่องค้นหา hero — ตัดแสง/เงาฟุ้ง (ลูกค้า: มีแสงแปลก ๆ ดูเป็น AI) คงรูปทรงแคปซูลเดิม
+   - พื้นขาวทึบ ไม่เบลอภาพด้านหลัง, เงาบางสั้น, ไม่มีขอบสว่างด้านใน
+   - วงไอคอนซ้าย: พื้นเรียบ ไม่ไล่สี ไม่เรืองทอง / ปุ่มค้นหา: ไม่มีเงา
+   - focus: ไม่ลอยขึ้น ใช้เส้นขอบเขียวชัด ๆ แทนวงแสง */
+.orst-hero-wow .orst-smart-search {
+  background: #fff;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: 1px solid #d9cbb3;
+  box-shadow: 0 4px 14px rgba(16, 32, 51, .08);
+}
+.orst-hero-wow .orst-smart-search:focus-within {
+  transform: none;
+  border-color: var(--deep);
+  box-shadow: 0 0 0 3px rgba(7, 59, 52, .15);
+}
+.orst-hero-wow .orst-search-orb {
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  box-shadow: none;
+}
+.orst-hero-wow .orst-search-submit,
+.orst-hero-wow .orst-search-submit:hover {
+  box-shadow: none;
+  transform: none;
+}
+.orst-hero-wow .orst-search-submit:hover { filter: brightness(1.15); }
+body.high-contrast .orst-hero-wow .orst-smart-search { background: var(--surface); }

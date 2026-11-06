@@ -898,7 +898,7 @@ function highlight(t, q) { return t.replace(new RegExp(`(${escapeRegExp(q)})`, '
 function initModals() { qsa('[data-modal-open]').forEach(btn => btn.addEventListener('click', () => openModal(btn.dataset.modalOpen))); qsa('[data-modal-close]').forEach(btn => btn.addEventListener('click', () => closeModal(btn.closest('.modal')?.id))); document.addEventListener('keydown', e => { if (e.key === 'Escape') qsa('.modal:not([hidden])').forEach(m => closeModal(m.id)) }); qs('#advanced-form')?.addEventListener('submit', e => { e.preventDefault(); const q = qs('#advanced-q').value.trim() || 'ภาษาไทย'; const type = new FormData(e.target).get('adv-type'); currentFilter = type; qsa('[data-filter]').forEach(b => { const active = b.dataset.filter === type; b.classList.toggle('active', active); b.setAttribute('aria-selected', String(active)) }); qs('#global-search').value = q; closeModal('advanced-modal'); doSearch(q) }) }
 function openModal(id) { const m = qs('#' + id); if (!m) return; lastFocused = document.activeElement; m.hidden = false; document.body.style.overflow = 'hidden'; setTimeout(() => qs('button,input,select,a', m)?.focus(), 20) }
 function closeModal(id) { const m = qs('#' + id); if (!m) return; m.hidden = true; document.body.style.overflow = ''; lastFocused?.focus?.() }
-function initAccessibility() { qsa('[data-font]').forEach(btn => btn.addEventListener('click', () => { const a = btn.dataset.font; if (a === 'plus') fontStep = Math.min(3, fontStep + 1); if (a === 'minus') fontStep = Math.max(-2, fontStep - 1); if (a === 'reset') fontStep = 0; document.documentElement.style.setProperty('--base-size', `${17 + fontStep}px`) })); qsa('[data-toggle-contrast]').forEach(b => b.addEventListener('click', () => document.body.classList.toggle('high-contrast'))); qsa('[data-readable]').forEach(b => b.addEventListener('click', () => document.body.classList.toggle('readable-mode'))); qsa('[data-reduce-motion]').forEach(b => b.addEventListener('click', () => document.body.classList.toggle('no-motion'))) }
+function initAccessibility() { qsa('[data-font]').forEach(btn => btn.addEventListener('click', () => { const a = btn.dataset.font; if (a === 'plus') fontStep = Math.min(3, fontStep + 1); if (a === 'minus') fontStep = Math.max(-2, fontStep - 1); if (a === 'reset') fontStep = 0; document.documentElement.style.setProperty('--base-size', `${17 + fontStep}px`) })); qsa('[data-toggle-contrast]').forEach(b => b.addEventListener('click', () => document.body.classList.toggle('high-contrast'))); qsa('[data-reduce-motion]').forEach(b => b.addEventListener('click', () => document.body.classList.toggle('no-motion'))) }
 function initFAQ() {
   qsa('.faq-q').forEach(btn => btn.addEventListener('click', () => {
     const a = btn.nextElementSibling; const open = btn.getAttribute('aria-expanded') === 'true'; btn.setAttribute('aria-expanded', String(!open)); const icon = btn.querySelector('em') || btn.querySelector('span:last-child');
@@ -1035,9 +1035,29 @@ function initAccessPanelEnhance() {
       });
 
       // รีเซ็ตขนาดตัวอักษรผ่านปุ่ม "ก" ให้ตัวนับของ components.js กับไฟล์นี้กลับเป็น 0 พร้อมกัน
-      document.querySelector('[data-font="reset"]')?.click();
+      // ต้องเป็นปุ่มในแผงเดียวกัน — ปุ่มแรกของหน้าคือแผงซ่อนของ components.js ซึ่ง home.js ไม่ได้ผูกไว้
+      (btn.closest('.access-panel')?.querySelector('[data-font="reset"]')
+        || document.querySelector('#accessibility-modal [data-font="reset"]'))?.click();
     });
   });
+
+  // ปุ่มขนาดตัวอักษร (เล็ก / ปกติ / ใหญ่) — ไฮไลต์ตามขนาดจริงของหน้า
+  // ("ใหญ่" กดซ้ำได้หลายระดับ จึงเทียบกับขนาดฐานแทนการจำปุ่มที่กดล่าสุด)
+  const segment = qs('.font-segment');
+  if (segment) {
+    const basePx = parseFloat(getComputedStyle(document.documentElement).fontSize) || 17;
+    const syncSegment = () => {
+      const px = parseFloat(getComputedStyle(document.documentElement).fontSize) || basePx;
+      const mode = px > basePx ? 'plus' : px < basePx ? 'minus' : 'reset';
+      qsa('[data-font]', segment).forEach(b => {
+        const on = b.dataset.font === mode;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-pressed', String(on));
+      });
+    };
+    qsa('[data-font]').forEach(btn => btn.addEventListener('click', () => setTimeout(syncSegment, 0)));
+    syncSegment();
+  }
 
   qsa('[data-access-link]').forEach(btn => {
     btn.addEventListener('click', () => document.body.classList.toggle('access-link-mode'));
