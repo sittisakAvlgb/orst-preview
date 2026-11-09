@@ -30,6 +30,11 @@ const basePath = location.pathname.includes('/pages/') ? '../' : './';
 // TODO: ใส่ URL จริงที่ได้รับจากหน่วยงาน (ตอนนี้ยังเป็น "#" ตามกฎห้ามเดาข้อมูลจริง)
 const ROYAL_SOCIETY_URL = '#';
 
+// ลิงก์แชท Facebook Messenger ของเพจสำนักงาน — ใช้กับปุ่ม "เริ่มแชทใน Messenger" ในการ์ดแชทมุมขวาล่าง (เปิดแท็บใหม่)
+// รูปแบบ: https://m.me/<ชื่อผู้ใช้ของเพจ>  (ดูได้จาก URL เพจ facebook.com/<ชื่อผู้ใช้ของเพจ>)
+// TODO: ใส่ลิงก์จริงที่ได้รับจากหน่วยงาน (ตอนนี้ยังเป็น "#" ตามกฎห้ามเดาข้อมูลจริง)
+const MESSENGER_URL = '#';
+
 const icons = `
 <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4.2-4.2"></path></symbol>
@@ -478,6 +483,49 @@ function renderHeader() {
 // }
 
 
+/* =============================================================================
+   ปุ่มแชท Facebook Messenger (ลอยมุมขวาล่าง เหนือปุ่ม "ช่วยการเข้าถึง")
+   หน่วยงานมีช่องทางแชทเฉพาะ Facebook — กดปุ่มแล้วเปิดการ์ดเล็กก่อน
+   (บอกว่าจะไปที่ Messenger + ทางเลือกอื่น) แทนการเด้งออกนอกเว็บทันที
+   ไอคอน: โลโก้ Messenger แบบทางการ (ฟองคำพูด + สายฟ้าเจาะทะลุ) ใช้ fill-rule evenodd
+   ============================================================================= */
+const MESSENGER_GLYPH = `
+  <svg class="chat-glyph" viewBox="0 0 24 24" aria-hidden="true">
+    <path fill-rule="evenodd" d="M.001 11.639C.001 4.949 5.241 0 12.001 0S24 4.95 24 11.639c0 6.689-5.24 11.638-12 11.638-1.21 0-2.38-.16-3.47-.46a.96.96 0 0 0-.64.05l-2.39 1.05a.96.96 0 0 1-1.35-.85l-.07-2.14a.97.97 0 0 0-.32-.68A11.39 11.39 0 0 1 .002 11.64zm8.32-2.19-3.52 5.6c-.35.53.32 1.139.82.75l3.79-2.87c.26-.2.6-.2.87 0l2.8 2.1c.84.63 2.04.4 2.6-.48l3.52-5.6c.35-.53-.32-1.13-.82-.75l-3.79 2.87c-.25.2-.6.2-.86 0l-2.8-2.1a1.8 1.8 0 0 0-2.61.48z"/>
+  </svg>`;
+
+function renderChat() {
+  return `
+    <div class="chat-widget" data-chat>
+      <div class="chat-panel" id="chat-panel" role="dialog" aria-labelledby="chat-title" hidden>
+        <div class="chat-panel-head">
+          <span class="chat-avatar">
+            <img src="${basePath}assets/images/orst-emblem.png" alt="" width="181" height="320" loading="lazy">
+          </span>
+          <span class="chat-panel-title">
+            <strong id="chat-title">สำนักงานราชบัณฑิตยสภา</strong>
+            <small>แชทผ่าน Facebook Messenger</small>
+          </span>
+          <button class="chat-close" type="button" data-chat-close aria-label="ปิดหน้าต่างแชท">${icon('i-x')}</button>
+        </div>
+        <div class="chat-panel-body">
+          <p class="chat-bubble">ยินดีให้บริการ<br>สอบถามเรื่องคำศัพท์ การใช้ภาษาไทย หรือบริการของสำนักงาน ส่งข้อความถึงเราทาง Messenger ได้เลย</p>
+          <a class="chat-cta" href="${MESSENGER_URL}" target="_blank" rel="noopener">
+            ${MESSENGER_GLYPH}
+            <span>เริ่มแชทใน Messenger</span>
+          </a>
+          <p class="chat-note">เปิดในแท็บใหม่ · ต้องเข้าสู่ระบบ Facebook</p>
+          <a class="chat-alt" href="${basePath}contact.html">ช่องทางติดต่ออื่น ${icon('i-arrow')}</a>
+        </div>
+      </div>
+      <button class="chat-fab" type="button" aria-expanded="false" aria-controls="chat-panel" aria-label="แชทกับเรา" data-chat-toggle>
+        ${MESSENGER_GLYPH}
+        <span class="chat-fab-label" aria-hidden="true">แชทกับเรา</span>
+      </button>
+    </div>
+  `;
+}
+
 function renderFooter() {
   // หัวคอลัมน์: เส้นทองสั้น + ชื่อไทย + ชื่ออังกฤษ
   const colHead = (th, en) => `<h3 class="orst-footer-head"><span>${th}</span><small lang="en">${en}</small></h3>`;
@@ -544,6 +592,8 @@ function renderFooter() {
     </footer>
 
     <button class="access-float" type="button" data-open-access>${icon('i-access')} ช่วยการเข้าถึง</button>
+
+    ${renderChat()}
 
     <div class="modal" id="search-modal" hidden role="dialog" aria-modal="true" aria-labelledby="search-title">
       <div class="modal-backdrop" data-close-modal></div>
@@ -965,6 +1015,31 @@ function initFixedHeader() {
   setTimeout(syncFixedHeaderHeight, 400);
 }
 
+// ปุ่มแชท Messenger: เปิด/ปิดการ์ด, ปิดด้วย Esc / คลิกนอกการ์ด / กดปุ่มปิด
+function initChat() {
+  const widget = document.querySelector('[data-chat]');
+  if (!widget) return;
+  const toggle = widget.querySelector('[data-chat-toggle]');
+  const panel = widget.querySelector('.chat-panel');
+
+  const setOpen = (open, { focus = true } = {}) => {
+    panel.hidden = !open;
+    toggle.setAttribute('aria-expanded', String(open));
+    widget.classList.toggle('is-open', open);
+    if (open && focus) widget.querySelector('.chat-cta')?.focus();
+    if (!open && focus) toggle.focus();
+  };
+
+  toggle.addEventListener('click', () => setOpen(panel.hidden));
+  widget.querySelector('[data-chat-close]').addEventListener('click', () => setOpen(false));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !panel.hidden) setOpen(false);
+  });
+  document.addEventListener('click', e => {
+    if (!panel.hidden && !widget.contains(e.target)) setOpen(false, { focus: false });
+  });
+}
+
 // ปุ่ม "ขึ้นบนสุด" ใน footer
 function initScrollTop() {
   document.querySelectorAll('[data-scroll-top]').forEach(btn => {
@@ -1001,6 +1076,7 @@ function initComponents() {
   initSharedAccessibility();
   initFixedHeader();
   initScrollTop();
+  initChat();
   initThaiDigits();
 }
 

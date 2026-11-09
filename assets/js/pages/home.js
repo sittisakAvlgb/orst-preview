@@ -975,15 +975,65 @@ function initMediaPlaylist() {
   }));
 }
 
-// ปฏิทินกิจกรรม: กดวันที่มีกิจกรรม -> ไฮไลต์รายการที่ตรงกันในกำหนดการ
+// ปฏิทินกิจกรรม
+// - รายการกิจกรรมกดเพื่อเปิด/ปิดรายละเอียด (เปิดได้ทีละรายการ, รายการแรกเปิดไว้ตั้งแต่ต้น)
+// - กดวันที่มีกิจกรรมในปฏิทิน -> เปิดรายละเอียดของกิจกรรมวันนั้น
+// - "เพิ่มลงปฏิทินของฉัน" -> ดาวน์โหลดไฟล์ .ics (เปิดได้กับ Google/Apple/Outlook Calendar)
 function initEventCalendar() {
   const days = qsa('[data-cal-event]');
+  const rows = qsa('.cal-agenda .cal-event[aria-controls]');
+  if (!rows.length) return;
+
+  const setOpen = (row, open) => {
+    const detail = qs(`#${row.getAttribute('aria-controls')}`);
+    row.setAttribute('aria-expanded', String(open));
+    row.classList.toggle('is-selected', open);
+    if (detail) detail.hidden = !open;
+    days.forEach(d => { if (d.dataset.calEvent === row.id) d.classList.toggle('is-selected', open); });
+  };
+  const openOnly = row => rows.forEach(r => setOpen(r, r === row));
+
+  rows.forEach(row => row.addEventListener('click', () => {
+    if (row.getAttribute('aria-expanded') === 'true') setOpen(row, false);
+    else openOnly(row);
+  }));
+
   days.forEach(day => day.addEventListener('click', () => {
-    const target = qs(`#${day.dataset.calEvent}`);
-    days.forEach(d => d.classList.toggle('is-selected', d === day));
-    qsa('.cal-event').forEach(ev => ev.classList.toggle('is-selected', ev === target));
-    target?.focus({ preventScroll: true });
-    target?.scrollIntoView({ block: 'nearest', behavior: reduce() ? 'auto' : 'smooth' });
+    const row = qs(`#${day.dataset.calEvent}`);
+    if (!row) return;
+    openOnly(row);
+    row.focus({ preventScroll: true });
+    row.scrollIntoView({ block: 'nearest', behavior: reduce() ? 'auto' : 'smooth' });
+  }));
+
+  openOnly(rows[0]);
+
+  // ไฟล์ปฏิทิน .ics (เวลาไทย UTC+7 แปลงเป็น UTC)
+  const toUtc = local => new Date(`${local}:00+07:00`).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+  const icsText = v => String(v).replace(/[\\;,]/g, m => `\\${m}`).replace(/\n/g, '\\n');
+  qsa('[data-cal-ics]').forEach(btn => btn.addEventListener('click', () => {
+    const d = btn.closest('.cal-event-detail');
+    if (!d) return;
+    const lines = [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//ORST//Website//TH', 'CALSCALE:GREGORIAN',
+      'BEGIN:VEVENT',
+      `UID:${d.id}-${d.dataset.start}@orst-website`,
+      `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '')}`,
+      `DTSTART:${toUtc(d.dataset.start)}`,
+      `DTEND:${toUtc(d.dataset.end)}`,
+      `SUMMARY:${icsText(d.dataset.title)}`,
+      `LOCATION:${icsText(d.dataset.location)}`,
+      `DESCRIPTION:${icsText(d.querySelector('p')?.textContent.trim() || '')}`,
+      'END:VEVENT', 'END:VCALENDAR'
+    ];
+    const blob = new Blob([lines.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `${d.id}.ics`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   }));
 }
 

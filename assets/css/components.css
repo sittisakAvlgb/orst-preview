@@ -1553,3 +1553,223 @@ body.high-contrast .block-eyebrow { color: var(--ink); }
 }
 .mega-feature h3 { font-weight: 700; }
 .mega-feature p { font-weight: 400; }
+
+/* =============================================================================
+   ขนาดตัวอักษรเมนูหลัก + mega menu (ลูกค้า: อยากให้ใหญ่กว่านี้) — ขยาย ~10–15%
+   TH Sarabun New ที่ 20px ดูเท่าฟอนต์ทั่วไปราว 14–15px จึงต้องตั้งตัวเลขสูงกว่าปกติ
+   เมนูหลักแสดงเฉพาะจอ ≥ 1366px (ต่ำกว่านั้นเป็นปุ่มเมนูมือถือ) — แต่ละช่วงจอขยายเท่าที่ยังอยู่บรรทัดเดียว
+   ============================================================================= */
+.topbar { font-size: 1rem; }                                            /* 17 -> 18px */
+@media (min-width: 1560px) {
+  .main-nav a, .main-nav button { font-size: 1.22rem; }                 /* 20 -> 22px */
+}
+@media (min-width: 1440px) and (max-width: 1559.98px) {
+  .main-nav a, .main-nav button { font-size: 1.12rem; }                 /* 18.7 -> 20px */
+}
+@media (min-width: 1366px) and (max-width: 1439.98px) {
+  .main-nav a, .main-nav button { font-size: 1.04rem; }                 /* 17.6 -> 18.7px */
+}
+
+.mega-feature h3 { font-size: 1.8rem; text-wrap: balance; }            /* คง 32px — 34px แล้ว "พจนานุกรมและคำศัพท์" ล้นแผงจนตัดเหลือ "ศัพท์" บรรทัดเดียว */
+.mega-feature p { font-size: 1.15rem; }                                 /* 19 -> 21px */
+.mega-group h4 { font-size: 1.22rem; }                                  /* 20 -> 22px */
+.mega-link strong { font-size: 1.22rem; }                               /* 19.4 -> 22px */
+.mega-link small { font-size: 1.03rem; }                                /* 16.6 -> 18.5px */
+
+/* ตัวหนังสือเมนู "บางไป" (ลูกค้า) — TH Sarabun New มีแค่ Regular(400) กับ Bold(700)
+   ไม่มีน้ำหนักกลาง จึงเติมเส้นขอบบาง ๆ สีเดียวกับตัวอักษร ให้ได้ความหนาราว Medium
+   โดยยังใช้ฟอนต์ตามสเปก (ถ้าเปลี่ยนเป็น Bold จะกลับไปทึบเหมือนเดิม) */
+.main-nav a:not(.active),
+.main-nav button,
+.mega-link strong { -webkit-text-stroke: .35px currentColor; }
+.mega-feature p,
+.mega-link small { -webkit-text-stroke: .2px currentColor; }
+
+/* =============================================================================
+   ปุ่มแชท Facebook Messenger (สร้างจาก renderChat() ใน components.js)
+   - ปุ่มกลมสีไล่แบบ Messenger + โลโก้ทางการสีขาว ให้จำได้ทันที วางเหนือปุ่ม "ช่วยการเข้าถึง"
+   - ชี้/โฟกัสแล้วมีป้าย "แชทกับเรา" (แทน tooltip ของเบราว์เซอร์ที่ตัดคำ)
+   - กดแล้วเปิดการ์ดเล็ก: ทักทาย + ปุ่มไป Messenger + ลิงก์ช่องทางติดต่ออื่น
+   ============================================================================= */
+.chat-widget {
+  position: fixed;
+  right: 18px;
+  bottom: 82px;               /* ปุ่ม "ช่วยการเข้าถึง" สูง ~50px อยู่ที่ bottom 18px */
+  z-index: 91;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+/* หน้าแรก: ปุ่ม "ขึ้นบนสุด" (↑) โผล่ที่ bottom 84px ตอนเลื่อนลง — ยกปุ่มแชทขึ้นไปอยู่เหนือ */
+@media (min-width: 761px) {
+  body:has(.back-top.show) .chat-widget { bottom: 142px; }
+}
+html.drawer-lock .chat-widget { visibility: hidden; }
+
+.chat-fab {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(200deg, #ff6968 0%, #a334fa 45%, #0695ff 100%);
+  color: #fff;
+  box-shadow: 0 12px 28px rgba(60, 50, 160, .3);
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.chat-fab:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(60, 50, 160, .36); }
+.chat-fab:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.chat-glyph { display: block; width: 28px; height: 28px; fill: currentColor; }
+
+/* ป้าย "แชทกับเรา" ทางซ้ายของปุ่ม — แสดงตอนชี้/โฟกัส (ซ่อนเมื่อการ์ดเปิด) */
+.chat-fab-label {
+  position: absolute;
+  right: calc(100% + 10px);
+  top: 50%;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(6px, -50%);
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease;
+}
+.chat-fab:hover .chat-fab-label,
+.chat-fab:focus-visible .chat-fab-label { opacity: 1; transform: translate(0, -50%); }
+.chat-widget.is-open .chat-fab-label { opacity: 0; }
+
+/* การ์ดแชท */
+.chat-panel {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 12px);
+  width: min(340px, calc(100vw - 24px));
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+  box-shadow: 0 24px 60px rgba(16, 32, 51, .22);
+  transform-origin: bottom right;
+}
+.chat-panel[hidden] { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .chat-panel:not([hidden]) { animation: chatIn .18s ease; }
+}
+@keyframes chatIn {
+  from { opacity: 0; transform: translateY(8px) scale(.98); }
+  to   { opacity: 1; transform: none; }
+}
+body.no-motion .chat-panel { animation: none; }
+
+.chat-panel-head {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 36px;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 12px 14px 16px;
+  background: var(--deep);
+  color: #fff;
+}
+.chat-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #fff;
+}
+.chat-avatar img { width: auto; height: 34px; }
+.chat-panel-title { display: grid; min-width: 0; }
+.chat-panel-title strong { font-size: 1.15rem; line-height: 1.3; }
+.chat-panel-title small { color: rgba(255, 255, 255, .78); font-size: .94rem; line-height: 1.4; }
+.chat-close {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, .1);
+  color: #fff;
+  cursor: pointer;
+}
+.chat-close:hover { background: rgba(255, 255, 255, .2); }
+.chat-close:focus-visible { outline: 2px solid var(--gold-2); outline-offset: 2px; }
+.chat-close .icon { width: 18px; height: 18px; }
+
+.chat-panel-body {
+  display: grid;
+  gap: 12px;
+  padding: 18px 16px 16px;
+  background: var(--surface-soft);
+}
+.chat-bubble {
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 4px 16px 16px 16px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+.chat-cta {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 999px;
+  background: linear-gradient(200deg, #ff6968 0%, #a334fa 45%, #0695ff 100%);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.chat-cta:hover { filter: brightness(1.06); }
+.chat-cta:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.chat-cta .chat-glyph { width: 22px; height: 22px; }
+.chat-note {
+  margin: -4px 0 0;
+  color: var(--muted);
+  font-size: .94rem;
+  text-align: center;
+}
+.chat-alt {
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  color: var(--deep);
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.chat-alt:hover { color: var(--gold); }
+.chat-alt .icon { width: 16px; height: 16px; }
+
+/* มือถือ: ชิดขอบเหมือนปุ่ม "ช่วยการเข้าถึง" (right/bottom 12px) */
+@media (max-width: 600px) {
+  .chat-widget { right: 12px; bottom: 72px; }
+  .chat-fab { width: 52px; height: 52px; }
+  .chat-fab-label { display: none; }
+}
+
+/* สีตัดกันสูง: ปุ่มดำขอบทอง ไม่ใช้สีไล่ */
+body.high-contrast .chat-fab,
+body.high-contrast .chat-cta { background: #000; border: 2px solid var(--gold); color: var(--gold); box-shadow: none; }
+body.high-contrast .chat-panel-head { border-bottom: 1px solid var(--line); }

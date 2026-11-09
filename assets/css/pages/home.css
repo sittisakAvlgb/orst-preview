@@ -12320,3 +12320,251 @@ body.high-contrast .orst-hero-wow .orst-smart-search { background: var(--surface
   .orst-hero-wow .orst-hero-kicker::before,
   .orst-hero-wow .orst-hero-kicker::after { width: 16px; }
 }
+
+/* =============================================================================
+   ข่าวสารและกิจกรรม (ลูกค้า: เพิ่ม "อ่านต่อ" ฝั่งขวา + วันที่ + ตัวอักษรใหญ่ขึ้น)
+   - การ์ดย่อย: แถวล่าง วันที่ชิดซ้าย | "อ่านต่อ →" ชิดขวา อยู่ล่างสุดของการ์ดเสมอ
+     ทั้งการ์ดยังกดได้ (ลิงก์ขยายพื้นที่คลิกด้วย ::after คลุมการ์ด)
+   - วันที่ในการ์ดย่อย (index.html) เป็น "วันที่ตัวอย่าง" ตามที่ผู้ใช้สั่ง — ต้องเปลี่ยนเป็นวันที่จริงก่อนขึ้น production
+   ============================================================================= */
+.news-mosaic-card { position: relative; }
+.news-mini-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+.news-mini-date {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.4;
+}
+.news-mini-foot a {
+  display: inline-flex;
+  align-items: center;
+  margin-left: auto;
+  color: var(--deep);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.news-mini-foot a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.news-mosaic-card:hover .news-mini-foot a,
+.news-mosaic-card:focus-within .news-mini-foot a { color: var(--gold); }
+.news-mosaic-card-body p { margin-bottom: 6px; }
+
+/* ขนาดตัวอักษร (เดิม 17–18px ดูเล็ก — TH Sarabun New ตัวเล็กกว่าฟอนต์ทั่วไป) */
+.news-mosaic-card .news-mini-type { font-size: 1rem; }                     /* 17 -> 18px */
+.news-mosaic-card-body h4 { font-size: 1.3rem; line-height: 1.35; }        /* 18 -> 23.4px */
+.news-mosaic-card-body p { font-size: 1.05rem; }                          /* 17 -> 18.9px */
+.news-mosaic-feature-body .news-meta,
+.news-mosaic-feature-body .news-meta span { font-size: 1.05rem; }         /* 17 -> 18.9px */
+.news-mosaic-feature-body h3 { font-size: 1.75rem; }                      /* 27 -> 31.5px */
+.news-mosaic-feature-body p { font-size: 1.15rem; }                       /* 18 -> 20.7px */
+.news-mosaic-feature-body .news-primary-action { font-size: 1.05rem; }
+.news-type-badge { font-size: 1rem; }
+
+@media (max-width: 640px) {
+  .news-mosaic-card-body h4 { font-size: 1.15rem; }
+  .news-mosaic-feature-body h3 { font-size: 1.45rem; }
+  .news-mini-foot { padding-top: 6px; }
+}
+
+/* =============================================================================
+   ปฏิทินกิจกรรม — กดรายการเพื่อดูรายละเอียด (ลูกค้า: ให้มีรายละเอียดด้วย)
+   แถว: ป้ายวันที่ | ชื่อ + ประเภท | ลูกศร (หมุนลงเมื่อเปิด)
+   รายละเอียด: วันเต็ม · เวลา · สถานที่ / คำอธิบาย / "รายละเอียด →" + "เพิ่มลงปฏิทินของฉัน"
+   ============================================================================= */
+.qa-layout .cal-agenda button.cal-event {
+  width: 100%;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  background: transparent;
+  cursor: pointer;
+}
+.qa-layout .cal-agenda li:has(.cal-event[aria-expanded="true"]) {
+  border-radius: 10px;
+  background: var(--surface-soft);
+}
+.qa-layout .cal-agenda li:has(.cal-event[aria-expanded="true"]) + li { border-top-color: transparent; }
+.qa-layout .cal-event[aria-expanded="true"] { background: transparent; }
+.qa-layout .cal-event:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+.cal-event-go {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+}
+.cal-event-go .icon { width: 18px; height: 18px; transition: transform .2s ease; }
+.cal-event:hover .cal-event-go { transform: none; }
+.cal-event[aria-expanded="true"] .cal-event-go .icon { transform: rotate(90deg); }
+
+.cal-event-detail {
+  display: grid;
+  gap: 10px;
+  padding: 2px 14px 16px 70px;   /* เยื้องให้ตรงกับชื่อกิจกรรม (ป้ายวันที่ 50px + ช่องว่าง) */
+}
+.cal-event-detail[hidden] { display: none; }
+.cal-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+  font-size: var(--fs-meta);
+}
+.cal-detail-meta li { display: inline-flex; align-items: center; gap: 6px; }
+.cal-detail-meta svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.cal-event-detail p {
+  margin: 0;
+  color: var(--ink);
+  font-size: var(--fs-body);
+  line-height: 1.55;
+}
+.cal-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 22px;
+  margin-top: 2px;
+}
+.cal-detail-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  color: var(--deep);
+  font-size: var(--fs-body);
+  font-weight: 700;
+  text-decoration: none;
+}
+.cal-detail-more .icon { width: 18px; height: 18px; transition: transform .18s ease; }
+.cal-detail-more:hover { color: var(--gold); }
+.cal-detail-more:hover .icon { transform: translateX(3px); }
+.cal-detail-ics {
+  min-height: 36px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: var(--fs-meta);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+.cal-detail-ics:hover { color: var(--deep); }
+.cal-detail-more:focus-visible,
+.cal-detail-ics:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 4px; }
+
+@media (max-width: 640px) {
+  .cal-event-detail { padding: 0 12px 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cal-event-go .icon,
+  .cal-detail-more .icon { transition: none; }
+}
+
+/* คำถามที่พบบ่อย + ปฏิทินกิจกรรม จอกว้าง ≥1600px (ลูกค้า: รายการกิจกรรม "กว้างไปมาก" แล้วต่อมา
+   ฝั่งคำถาม "ให้แคบกว่านี้") — เดิมตารางปฏิทินล็อก 264px พื้นที่ที่เหลือไปตกที่รายการกิจกรรมหมด
+   ใหม่: คำถาม 1 : ปฏิทิน 1.4 และตารางปฏิทินกินพื้นที่มากกว่ารายการ (1.2 : 1)
+   ที่จอ 1920px ≈ คำถาม 740px | ตารางปฏิทิน 520px | รายการกิจกรรม 440px */
+@media (min-width: 1600px) {
+  .qa-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); }
+  .qa-layout > .events-calendar-card.cal { grid-template-columns: minmax(300px, 1.2fr) minmax(0, 1fr); }
+}
+
+/* =============================================================================
+   บริการวิชาการของสำนักงาน — การ์ดกะทัดรัด
+   ประวัติ: การ์ดเด่น/เลขลำดับ ("เหมือน AI") → รายการเรียบ ("ไม่น่าสนใจ") → การ์ดไอคอนเขียวเข้ม + แถบทอง
+   ("ใหญ่ไปมาก และเหมือน AI") → แบบนี้: การ์ดขาวเตี้ย ไอคอนกล่องครีมอยู่ข้างชื่อบริการ
+   คำอธิบาย 2 บรรทัด และลิงก์ "ใช้บริการ →" ธรรมดา — ไม่มีแถบทอง/กล่องสีเข้ม/แอนิเมชัน
+   ============================================================================= */
+#academic-service .svc-card-grid { gap: 16px; }
+#academic-service .service-card {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  grid-template-areas:
+    "icon title"
+    "desc desc"
+    "go   go";
+  align-items: center;
+  column-gap: 14px;
+  padding: 22px 22px 18px;
+  overflow: visible;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: none;
+  transition: border-color .18s ease;
+}
+#academic-service .service-card .service-icon {
+  grid-area: icon;
+  width: 48px;
+  height: 48px;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface-soft);
+  color: var(--deep);
+}
+#academic-service .service-card .service-icon .icon-lg { width: 24px; height: 24px; }
+#academic-service .service-card h3 {
+  grid-area: title;
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.2rem;
+  line-height: 1.35;
+}
+#academic-service .service-card p {
+  grid-area: desc;
+  margin: 14px 0 12px;
+  color: color-mix(in srgb, var(--ink) 78%, var(--muted));
+  font-size: 1rem;
+  line-height: 1.55;
+}
+#academic-service .svc-go {
+  grid-area: go;
+  justify-self: start;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--deep);
+  font-size: 1rem;
+}
+#academic-service .service-card:hover { transform: none; border-color: var(--gold); box-shadow: none; }
+#academic-service .service-card:hover .service-icon { transform: none; background: var(--surface-soft); color: var(--deep); }
+#academic-service .service-card:hover h3 { color: var(--deep); }
+#academic-service .service-card:hover .svc-go { background: none; color: var(--gold); }
+#academic-service .service-card:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+body.high-contrast #academic-service .service-card { background: var(--surface); }
+body.high-contrast #academic-service .service-card .service-icon { background: #000; border-color: var(--gold); color: var(--gold); }
+body.high-contrast #academic-service { background: var(--paper); }   /* section ตั้งพื้นขาวตายตัว — ให้ใช้พื้นตามธีม */
