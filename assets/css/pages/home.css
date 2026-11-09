@@ -12229,3 +12229,69 @@ body.high-contrast .orst-hero-wow .orst-smart-search { background: var(--surface
 @media (max-width: 480px) {
   #hero-title.orst-hero-title { font-size: clamp(1.9rem, 9.5vw, 2.6rem); }
 }
+
+/* หัวข้อ "ปฏิทินกิจกรรม" แยกเหนือการ์ดปฏิทิน (ลูกค้า: ปฏิทินกิจกรรมควรมีหัวข้อด้วย)
+   จอกว้าง: หัวข้อคำถาม | หัวข้อปฏิทิน อยู่แถวเดียวกัน แล้วการ์ดเรียงใต้แต่ละหัวข้อ
+   จอแคบ: หัวข้อคำถาม > คำถาม > หัวข้อปฏิทิน > ปฏิทิน
+   หัวในการ์ด (กำหนดการกิจกรรม / ดูทั้งหมด) ซ้ำกับหัวข้อใหม่ จึงซ่อน */
+.qa-cal-intro {
+  grid-area: calintro;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+.qa-cal-intro .section-kicker { color: var(--gold); }
+.qa-cal-intro h2 { margin: 4px 0 10px; color: var(--ink); font-size: var(--fs-h2); }
+.qa-cal-intro p { margin: 0; color: var(--muted); font-size: 1.05rem; line-height: 1.6; }
+.qa-cal-intro .view-all { flex: none; }
+.qa-layout .events-calendar-card.cal .cal-head { display: none; }
+.qa-layout .events-calendar-card.cal .cal-month { margin-top: 0; }
+.qa-layout .cal-agenda { margin-top: 0; }
+
+.qa-layout {
+  grid-template-areas:
+    "intro"
+    "list"
+    "calintro"
+    "cal";
+}
+@media (min-width: 1366px) {
+  .qa-layout {
+    grid-template-areas:
+      "intro calintro"
+      "list  cal";
+    grid-template-rows: auto auto;
+  }
+}
+@media (max-width: 760px) {
+  .qa-cal-intro { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
+@media (min-width: 700px) {
+  .qa-layout > .events-calendar-card.cal {
+    grid-template-areas:
+      "month  agenda"
+      "grid   agenda"
+      "legend agenda";
+    grid-template-rows: auto 1fr auto;
+  }
+}
+/* หัวข้อสองฝั่งเริ่มบรรทัดเดียวกัน (คำโปรยยาวไม่เท่ากัน) — ข้อความชิดบน ปุ่มชิดล่าง */
+.qa-intro > div,
+.qa-cal-intro > div { align-self: flex-start; }
+
+/* Hero หลังเปลี่ยนเป็น TH Sarabun New (ลูกค้า: ดูแปลก ux ไม่ดี)
+   - ฟอนต์นี้มีช่องว่างบน-ล่างในตัวมาก: ระยะบรรทัด 1.38 (ตั้งไว้ตอนใช้ Sarabun) ทำให้หัวข้อสองบรรทัดห่างเกิน -> 1.2
+   - คำอธิบาย: แบ่งบรรทัดให้ยาวพอ ๆ กัน (ไม่เหลือคำเดียวบรรทัดล่าง) ระยะบรรทัดแน่นขึ้น
+   - ช่องค้นหา: ตัวอักษร/placeholder ใหญ่ขึ้นให้สมดุลกับช่อง */
+#hero-title.orst-hero-title { line-height: 1.2; margin-bottom: 14px; }
+.orst-hero-wow .orst-hero-lead {
+  max-width: 44em;
+  line-height: 1.5;
+  text-wrap: balance;
+}
+.orst-hero-wow .orst-smart-search input,
+.orst-hero-wow .orst-smart-search input::placeholder { font-size: 1.15rem; }
+
+/* หัวข้อเล็กบนพื้นภาพมืด (ส่วนบริการดิจิทัล) — ใช้ทองอ่อนแทนทองหม่น ให้อ่านออกบนพื้นเข้ม */
+#service-hub .section-kicker:not([lang="en"]) { color: var(--gold-2); }

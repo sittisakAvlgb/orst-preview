@@ -7,7 +7,7 @@
   "blocks": [
     {
       "type": "page-hero",
-      "eyebrow": "Design System",
+      "eyebrow": "ระบบการออกแบบ",
       "heading": "คลังบล็อก",
       "lead": "block ทุกชนิดที่ระบบรองรับ พร้อมตัวอย่างการใช้งาน — คัดลอก JSON จาก content/pages/_styleguide.json ไปใช้ได้เลย",
       "breadcrumb": [

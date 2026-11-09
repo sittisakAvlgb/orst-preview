@@ -1454,3 +1454,30 @@ a[href^="mailto:"][lang="en"],
 .orst-footer-head span { font-size: 1.3rem; }
 .section-kicker:not([lang="en"]),
 .eyebrow:not([lang="en"]) { font-size: 1.1rem; }
+
+/* หัวข้อเล็กเหนือหัวข้อ section (section-kicker / block-eyebrow) — ภาษาไทย มีเส้นสั้นนำหน้า
+   (ลูกค้า: ใช้ภาษาไทยก่อนจนกว่าจะมีระบบเปลี่ยนภาษา — ข้อความอังกฤษเก็บไว้ที่ data-en)
+   ใช้ทุกหน้า สีทองหม่นผสมสีตัวอักษร ให้อ่านง่ายบนพื้นขาว/ครีม */
+.section-kicker:not([lang="en"]),
+.block-eyebrow:not([lang="en"]) {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: color-mix(in srgb, var(--gold) 72%, var(--ink));
+  font-family: var(--font-th);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.section-kicker:not([lang="en"])::before,
+.block-eyebrow:not([lang="en"])::before {
+  content: "";
+  flex: none;
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  opacity: .6;
+}
+body.high-contrast .section-kicker,
+body.high-contrast .block-eyebrow { color: var(--ink); }
