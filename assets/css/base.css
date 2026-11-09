@@ -19,9 +19,13 @@
      - Responsive + fixed-header patch
    ============================================================================= */
 
+/* Geist (ภาษาอังกฤษ: เนื้อหา เมนู ปุ่ม) + Newsreader (หัวข้อภาษาอังกฤษในโหมด EN) จาก Google Fonts
+   @import ต้องอยู่ก่อนกฎอื่นทั้งหมดในไฟล์ / เบราว์เซอร์โหลดเฉพาะฟอนต์ที่หน้านั้นใช้จริง */
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&display=swap");
+
 /* -----------------------------------------------------------------------------
    TH Sarabun New — ฟอนต์ราชการ (ฟอนต์แห่งชาติ) ใช้กับภาษาไทยทุกหน้า
-   เก็บไฟล์ไว้ในเว็บเอง (self-host) ที่ assets/fonts/ ไม่พึ่ง Google Fonts
+   เก็บไฟล์ไว้ในเว็บเอง (self-host) ที่ assets/fonts/ (ฟอนต์อังกฤษ Geist/Newsreader โหลดจาก Google Fonts ด้านบน)
    มี 4 สไตล์: Regular/Bold/Italic/BoldItalic (น้ำหนัก 400 กับ 700)
    -------------------------------------------------------------------------- */
 @font-face {
@@ -95,6 +99,14 @@
 }
 
 :root {
+  /* ชุดฟอนต์ (ตามสเปกลูกค้า) — ฟอนต์ท้ายรายการคือฟอนต์สำรอง
+     --font-th          เนื้อหาและหัวข้อภาษาไทยทั้งหมด
+     --font-en          คำ/ข้อความภาษาอังกฤษ (ในหน้าไทยด้วย) เมนู ปุ่ม อีเมล โดเมน
+     --font-en-heading  หัวข้อในโหมดภาษาอังกฤษ (lang="en") */
+  --font-th: "TH Sarabun New", "Leelawadee UI", Tahoma, sans-serif;
+  --font-en: "Geist", "TH Sarabun New", system-ui, sans-serif;
+  --font-en-heading: "Newsreader", "TH Sarabun New", Georgia, serif;
+
   --container: 1800px;
   --paper: #fbf7ef;
   --surface: #ffffff;
@@ -109,12 +121,12 @@
   --shadow: 0 14px 35px rgba(16, 32, 51, .10);
   --radius: 18px;
 
-  /* สเกลตัวอักษร (ฐาน 17px, TH Sarabun New) — ทุกหน้าใช้ชุดเดียวกัน
+  /* สเกลตัวอักษร (ฐาน 18px, TH Sarabun New) — ทุกหน้าใช้ชุดเดียวกัน
      ป้าย/วันที่/แท็ก/breadcrumb ต่ำสุด 16px เพราะ TH Sarabun New ตัวเล็กกว่าฟอนต์ทั่วไป */
-  --fs-meta: .94rem;      /* 16px   ป้าย วันที่ แท็ก หมายเหตุ breadcrumb */
-  --fs-body: 1rem;        /* 17px   เนื้อหา คำอธิบายการ์ด ปุ่ม ลิงก์ */
-  --fs-title: 1.15rem;    /* 19.6px หัวข้อการ์ด */
-  --fs-subhead: 1.3rem;   /* 22px   หัวข้อกล่อง/แผงย่อย */
+  --fs-meta: .94rem;      /* 17px   ป้าย วันที่ แท็ก หมายเหตุ breadcrumb */
+  --fs-body: 1rem;        /* 18px   เนื้อหา คำอธิบายการ์ด ปุ่ม ลิงก์ */
+  --fs-title: 1.15rem;    /* 20.7px หัวข้อการ์ด */
+  --fs-subhead: 1.3rem;   /* 23.4px  หัวข้อกล่อง/แผงย่อย */
   --fs-panel: 1.85rem;    /* 31.5px หัวข้อแผงเด่น/แบนเนอร์ */
   --fs-h2: clamp(1.75rem, 3vw, 2.5rem);   /* หัวข้อ section ≤ 42.5px */
   --fs-h1: clamp(2.3rem, 4vw, 3.3rem);    /* หัวข้อหน้า ≤ 56px */
@@ -129,12 +141,12 @@ html {
   scroll-behavior: smooth;
   /* TH Sarabun New เป็นฟอนต์ตัวเล็ก ขยายฐานเล็กน้อยให้อ่านสบายขึ้น
      (rem ทั้งเว็บจะสเกลตามอัตโนมัติ) */
-  font-size: 17px;
+  font-size: 18px;   /* เดิม 17px — ลูกค้า: ตัวอักษรบางส่วนเล็กเกิน */
 }
 
 body {
   margin: 0;
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   color: var(--ink);
   background: var(--paper);
   line-height: 1.7;
@@ -427,7 +439,7 @@ svg {
 }
 
 .hero-copy h1 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: clamp(2.9rem, 5.4vw, 5rem);
   font-weight: 700;
   line-height: 1.22;
@@ -575,7 +587,7 @@ svg {
 }
 
 .section-head h2 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: clamp(1.75rem, 3vw, 2.5rem);
   font-weight: 700;
   line-height: 1.3;
@@ -762,7 +774,7 @@ svg {
 }
 
 .page-hero h1 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: clamp(2.3rem, 4vw, 3.3rem);   /* สูงสุด ~56px เท่าหัวข้อหน้าแรก */
   font-weight: 700;
   line-height: 1.25;
@@ -833,7 +845,7 @@ svg {
 
 .modal-header h2 {
   margin: 0;
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
 }
 
 .modal-close {
@@ -1192,7 +1204,7 @@ svg {
   z-index: 1;
   margin: 8px 0 10px;
   color: #fff;
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: 1.45rem;
   line-height: 1.28;
 }

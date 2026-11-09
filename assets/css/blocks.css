@@ -151,7 +151,7 @@
 }
 
 .block-prose h3 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: 1.3rem;
   margin: 26px 0 10px;
 }
@@ -186,7 +186,7 @@
 }
 
 .block-card h3 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: 1.15rem;
   margin: 0;
 }
@@ -217,6 +217,20 @@
   border-color: var(--gold);
   box-shadow: 0 16px 36px rgba(16, 32, 51, .10);
 }
+
+/* ปุ่มท้ายการ์ด (ฟิลด์ action) — ชิดล่างทุกใบ การ์ดในแถวเดียวกันปุ่มอยู่ระดับเดียวกัน */
+.block-card-action {
+  margin-top: auto;
+  padding-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--deep);
+  font-weight: 700;
+}
+.block-card-action span { transition: transform .18s ease; }
+.block-card.is-link:hover .block-card-action { color: var(--gold); }
+.block-card.is-link:hover .block-card-action span { transform: translateX(3px); }
 
 /* ---------- feature-list ---------- */
 
@@ -274,7 +288,7 @@
 }
 
 .block-stat strong {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: clamp(1.8rem, 3vw, 2.4rem);
   color: var(--deep);
   line-height: 1.2;
@@ -548,7 +562,7 @@
 .block-two-col.is-image-left .block-two-col-media { order: 1; }
 
 .block-two-col-text h3 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: 1.4rem;
   margin: 0 0 12px;
 }
@@ -582,7 +596,7 @@
 }
 
 .block-cta h2 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: clamp(1.5rem, 2.6vw, 2.1rem);
   margin: 0 0 6px;
 }
@@ -745,3 +759,57 @@
 .block-link-text span,
 .block-table caption { font-size: var(--fs-meta); }
 .block-cta h2 { font-size: var(--fs-panel); }
+
+/* =============================================================================
+   หน้าบริการวิชาการ (body[data-page="services"]) — จัดแบบกระชับ (ลูกค้าเลือก)
+   - การ์ดบริการ: ข้อความอ่านง่ายขึ้น ปุ่ม "ยื่นคำขอ" ชิดล่าง
+   - ขั้นตอน: เรียงแนวนอน 4 ช่องในแถวเดียว
+   - แบบฟอร์มดาวน์โหลด | ช่องทางร้องเรียน วางคู่กัน 2 คอลัมน์ (จอ >= 1024px)
+   ใช้ตัวแปรสีเท่านั้น (โหมด high-contrast / readable ยังทำงาน)
+   ============================================================================= */
+body[data-page="services"] .block-card { padding: 22px; border-radius: 12px; }
+body[data-page="services"] .block-card p { color: color-mix(in srgb, var(--ink) 78%, var(--muted)); }
+body[data-page="services"] .block-card-icon { border-radius: 10px; }
+
+body[data-page="services"] .block-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+body[data-page="services"] .block-step {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+@media (max-width: 900px) {
+  body[data-page="services"] .block-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 520px) {
+  body[data-page="services"] .block-steps { grid-template-columns: 1fr; }
+}
+
+@media (min-width: 1024px) {
+  body[data-page="services"] #app-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  body[data-page="services"] #app-content > * { grid-column: 1 / -1; }
+  body[data-page="services"] #app-content > #forms { grid-column: 1; }
+  body[data-page="services"] #app-content > #channels { grid-column: 2; }
+  /* ให้ขอบซ้ายของคอลัมน์ซ้าย / ขอบขวาของคอลัมน์ขวา ตรงกับ .container ของทั้งหน้า */
+  body[data-page="services"] #forms > .container {
+    width: min(calc(var(--container) / 2 - 14px), calc(100% - 34px));
+    margin-left: auto;
+    margin-right: 14px;
+  }
+  body[data-page="services"] #channels > .container {
+    width: min(calc(var(--container) / 2 - 14px), calc(100% - 34px));
+    margin-left: 14px;
+    margin-right: auto;
+  }
+}

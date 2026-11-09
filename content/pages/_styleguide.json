@@ -49,7 +49,7 @@
       "columns": 3,
       "items": [
         { "icon": "i-book", "title": "การ์ดที่มีไอคอน", "body": "ใส่ icon เป็น id จาก sprite เช่น i-book, i-file, i-people", "meta": "ฟิลด์ meta อยู่ล่างสุด" },
-        { "tag": "มี tag", "title": "การ์ดที่คลิกได้", "body": "ถ้าใส่ href การ์ดทั้งใบจะกลายเป็นลิงก์และมี hover effect", "href": "#" },
+        { "tag": "มี tag", "title": "การ์ดที่คลิกได้", "body": "ถ้าใส่ href การ์ดทั้งใบจะกลายเป็นลิงก์และมี hover effect ใส่ action เพื่อแสดงปุ่มท้ายการ์ด", "href": "#", "action": "ยื่นคำขอ" },
         { "title": "การ์ดแบบเรียบ", "body": "ไม่ใส่ icon ไม่ใส่ href ก็ได้ เหลือแค่หัวข้อกับเนื้อหา" }
       ]
     },

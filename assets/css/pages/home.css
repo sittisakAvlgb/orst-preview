@@ -72,7 +72,7 @@
    ============================================================================= */
 
 :root {
-  --base-size: 17px;
+  --base-size: 18px;
   --paper: #fbf7ef;
   --paper-2: #f4eee2;
   --surface: #ffffff;
@@ -111,7 +111,7 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   line-height: 1.65;
   overflow-x: hidden
 }
@@ -508,7 +508,7 @@ svg {
 h1,
 h2,
 h3 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   line-height: 1.26;
   margin: 0;
   color: var(--ink)
@@ -914,7 +914,7 @@ h3 {
 }
 
 .trust-item h3 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: 1.08rem;
   margin: 0;
   color: #f5e8c8
@@ -1051,7 +1051,7 @@ section {
 }
 
 .service-card h3 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: 1rem;
   margin: 0 0 4px;
   position: relative;
@@ -1152,7 +1152,7 @@ section {
 }
 
 .news-body h3 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: 1.08rem;
   margin-bottom: 8px
 }
@@ -1224,7 +1224,7 @@ section {
 } */
 
 .cover strong {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: 1.1rem;
   text-align: center;
   position: relative;
@@ -1385,7 +1385,7 @@ section {
 }
 
 .hub-card h3 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: 1.05rem
 }
 
@@ -1485,7 +1485,7 @@ section {
 }
 
 .footer h3 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   color: #fff;
   font-size: 1.05rem;
   margin-bottom: 12px
@@ -3300,7 +3300,7 @@ section {
 }
 
 .news-body h3 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: clamp(1.1rem, 1.45vw, 1.35rem);
   line-height: 1.45;
   color: var(--ink);
@@ -3445,7 +3445,7 @@ section {
 
 .service-directory-intro h3 {
   color: #fff;
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: 1.72rem;
   line-height: 1.28;
   margin-bottom: 12px;
@@ -3568,7 +3568,7 @@ section {
 }
 
 .public-service-card h3 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: 1.14rem;
   line-height: 1.38;
   margin-bottom: 6px;
@@ -3925,7 +3925,7 @@ section {
 }
 
 .archive-suggest-head h3 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: 1.35rem;
   margin: 0;
 }
@@ -4129,7 +4129,7 @@ section {
 }
 
 .access-brand h2 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: 1.35rem;
   margin: 0;
 }
@@ -4164,7 +4164,7 @@ section {
 }
 
 .access-section h3 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: .95rem;
   margin: 0 0 10px;
 }
@@ -4547,7 +4547,7 @@ body.access-cursor-mode * {
 
 .faq-help-card h3 {
   color: #fff;
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: 1.35rem;
   margin-bottom: 8px;
 }
@@ -4773,7 +4773,7 @@ body.access-cursor-mode * {
 
 .network-feature h3 {
   color: #fff;
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: clamp(1.55rem, 2vw, 2rem);
   line-height: 1.28;
   margin-bottom: 10px;
@@ -5103,7 +5103,7 @@ linear-gradient(90deg,
   gap: 12px;
   margin-bottom: 12px;
   color: #a57a2f;
-  font-family: "Sarabun", "TH Sarabun New", sans-serif;
+  font-family: var(--font-th);
   font-weight: 600;
   font-size: 1.08rem;
 }
@@ -5121,7 +5121,7 @@ linear-gradient(90deg,
   /* max-width: 980px; */
   margin: 0 auto 10px;
   color: #123e35;
-  font-family: "Sarabun", "TH Sarabun New", sans-serif;
+  font-family: var(--font-th);
   font-weight: 800;
   font-size: clamp(2.55rem, 4.65vw, 5.15rem);
   line-height: 1.2;
@@ -5134,7 +5134,7 @@ linear-gradient(90deg,
   /* max-width: 780px !important; */
   margin: 0 auto 20px !important;
   color: #28463f !important;
-  font-family: "Sarabun", "TH Sarabun New", sans-serif !important;
+  font-family: var(--font-th);
   font-size: clamp(1.18rem, 1.55vw, 1.5rem) !important;
   line-height: 1.72 !important;
   font-weight: 400 !important;
@@ -5331,7 +5331,7 @@ linear-gradient(90deg,
 }
 
 .orst-proof-info h2 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: 1.2rem;
   line-height: 1.25;
   color: var(--deep, #073b34);
@@ -5724,7 +5724,7 @@ linear-gradient(90deg,
 }
 
 .orst-result-card h3 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   color: var(--deep, #073b34);
   font-size: 1.08rem;
   line-height: 1.42;
@@ -6221,7 +6221,7 @@ header,
 
 .orst-featured-result h3 {
   color: #fff;
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: 1.35rem;
   margin: 10px 0 6px;
 }
@@ -6313,7 +6313,7 @@ header,
 }
 
 .orst-result-card h3 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: 1.08rem;
   line-height: 1.45;
   margin-bottom: 7px;
@@ -8292,7 +8292,7 @@ background: rgba(255, 255, 255, .76); */
 }
 
 .news-feature-content h3 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: clamp(1.35rem, 2vw, 1.8rem);
   line-height: 1.38;
   color: var(--ink);
@@ -8384,7 +8384,7 @@ background: rgba(255, 255, 255, .76); */
 }
 
 .calendar-head h3 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   color: var(--deep);
   font-size: 1.35rem;
 }
@@ -8884,7 +8884,7 @@ background: rgba(255, 255, 255, .76); */
 
 .quick-access-feature h3 {
   color: #fff;
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: clamp(1.55rem, 2vw, 2rem);
   line-height: 1.3;
   margin: 8px 0 12px;
@@ -9409,7 +9409,7 @@ backdrop-filter: blur(10px);
 }
 
 .help-faq-top h3 {
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   color: var(--deep);
   font-size: 1.45rem;
 }
@@ -9821,7 +9821,7 @@ margin-bottom: 16px;
 }
 
 .faq-center-top h3 {
-font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+font-family: var(--font-th);
 color: var(--deep);
 font-size: 1.45rem;
 }
@@ -10016,7 +10016,7 @@ padding: 26px;
 .news-mosaic-feature-body h3 {
 margin: 8px 0 10px;
 color: var(--ink);
-font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+font-family: var(--font-th);
 font-size: clamp(1.35rem, 2vw, 1.85rem);
 line-height: 1.35;
 
@@ -10081,7 +10081,7 @@ align-content: start;
 .news-mosaic-card-body h4 {
 margin: 8px 0 6px;
 color: var(--ink);
-font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+font-family: var(--font-th);
 font-size: 1rem;
 line-height: 1.42;
 
@@ -10194,7 +10194,7 @@ object-position: center top;
 }
 #hero-title.orst-hero-title {
 color: #123e35;
-font-family: "Sarabun", "TH Sarabun New", sans-serif;
+font-family: var(--font-th);
 font-size: clamp(2.3rem, 4vw, 3.3rem);   /* สูงสุด ~56px ที่ฐาน 17px */
 line-height: 1.2;
 letter-spacing: -0.005em;
@@ -10326,12 +10326,12 @@ radial-gradient(circle at 50% 52%, rgba(255,255,255,0.5), transparent 44%);
   opacity: .72;
 }
 .ig-latin {
-  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: .9rem;
   letter-spacing: .04em;
 }
 .ig-word {
-  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: 2.6rem;
   font-weight: 800;
   line-height: 1.15;
@@ -10430,7 +10430,7 @@ body.high-contrast .ig-word { color: var(--ink); }
 }
 .mm-feature-title {
   flex: 1 1 260px;
-  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: 1.2rem;
   font-weight: 700;
   line-height: 1.4;
@@ -10517,7 +10517,7 @@ body.high-contrast .ig-word { color: var(--ink); }
 .mm-item-text { display: grid; gap: 2px; min-width: 0; }
 .mm-no {
   color: var(--muted);
-  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: var(--fs-label-en);
   font-weight: 700;
   letter-spacing: .08em;
@@ -10817,7 +10817,7 @@ body.high-contrast .hero-slides { display: none; }
   line-height: 1.1;
   color: var(--deep);
 }
-.cal-event-date b { font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif; font-size: 1.45rem; font-weight: 800; }
+.cal-event-date b { font-family: var(--font-th); font-size: 1.45rem; font-weight: 800; }
 .cal-event-date small { font-size: var(--fs-meta); color: var(--muted); }
 .cal-event-body { display: grid; gap: 2px; min-width: 0; }
 .cal-event-body strong { font-size: var(--fs-body); line-height: 1.4; }
@@ -12156,3 +12156,76 @@ body.high-contrast .orst-hero-wow .orst-smart-search { background: var(--surface
 .service-done strong { color: var(--deep); font-size: var(--fs-title); }
 .service-done p { margin: 0; color: var(--ink); }
 .service-done .btn { margin-top: 6px; border-radius: 8px; }
+
+/* ขนาดตัวอักษรขั้นต่ำ (ลูกค้า: บางจุดเล็กเกิน) — ข้อความไทยที่เดิมเล็กกว่า 15px ในหน้าแรก
+   ยกขึ้นเป็นขนาดป้าย (--fs-meta ≈ 17px ที่ฐาน 18px) */
+.orst-featured-result small,
+.orst-featured-result .type,
+.orst-card-meta span,
+.orst-card-top .orst-score,
+.orst-card-top .orst-type-badge,
+.filter-btn span,
+.access-footer-note p,
+.mm-item-text .mm-no,
+.suggestions small,
+.section-kicker { font-size: var(--fs-meta); }
+.qa-layout .cal-event-date small { font-size: .82rem; }  /* ป้ายวัน/เดือนในกล่องวันที่ (พื้นที่จำกัด) */
+
+/* ฐานตัวอักษร 18px: ชื่อกิจกรรมยาวขึ้น — ให้ฝั่งกำหนดการกว้างขึ้นและปฏิทินกว้างคงที่ รายการได้พื้นที่ที่เหลือ */
+@media (min-width: 1366px) {
+  .qa-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); }
+  .qa-layout > .events-calendar-card.cal { grid-template-columns: 264px minmax(0, 1fr); column-gap: 24px; }
+  .qa-layout .cal-grid > span:not(.cal-dow),
+  .qa-layout .cal-grid > .cal-day { min-height: 56px; }
+}
+
+/* ปฏิทินยืดเต็มความสูงของรายการกิจกรรม — คำอธิบายสัญลักษณ์จบระดับเดียวกับรายการทุกขนาดจอ
+   (แถววันในปฏิทินแบ่งความสูงที่เหลือเท่า ๆ กัน) */
+@media (min-width: 700px) {
+  .qa-layout > .events-calendar-card.cal {
+    grid-template-areas:
+      "head   head"
+      "month  agenda"
+      "grid   agenda"
+      "legend agenda";
+    grid-template-rows: auto auto 1fr auto;
+  }
+  .qa-layout .cal-grid {
+    align-self: stretch;
+    grid-template-rows: auto;
+    grid-auto-rows: minmax(46px, 1fr);
+  }
+  .qa-layout .cal-grid > span:not(.cal-dow),
+  .qa-layout .cal-grid > .cal-day { min-height: 0; height: 100%; }
+}
+.orst-filter-row .filter-btn span,
+.suggestion-item small,
+.archive-suggest-list small { font-size: var(--fs-meta); }
+
+/* หัวส่วนคำถามที่พบบ่อย — ให้เหมือนหัว section อื่นในหน้าแรก:
+   หัวข้อเล็กภาษาอังกฤษสีทอง (เดิมเป็นไทยสีเทา) + ปุ่มด้านขวา */
+.qa-intro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+.qa-intro .section-kicker { color: var(--gold); }
+.qa-intro .view-all { flex: none; }
+@media (max-width: 760px) {
+  .qa-intro { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
+
+/* ฟอนต์ตามสเปก: ส่วนที่เดิมใช้ Sarabun เปลี่ยนเป็น TH Sarabun New (ตัวเล็กกว่าราว 20% ที่ px เท่ากัน)
+   ขยายขนาดชดเชย ให้หน้าตาใกล้เดิม */
+#hero-title.orst-hero-title { font-size: clamp(2.75rem, 4.8vw, 3.85rem); }
+.orst-hero-wow .orst-hero-lead { font-size: clamp(1.3rem, 1.55vw, 1.4rem) !important; }
+.orst-hero-kicker { font-size: 1.3rem; }
+.qa-layout .cal-event-date b { font-size: 1.75rem; }
+.ig-word { font-size: 3.1rem; }
+.ig-word--long { font-size: 2.1rem; }
+.ig-word--digit { font-size: 6rem; }
+.mm-feature-title { font-size: 1.45rem; }
+@media (max-width: 480px) {
+  #hero-title.orst-hero-title { font-size: clamp(1.9rem, 9.5vw, 2.6rem); }
+}

@@ -11,7 +11,6 @@
   <!-- โหลดฟอนต์หลักก่อน CSS — กันหน้ากระพริบเป็นฟอนต์สำรอง (กว้างกว่า ทำให้เมนูล้น) -->
   <link rel="preload" href="assets/fonts/THSarabunNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/Sarabun-ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/pages/home.css">
   <link rel="stylesheet" href="assets/css/components.css">
@@ -96,7 +95,7 @@
 
           <div class="orst-results-hero">
             <div class="orst-results-heading">
-              <span class="section-kicker">Smart Search</span>
+              <span class="section-kicker" lang="en">Smart Search</span>
 
               <h2 id="search-results-title">ผลการค้นหาองค์ความรู้เบื้องต้น</h2>
 
@@ -249,6 +248,7 @@
       <div class="container">
         <div class="section-head">
           <div>
+            <span class="section-kicker" lang="en">ACADEMIC SERVICES</span>
             <h2 id="svc1-title">บริการวิชาการของสำนักงาน</h2>
             <p>ระบบและช่องทางต่าง ๆ ที่ให้บริการประชาชน</p>
           </div>
@@ -294,7 +294,7 @@
 
         <div class="section-head knowledge-hub-head">
           <div>
-            <span class="section-kicker">KNOWLEDGE HUB</span>
+            <span class="section-kicker" lang="en">KNOWLEDGE HUB</span>
             <h2>คลังสื่อและองค์ความรู้</h2>
             <p>รวมสารานุกรม อินโฟกราฟิก และสื่อมัลติมีเดีย เพื่อการเรียนรู้อย่างต่อเนื่อง</p>
           </div>
@@ -369,7 +369,7 @@
 
                 <article class="pub-card knowledge-card ig-card">
                   <div class="ig-cover ig-white">
-                    <span class="ig-kicker ig-latin">application</span>
+                    <span class="ig-kicker ig-latin" lang="en">application</span>
                     <strong class="ig-word ig-word--long">แอปพลิเคชัน</strong>
                     <span class="ig-sub">ไม่ใช่ <s>แอพพลิเคชั่น</s></span>
                   </div>
@@ -405,7 +405,7 @@
 
                 <article class="pub-card knowledge-card ig-card">
                   <div class="ig-cover ig-white">
-                    <span class="ig-kicker ig-latin">e-mail</span>
+                    <span class="ig-kicker ig-latin" lang="en">e-mail</span>
                     <strong class="ig-word">อีเมล</strong>
                     <span class="ig-sub">ไม่ใช่ <s>อีเมล์</s></span>
                   </div>
@@ -482,7 +482,7 @@
                 </article>
                 <article class="pub-card knowledge-card ig-card">
                   <div class="ig-cover ig-white">
-                    <span class="ig-kicker ig-latin">website</span>
+                    <span class="ig-kicker ig-latin" lang="en">website</span>
                     <strong class="ig-word">เว็บไซต์</strong>
                     <span class="ig-sub">ไม่ใช่ <s>เวบไซต์</s></span>
                   </div>
@@ -642,7 +642,7 @@
 
     <div class="section-head news-events-head">
       <div>
-        <span class="section-kicker">NEWS & EVENTS</span>
+        <span class="section-kicker" lang="en">NEWS & EVENTS</span>
         <h2>ข่าวสารและกิจกรรม</h2>
         <p>ติดตามข่าวสำคัญ ประกาศ กิจกรรม อบรม และกำหนดการของสำนักงานราชบัณฑิตยสภา</p>
       </div>
@@ -1097,7 +1097,7 @@
       <div class="container">
         <div class="service-directory-head">
           <div>
-            <span class="section-kicker">Digital Service Hub</span>
+            <span class="section-kicker" lang="en">Digital Service Hub</span>
             <h2 style="
     color: #FFF;
 ">บริการวิชาการดิจิทัล</h2>
@@ -1255,7 +1255,7 @@
       <div class="container">
         <div class="network-head network-head-compact">
           <div>
-            <span class="section-kicker">Connected Network</span>
+            <span class="section-kicker" lang="en">Connected Network</span>
             <h2>หน่วยงานและระบบที่เกี่ยวข้อง</h2>
             <p>เชื่อมโยงแหล่งข้อมูลและระบบสารสนเทศที่สนับสนุนองค์ความรู้ของชาติ</p>
           </div>
@@ -1374,9 +1374,12 @@
          มือถือเรียง: หัวข้อ > คำถาม > ช่วยเหลือ > กำหนดการ (grid-template-areas) -->
     <div class="qa-layout reveal">
       <div class="qa-intro">
-        <span class="section-kicker">ช่วยเหลือและกำหนดการ</span>
-        <h2>คำถามที่พบบ่อย</h2>
-        <p>คำตอบสั้น ๆ สำหรับการเริ่มใช้งานเว็บไซต์และบริการสำคัญ พร้อมกำหนดการกิจกรรมที่กำลังจะมาถึง</p>
+        <div>
+          <span class="section-kicker" lang="en">FAQ &amp; EVENTS</span>
+          <h2>คำถามที่พบบ่อย</h2>
+          <p>คำตอบสั้น ๆ สำหรับการเริ่มใช้งานเว็บไซต์และบริการสำคัญ พร้อมกำหนดการกิจกรรมที่กำลังจะมาถึง</p>
+        </div>
+        <a class="view-all" href="contact.html#contact-form">ส่งคำถามถึงเจ้าหน้าที่ →</a>
       </div>
 
       <div class="qa-list">
@@ -1687,7 +1690,7 @@
         </span>
 
         <div>
-          <span class="section-kicker">Online Service</span>
+          <span class="section-kicker" lang="en">Online Service</span>
           <h2 id="service-modal-title">ติดต่อหรือขอรับบริการออนไลน์</h2>
           <p>เลือกประเภทเรื่อง กรอกข้อมูลติดต่อ แล้วเจ้าหน้าที่จะติดต่อกลับตามช่องทางที่ระบุ</p>
         </div>

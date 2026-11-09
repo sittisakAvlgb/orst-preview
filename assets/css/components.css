@@ -344,7 +344,7 @@
 .mega-feature h3 {
   color: #fff;
   margin: 8px 0 8px;
-  font-family: "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: 1.8rem;
   line-height: 1.25;
 }
@@ -895,14 +895,14 @@ body.high-contrast .drawer-cta { border: 1px solid var(--line); }
 }
 .orst-footer-wordmark-th {
   color: #fff;
-  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: 1.12rem;
   font-weight: 700;
   line-height: 1.25;
 }
 .orst-footer-wordmark-en {
   color: var(--gold-2);
-  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: .66rem;
   font-weight: 600;
   letter-spacing: .16em;
@@ -991,14 +991,14 @@ body.high-contrast .drawer-cta { border: 1px solid var(--line); }
 }
 .orst-footer-head span {
   color: #fff;
-  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: 1.08rem;
   font-weight: 700;
   line-height: 1.3;
 }
 .orst-footer-head small {
   color: var(--gold-2);
-  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-size: .66rem;
   font-weight: 600;
   letter-spacing: .16em;
@@ -1379,23 +1379,23 @@ body.no-motion *, body.no-motion *::before, body.no-motion *::after { animation:
    (home hero ใช้ .orst-hero-* จึงตั้งไว้ที่ home.css โดยตรง)
    ============================================================================= */
 .hero-copy h1, .page-hero h1 {
-  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-weight: 800;
   letter-spacing: -.01em;
 }
 .hero-copy p, .page-hero p {
-  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-weight: 400;
 }
 .eyebrow, .section-kicker {
-  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-weight: 600;
 }
 
 /* ===== Type scale header/footer (ใช้ตัวแปร --fs-* จาก base.css) =====
    ป้ายอังกฤษตัวพิมพ์ใหญ่ใช้ Sarabun — TH Sarabun New ตัวอังกฤษเล็กมากจนอ่านยาก */
 .brand-text-en {
-  font-family: "Sarabun", "TH Sarabun New", "TH SarabunPSK", sans-serif;
+  font-family: var(--font-th);
   font-weight: 600;
   letter-spacing: .08em;
 }
@@ -1419,3 +1419,38 @@ body.no-motion *, body.no-motion *::before, body.no-motion *::after { animation:
     min-height: 40px;
   }
 }
+
+/* ขนาดตัวอักษรขั้นต่ำ (ลูกค้า: บางจุดเล็กเกิน) — header/footer/เมนูมือถือ
+   ข้อความภาษาไทยที่เดิมเล็กกว่า 15px ยกขึ้นเป็นขนาดป้าย (--fs-meta) */
+.drawer-sub-title,
+.orst-footer-head small { font-size: var(--fs-meta); }
+
+/* =============================================================================
+   ฟอนต์ตามสเปก — ไทย: --font-th (TH Sarabun New) ตั้งที่ body/หัวข้อแล้ว
+   ข้อความภาษาอังกฤษ (ใส่ lang="en"): Geist  /  หัวข้อในโหมด EN: Newsreader
+   Geist ตัวใหญ่กว่า TH Sarabun New ที่ px เท่ากันมาก จึงลดขนาดป้ายภาษาอังกฤษให้สมดุลกับข้อความไทย
+   ============================================================================= */
+[lang="en"] { font-family: var(--font-en); }
+:is(h1, h2, h3, h4)[lang="en"],
+[lang="en"] :is(h1, h2, h3, h4) { font-family: var(--font-en-heading); }
+
+.section-kicker[lang="en"],
+.block-eyebrow[lang="en"] {
+  font-size: .76rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.brand-text-en[lang="en"],
+.orst-footer-wordmark-en[lang="en"],
+.drawer-brand-en[lang="en"] { font-weight: 500; letter-spacing: .06em; }
+.orst-footer-head small[lang="en"] { font-size: .72rem; font-weight: 500; letter-spacing: .08em; }
+a[href^="mailto:"][lang="en"],
+.channel-value[lang="en"] { font-size: .92em; }
+/* ส่วนที่เดิมใช้ Sarabun → TH Sarabun New: ขยายชดเชย (~1.2 เท่า) */
+.page-hero h1 { font-size: clamp(2.75rem, 4.8vw, 3.85rem); }
+.page-hero p { font-size: 1.4rem; }
+.orst-footer-wordmark-th { font-size: 1.35rem; }
+.orst-footer-head span { font-size: 1.3rem; }
+.section-kicker:not([lang="en"]),
+.eyebrow:not([lang="en"]) { font-size: 1.1rem; }

@@ -48,6 +48,11 @@ export function icon(id, className = 'icon') {
   return `<svg class="${esc(className)}" aria-hidden="true"><use href="#${esc(id)}"></use></svg>`;
 }
 
+/** ใส่ lang="en" ให้ข้อความที่เป็นภาษาอังกฤษล้วน (ไม่มีอักษรไทย) — ใช้ฟอนต์อังกฤษ และโปรแกรมอ่านหน้าจอออกเสียงถูก */
+function langAttr(text) {
+  return text && !/[฀-๿]/.test(text) ? ' lang="en"' : '';
+}
+
 /** หัว section มาตรฐาน: หัวข้อ + คำโปรย + ปุ่มมุมขวา */
 function sectionHead(block) {
   if (!block.heading && !block.lead) return '';
@@ -57,7 +62,7 @@ function sectionHead(block) {
   return `
       <div class="section-head">
         <div>
-          ${block.eyebrow ? `<span class="block-eyebrow">${esc(block.eyebrow)}</span>` : ''}
+          ${block.eyebrow ? `<span class="block-eyebrow"${langAttr(block.eyebrow)}>${esc(block.eyebrow)}</span>` : ''}
           ${block.heading ? `<h2>${esc(block.heading)}</h2>` : ''}
           ${block.lead ? `<p>${esc(block.lead)}</p>` : ''}
         </div>
@@ -107,7 +112,7 @@ function pageHero(b) {
     <section class="page-hero"${attr('id', b.id)}>
       <div class="container">
         ${crumbs}
-        ${b.eyebrow ? `<span class="block-eyebrow">${esc(b.eyebrow)}</span>` : ''}
+        ${b.eyebrow ? `<span class="block-eyebrow"${langAttr(b.eyebrow)}>${esc(b.eyebrow)}</span>` : ''}
         <h1>${esc(b.heading)}</h1>
         ${b.lead ? `<p>${esc(b.lead)}</p>` : ''}
         ${actions(b.actions)}
@@ -131,7 +136,8 @@ function richText(b) {
 /* ---------- Block: card-grid ---------- */
 /* การ์ดเนื้อหาเรียงเป็นตาราง — block ที่ใช้บ่อยที่สุด
    { type, heading?, lead?, columns?: 2|3|4,
-     items: [{ title, body?, href?, icon?, tag?, meta? }] } */
+     items: [{ title, body?, href?, icon?, tag?, meta?, action? }] }
+   action = ข้อความปุ่มท้ายการ์ด (เช่น "ยื่นคำขอ") แสดงเมื่อการ์ดมี href */
 function cardGrid(b) {
   const cards = (b.items || []).map(it => {
     const inner = `
@@ -139,7 +145,8 @@ function cardGrid(b) {
             ${it.tag ? `<span class="block-tag">${esc(it.tag)}</span>` : ''}
             <h3>${esc(it.title)}</h3>
             ${it.body ? `<p>${esc(it.body)}</p>` : ''}
-            ${it.meta ? `<small class="block-meta">${esc(it.meta)}</small>` : ''}`;
+            ${it.meta ? `<small class="block-meta">${esc(it.meta)}</small>` : ''}
+            ${it.action ? `<span class="block-card-action">${esc(it.action)} <span aria-hidden="true">→</span></span>` : ''}`;
     return it.href
       ? `<a class="content-card block-card is-link" href="${esc(it.href)}">${inner}
           </a>`

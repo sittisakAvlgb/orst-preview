@@ -329,7 +329,7 @@ function renderDrawer(active) {
         <div class="drawer-head">
           <a class="drawer-brand" href="${basePath}index.html" aria-label="สำนักงานราชบัณฑิตยสภา หน้าแรก">
             <img src="${basePath}assets/images/orst-emblem.png" alt="" aria-hidden="true" width="181" height="320">
-            <span><span class="drawer-brand-th">สำนักงานราชบัณฑิตยสภา</span><span class="drawer-brand-en">Office of the Royal Society</span></span>
+            <span><span class="drawer-brand-th">สำนักงานราชบัณฑิตยสภา</span><span class="drawer-brand-en" lang="en">Office of the Royal Society</span></span>
           </a>
           <button class="drawer-close" type="button" data-drawer-close aria-label="ปิดเมนู">${icon('i-x')}</button>
         </div>
@@ -375,7 +375,7 @@ function renderHeader() {
           <img src="${basePath}assets/images/orst-emblem.png" alt="" aria-hidden="true" class="brand-emblem" width="181" height="320">
           <span class="brand-text">
             <span class="brand-text-th">สำนักงานราชบัณฑิตยสภา</span>
-            <span class="brand-text-en">Office of the Royal Society</span>
+            <span class="brand-text-en" lang="en">Office of the Royal Society</span>
           </span>
         </a>
         <nav class="main-nav" aria-label="เมนูหลัก">
@@ -480,7 +480,7 @@ function renderHeader() {
 
 function renderFooter() {
   // หัวคอลัมน์: เส้นทองสั้น + ชื่อไทย + ชื่ออังกฤษ
-  const colHead = (th, en) => `<h3 class="orst-footer-head"><span>${th}</span><small>${en}</small></h3>`;
+  const colHead = (th, en) => `<h3 class="orst-footer-head"><span>${th}</span><small lang="en">${en}</small></h3>`;
   const links = items => items.map(([text, url]) => `<li><a href="${url}">${text}</a></li>`).join('');
 
   return `
@@ -494,14 +494,14 @@ function renderFooter() {
                 class="orst-footer-emblem" width="181" height="320" loading="lazy">
               <span class="orst-footer-wordmark">
                 <span class="orst-footer-wordmark-th">สำนักงานราชบัณฑิตยสภา</span>
-                <span class="orst-footer-wordmark-en">Office of the Royal Society</span>
+                <span class="orst-footer-wordmark-en" lang="en">Office of the Royal Society</span>
               </span>
             </a>
 
             <ul class="orst-footer-reach">
               <li>${icon('i-pin')}<span>เลขที่ ๑๒๐ หมู่ ๓ ศูนย์ราชการเฉลิมพระเกียรติ ๘๐ พรรษา ๕ ธันวาคม ๒๕๕๐ (อาคารซี) ถนนแจ้งวัฒนะ แขวงทุ่งสองห้อง เขตหลักสี่ กรุงเทพมหานคร ๑๐๒๑๐</span></li>
               <li>${icon('i-phone-call')}<a href="tel:021411718">0 2141 1718</a></li>
-              <li>${icon('i-mail')}<a href="mailto:saraban@orst.go.th">saraban@orst.go.th</a></li>
+              <li>${icon('i-mail')}<a href="mailto:saraban@orst.go.th" lang="en">saraban@orst.go.th</a></li>
             </ul>
 
             <div class="orst-footer-actions">
@@ -1001,6 +1001,48 @@ function initComponents() {
   initSharedAccessibility();
   initFixedHeader();
   initScrollTop();
+  initThaiDigits();
+}
+
+/* =============================================================================
+   เลขไทย — แปลงตัวเลข 0-9 ในข้อความที่แสดงบนหน้าเป็น ๐-๙ ทั้งเว็บ (ลูกค้าต้องการ)
+   - แปลงเฉพาะ "ข้อความ" ไม่แตะ attribute: ลิงก์ tel:/mailto:/URL, value ของฟอร์ม, aria-label คงเดิม
+   - ไม่แปลงคำที่มีอักษรละตินหรือ @ ปนอยู่ (อีเมล ชื่อไฟล์ รหัสภาษาอังกฤษ)
+   - ข้ามส่วนที่ไม่ควรแปลง: <code> <pre> <textarea> ช่องกรอก และอะไรก็ได้ที่ใส่ data-keep-digits / lang="en"
+   - เนื้อหาที่ JS ใส่ทีหลัง (ผลค้นหา หน้า JSON) แปลงอัตโนมัติด้วย MutationObserver
+   แหล่งข้อมูล (HTML/JSON) ยังเป็นเลขอารบิก — ค้นหา/แก้ไขเนื้อหาได้ตามปกติ
+   ============================================================================= */
+const THAI_DIGITS = '๐๑๒๓๔๕๖๗๘๙';
+const KEEP_DIGITS = 'script,style,code,pre,textarea,input,select,option,[data-keep-digits],[lang="en"]';
+
+function thaiDigitsIn(root) {
+  if (!root) return;
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      if (!/[0-9]/.test(node.nodeValue)) return NodeFilter.FILTER_REJECT;
+      const el = node.parentElement;
+      return !el || el.closest(KEEP_DIGITS) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT;
+    },
+  });
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(node => {
+    const next = node.nodeValue.replace(/\S+/g, word =>
+      /[A-Za-z@]/.test(word) ? word : word.replace(/[0-9]/g, d => THAI_DIGITS[d]));
+    if (next !== node.nodeValue) node.nodeValue = next;
+  });
+}
+
+function initThaiDigits() {
+  thaiDigitsIn(document.body);
+  document.title = document.title.replace(/\S+/g, w => /[A-Za-z@]/.test(w) ? w : w.replace(/[0-9]/g, d => THAI_DIGITS[d]));
+  // MutationObserver รวมการเปลี่ยนแปลงเป็นชุดให้อยู่แล้ว — แปลงในชุดนั้นเลย
+  // (การแปลงซ้ำไม่วนไม่จบ เพราะรอบถัดไปไม่เหลือเลข 0-9 ให้แปลง)
+  new MutationObserver(records => {
+    const targets = new Set();
+    records.forEach(r => targets.add(r.type === 'characterData' ? r.target.parentElement : r.target));
+    targets.forEach(el => el && el.isConnected && thaiDigitsIn(el));
+  }).observe(document.body, { childList: true, subtree: true, characterData: true });
 }
 
 if (document.readyState === 'loading') {

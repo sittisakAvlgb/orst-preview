@@ -138,7 +138,8 @@
               "href": { "type": "string" },
               "icon": { "$ref": "#/definitions/iconId" },
               "tag": { "type": "string" },
-              "meta": { "type": "string" }
+              "meta": { "type": "string" },
+              "action": { "type": "string", "description": "ข้อความปุ่มท้ายการ์ด เช่น \"ยื่นคำขอ\" (ใช้คู่กับ href)" }
             }
           }
         }
