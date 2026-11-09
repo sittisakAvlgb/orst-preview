@@ -333,6 +333,15 @@ document.addEventListener('DOMContentLoaded', () => {
     news: 'ข่าวสาร'
   };
 
+  // ปุ่ม "ดูรายละเอียด" ของผลค้นหา — เดิมลิงก์ไป #type-id ที่ไม่มีในหน้า (กดแล้วไม่ไปไหน)
+  // ยังไม่มีหน้ารายละเอียดรายชิ้น จึงพาไปหน้าหมวดที่ตรงกับชนิดผลลัพธ์ (ใส่ item.url เพื่อระบุหน้าเองได้)
+  const resultPage = {
+    dictionary: 'dictionary.html', term: 'dictionary.html',
+    article: 'knowledge.html', journal: 'knowledge.html', document: 'knowledge.html',
+    news: 'news.html', service: 'services.html'
+  };
+  const resultUrl = item => item.url || resultPage[item.type] || 'knowledge.html';
+
   const searchData = [
     {
       id: 1,
@@ -558,7 +567,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <h3>${highlight(item.title, activeQuery)}</h3>
     <p>${highlight(item.desc, activeQuery)}</p>
     <small>${item.source} • อัปเดต ${item.year} • ความนิยม ${item.popularity}%</small><br>
-    <a href="#${item.type}-${item.id}" aria-label="ดูรายละเอียด ${item.title}">ดูรายละเอียด →</a>
+    <a href="${resultUrl(item)}" aria-label="ดูรายละเอียด ${item.title}">ดูรายละเอียด →</a>
   `;
   }
 
@@ -623,7 +632,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <span>นิยม ${item.popularity}%</span>
       </div>
 
-      <a class="orst-card-action" href="#${item.type}-${item.id}" aria-label="ดูรายละเอียด ${item.title}">
+      <a class="orst-card-action" href="${resultUrl(item)}" aria-label="ดูรายละเอียด ${item.title}">
         ดูรายละเอียด
       </a>
     </article>
@@ -733,6 +742,7 @@ function init() {
   initFAQEnhance();
   initMediaPlaylist();
   initEventCalendar();
+  initServiceHub();
 }
 function initHeader() {
   const h = qs('#site-header');
@@ -1167,20 +1177,59 @@ function initFAQEnhance() {
 
 
 function initServiceHub() {
+  // ปุ่มบริการ (data-service-card) -> เปิดแผง service-modal แล้วตั้งหัวข้อ/คำอธิบาย และเลือกประเภทเรื่องให้ตรงกับบริการที่กด
+  // (เดิมอ้าง id ของแผงรุ่นเก่า #service-title/#service-type ที่ไม่มีแล้ว ฟังก์ชันจึงออกทันที -> ทุกบริการเลือก "สอบถาม" เสมอ)
+  const modal = qs('#service-modal');
   const serviceButtons = qsa('[data-service-card]');
-  const title = qs('#service-title');
-  const subtitle = qs('#service-subtitle');
-  const serviceType = qs('#service-type');
-  const submitBtn = qs('#service-submit-btn');
+  if (!modal || !serviceButtons.length) return;
 
-  if (!serviceButtons.length || !title || !subtitle || !serviceType || !submitBtn) return;
+  const title = qs('#service-modal-title', modal);
+  const subtitle = title?.nextElementSibling;
+  const submitBtn = qs('#service-request-form button[type="submit"]', modal);
+  const defaults = { title: title?.textContent, subtitle: subtitle?.textContent, submit: submitBtn?.textContent };
+
+  // ชื่อบริการ -> ค่า radio name="serviceType" (ใส่ data-service-value บนปุ่มเพื่อระบุเองได้)
+  const typeFor = name => {
+    if (/ขออนุญาต/.test(name)) return 'permission';
+    if (/ร้องเรียน|เสนอแนะ|แบบสำรวจ/.test(name)) return 'suggestion';
+    if (/เว็บไซต์/.test(name)) return 'website';
+    return 'academic';
+  };
+
+  // ส่งฟอร์ม: เดิมไม่มีตัวจัดการ เบราว์เซอร์จึงส่งแบบ GET -> โหลดหน้าใหม่และชื่อ/อีเมลไปโผล่ใน URL
+  // ตอนนี้: ตรวจช่องบังคับ -> ซ่อนฟอร์ม แสดงข้อความยืนยันในแผง (ยังไม่มี backend จึงไม่ส่งข้อมูลไปไหน)
+  const form = qs('#service-request-form', modal);
+  let done = null;
+  const resetForm = () => {
+    done?.remove(); done = null;
+    if (form) { form.hidden = false; form.reset(); }
+  };
+  form?.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    const email = form.querySelector('[name="email"]')?.value || '';
+    done = document.createElement('div');
+    done.className = 'service-done';
+    done.setAttribute('role', 'status');
+    done.innerHTML = `<strong>ส่งคำขอเรียบร้อยแล้ว</strong>
+      <p>เจ้าหน้าที่จะตรวจสอบและติดต่อกลับทางอีเมล <b></b></p>
+      <button type="button" class="btn" data-modal-close>ปิด</button>`;
+    done.querySelector('b').textContent = email;
+    done.querySelector('[data-modal-close]').addEventListener('click', () => closeModal('service-modal'));
+    form.hidden = true;
+    form.after(done);
+    done.querySelector('button').focus();
+  });
 
   serviceButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      title.textContent = btn.dataset.serviceTitle || 'เริ่มใช้บริการออนไลน์';
-      subtitle.textContent = btn.dataset.serviceSubtitle || 'เลือกประเภทบริการ กรอกข้อมูล และรับเลขติดตามสถานะ';
-      serviceType.value = btn.dataset.serviceType || serviceType.value;
-      submitBtn.textContent = btn.dataset.serviceAction || 'ส่งคำขอ';
+      resetForm();
+      if (title) title.textContent = btn.dataset.serviceTitle || defaults.title;
+      if (subtitle) subtitle.textContent = btn.dataset.serviceSubtitle || defaults.subtitle;
+      if (submitBtn && btn.dataset.serviceAction) submitBtn.textContent = btn.dataset.serviceAction;
+      const value = btn.dataset.serviceValue || typeFor(btn.dataset.serviceTitle || '');
+      const radio = qs(`input[name="serviceType"][value="${value}"]`, modal);
+      if (radio) radio.checked = true;
     }, true);
   });
 }
