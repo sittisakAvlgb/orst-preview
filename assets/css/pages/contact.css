@@ -1403,3 +1403,129 @@ body.high-contrast .dir-mails a { color: var(--ink); }
   .dir-num a,
   .dir-mails a { display: inline-flex; align-items: center; min-height: 40px; }
 }
+
+/* =============================================================================
+   ฟอร์มติดต่อ + การ์ดแผนที่ — ปรับให้อ่านง่าย กรอกง่าย เป็นทางการ (ลูกค้า: ไม่น่าใช้งาน)
+   - ตัวอักษรฟอร์มใหญ่ขึ้น (ฟอนต์ TH Sarabun ที่ 17px ดูเล็ก) ข้อความรองเข้มขึ้น
+   - ช่องกรอก: พื้นขาว ขอบชัด มุมมนน้อย, focus ขอบเขียว
+   - ช่องทางติดต่อกลับ: ปุ่มวิทยุธรรมดา (เดิมเป็นแคปซูล)
+   - ปุ่ม: สี่เหลี่ยมมุมมนน้อย ไม่มีเงา
+   - การ์ดแผนที่สูงเท่าฟอร์ม (เลิก sticky) แผนที่ยืดเติมพื้นที่
+   ============================================================================= */
+.contact-form-panel,
+.map-card { border-radius: 14px; }
+
+.contact-form-panel .form-intro,
+.contact-form-panel .form-note,
+.map-body p { color: color-mix(in srgb, var(--ink) 78%, var(--muted)); }
+
+.contact-form-panel .field label,
+.contact-form-panel .contact-reply legend { font-size: 1.08rem; color: var(--ink); }
+
+.contact-form-panel input:not([type="radio"]):not([type="checkbox"]),
+.contact-form-panel select,
+.contact-form-panel textarea {
+  min-height: 50px;
+  padding: 10px 14px;
+  border: 1px solid #cdbb9c;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 1.1rem;
+  box-shadow: none;
+}
+.contact-form-panel textarea { min-height: 150px; }
+.contact-form-panel input::placeholder,
+.contact-form-panel textarea::placeholder { color: #8a8f98; }
+.contact-form-panel input:not([type="radio"]):not([type="checkbox"]):focus,
+.contact-form-panel select:focus,
+.contact-form-panel textarea:focus {
+  outline: none;
+  border-color: var(--deep);
+  box-shadow: 0 0 0 3px rgba(7, 59, 52, .14);
+}
+
+/* ช่องทางติดต่อกลับ: วิทยุธรรมดาเรียงแถว */
+.contact-form-panel .contact-choice { gap: 8px 28px; }
+.contact-form-panel .contact-choice label,
+.contact-form-panel .contact-choice label:has(input:checked) {
+  min-height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ink);
+  gap: 8px;
+}
+.contact-form-panel input[type="radio"],
+.contact-form-panel input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--deep);
+}
+.contact-form-panel .privacy-check { font-size: 1.05rem; color: var(--ink); }
+
+/* ปุ่ม */
+.contact-form-panel .form-actions .btn,
+.map-card .map-actions .btn,
+.map-card .mini-action {
+  border-radius: 8px;
+  box-shadow: none;
+}
+.contact-form-panel .form-actions .btn { min-height: 50px; padding-inline: 28px; font-size: 1.1rem; }
+.contact-form-panel .form-actions .btn:hover,
+.map-card .map-actions .btn:hover { transform: none; filter: brightness(1.15); }
+
+/* การ์ดแผนที่: สูงเท่าฟอร์ม แผนที่ยืดเติม */
+@media (min-width: 1181px) {
+  .contact-grid { align-items: stretch; }
+  .map-card {
+    position: static;
+    display: flex;
+    flex-direction: column;
+  }
+  .map-frame { flex: 1 1 auto; aspect-ratio: auto; min-height: 320px; }
+}
+.map-body h2 { font-size: 1.4rem; }
+
+/* แผงช่องทางติดต่อ — เรียบ เป็นทางการ (ลูกค้า: ดูเป็น AI)
+   - มุมมนน้อย เงาบาง พื้นขาวทุกช่อง (เลิกพื้นทองอ่อนที่ช่องสุดท้าย)
+   - ไอคอนอยู่ในกรอบสี่เหลี่ยมเล็ก ชื่อช่องทางสีเข้ม คำอธิบายอ่านง่ายขึ้น
+   - hover: พื้นอ่อนทั้งช่อง + ลิงก์ล่างขีดเส้นใต้ */
+.contact-channels {
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(16, 32, 51, .08);
+}
+.channel,
+.channel--primary { background: #fff; padding: 22px 24px 20px; }
+.channel:hover,
+.channel:focus-visible,
+.channel--primary:hover,
+.channel--primary:focus-visible { background: var(--surface-soft); }
+
+.channel-label { gap: 10px; color: var(--ink); }
+.channel-label .icon {
+  box-sizing: content-box;
+  width: 18px;
+  height: 18px;
+  padding: 7px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-soft);
+  color: var(--deep);
+}
+.channel-value { margin-top: 10px; }
+.channel-note { color: color-mix(in srgb, var(--ink) 78%, var(--muted)); }
+.channel-go { font-size: var(--fs-body); }
+.channel:hover .channel-go,
+.channel:focus-visible .channel-go { text-decoration: underline; text-underline-offset: 3px; }
+
+body.high-contrast .contact-channels,
+body.high-contrast .channel { background: var(--surface); }
+
+@media (max-width: 760px) {
+  .contact-channels { border-radius: 12px; }
+}
