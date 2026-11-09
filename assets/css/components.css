@@ -1481,3 +1481,75 @@ a[href^="mailto:"][lang="en"],
 }
 body.high-contrast .section-kicker,
 body.high-contrast .block-eyebrow { color: var(--ink); }
+
+/* =============================================================================
+   ขนาดตัวอักษร footer (ลูกค้า: ปรับให้สมดุล น่าอ่าน)
+   - TH Sarabun New ตัวเล็กกว่าฟอนต์ทั่วไปมากที่ px เท่ากัน → ข้อความไทยใน footer ใช้ ~20px
+   - Geist (อีเมล/ป้ายภาษาอังกฤษ) ตัวใหญ่กว่ามาก → ลดลงให้ความสูงตัวอักษรใกล้เคียงข้อความไทย
+   - ใส่ .orst-footer นำหน้า เพื่อชนะ ".footer a/li" (0.95rem) ใน base.css และ pages/*.css
+   ลำดับขั้น: ชื่อหน่วยงาน 26px > หัวคอลัมน์ 24px > เนื้อหา/ลิงก์ 20px > ปุ่ม 19px > แถบล่าง 18px
+   ============================================================================= */
+.orst-footer .orst-footer-wordmark-th { font-size: 1.45rem; }
+.orst-footer .orst-footer-head span { font-size: 1.35rem; }
+.orst-footer .orst-footer-wordmark-en,
+.orst-footer .orst-footer-head small {
+  font-family: var(--font-en);
+  font-size: .68rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.orst-footer .orst-footer-wordmark-en { font-size: .72rem; letter-spacing: .08em; }
+.orst-footer .orst-footer-reach li,
+.orst-footer .orst-footer-reach a,
+.orst-footer .orst-footer-col a,
+.orst-footer .orst-footer-col button {
+  font-size: 1.1rem;
+  line-height: 1.55;
+}
+.orst-footer .orst-footer-reach a[href^="mailto:"] {
+  font-family: var(--font-en);
+  font-size: .8rem;
+  letter-spacing: .01em;
+}
+.orst-footer .orst-footer-primary,
+.orst-footer .orst-footer-secondary { font-size: 1.05rem; }
+.orst-footer .orst-footer-bottom,
+.orst-footer .orst-footer-bottom span,
+.orst-footer .orst-footer-totop { font-size: 1rem; }
+
+/* สีข้อความ footer (ลูกค้า: ให้เหมือนกันทั้งหมด) — ที่อยู่ เบอร์โทร อีเมล และลิงก์ทุกคอลัมน์ใช้สีเดียว
+   เดิม: ที่อยู่ .76 / เบอร์โทร-อีเมล ขาวล้วน / ลิงก์ .74 จึงดูไม่เท่ากัน */
+.orst-footer .orst-footer-reach li,
+.orst-footer .orst-footer-reach a,
+.orst-footer .orst-footer-col a,
+.orst-footer .orst-footer-col button { color: rgba(255, 255, 255, .8); }
+.orst-footer .orst-footer-reach a:hover,
+.orst-footer .orst-footer-reach a:focus-visible,
+.orst-footer .orst-footer-col a:hover,
+.orst-footer .orst-footer-col a:focus-visible,
+.orst-footer .orst-footer-col button:hover,
+.orst-footer .orst-footer-col button:focus-visible { color: var(--gold-2); }
+
+/* =============================================================================
+   น้ำหนักตัวอักษรเมนูหลัก + mega menu (ลูกค้า: ให้หนา/บางแบบเว็บตัวอย่าง)
+   เดิมเกือบทุกอย่างเป็นตัวหนา (เมนู 700, ชื่อลิงก์ 900, คำอธิบาย 700) จึงดูทึบ ไม่มีลำดับ
+   ใหม่: ตัวหนาเฉพาะ "หัว" — เมนูหน้าปัจจุบัน, ชื่อแผงซ้าย, หัวคอลัมน์ และปุ่ม
+         ที่เหลือ (เมนูอื่น, ชื่อลิงก์, คำอธิบาย) เป็นตัวปกติ
+   TH Sarabun New มีแค่ 400/700 — ค่าอื่นจะถูกปัดเป็นสองค่านี้ จึงใช้แค่ 400/700
+   ============================================================================= */
+.main-nav a,
+.main-nav button { font-weight: 400; }
+.main-nav a.active { font-weight: 700; }
+
+.mega-group h4 { font-weight: 700; }
+.mega-link strong {
+  font-weight: 400;
+  color: var(--ink);
+}
+.mega-link small {
+  font-weight: 400;
+  color: var(--muted);
+}
+.mega-feature h3 { font-weight: 700; }
+.mega-feature p { font-weight: 400; }

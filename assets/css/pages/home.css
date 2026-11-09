@@ -10236,7 +10236,7 @@ radial-gradient(circle at 50% 52%, rgba(255,255,255,0.5), transparent 44%);
 .network-head-compact h2,
 .help-center-head h2,
 .faq-center-head h2 {
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-size: var(--fs-h2);
 }
 
 /* คำอธิบายใต้หัวข้อ section */
@@ -12295,3 +12295,28 @@ body.high-contrast .orst-hero-wow .orst-smart-search { background: var(--surface
 
 /* หัวข้อเล็กบนพื้นภาพมืด (ส่วนบริการดิจิทัล) — ใช้ทองอ่อนแทนทองหม่น ให้อ่านออกบนพื้นเข้ม */
 #service-hub .section-kicker:not([lang="en"]) { color: var(--gold-2); }
+
+/* จังหวะระยะห่างใน hero (ลูกค้า: ปรับความห่างให้น่าสนใจ)
+   เดิมทุกช่วงห่างเท่า ๆ กัน 12–20px จึงดูอัดแน่นเป็นก้อนเดียว
+   ใหม่: แบ่งเป็น 2 กลุ่ม — "ข้อความ" (หัวข้อเล็ก + หัวข้อ + คำอธิบาย) กับ "การค้นหา" (ช่องค้นหา + คำยอดนิยม)
+   ภายในกลุ่มชิดกัน ระหว่างกลุ่มเว้นกว้าง ให้สายตาอ่านข้อความจบก่อนแล้วค่อยไปที่ช่องค้นหา */
+.orst-hero-wow .orst-hero-kicker { margin-bottom: 18px; }
+.orst-hero-wow #hero-title.orst-hero-title { line-height: 1.22; margin-bottom: 24px; }
+.orst-hero-wow .orst-hero-content > .orst-smart-search { margin-top: 44px; }   /* คำอธิบายมี margin-bottom 20px !important อยู่แล้ว — margin ยุบรวมเหลือ 44px */
+.orst-hero-wow .orst-popular-shell { margin-top: 22px; }
+@media (max-width: 760px) {
+  .orst-hero-wow .orst-hero-kicker { margin-bottom: 12px; }
+  .orst-hero-wow #hero-title.orst-hero-title { margin-bottom: 16px; }
+  .orst-hero-wow .orst-hero-content > .orst-smart-search { margin-top: 28px; }
+  .orst-hero-wow .orst-popular-shell { margin-top: 16px; }
+}
+
+/* หัวข้อเล็ก hero บนมือถือ: เดิมตัดบรรทัดเหลือคำ "กลุ่ม" คำเดียวบรรทัดล่าง
+   - จอแคบ: ย่อตัวอักษร/เส้นข้าง/ช่องว่างเล็กน้อย ให้พออยู่บรรทัดเดียว (ข้อความ ~280px + เส้น ~48px)
+   - จอแคบมาก (≤ 340px) ถ้ายังไม่พอ text-wrap: balance แบ่งสองบรรทัดยาวพอ ๆ กัน ไม่เหลือคำเดียว */
+.orst-hero-kicker { text-wrap: balance; text-align: center; }
+@media (max-width: 480px) {
+  .orst-hero-wow .orst-hero-kicker { gap: 8px; font-size: 1.2rem; }
+  .orst-hero-wow .orst-hero-kicker::before,
+  .orst-hero-wow .orst-hero-kicker::after { width: 16px; }
+}

@@ -1469,7 +1469,7 @@
    ============================================================================= */
 .hero-copy h1,
 .knowledge-hero .hero-copy h1 { font-size: clamp(2.3rem, 4vw, 3.3rem); }   /* สูงสุด ~56px */
-.section-head h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); }
+.section-head h2 { font-size: var(--fs-h2); }
 .section-kicker { font-size: .9rem; }
 
 /* การ์ด */

@@ -1533,4 +1533,4 @@ body.high-contrast .channel { background: var(--surface); }
 /* ฟอนต์ตามสเปก: ส่วนที่เดิมใช้ Sarabun → TH Sarabun New ขยายชดเชย (~1.2 เท่า) */
 .contact-hero h1 { font-size: clamp(2.75rem, 4.8vw, 3.85rem); }
 .channel-value:not([lang="en"]) { font-size: clamp(1.4rem, 1.8vw, 1.65rem); }
-.directory-intro h2 { font-size: 2.2rem; }
+.directory-intro h2 { font-size: var(--fs-h2); }
